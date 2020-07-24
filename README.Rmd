@@ -104,18 +104,18 @@ parties
 
 parties %>% 
   in_case(
-    . == "d"           ~ "Democratic",
-    . == "r"           ~ "Republican",
-    . %in% c("g", "l") ~ "Other",
-    . %in% c("i", NA)  ~ "Independent" 
+    . == "D"           ~ "Democratic",
+    . == "R"           ~ "Republican",
+    . %in% c("G", "L") ~ "Other",
+    . %in% c("I", NA)  ~ "Independent" 
   )
 
 parties %>%
   switch_case(
-    "d"         ~ "Democrat",
-    "r"         ~ "Republican",
-    c("g", "l") ~ "Other",
-    c("i", NA)  ~ "Independent"
+    "D"         ~ "Democrat",
+    "R"         ~ "Republican",
+    c("G", "L") ~ "Other",
+    c("I", NA)  ~ "Independent"
   )
 ```
 

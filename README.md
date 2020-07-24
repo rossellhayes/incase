@@ -111,30 +111,30 @@ recoding discrete values.
 
 ``` r
 parties
-#>  [1] "R" "I" "R" "G" "R" "R" "R" "D" "D" "R" "I" NA  NA  "I" "G" "I" "R" "R" "R"
-#> [20] "R"
+#>  [1] "I" "D" "R" "R" "I" "D" "I" "D" "R" "I" "R" "I" "L" "R" "G" "I" "D" "D" "I"
+#> [20] "D"
 
 parties %>% 
   in_case(
-    . == "d"           ~ "Democratic",
-    . == "r"           ~ "Republican",
-    . %in% c("g", "l") ~ "Other",
-    . %in% c("i", NA)  ~ "Independent" 
+    . == "D"           ~ "Democratic",
+    . == "R"           ~ "Republican",
+    . %in% c("G", "L") ~ "Other",
+    . %in% c("I", NA)  ~ "Independent" 
   )
-#>  [1] NA            NA            NA            NA            NA           
-#>  [6] NA            NA            NA            NA            NA           
-#> [11] NA            "Independent" "Independent" NA            NA           
-#> [16] NA            NA            NA            NA            NA
+#>  [1] "Independent" "Democratic"  "Republican"  "Republican"  "Independent"
+#>  [6] "Democratic"  "Independent" "Democratic"  "Republican"  "Independent"
+#> [11] "Republican"  "Independent" "Other"       "Republican"  "Other"      
+#> [16] "Independent" "Democratic"  "Democratic"  "Independent" "Democratic"
 
 parties %>%
   switch_case(
-    "d"         ~ "Democrat",
-    "r"         ~ "Republican",
-    c("g", "l") ~ "Other",
-    c("i", NA)  ~ "Independent"
+    "D"         ~ "Democrat",
+    "R"         ~ "Republican",
+    c("G", "L") ~ "Other",
+    c("I", NA)  ~ "Independent"
   )
-#>  [1] NA            NA            NA            NA            NA           
-#>  [6] NA            NA            NA            NA            NA           
-#> [11] NA            "Independent" "Independent" NA            NA           
-#> [16] NA            NA            NA            NA            NA
+#>  [1] "Independent" "Democrat"    "Republican"  "Republican"  "Independent"
+#>  [6] "Democrat"    "Independent" "Democrat"    "Republican"  "Independent"
+#> [11] "Republican"  "Independent" "Other"       "Republican"  "Other"      
+#> [16] "Independent" "Democrat"    "Democrat"    "Independent" "Democrat"
 ```
