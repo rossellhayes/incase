@@ -59,8 +59,9 @@ in_case <- function(..., preserve = FALSE, default = NA) {
 
     if (preserve) {
       glubort(
-        code("preserve"), "requires a vector to be piped into",
-        code("in_case()"), bullet(), "Try using", code("default"), "instead"
+        code("preserve"), " requires a vector to be piped into ",
+        code("in_case()"), ":", bullet(), " Try using ", code("default"),
+        " instead", .zero = TRUE
       )
     }
   }
