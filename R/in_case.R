@@ -104,10 +104,12 @@ in_case <- function(..., preserve = FALSE, default = NA) {
     }
   }
 
-  value    <- lapply(value, `class<-`, class(c(value, recursive = TRUE)))
-  m        <- validate_case_when_length(query, value, fs)
-  out      <- rep_len(default, m)
-  replaced <- rep(FALSE, m)
+  class      <- class(c(value, recursive = TRUE))
+  value      <- lapply(value, `class<-`, class)
+  m          <- validate_case_when_length(query, value, fs)
+  out        <- rep_len(default, m)
+  class(out) <- class
+  replaced   <- rep(FALSE, m)
 
   for (i in seq_len(n)) {
     out      <- replace_with(out, query[[i]] & !replaced, value[[i]], NULL)

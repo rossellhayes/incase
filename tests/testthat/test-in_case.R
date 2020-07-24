@@ -102,14 +102,14 @@ test_that("NA conditions (#2927)", {
 test_that("atomic conditions (#2909)", {
   expect_equal(
     in_case(
-      TRUE ~ 1:3,
+      TRUE  ~ 1:3,
       FALSE ~ 4:6
     ),
     1:3
   )
   expect_equal(
     in_case(
-      NA ~ 1:3,
+      NA   ~ 1:3,
       TRUE ~ 4:6
     ),
     4:6
@@ -119,7 +119,7 @@ test_that("atomic conditions (#2909)", {
 test_that("zero-length conditions and values (#3041)", {
   expect_equal(
     in_case(
-      TRUE ~ integer(),
+      TRUE  ~ integer(),
       FALSE ~ integer()
     ),
     integer()
