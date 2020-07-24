@@ -3,6 +3,19 @@
 
 # incase <img src="man/figures/logo.png?raw=TRUE" align="right" height="138" />
 
+<!-- badges: start -->
+
+<!-- [![](https://www.r-pkg.org/badges/version/incase?color=brightgreen)](https://cran.r-project.org/package=incase) -->
+
+[![](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![License:
+MIT](https://img.shields.io/badge/license-MIT-blueviolet.svg)](https://cran.r-project.org/web/licenses/MIT)
+[![R build
+status](https://github.com/rossellhayes/incase/workflows/R-CMD-check/badge.svg)](https://github.com/rossellhayes/incase/actions)
+[![](https://codecov.io/gh/rossellhayes/incase/branch/master/graph/badge.svg)](https://codecov.io/gh/rossellhayes/incase)
+<!-- [![Dependencies](https://tinyverse.netlify.com/badge/incase)](https://cran.r-project.org/package=incase) -->
+<!-- badges: end -->
+
 **incase** provides a more pipe-friendly alternative to
 [**dplyr**](https://github.com/tidyverse/dplyr)’s
 [`case_when()`](https://dplyr.tidyverse.org/reference/case_when.html)
@@ -98,8 +111,8 @@ recoding discrete values.
 
 ``` r
 parties
-#>  [1] "D" "I" NA  "G" "I" "R" NA  "I" "R" "D" "D" "I" "D" "D" "I" "I" "D" "R" "I"
-#> [20] "G"
+#>  [1] "R" "I" "R" "G" "R" "R" "R" "D" "D" "R" "I" NA  NA  "I" "G" "I" "R" "R" "R"
+#> [20] "R"
 
 parties %>% 
   in_case(
@@ -108,9 +121,9 @@ parties %>%
     . %in% c("g", "l") ~ "Other",
     . %in% c("i", NA)  ~ "Independent" 
   )
-#>  [1] NA            NA            "Independent" NA            NA           
-#>  [6] NA            "Independent" NA            NA            NA           
-#> [11] NA            NA            NA            NA            NA           
+#>  [1] NA            NA            NA            NA            NA           
+#>  [6] NA            NA            NA            NA            NA           
+#> [11] NA            "Independent" "Independent" NA            NA           
 #> [16] NA            NA            NA            NA            NA
 
 parties %>%
@@ -120,8 +133,8 @@ parties %>%
     c("g", "l") ~ "Other",
     c("i", NA)  ~ "Independent"
   )
-#>  [1] NA            NA            "Independent" NA            NA           
-#>  [6] NA            "Independent" NA            NA            NA           
-#> [11] NA            NA            NA            NA            NA           
+#>  [1] NA            NA            NA            NA            NA           
+#>  [6] NA            NA            NA            NA            NA           
+#> [11] NA            "Independent" "Independent" NA            NA           
 #> [16] NA            NA            NA            NA            NA
 ```
