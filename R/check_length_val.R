@@ -5,8 +5,7 @@ check_length_val <- function(
 
   if (is.null(reason)) {
     reason <- ""
-  }
-  else {
+  } else {
     reason <- paste0("(", reason, ")")
   }
 
@@ -15,8 +14,7 @@ check_length_val <- function(
       header, "must be length 1", reason, "not", plu::stick(length_x),
       .abort = .abort
     )
-  }
-  else {
+  } else {
     glubort(
       header, "must be length", n, reason, "or one, not", plu::stick(length_x),
       .abort = .abort
