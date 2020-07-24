@@ -1,0 +1,114 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+
+library(badger)
+library(incase)
+parties <- sample(
+  c("D", "R", "G", "L", "I", NA),
+  20,
+  replace = TRUE,
+  c(0.25, 0.25, 0.075, 0.075, 0.25, 0.1)
+)
+```
+
+# incase <img src="man/figures/logo.png?raw=TRUE" align="right" height="138" />
+
+
+
+**incase** provides a more pipe-friendly alternative to [**dplyr**](https://github.com/tidyverse/dplyr)'s [`case_when()`](https://dplyr.tidyverse.org/reference/case_when.html) and [`if_else()`](https://dplyr.tidyverse.org/reference/if_else.html).
+
+## Installation
+
+You can install the development version of **incase** from [GitHub](https://github.com/rossellhayes/incase) with:
+
+``` r
+# install.packages("remotes")
+remotes::install_github("rossellhayes/incase")
+```
+
+## Example
+
+**incase**'s `in_case()` and `if_case()` accept a vector as their first input, allowing you to take full advantage of [**magrittr**](https://github.com/tidyverse/magrittr)'s `.`
+
+```{r}
+1:20 %>%
+  in_case(
+    . %% 15 == 0 ~ "fizz buzz",
+    . %%  3 == 0 ~ "fizz",
+    . %%  5 == 0 ~ "buzz",
+    TRUE         ~ .
+  )
+
+1:20 %>% if_case(. %% 3 == 0, "fizz", .)
+```
+
+As shown above, they also automatically coerce types.
+This is especially useful when dealing with integers.
+
+```{r}
+# Halve all odd numbers
+x <- 1:10
+
+if_case(x %% 2 != 0, x / 2, x)
+```
+
+`in_case()` adds `preserve` and `default` arguments, to avoid having to use `TRUE ~ ...`.
+
+```{r}
+1:20 %>%
+  in_case(
+    . %% 15 == 0 ~ "fizz buzz",
+    . %%  3 == 0 ~ "fizz",
+    . %%  5 == 0 ~ "buzz"
+  )
+
+1:20 %>%
+  in_case(
+    . %% 15 == 0 ~ "fizz buzz",
+    . %%  3 == 0 ~ "fizz",
+    . %%  5 == 0 ~ "buzz",
+    preserve     = TRUE
+  )
+
+1:20 %>%
+  in_case(
+    . %% 15 == 0 ~ "fizz buzz",
+    . %%  3 == 0 ~ "fizz",
+    . %%  5 == 0 ~ "buzz",
+    default      = "pass"
+  )
+```
+
+`switch_case()` works as a convenient shorthand for `in_case()` when recoding discrete values.
+
+```{r}
+parties
+
+parties %>% 
+  in_case(
+    . == "d"           ~ "Democratic",
+    . == "r"           ~ "Republican",
+    . %in% c("g", "l") ~ "Other",
+    . %in% c("i", NA)  ~ "Independent" 
+  )
+
+parties %>%
+  switch_case(
+    "d"         ~ "Democrat",
+    "r"         ~ "Republican",
+    c("g", "l") ~ "Other",
+    c("i", NA)  ~ "Independent"
+  )
+```
+
