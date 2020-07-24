@@ -18,14 +18,14 @@ Description: Offers a pipe-friendly alternative to the 'dplyr'
 License: MIT + file LICENSE
 URL: https://github.com/rossellhayes/incase
 BugReports: https://github.com/rossellhayes/incase/issues
-Imports: 
-    dplyr,
+Imports:
     magrittr,
     plu (>= 0.1.0),
     rlang
 Suggests: 
     cli,
     crayon,
+    dplyr,
     testthat
 Remotes: 
     rossellhayes/plu
