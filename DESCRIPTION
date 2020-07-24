@@ -1,7 +1,6 @@
 Type: Package
 Package: incase
-Title: Pipe-Friendly Vector Replacement with Case or If-Else
-    Statements
+Title: Pipe-Friendly Vector Replacement with Case Statements
 Version: 0.0.0.9000
 Description: Offers a pipe-friendly alternative to the 'dplyr'
     functions 'case_when()' and 'if_else()'.  These functions accept a
