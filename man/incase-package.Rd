@@ -4,8 +4,7 @@
 \name{incase-package}
 \alias{incase}
 \alias{incase-package}
-\title{incase: Pipe-Friendly Vector Replacement with Case or If-Else
-    Statements}
+\title{incase: Pipe-Friendly Vector Replacement with Case Statements}
 \description{
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
@@ -16,5 +15,13 @@ Offers a pipe-friendly alternative to the 'dplyr'
     coerce all possible outputs to the same type, meaning you no longer
     have to worry about using specific typed variants of NA or explicitly
     declaring integer outputs.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/rossellhayes/incase}
+  \item Report bugs at \url{https://github.com/rossellhayes/incase/issues}
+}
+
 }
 \keyword{internal}

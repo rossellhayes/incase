@@ -38,45 +38,52 @@ A vector of the same length as `x`.
 Switch-style recoding of values
 }
 \examples{
-x <- 1:10
-in_switch(
-  x,
-  3 ~ "fizz",
-  5 ~ "buzz",
-  6 ~ "fizz",
-  9 ~ "fizz"
+parties <- sample(c("d", "r", "i", "g", "l"), 20, replace = TRUE)
+
+switch_case(
+  parties,
+  "d" ~ "Democrat",
+  "r" ~ "Republican",
+  "i" ~ "Independent",
+  "g" ~ "Green",
+  "l" ~ "Libertarian"
 )
 
-1:10 \%>\%
-  in_switch(
-    3 ~ "fizz",
-    5 ~ "buzz",
-    6 ~ "fizz",
-    9 ~ "fizz"
+parties \%>\%
+  switch_case(
+    "d" ~ "Democrat",
+    "r" ~ "Republican",
+    "i" ~ "Independent",
+    "g" ~ "Green",
+    "l" ~ "Libertarian"
   )
 
-1:10 \%>\%
-  in_switch(
-    c(3, 6, 9) ~ "fizz",
-    5 ~ "buzz"
+parties \%>\%
+  switch_case(
+    "d" ~ "Democrat",
+    "r" ~ "Republican",
+    c("i", "g", "l") ~ "Other"
   )
 
-1:10 \%>\%
-  in_switch(
-    3 ~ "fizz",
-    5 ~ "buzz",
-    6 ~ "fizz",
-    9 ~ "fizz",
+parties \%>\%
+  switch_case(
+    "d" ~ "Democrat",
+    "r" ~ "Republican",
+    default = "Other"
+  )
+
+parties \%>\%
+  switch_case(
+    "d" ~ "Democrat",
+    "r" ~ "Republican",
+    preserve = FALSE
+  )
+
+parties \%>\%
+  switch_case(
+    "d" ~ "Democrat",
+    "r" ~ "Republican",
     preserve = TRUE
-  )
-
-1:10 \%>\%
-  in_switch(
-    3 ~ "fizz",
-    5 ~ "buzz",
-    6 ~ "fizz",
-    9 ~ "fizz",
-    default = "bam"
   )
 }
 \seealso{

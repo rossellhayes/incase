@@ -4,7 +4,7 @@
 \alias{in_case}
 \title{A pipe-friendly general vectorized if}
 \usage{
-in_case(...)
+in_case(..., preserve = FALSE, default = NA)
 }
 \arguments{
 \item{...}{<[`dynamic-dots`][rlang::dyn-dots]> A sequence of two-sided
@@ -19,6 +19,18 @@ in_case(...)
   The case of `n == 0` is treated as a variant of `n != 1`.
 
   `NULL` inputs are ignored.}
+
+\item{preserve}{If `TRUE`, unmatched elements of the input will be
+returned unmodified.
+(The elements may have their type coerced to be compatible with
+replacement values.)
+If `FALSE`, unmatched elements of the input will be replaced
+with `default`.
+Defaults to `FALSE`.}
+
+\item{default}{If `preserve` is `FALSE`, a value to replace unmatched
+elements of the input.
+Defaults to `NA`.}
 }
 \value{
 A vector of length 1 or n, matching the length of the logical input
@@ -51,7 +63,7 @@ in_case(
     TRUE         ~ .
   )
 
-# in_case() silently converts the type of NA
+# in_case() silently converts types
 1:30 \%>\%
   in_case(
     . \%\% 15 == 0 ~ 35,
@@ -60,10 +72,30 @@ in_case(
     TRUE         ~ NA
   )
 
+\dontrun{
+  dplyr::case_when(
+    x \%\% 15 == 0 ~ 35,
+    x \%\%  3 == 0 ~ 5,
+    x \%\%  5 == 0 ~ 7,
+    TRUE         ~ NA
+  )
+}
+
+# default and preserve make it easier to handle unmatched values
 1:30 \%>\%
   in_case(
-    . < 15 ~ . - 1,
-    . > 15 ~ . + 1
+    . \%\% 15 == 0 ~ "fizz buzz",
+    . \%\%  3 == 0 ~ "fizz",
+    . \%\%  5 == 0 ~ "buzz",
+    default      = "pass"
+  )
+
+1:30 \%>\%
+  in_case(
+    . \%\% 15 == 0 ~ "fizz buzz",
+    . \%\%  3 == 0 ~ "fizz",
+    . \%\%  5 == 0 ~ "buzz",
+    preserve     = TRUE
   )
 }
 \seealso{
