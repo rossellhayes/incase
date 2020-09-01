@@ -1,15 +1,16 @@
 #' @description Offers a pipe-friendly alternative to [dplyr::case_when()] and
 #' [dplyr::if_else()].
 #' These functions accept a vector as an optional first argument, allowing
-#' conditional statements to be built using the [magrittr] dot operator.
+#' conditional statements to be built using the [magrittr][magrittr::magrittr]
+#' dot operator.
 #' The functions also coerce all possible outputs to the same type, meaning you
 #' no longer have to worry about using specific typed variants of `NA` or
 #' explicitly declaring integer outputs.
 #'
 #' @details # Copyright
 #'
-#' **incase** includes code from [dplyr], which is licensed under the MIT
-#' License:
+#' **incase** includes code from [dplyr][dplyr::dplyr-package], which is
+#' licensed under the MIT License:
 #'
 #' Copyright (c) 2013-2019 RStudio and others.
 #'

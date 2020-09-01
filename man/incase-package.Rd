@@ -9,14 +9,15 @@
 Offers a pipe-friendly alternative to \code{\link[dplyr:case_when]{dplyr::case_when()}} and
 \code{\link[dplyr:if_else]{dplyr::if_else()}}.
 These functions accept a vector as an optional first argument, allowing
-conditional statements to be built using the \link{magrittr} dot operator.
+conditional statements to be built using the \link[magrittr:magrittr]{magrittr}
+dot operator.
 The functions also coerce all possible outputs to the same type, meaning you
 no longer have to worry about using specific typed variants of \code{NA} or
 explicitly declaring integer outputs.
 }
 \section{Copyright}{
-\strong{incase} includes code from \link{dplyr}, which is licensed under the MIT
-License:
+\strong{incase} includes code from \link[dplyr:dplyr-package]{dplyr}, which is
+licensed under the MIT License:
 
 Copyright (c) 2013-2019 RStudio and others.
 
