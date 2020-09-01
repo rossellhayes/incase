@@ -13,5 +13,6 @@ x %>% if_case(. > 3, "high", "low", "missing")
 \dontrun{x %>% dplyr::if_else(. > 3, "high", "low", "missing")}
 x %>% {dplyr::if_else(. > 3, "high", "low", "missing")}
 
-# You can also pipe a conditional test instead of a vector
+# You can also pipe a conditional test like dplyr::if_else()
 {x > 3} %>% if_case("high", "low", "missing")
+{x > 3} %>% dplyr::if_else("high", "low", "missing")
