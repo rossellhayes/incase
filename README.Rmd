@@ -44,7 +44,9 @@ You can install the development version of **incase** from [GitHub](https://gith
 remotes::install_github("rossellhayes/incase")
 ```
 
-## Example
+## Usage
+
+### Pipe-friendly conditionals
 
 **incase**'s `in_case()` and `if_case()` accept a vector as their first input, allowing you to take full advantage of [**magrittr**](https://github.com/tidyverse/magrittr)'s `.`
 
@@ -60,17 +62,30 @@ remotes::install_github("rossellhayes/incase")
 1:20 %>% if_case(. %% 3 == 0, "fizz", .)
 ```
 
-As shown above, they also automatically coerce types.
-This is especially useful when dealing with integers.
+### Automatic type conversion
 
-```{r}
-# Halve all odd numbers
-x <- 1:10
+**incase** functions automatically coerce types.
+This is especially useful when dealing with integers or `NA`s.
 
-if_case(x %% 2 != 0, x / 2, x)
+```{r error=TRUE}
+x <- -1:5
+
+# Replace -1 with NA
+dplyr::case_when(x == -1 ~ NA, TRUE ~ x)
+dplyr::case_when(x == -1 ~ NA_integer_, TRUE ~ x)
+in_case(x == -1 ~ NA, TRUE ~ x)
+
+# Replace -1 with 0
+dplyr::case_when(x == -1 ~ 0, TRUE ~ x)
+dplyr::case_when(x == -1 ~ 0L, TRUE ~ x)
+in_case(x == -1 ~ 0, TRUE ~ x)
 ```
 
-`in_case()` adds `preserve` and `default` arguments, to avoid having to use `TRUE ~ ...`.
+With **incase**, you no longer have to worry about specifying the type of your `NA`s or adding `L` to your integers.
+
+### Easy default values
+
+`in_case()` adds `preserve` and `default` arguments as a more intuitive alternative to `TRUE ~ ...`.*
 
 ```{r}
 1:20 %>%
@@ -97,6 +112,8 @@ if_case(x %% 2 != 0, x / 2, x)
   )
 ```
 
+### Simplified interface for recoding
+
 `switch_case()` works as a convenient shorthand for `in_case()` when recoding discrete values.
 
 ```{r}
@@ -119,3 +136,11 @@ parties %>%
   )
 ```
 
+---
+
+Hex sticker fonts are [Source Code Pro](https://github.com/adobe-fonts/source-code-pro) by [Adobe](https://www.adobe.com) and [Hasklig](https://github.com/i-tu/Hasklig) by [Ian Tuomi](https://github.com/i-tu).
+
+Please note that **incase** is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.
+
+\* Intuitiveness may vary from person to person.

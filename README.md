@@ -31,7 +31,9 @@ You can install the development version of **incase** from
 remotes::install_github("rossellhayes/incase")
 ```
 
-## Example
+## Usage
+
+### Pipe-friendly conditionals
 
 **incase**’s `in_case()` and `if_case()` accept a vector as their first
 input, allowing you to take full advantage of
@@ -55,19 +57,38 @@ input, allowing you to take full advantage of
 #> [11] "11"   "fizz" "13"   "14"   "fizz" "16"   "17"   "fizz" "19"   "20"
 ```
 
-As shown above, they also automatically coerce types. This is especially
-useful when dealing with integers.
+### Automatic type conversion
+
+**incase** functions automatically coerce types. This is especially
+useful when dealing with integers or `NA`s.
 
 ``` r
-# Halve all odd numbers
-x <- 1:10
+x <- -1:5
 
-if_case(x %% 2 != 0, x / 2, x)
-#>  [1]  0.5  2.0  1.5  4.0  2.5  6.0  3.5  8.0  4.5 10.0
+# Replace -1 with NA
+dplyr::case_when(x == -1 ~ NA, TRUE ~ x)
+#> Error: must be a logical vector, not an integer vector.
+dplyr::case_when(x == -1 ~ NA_integer_, TRUE ~ x)
+#> [1] NA  0  1  2  3  4  5
+in_case(x == -1 ~ NA, TRUE ~ x)
+#> [1] NA  0  1  2  3  4  5
+
+# Replace -1 with 0
+dplyr::case_when(x == -1 ~ 0, TRUE ~ x)
+#> Error: must be a double vector, not an integer vector.
+dplyr::case_when(x == -1 ~ 0L, TRUE ~ x)
+#> [1] 0 0 1 2 3 4 5
+in_case(x == -1 ~ 0, TRUE ~ x)
+#> [1] 0 0 1 2 3 4 5
 ```
 
-`in_case()` adds `preserve` and `default` arguments, to avoid having to
-use `TRUE ~ ...`.
+With **incase**, you no longer have to worry about specifying the type
+of your `NA`s or adding `L` to your integers.
+
+### Easy default values
+
+`in_case()` adds `preserve` and `default` arguments as a more intuitive
+alternative to `TRUE ~ ...`.\*
 
 ``` r
 1:20 %>%
@@ -106,12 +127,14 @@ use `TRUE ~ ...`.
 #> [19] "pass"      "buzz"
 ```
 
+### Simplified interface for recoding
+
 `switch_case()` works as a convenient shorthand for `in_case()` when
 recoding discrete values.
 
 ``` r
 parties
-#>  [1] "I" "D" "R" "R" "I" "D" "I" "D" "R" "I" "R" "I" "L" "R" "G" "I" "D" "D" "I"
+#>  [1] "D" "R" "I" "L" "D" "D" "D" NA  "R" "D" "G" "I" NA  NA  "I" "I" "D" "I" "D"
 #> [20] "D"
 
 parties %>% 
@@ -121,10 +144,10 @@ parties %>%
     . %in% c("G", "L") ~ "Other",
     . %in% c("I", NA)  ~ "Independent" 
   )
-#>  [1] "Independent" "Democratic"  "Republican"  "Republican"  "Independent"
-#>  [6] "Democratic"  "Independent" "Democratic"  "Republican"  "Independent"
-#> [11] "Republican"  "Independent" "Other"       "Republican"  "Other"      
-#> [16] "Independent" "Democratic"  "Democratic"  "Independent" "Democratic"
+#>  [1] "Democratic"  "Republican"  "Independent" "Other"       "Democratic" 
+#>  [6] "Democratic"  "Democratic"  "Independent" "Republican"  "Democratic" 
+#> [11] "Other"       "Independent" "Independent" "Independent" "Independent"
+#> [16] "Independent" "Democratic"  "Independent" "Democratic"  "Democratic"
 
 parties %>%
   switch_case(
@@ -133,8 +156,22 @@ parties %>%
     c("G", "L") ~ "Other",
     c("I", NA)  ~ "Independent"
   )
-#>  [1] "Independent" "Democrat"    "Republican"  "Republican"  "Independent"
-#>  [6] "Democrat"    "Independent" "Democrat"    "Republican"  "Independent"
-#> [11] "Republican"  "Independent" "Other"       "Republican"  "Other"      
-#> [16] "Independent" "Democrat"    "Democrat"    "Independent" "Democrat"
+#>  [1] "Democrat"    "Republican"  "Independent" "Other"       "Democrat"   
+#>  [6] "Democrat"    "Democrat"    "Independent" "Republican"  "Democrat"   
+#> [11] "Other"       "Independent" "Independent" "Independent" "Independent"
+#> [16] "Independent" "Democrat"    "Independent" "Democrat"    "Democrat"
 ```
+
+-----
+
+Hex sticker fonts are [Source Code
+Pro](https://github.com/adobe-fonts/source-code-pro) by
+[Adobe](https://www.adobe.com) and
+[Hasklig](https://github.com/i-tu/Hasklig) by [Ian
+Tuomi](https://github.com/i-tu).
+
+Please note that **incase** is released with a [Contributor Code of
+Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.
+
+\* Intuitiveness may vary from person to person.
