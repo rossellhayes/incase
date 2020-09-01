@@ -9,30 +9,30 @@ switch_case(x, ..., preserve = FALSE, default = NA)
 \arguments{
 \item{x}{A vector}
 
-\item{...}{<[`dynamic-dots`][rlang::dyn-dots]> A sequence of two-sided
-  formulas.
-  Elements of `x` that match the left hand side (LHS) will be replaced with
-  the value in the right hand side (RHS).
+\item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}> A sequence of two-sided
+formulas.
+Elements of \code{x} that match the left hand side (LHS) will be replaced with
+the value in the right hand side (RHS).
 
-  The LHS must evaluate to an atomic vector.
+The LHS must evaluate to an atomic vector.
 
-  The RHS must be of length one.
+The RHS must be of length one.
 
-  `NULL` inputs are ignored.}
+\code{NULL} inputs are ignored.}
 
-\item{preserve}{If `TRUE`, unmatched elements of `x` will be returned
+\item{preserve}{If \code{TRUE}, unmatched elements of \code{x} will be returned
 unmodified.
 (The elements may have their type coerced to be compatible with
 replacement values.)
-If `FALSE`, unmatched elements of `x` will be replaced with `default`.
-Defaults to `FALSE`.}
+If \code{FALSE}, unmatched elements of \code{x} will be replaced with \code{default}.
+Defaults to \code{FALSE}.}
 
-\item{default}{If `preserve` is `FALSE`, a value to replace unmatched
-elements of `x`.
-Defaults to `NA`.}
+\item{default}{If \code{preserve} is \code{FALSE}, a value to replace unmatched
+elements of \code{x}.
+Defaults to \code{NA}.}
 }
 \value{
-A vector of the same length as `x`.
+A vector of the same length as \code{x}.
 }
 \description{
 Switch-style recoding of values
@@ -87,9 +87,9 @@ parties \%>\%
   )
 }
 \seealso{
-[in_case()], a pipeable alternative to [dplyr::case_when()]
+\code{\link[=in_case]{in_case()}}, a pipeable alternative to \code{\link[dplyr:case_when]{dplyr::case_when()}}
 
-  [if_case()], a pipeable alternative to [dplyr::if_else()]
+\code{\link[=if_case]{if_case()}}, a pipeable alternative to \code{\link[dplyr:if_else]{dplyr::if_else()}}
 
-  [switch()], which inspired this function
+\code{\link[=switch]{switch()}}, which inspired this function
 }

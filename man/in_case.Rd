@@ -7,42 +7,42 @@
 in_case(..., preserve = FALSE, default = NA)
 }
 \arguments{
-\item{...}{<[`dynamic-dots`][rlang::dyn-dots]> A sequence of two-sided
-  formulas.
-  The left hand side (LHS) determines which values match this case.
-  The right hand side (RHS) provides the replacement value.
+\item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}> A sequence of two-sided
+formulas.
+The left hand side (LHS) determines which values match this case.
+The right hand side (RHS) provides the replacement value.
 
-  The LHS must evaluate to a logical vector.
+The LHS must evaluate to a logical vector.
 
-  Both LHS and RHS may have the same length of either 1 or `n`.
-  The value of `n` must be consistent across all cases.
-  The case of `n == 0` is treated as a variant of `n != 1`.
+Both LHS and RHS may have the same length of either 1 or \code{n}.
+The value of \code{n} must be consistent across all cases.
+The case of \code{n == 0} is treated as a variant of \code{n != 1}.
 
-  `NULL` inputs are ignored.}
+\code{NULL} inputs are ignored.}
 
-\item{preserve}{If `TRUE`, unmatched elements of the input will be
+\item{preserve}{If \code{TRUE}, unmatched elements of the input will be
 returned unmodified.
 (The elements may have their type coerced to be compatible with
 replacement values.)
-If `FALSE`, unmatched elements of the input will be replaced
-with `default`.
-Defaults to `FALSE`.}
+If \code{FALSE}, unmatched elements of the input will be replaced
+with \code{default}.
+Defaults to \code{FALSE}.}
 
-\item{default}{If `preserve` is `FALSE`, a value to replace unmatched
+\item{default}{If \code{preserve} is \code{FALSE}, a value to replace unmatched
 elements of the input.
-Defaults to `NA`.}
+Defaults to \code{NA}.}
 }
 \value{
 A vector of length 1 or n, matching the length of the logical input
-  or output vectors.
-  Inconsistent lengths will generate an error.
+or output vectors.
+Inconsistent lengths will generate an error.
 }
 \description{
 This function allows you to vectorize multiple if_else() statements.
 If no cases match, NA is returned.
-This function derived from [dplyr::case_when()].
-Unlike [dplyr::case_when()], `in_case()` supports piping elegantly and
-  attempts to handle inconsistent types (see examples).
+This function derived from \code{\link[dplyr:case_when]{dplyr::case_when()}}.
+Unlike \code{\link[dplyr:case_when]{dplyr::case_when()}}, \code{in_case()} supports piping elegantly and
+attempts to handle inconsistent types (see examples).
 }
 \examples{
 # Non-piped statements are handled the same as dplyr::case_when()
@@ -99,9 +99,9 @@ in_case(
   )
 }
 \seealso{
-[if_case()], a pipeable alternative to [dplyr::if_else()]
+\code{\link[=if_case]{if_case()}}, a pipeable alternative to \code{\link[dplyr:if_else]{dplyr::if_else()}}
 
-  [switch_case()], a reimplementation of [switch()]
+\code{\link[=switch_case]{switch_case()}}, a reimplementation of \code{\link[=switch]{switch()}}
 
-  [dplyr::case_when()], from which this function is derived
+\code{\link[dplyr:case_when]{dplyr::case_when()}}, from which this function is derived
 }

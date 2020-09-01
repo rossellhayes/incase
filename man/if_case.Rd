@@ -9,27 +9,27 @@ if_case(condition, true, false, missing = NA, ...)
 \arguments{
 \item{condition}{Logical vector}
 
-\item{true, false, missing}{Values to use for `TRUE`, `FALSE`, and `NA` values
-of `condition`.
-They must be either the same length as `condition`, or length 1.}
+\item{true, false, missing}{Values to use for \code{TRUE}, \code{FALSE}, and \code{NA} values
+of \code{condition}.
+They must be either the same length as \code{condition}, or length 1.}
 
-\item{...}{Values passed to `...` produce an error.
+\item{...}{Values passed to \code{...} produce an error.
 This facilitates the quiet ignoring of a piped vector.}
 }
 \value{
-Where `condition` is `TRUE`, the matching value from `true`;
-  where it's `FALSE`, the matching value from `false`;
-  and where it's `NA`, the matching value from `missing`.
+Where \code{condition} is \code{TRUE}, the matching value from \code{true};
+where it's \code{FALSE}, the matching value from \code{false};
+and where it's \code{NA}, the matching value from \code{missing}.
 }
 \description{
-Compared to [dplyr::if_else()], this function is easier to use with a pipe.
+Compared to \code{\link[dplyr:if_else]{dplyr::if_else()}}, this function is easier to use with a pipe.
 A vector piped into this function will be quietly ignored.
-This allows [magrittr] dots to be used in arguments without requiring
+This allows \link{magrittr} dots to be used in arguments without requiring
 workarounds like wrapping the function in braces.
 }
 \details{
-This function is also less strict than [dplyr::if_else()].
-If `true`, `false`, and `missing` are different types, they are silently
+This function is also less strict than \code{\link[dplyr:if_else]{dplyr::if_else()}}.
+If \code{true}, \code{false}, and \code{missing} are different types, they are silently
 coerced to a common type.
 }
 \examples{
@@ -53,9 +53,9 @@ x \%>\% {dplyr::if_else(. > 3, "high", "low", "missing")}
 {x > 3} \%>\% dplyr::if_else("high", "low", "missing")
 }
 \seealso{
-[in_case()], a pipeable alternative to [dplyr::case_when()]
+\code{\link[=in_case]{in_case()}}, a pipeable alternative to \code{\link[dplyr:case_when]{dplyr::case_when()}}
 
-  [switch_case()], a reimplementation of [switch()]
+\code{\link[=switch_case]{switch_case()}}, a reimplementation of \code{\link[=switch]{switch()}}
 
-  [dplyr::if_else()], from which this function is derived
+\code{\link[dplyr:if_else]{dplyr::if_else()}}, from which this function is derived
 }
