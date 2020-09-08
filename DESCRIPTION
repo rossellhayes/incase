@@ -16,7 +16,8 @@ Description: Offers a pipe-friendly alternative to the 'dplyr'
     worry about using specific typed variants of NA or explicitly
     declaring integer outputs.
 License: MIT + file LICENSE
-URL: https://github.com/rossellhayes/incase
+URL: http://incase.rossellhayes.com,
+    https://github.com/rossellhayes/incase
 BugReports: https://github.com/rossellhayes/incase/issues
 Imports:
     magrittr,
