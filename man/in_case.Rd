@@ -72,14 +72,15 @@ in_case(
     TRUE         ~ NA
   )
 
-\dontrun{
+x <- 1:30
+try(
   dplyr::case_when(
     x \%\% 15 == 0 ~ 35,
     x \%\%  3 == 0 ~ 5,
     x \%\%  5 == 0 ~ 7,
     TRUE         ~ NA
   )
-}
+)
 
 # default and preserve make it easier to handle unmatched values
 1:30 \%>\%
