@@ -9,11 +9,11 @@ Authors@R:
            email = "alexander@rossellhayes.com",
            comment = c(ORCID = "0000-0001-9412-0457"))
 Description: Offers a pipe-friendly alternative to the 'dplyr'
-    functions 'case_when()' and 'if_else()'.  These functions accept a
-    vector as an optional first argument, allowing conditional statements
-    to be built using the 'magrittr' dot operator.  The functions also
-    coerce all possible outputs to the same type, meaning you no longer
-    have to worry about using specific typed variants of NA or explicitly
+    functions case_when() and if_else().  These functions accept a vector
+    as an optional first argument, allowing conditional statements to be
+    built using the 'magrittr' dot operator.  The functions also coerce
+    all possible outputs to the same type, meaning you no longer have to
+    worry about using specific typed variants of NA or explicitly
     declaring integer outputs.
 License: MIT + file LICENSE
 URL: https://github.com/rossellhayes/incase
@@ -30,5 +30,5 @@ Suggests:
     testthat
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
