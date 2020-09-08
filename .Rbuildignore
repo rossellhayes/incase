@@ -7,3 +7,6 @@
 ^CODE_OF_CONDUCT\.md$
 ^CRAN-RELEASE$
 ^cran-comments.md$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
