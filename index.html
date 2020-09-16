@@ -84,14 +84,17 @@
 <a href="#incase-" class="anchor"></a>incase <img src="reference/figures/logo.png?raw=TRUE" align="right" height="138">
 </h1></div>
 <!-- badges: start -->
-<!-- [![](https://www.r-pkg.org/badges/version/incase?color=brightgreen)](https://cran.r-project.org/package=incase) -->
 
 <p><strong>incase</strong> provides a more pipe-friendly alternative to <a href="https://github.com/tidyverse/dplyr"><strong>dplyr</strong></a>’s <a href="https://dplyr.tidyverse.org/reference/case_when.html"><code>case_when()</code></a> and <a href="https://dplyr.tidyverse.org/reference/if_else.html"><code>if_else()</code></a>.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install the development version of <strong>incase</strong> from <a href="https://github.com/rossellhayes/incase">GitHub</a> with:</p>
+<p>You can install the released version of <strong>incase</strong> from <a href="https://cran.r-project.org/package=incase">CRAN</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"incase"</span>)
+</pre></div>
+<p>or the development version from <a href="https://github.com/rossellhayes/incase">GitHub</a> with:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit">
 <span class="co"># install.packages("remotes")</span>
 <span class="kw">remotes</span>::<span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"rossellhayes/incase"</span>)
 </pre></div>
@@ -103,7 +106,7 @@
 <h3 class="hasAnchor">
 <a href="#pipe-friendly-conditionals" class="anchor"></a>Pipe-friendly conditionals</h3>
 <p><strong>incase</strong>’s <code><a href="reference/in_case.html">in_case()</a></code> and <code><a href="reference/if_case.html">if_case()</a></code> accept a vector as their first input, allowing you to take full advantage of <a href="https://github.com/tidyverse/magrittr"><strong>magrittr</strong></a>’s <code>.</code></p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
+<div class="sourceCode" id="cb3"><pre class="downlit">
 <span class="fl">1</span><span class="op">:</span><span class="fl">20</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="reference/in_case.html">in_case</a></span>(
     <span class="kw">.</span> <span class="op">%%</span> <span class="fl">15</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"fizz buzz"</span>,
@@ -125,7 +128,7 @@
 <h3 class="hasAnchor">
 <a href="#automatic-type-conversion" class="anchor"></a>Automatic type conversion</h3>
 <p><strong>incase</strong> functions automatically coerce types. This is especially useful when dealing with integers or <code>NA</code>s.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
+<div class="sourceCode" id="cb4"><pre class="downlit">
 <span class="kw">x</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>
 
 <span class="co"># Replace -1 with NA</span>
@@ -150,7 +153,7 @@
 <h3 class="hasAnchor">
 <a href="#easy-default-values" class="anchor"></a>Easy default values</h3>
 <p><code><a href="reference/in_case.html">in_case()</a></code> adds <code>preserve</code> and <code>default</code> arguments as a more intuitive alternative to <code>TRUE ~ ...</code>.*</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
+<div class="sourceCode" id="cb5"><pre class="downlit">
 <span class="fl">1</span><span class="op">:</span><span class="fl">20</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="reference/in_case.html">in_case</a></span>(
     <span class="kw">.</span> <span class="op">%%</span> <span class="fl">15</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"fizz buzz"</span>,
@@ -191,9 +194,9 @@
 <h3 class="hasAnchor">
 <a href="#simplified-interface-for-recoding" class="anchor"></a>Simplified interface for recoding</h3>
 <p><code><a href="reference/switch_case.html">switch_case()</a></code> works as a convenient shorthand for <code><a href="reference/in_case.html">in_case()</a></code> when recoding discrete values.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
+<div class="sourceCode" id="cb6"><pre class="downlit">
 <span class="kw">parties</span>
-<span class="co">#&gt;  [1] "D" "R" "I" "L" "D" "D" "D" NA  "R" "D" "G" "I" NA  NA  "I" "I" "D" "I" "D"</span>
+<span class="co">#&gt;  [1] "I" "L" "R" NA  "I" "R" "D" "R" "R" "R" "D" "I" "I" "I" "L" "D" "L" "R" "G"</span>
 <span class="co">#&gt; [20] "D"</span>
 
 <span class="kw">parties</span> <span class="op">%&gt;%</span> 
@@ -203,10 +206,10 @@
     <span class="kw">.</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"G"</span>, <span class="st">"L"</span>) <span class="op">~</span> <span class="st">"Other"</span>,
     <span class="kw">.</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"I"</span>, <span class="fl">NA</span>)  <span class="op">~</span> <span class="st">"Independent"</span> 
   )
-<span class="co">#&gt;  [1] "Democratic"  "Republican"  "Independent" "Other"       "Democratic" </span>
-<span class="co">#&gt;  [6] "Democratic"  "Democratic"  "Independent" "Republican"  "Democratic" </span>
-<span class="co">#&gt; [11] "Other"       "Independent" "Independent" "Independent" "Independent"</span>
-<span class="co">#&gt; [16] "Independent" "Democratic"  "Independent" "Democratic"  "Democratic"</span>
+<span class="co">#&gt;  [1] "Independent" "Other"       "Republican"  "Independent" "Independent"</span>
+<span class="co">#&gt;  [6] "Republican"  "Democratic"  "Republican"  "Republican"  "Republican" </span>
+<span class="co">#&gt; [11] "Democratic"  "Independent" "Independent" "Independent" "Other"      </span>
+<span class="co">#&gt; [16] "Democratic"  "Other"       "Republican"  "Other"       "Democratic"</span>
 
 <span class="kw">parties</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="reference/switch_case.html">switch_case</a></span>(
@@ -215,13 +218,13 @@
     <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"G"</span>, <span class="st">"L"</span>) <span class="op">~</span> <span class="st">"Other"</span>,
     <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"I"</span>, <span class="fl">NA</span>)  <span class="op">~</span> <span class="st">"Independent"</span>
   )
-<span class="co">#&gt;  [1] "Democrat"    "Republican"  "Independent" "Other"       "Democrat"   </span>
-<span class="co">#&gt;  [6] "Democrat"    "Democrat"    "Independent" "Republican"  "Democrat"   </span>
-<span class="co">#&gt; [11] "Other"       "Independent" "Independent" "Independent" "Independent"</span>
-<span class="co">#&gt; [16] "Independent" "Democrat"    "Independent" "Democrat"    "Democrat"</span>
+<span class="co">#&gt;  [1] "Independent" "Other"       "Republican"  "Independent" "Independent"</span>
+<span class="co">#&gt;  [6] "Republican"  "Democrat"    "Republican"  "Republican"  "Republican" </span>
+<span class="co">#&gt; [11] "Democrat"    "Independent" "Independent" "Independent" "Other"      </span>
+<span class="co">#&gt; [16] "Democrat"    "Other"       "Republican"  "Other"       "Democrat"</span>
 </pre></div>
 <hr>
-<p>Hex sticker fonts are <a href="https://github.com/adobe-fonts/source-code-pro">Source Code Pro</a> by <a href="https://www.adobe.com">Adobe</a> and <a href="https://github.com/i-tu/Hasklig">Hasklig</a> by <a href="https://github.com/i-tu">Ian Tuomi</a>.</p>
+<p>Hex sticker fonts are <a href="https://github.com/adobe-fonts/source-sans-pro">Source Sans Pro</a> by <a href="https://www.adobe.com">Adobe</a> and <a href="https://github.com/i-tu/Hasklig">Hasklig</a> by <a href="https://github.com/i-tu">Ian Tuomi</a>.</p>
 <p>Please note that <strong>incase</strong> is released with a <a href="https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 <p>* Intuitiveness may vary from person to person.</p>
 </div>
@@ -233,6 +236,8 @@
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
+<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=incase">https://​cloud.r-project.org/​package=incase</a>
+</li>
 <li>Browse source code at <br><a href="https://github.com/rossellhayes/incase/">https://​github.com/​rossellhayes/​incase/​</a>
 </li>
 <li>Report a bug at <br><a href="https://github.com/rossellhayes/incase/issues">https://​github.com/​rossellhayes/​incase/​issues</a>
@@ -262,10 +267,12 @@
   <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg"></a></li>
+<li><a href="https://cran.r-project.org/package=incase"><img src="https://www.r-pkg.org/badges/version/incase?color=brightgreen"></a></li>
+<li><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg"></a></li>
 <li><a href="https://cran.r-project.org/web/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-blueviolet.svg" alt="License: MIT"></a></li>
 <li><a href="https://github.com/rossellhayes/incase/actions"><img src="https://github.com/rossellhayes/incase/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
 <li><a href="https://codecov.io/gh/rossellhayes/incase"><img src="https://codecov.io/gh/rossellhayes/incase/branch/master/graph/badge.svg"></a></li>
+<li><a href="https://cran.r-project.org/package=incase"><img src="https://tinyverse.netlify.com/badge/incase" alt="Dependencies"></a></li>
 </ul>
 </div>
 </div>
@@ -277,7 +284,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
