@@ -25,21 +25,27 @@ parties <- sample(
 # incase <img src="man/figures/logo.png?raw=TRUE" align="right" height="138" />
 
 <!-- badges: start -->
-<!-- `r badge_cran_release(color = "brightgreen")` -->
-`r badge_lifecycle("experimental")`
+`r badge_cran_release(color = "brightgreen")`
+`r badge_lifecycle("maturing")`
 `r badge_license(color = "blueviolet")`
 `r badge_github_actions(action = "R-CMD-check")`
 `r badge_codecov()`
-<!-- `r badge_dependencies()` -->
+`r badge_dependencies()`
 <!-- badges: end -->
 
 **incase** provides a more pipe-friendly alternative to [**dplyr**](https://github.com/tidyverse/dplyr)'s [`case_when()`](https://dplyr.tidyverse.org/reference/case_when.html) and [`if_else()`](https://dplyr.tidyverse.org/reference/if_else.html).
 
 ## Installation
 
-You can install the development version of **incase** from [GitHub](https://github.com/rossellhayes/incase) with:
+You can install the released version of **incase** from [CRAN](https://cran.r-project.org/package=incase) with:
 
-``` r
+``` {r eval = FALSE}
+install.packages("incase")
+```
+
+or the development version from [GitHub](https://github.com/rossellhayes/incase) with:
+
+``` {r eval = FALSE}
 # install.packages("remotes")
 remotes::install_github("rossellhayes/incase")
 ```
@@ -138,7 +144,7 @@ parties %>%
 
 ---
 
-Hex sticker fonts are [Source Code Pro](https://github.com/adobe-fonts/source-code-pro) by [Adobe](https://www.adobe.com) and [Hasklig](https://github.com/i-tu/Hasklig) by [Ian Tuomi](https://github.com/i-tu).
+Hex sticker fonts are [Source Sans Pro](https://github.com/adobe-fonts/source-sans-pro) by [Adobe](https://www.adobe.com) and [Hasklig](https://github.com/i-tu/Hasklig) by [Ian Tuomi](https://github.com/i-tu).
 
 Please note that **incase** is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms.

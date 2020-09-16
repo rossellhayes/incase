@@ -5,15 +5,14 @@
 
 <!-- badges: start -->
 
-<!-- [![](https://www.r-pkg.org/badges/version/incase?color=brightgreen)](https://cran.r-project.org/package=incase) -->
-
-[![](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![](https://www.r-pkg.org/badges/version/incase?color=brightgreen)](https://cran.r-project.org/package=incase)
+[![](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![License:
 MIT](https://img.shields.io/badge/license-MIT-blueviolet.svg)](https://cran.r-project.org/web/licenses/MIT)
 [![R build
 status](https://github.com/rossellhayes/incase/workflows/R-CMD-check/badge.svg)](https://github.com/rossellhayes/incase/actions)
 [![](https://codecov.io/gh/rossellhayes/incase/branch/master/graph/badge.svg)](https://codecov.io/gh/rossellhayes/incase)
-<!-- [![Dependencies](https://tinyverse.netlify.com/badge/incase)](https://cran.r-project.org/package=incase) -->
+[![Dependencies](https://tinyverse.netlify.com/badge/incase)](https://cran.r-project.org/package=incase)
 <!-- badges: end -->
 
 **incase** provides a more pipe-friendly alternative to
@@ -23,7 +22,14 @@ and [`if_else()`](https://dplyr.tidyverse.org/reference/if_else.html).
 
 ## Installation
 
-You can install the development version of **incase** from
+You can install the released version of **incase** from
+[CRAN](https://cran.r-project.org/package=incase) with:
+
+``` r
+install.packages("incase")
+```
+
+or the development version from
 [GitHub](https://github.com/rossellhayes/incase) with:
 
 ``` r
@@ -134,7 +140,7 @@ recoding discrete values.
 
 ``` r
 parties
-#>  [1] "D" "R" "I" "L" "D" "D" "D" NA  "R" "D" "G" "I" NA  NA  "I" "I" "D" "I" "D"
+#>  [1] "I" "L" "R" NA  "I" "R" "D" "R" "R" "R" "D" "I" "I" "I" "L" "D" "L" "R" "G"
 #> [20] "D"
 
 parties %>% 
@@ -144,10 +150,10 @@ parties %>%
     . %in% c("G", "L") ~ "Other",
     . %in% c("I", NA)  ~ "Independent" 
   )
-#>  [1] "Democratic"  "Republican"  "Independent" "Other"       "Democratic" 
-#>  [6] "Democratic"  "Democratic"  "Independent" "Republican"  "Democratic" 
-#> [11] "Other"       "Independent" "Independent" "Independent" "Independent"
-#> [16] "Independent" "Democratic"  "Independent" "Democratic"  "Democratic"
+#>  [1] "Independent" "Other"       "Republican"  "Independent" "Independent"
+#>  [6] "Republican"  "Democratic"  "Republican"  "Republican"  "Republican" 
+#> [11] "Democratic"  "Independent" "Independent" "Independent" "Other"      
+#> [16] "Democratic"  "Other"       "Republican"  "Other"       "Democratic"
 
 parties %>%
   switch_case(
@@ -156,16 +162,16 @@ parties %>%
     c("G", "L") ~ "Other",
     c("I", NA)  ~ "Independent"
   )
-#>  [1] "Democrat"    "Republican"  "Independent" "Other"       "Democrat"   
-#>  [6] "Democrat"    "Democrat"    "Independent" "Republican"  "Democrat"   
-#> [11] "Other"       "Independent" "Independent" "Independent" "Independent"
-#> [16] "Independent" "Democrat"    "Independent" "Democrat"    "Democrat"
+#>  [1] "Independent" "Other"       "Republican"  "Independent" "Independent"
+#>  [6] "Republican"  "Democrat"    "Republican"  "Republican"  "Republican" 
+#> [11] "Democrat"    "Independent" "Independent" "Independent" "Other"      
+#> [16] "Democrat"    "Other"       "Republican"  "Other"       "Democrat"
 ```
 
 -----
 
-Hex sticker fonts are [Source Code
-Pro](https://github.com/adobe-fonts/source-code-pro) by
+Hex sticker fonts are [Source Sans
+Pro](https://github.com/adobe-fonts/source-sans-pro) by
 [Adobe](https://www.adobe.com) and
 [Hasklig](https://github.com/i-tu/Hasklig) by [Ian
 Tuomi](https://github.com/i-tu).
