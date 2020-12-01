@@ -22,7 +22,8 @@ BugReports: https://github.com/rossellhayes/incase/issues
 Imports:
     magrittr,
     plu,
-    rlang
+    rlang,
+    stats
 Suggests: 
     cli,
     covr,
