@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Switch-style recoding of values — switch_case • incase</title>
+<title>Switch-style recoding of values with string pattern matching — grep_case • incase</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Switch-style recoding of values — switch_case" />
-<meta property="og:description" content="Switch-style recoding of values" />
+<meta property="og:title" content="Switch-style recoding of values with string pattern matching — grep_case" />
+<meta property="og:description" content="Switch-style recoding of values with string pattern matching" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -119,16 +119,16 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Switch-style recoding of values</h1>
-    <small class="dont-index">Source: <a href='https://github.com/rossellhayes/incase/blob/master/R/switch_case.R'><code>R/switch_case.R</code></a></small>
-    <div class="hidden name"><code>switch_case.Rd</code></div>
+    <h1>Switch-style recoding of values with string pattern matching</h1>
+    <small class="dont-index">Source: <a href='https://github.com/rossellhayes/incase/blob/master/R/grep_case.R'><code>R/grep_case.R</code></a></small>
+    <div class="hidden name"><code>grep_case.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Switch-style recoding of values</p>
+    <p>Switch-style recoding of values with string pattern matching</p>
     </div>
 
-    <pre class="usage"><span class='fu'>switch_case</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span>, preserve <span class='op'>=</span> <span class='cn'>FALSE</span>, default <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>grep_case</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span>, preserve <span class='op'>=</span> <span class='cn'>FALSE</span>, default <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -143,7 +143,7 @@
 formulas.
 Elements of <code>x</code> that match the left hand side (LHS) will be replaced with
 the value in the right hand side (RHS).</p>
-<p>The LHS must evaluate to an atomic vector.</p>
+<p>The LHS must evaluate to a character string.</p>
 <p>The RHS must be of length one.</p>
 <p><code>NULL</code> inputs are ignored.</p></td>
     </tr>
@@ -169,78 +169,29 @@ Defaults to <code>NA</code>.</p></td>
     <p>A vector of the same length as <code>x</code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='grep_case.html'>grep_case()</a></code> to recode values with string pattern matching</p>
+    <div class='dont-index'><p><code><a href='switch_case.html'>switch_case()</a></code> to recode values with exact matching</p>
 <p><code><a href='in_case.html'>in_case()</a></code>, a pipeable alternative to <code><a href='https://dplyr.tidyverse.org/reference/case_when.html'>dplyr::case_when()</a></code></p>
 <p><code><a href='if_case.html'>if_case()</a></code>, a pipeable alternative to <code><a href='https://dplyr.tidyverse.org/reference/if_else.html'>dplyr::if_else()</a></code></p>
-<p><code><a href='https://rdrr.io/r/base/switch.html'>switch()</a></code>, which inspired this function</p></div>
+<p><code><a href='https://rdrr.io/r/base/switch.html'>switch()</a></code> and <code><a href='https://rdrr.io/r/base/grep.html'>grepl()</a></code>, which inspired this function</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>parties</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"d"</span>, <span class='st'>"r"</span>, <span class='st'>"i"</span>, <span class='st'>"g"</span>, <span class='st'>"l"</span><span class='op'>)</span>, <span class='fl'>20</span>, replace <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='va'>words</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"caterpillar"</span>, <span class='st'>"dogwood"</span>, <span class='st'>"catastrophe"</span>, <span class='st'>"dogma"</span><span class='op'>)</span>
 
-<span class='fu'>switch_case</span><span class='op'>(</span>
-  <span class='va'>parties</span>,
-  <span class='st'>"d"</span> <span class='op'>~</span> <span class='st'>"Democrat"</span>,
-  <span class='st'>"r"</span> <span class='op'>~</span> <span class='st'>"Republican"</span>,
-  <span class='st'>"i"</span> <span class='op'>~</span> <span class='st'>"Independent"</span>,
-  <span class='st'>"g"</span> <span class='op'>~</span> <span class='st'>"Green"</span>,
-  <span class='st'>"l"</span> <span class='op'>~</span> <span class='st'>"Libertarian"</span>
+<span class='fu'>grep_case</span><span class='op'>(</span>
+  <span class='va'>words</span>,
+  <span class='st'>"cat"</span> <span class='op'>~</span> <span class='st'>"feline"</span>,
+  <span class='st'>"dog"</span> <span class='op'>~</span> <span class='st'>"canine"</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] "Libertarian" "Green"       "Libertarian" "Green"       "Democrat"   
-#&gt;  [6] "Libertarian" "Libertarian" "Libertarian" "Republican"  "Independent"
-#&gt; [11] "Independent" "Libertarian" "Libertarian" "Green"       "Libertarian"
-#&gt; [16] "Republican"  "Green"       "Republican"  "Independent" "Democrat"   </div><div class='input'>
-<span class='va'>parties</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>switch_case</span><span class='op'>(</span>
-    <span class='st'>"d"</span> <span class='op'>~</span> <span class='st'>"Democrat"</span>,
-    <span class='st'>"r"</span> <span class='op'>~</span> <span class='st'>"Republican"</span>,
-    <span class='st'>"i"</span> <span class='op'>~</span> <span class='st'>"Independent"</span>,
-    <span class='st'>"g"</span> <span class='op'>~</span> <span class='st'>"Green"</span>,
-    <span class='st'>"l"</span> <span class='op'>~</span> <span class='st'>"Libertarian"</span>
-  <span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] "Libertarian" "Green"       "Libertarian" "Green"       "Democrat"   
-#&gt;  [6] "Libertarian" "Libertarian" "Libertarian" "Republican"  "Independent"
-#&gt; [11] "Independent" "Libertarian" "Libertarian" "Green"       "Libertarian"
-#&gt; [16] "Republican"  "Green"       "Republican"  "Independent" "Democrat"   </div><div class='input'>
-<span class='va'>parties</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>switch_case</span><span class='op'>(</span>
-    <span class='st'>"d"</span> <span class='op'>~</span> <span class='st'>"Democrat"</span>,
-    <span class='st'>"r"</span> <span class='op'>~</span> <span class='st'>"Republican"</span>,
-    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"i"</span>, <span class='st'>"g"</span>, <span class='st'>"l"</span><span class='op'>)</span> <span class='op'>~</span> <span class='st'>"Other"</span>
-  <span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] "Other"      "Other"      "Other"      "Other"      "Democrat"  
-#&gt;  [6] "Other"      "Other"      "Other"      "Republican" "Other"     
-#&gt; [11] "Other"      "Other"      "Other"      "Other"      "Other"     
-#&gt; [16] "Republican" "Other"      "Republican" "Other"      "Democrat"  </div><div class='input'>
-<span class='va'>parties</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>switch_case</span><span class='op'>(</span>
-    <span class='st'>"d"</span> <span class='op'>~</span> <span class='st'>"Democrat"</span>,
-    <span class='st'>"r"</span> <span class='op'>~</span> <span class='st'>"Republican"</span>,
-    default <span class='op'>=</span> <span class='st'>"Other"</span>
-  <span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] "Other"      "Other"      "Other"      "Other"      "Democrat"  
-#&gt;  [6] "Other"      "Other"      "Other"      "Republican" "Other"     
-#&gt; [11] "Other"      "Other"      "Other"      "Other"      "Other"     
-#&gt; [16] "Republican" "Other"      "Republican" "Other"      "Democrat"  </div><div class='input'>
-<span class='va'>parties</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>switch_case</span><span class='op'>(</span>
-    <span class='st'>"d"</span> <span class='op'>~</span> <span class='st'>"Democrat"</span>,
-    <span class='st'>"r"</span> <span class='op'>~</span> <span class='st'>"Republican"</span>,
-    preserve <span class='op'>=</span> <span class='cn'>FALSE</span>
-  <span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] NA           NA           NA           NA           "Democrat"  
-#&gt;  [6] NA           NA           NA           "Republican" NA          
-#&gt; [11] NA           NA           NA           NA           NA          
-#&gt; [16] "Republican" NA           "Republican" NA           "Democrat"  </div><div class='input'>
-<span class='va'>parties</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>switch_case</span><span class='op'>(</span>
-    <span class='st'>"d"</span> <span class='op'>~</span> <span class='st'>"Democrat"</span>,
-    <span class='st'>"r"</span> <span class='op'>~</span> <span class='st'>"Republican"</span>,
-    preserve <span class='op'>=</span> <span class='cn'>TRUE</span>
-  <span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] "l"          "g"          "l"          "g"          "Democrat"  
-#&gt;  [6] "l"          "l"          "l"          "Republican" "i"         
-#&gt; [11] "i"          "l"          "l"          "g"          "l"         
-#&gt; [16] "Republican" "g"          "Republican" "i"          "Democrat"  </div></pre>
+</div><div class='output co'>#&gt; [1] "feline" "canine" "feline" "canine"</div><div class='input'>
+<span class='va'>caps_words</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"caterpillar"</span>, <span class='st'>"dogwood"</span>, <span class='st'>"Catastrophe"</span>, <span class='st'>"DOGMA"</span><span class='op'>)</span>
+
+<span class='fu'>grep_case</span><span class='op'>(</span>
+  <span class='va'>caps_words</span>,
+  <span class='st'>"cat"</span> <span class='op'>~</span> <span class='st'>"feline"</span>,
+  <span class='st'>"dog"</span> <span class='op'>~</span> <span class='st'>"canine"</span>,
+  ignore.case <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "feline" "canine" "feline" "canine"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

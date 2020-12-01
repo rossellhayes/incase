@@ -44,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">incase</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9001</span>
       </span>
     </div>
 
@@ -58,6 +58,9 @@
 </li>
 <li>
   <a href="reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="news/index.html">Changelog</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -90,14 +93,12 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install the released version of <strong>incase</strong> from <a href="https://cran.r-project.org/package=incase">CRAN</a> with:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"incase"</span>)
-</pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"incase"</span><span class="op">)</span></code></pre></div>
 <p>or the development version from <a href="https://github.com/rossellhayes/incase">GitHub</a> with:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="co"># install.packages("remotes")</span>
-<span class="kw">remotes</span>::<span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"rossellhayes/incase"</span>)
-</pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># install.packages("remotes")</span>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"rossellhayes/incase"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
@@ -106,123 +107,137 @@
 <h3 class="hasAnchor">
 <a href="#pipe-friendly-conditionals" class="anchor"></a>Pipe-friendly conditionals</h3>
 <p><strong>incase</strong>’s <code><a href="reference/in_case.html">in_case()</a></code> and <code><a href="reference/if_case.html">if_case()</a></code> accept a vector as their first input, allowing you to take full advantage of <a href="https://github.com/tidyverse/magrittr"><strong>magrittr</strong></a>’s <code>.</code></p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fl">1</span><span class="op">:</span><span class="fl">20</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/in_case.html">in_case</a></span>(
-    <span class="kw">.</span> <span class="op">%%</span> <span class="fl">15</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"fizz buzz"</span>,
-    <span class="kw">.</span> <span class="op">%%</span>  <span class="fl">3</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"fizz"</span>,
-    <span class="kw">.</span> <span class="op">%%</span>  <span class="fl">5</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"buzz"</span>,
-    <span class="fl">TRUE</span>         <span class="op">~</span> <span class="kw">.</span>
-  )
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fl">1</span><span class="op">:</span><span class="fl">20</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/in_case.html">in_case</a></span><span class="op">(</span>
+    <span class="va">.</span> <span class="op">%%</span> <span class="fl">15</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"fizz buzz"</span>,
+    <span class="va">.</span> <span class="op">%%</span>  <span class="fl">3</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"fizz"</span>,
+    <span class="va">.</span> <span class="op">%%</span>  <span class="fl">5</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"buzz"</span>,
+    <span class="cn">TRUE</span>         <span class="op">~</span> <span class="va">.</span>
+  <span class="op">)</span>
 <span class="co">#&gt;  [1] "1"         "2"         "fizz"      "4"         "buzz"      "fizz"     </span>
 <span class="co">#&gt;  [7] "7"         "8"         "fizz"      "buzz"      "11"        "fizz"     </span>
 <span class="co">#&gt; [13] "13"        "14"        "fizz buzz" "16"        "17"        "fizz"     </span>
 <span class="co">#&gt; [19] "19"        "buzz"</span>
 
-<span class="fl">1</span><span class="op">:</span><span class="fl">20</span> <span class="op">%&gt;%</span> <span class="fu"><a href="reference/if_case.html">if_case</a></span>(<span class="kw">.</span> <span class="op">%%</span> <span class="fl">3</span> <span class="op">==</span> <span class="fl">0</span>, <span class="st">"fizz"</span>, <span class="kw">.</span>)
+<span class="fl">1</span><span class="op">:</span><span class="fl">20</span> <span class="op">%&gt;%</span> <span class="fu"><a href="reference/if_case.html">if_case</a></span><span class="op">(</span><span class="va">.</span> <span class="op">%%</span> <span class="fl">3</span> <span class="op">==</span> <span class="fl">0</span>, <span class="st">"fizz"</span>, <span class="va">.</span><span class="op">)</span>
 <span class="co">#&gt;  [1] "1"    "2"    "fizz" "4"    "5"    "fizz" "7"    "8"    "fizz" "10"  </span>
-<span class="co">#&gt; [11] "11"   "fizz" "13"   "14"   "fizz" "16"   "17"   "fizz" "19"   "20"</span>
-</pre></div>
+<span class="co">#&gt; [11] "11"   "fizz" "13"   "14"   "fizz" "16"   "17"   "fizz" "19"   "20"</span></code></pre></div>
 </div>
 <div id="automatic-type-conversion" class="section level3">
 <h3 class="hasAnchor">
 <a href="#automatic-type-conversion" class="anchor"></a>Automatic type conversion</h3>
 <p><strong>incase</strong> functions automatically coerce types. This is especially useful when dealing with integers or <code>NA</code>s.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="kw">x</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>
 
 <span class="co"># Replace -1 with NA</span>
-<span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span>(<span class="kw">x</span> <span class="op">==</span> <span class="op">-</span><span class="fl">1</span> <span class="op">~</span> <span class="fl">NA</span>, <span class="fl">TRUE</span> <span class="op">~</span> <span class="kw">x</span>)
+<span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="op">-</span><span class="fl">1</span> <span class="op">~</span> <span class="cn">NA</span>, <span class="cn">TRUE</span> <span class="op">~</span> <span class="va">x</span><span class="op">)</span>
 <span class="co">#&gt; Error: must be a logical vector, not an integer vector.</span>
-<span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span>(<span class="kw">x</span> <span class="op">==</span> <span class="op">-</span><span class="fl">1</span> <span class="op">~</span> <span class="fl">NA_integer_</span>, <span class="fl">TRUE</span> <span class="op">~</span> <span class="kw">x</span>)
+<span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="op">-</span><span class="fl">1</span> <span class="op">~</span> <span class="cn">NA_integer_</span>, <span class="cn">TRUE</span> <span class="op">~</span> <span class="va">x</span><span class="op">)</span>
 <span class="co">#&gt; [1] NA  0  1  2  3  4  5</span>
-<span class="fu"><a href="reference/in_case.html">in_case</a></span>(<span class="kw">x</span> <span class="op">==</span> <span class="op">-</span><span class="fl">1</span> <span class="op">~</span> <span class="fl">NA</span>, <span class="fl">TRUE</span> <span class="op">~</span> <span class="kw">x</span>)
+<span class="fu"><a href="reference/in_case.html">in_case</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="op">-</span><span class="fl">1</span> <span class="op">~</span> <span class="cn">NA</span>, <span class="cn">TRUE</span> <span class="op">~</span> <span class="va">x</span><span class="op">)</span>
 <span class="co">#&gt; [1] NA  0  1  2  3  4  5</span>
 
 <span class="co"># Replace -1 with 0</span>
-<span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span>(<span class="kw">x</span> <span class="op">==</span> <span class="op">-</span><span class="fl">1</span> <span class="op">~</span> <span class="fl">0</span>, <span class="fl">TRUE</span> <span class="op">~</span> <span class="kw">x</span>)
+<span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="op">-</span><span class="fl">1</span> <span class="op">~</span> <span class="fl">0</span>, <span class="cn">TRUE</span> <span class="op">~</span> <span class="va">x</span><span class="op">)</span>
 <span class="co">#&gt; Error: must be a double vector, not an integer vector.</span>
-<span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span>(<span class="kw">x</span> <span class="op">==</span> <span class="op">-</span><span class="fl">1</span> <span class="op">~</span> <span class="fl">0L</span>, <span class="fl">TRUE</span> <span class="op">~</span> <span class="kw">x</span>)
+<span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="op">-</span><span class="fl">1</span> <span class="op">~</span> <span class="fl">0L</span>, <span class="cn">TRUE</span> <span class="op">~</span> <span class="va">x</span><span class="op">)</span>
 <span class="co">#&gt; [1] 0 0 1 2 3 4 5</span>
-<span class="fu"><a href="reference/in_case.html">in_case</a></span>(<span class="kw">x</span> <span class="op">==</span> <span class="op">-</span><span class="fl">1</span> <span class="op">~</span> <span class="fl">0</span>, <span class="fl">TRUE</span> <span class="op">~</span> <span class="kw">x</span>)
-<span class="co">#&gt; [1] 0 0 1 2 3 4 5</span>
-</pre></div>
+<span class="fu"><a href="reference/in_case.html">in_case</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="op">-</span><span class="fl">1</span> <span class="op">~</span> <span class="fl">0</span>, <span class="cn">TRUE</span> <span class="op">~</span> <span class="va">x</span><span class="op">)</span>
+<span class="co">#&gt; [1] 0 0 1 2 3 4 5</span></code></pre></div>
 <p>With <strong>incase</strong>, you no longer have to worry about specifying the type of your <code>NA</code>s or adding <code>L</code> to your integers.</p>
 </div>
 <div id="easy-default-values" class="section level3">
 <h3 class="hasAnchor">
 <a href="#easy-default-values" class="anchor"></a>Easy default values</h3>
 <p><code><a href="reference/in_case.html">in_case()</a></code> adds <code>preserve</code> and <code>default</code> arguments as a more intuitive alternative to <code>TRUE ~ ...</code>.*</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="fl">1</span><span class="op">:</span><span class="fl">20</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/in_case.html">in_case</a></span>(
-    <span class="kw">.</span> <span class="op">%%</span> <span class="fl">15</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"fizz buzz"</span>,
-    <span class="kw">.</span> <span class="op">%%</span>  <span class="fl">3</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"fizz"</span>,
-    <span class="kw">.</span> <span class="op">%%</span>  <span class="fl">5</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"buzz"</span>
-  )
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fl">1</span><span class="op">:</span><span class="fl">20</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/in_case.html">in_case</a></span><span class="op">(</span>
+    <span class="va">.</span> <span class="op">%%</span> <span class="fl">15</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"fizz buzz"</span>,
+    <span class="va">.</span> <span class="op">%%</span>  <span class="fl">3</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"fizz"</span>,
+    <span class="va">.</span> <span class="op">%%</span>  <span class="fl">5</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"buzz"</span>
+  <span class="op">)</span>
 <span class="co">#&gt;  [1] NA          NA          "fizz"      NA          "buzz"      "fizz"     </span>
 <span class="co">#&gt;  [7] NA          NA          "fizz"      "buzz"      NA          "fizz"     </span>
 <span class="co">#&gt; [13] NA          NA          "fizz buzz" NA          NA          "fizz"     </span>
 <span class="co">#&gt; [19] NA          "buzz"</span>
 
 <span class="fl">1</span><span class="op">:</span><span class="fl">20</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/in_case.html">in_case</a></span>(
-    <span class="kw">.</span> <span class="op">%%</span> <span class="fl">15</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"fizz buzz"</span>,
-    <span class="kw">.</span> <span class="op">%%</span>  <span class="fl">3</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"fizz"</span>,
-    <span class="kw">.</span> <span class="op">%%</span>  <span class="fl">5</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"buzz"</span>,
-    preserve     = <span class="fl">TRUE</span>
-  )
+  <span class="fu"><a href="reference/in_case.html">in_case</a></span><span class="op">(</span>
+    <span class="va">.</span> <span class="op">%%</span> <span class="fl">15</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"fizz buzz"</span>,
+    <span class="va">.</span> <span class="op">%%</span>  <span class="fl">3</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"fizz"</span>,
+    <span class="va">.</span> <span class="op">%%</span>  <span class="fl">5</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"buzz"</span>,
+    preserve     <span class="op">=</span> <span class="cn">TRUE</span>
+  <span class="op">)</span>
 <span class="co">#&gt;  [1] "1"         "2"         "fizz"      "4"         "buzz"      "fizz"     </span>
 <span class="co">#&gt;  [7] "7"         "8"         "fizz"      "buzz"      "11"        "fizz"     </span>
 <span class="co">#&gt; [13] "13"        "14"        "fizz buzz" "16"        "17"        "fizz"     </span>
 <span class="co">#&gt; [19] "19"        "buzz"</span>
 
 <span class="fl">1</span><span class="op">:</span><span class="fl">20</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/in_case.html">in_case</a></span>(
-    <span class="kw">.</span> <span class="op">%%</span> <span class="fl">15</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"fizz buzz"</span>,
-    <span class="kw">.</span> <span class="op">%%</span>  <span class="fl">3</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"fizz"</span>,
-    <span class="kw">.</span> <span class="op">%%</span>  <span class="fl">5</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"buzz"</span>,
-    default      = <span class="st">"pass"</span>
-  )
+  <span class="fu"><a href="reference/in_case.html">in_case</a></span><span class="op">(</span>
+    <span class="va">.</span> <span class="op">%%</span> <span class="fl">15</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"fizz buzz"</span>,
+    <span class="va">.</span> <span class="op">%%</span>  <span class="fl">3</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"fizz"</span>,
+    <span class="va">.</span> <span class="op">%%</span>  <span class="fl">5</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"buzz"</span>,
+    default      <span class="op">=</span> <span class="st">"pass"</span>
+  <span class="op">)</span>
 <span class="co">#&gt;  [1] "pass"      "pass"      "fizz"      "pass"      "buzz"      "fizz"     </span>
 <span class="co">#&gt;  [7] "pass"      "pass"      "fizz"      "buzz"      "pass"      "fizz"     </span>
 <span class="co">#&gt; [13] "pass"      "pass"      "fizz buzz" "pass"      "pass"      "fizz"     </span>
-<span class="co">#&gt; [19] "pass"      "buzz"</span>
-</pre></div>
+<span class="co">#&gt; [19] "pass"      "buzz"</span></code></pre></div>
 </div>
 <div id="simplified-interface-for-recoding" class="section level3">
 <h3 class="hasAnchor">
 <a href="#simplified-interface-for-recoding" class="anchor"></a>Simplified interface for recoding</h3>
 <p><code><a href="reference/switch_case.html">switch_case()</a></code> works as a convenient shorthand for <code><a href="reference/in_case.html">in_case()</a></code> when recoding discrete values.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="kw">parties</span>
-<span class="co">#&gt;  [1] "I" "L" "R" NA  "I" "R" "D" "R" "R" "R" "D" "I" "I" "I" "L" "D" "L" "R" "G"</span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">parties</span>
+<span class="co">#&gt;  [1] "G" "R" "G" "D" "I" "I" "R" "R" "I" NA  "I" "L" "L" "I" "L" "R" "I" "R" "R"</span>
 <span class="co">#&gt; [20] "D"</span>
 
-<span class="kw">parties</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="reference/in_case.html">in_case</a></span>(
-    <span class="kw">.</span> <span class="op">==</span> <span class="st">"D"</span>           <span class="op">~</span> <span class="st">"Democratic"</span>,
-    <span class="kw">.</span> <span class="op">==</span> <span class="st">"R"</span>           <span class="op">~</span> <span class="st">"Republican"</span>,
-    <span class="kw">.</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"G"</span>, <span class="st">"L"</span>) <span class="op">~</span> <span class="st">"Other"</span>,
-    <span class="kw">.</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"I"</span>, <span class="fl">NA</span>)  <span class="op">~</span> <span class="st">"Independent"</span> 
-  )
-<span class="co">#&gt;  [1] "Independent" "Other"       "Republican"  "Independent" "Independent"</span>
-<span class="co">#&gt;  [6] "Republican"  "Democratic"  "Republican"  "Republican"  "Republican" </span>
-<span class="co">#&gt; [11] "Democratic"  "Independent" "Independent" "Independent" "Other"      </span>
-<span class="co">#&gt; [16] "Democratic"  "Other"       "Republican"  "Other"       "Democratic"</span>
+<span class="va">parties</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="reference/in_case.html">in_case</a></span><span class="op">(</span>
+    <span class="va">.</span> <span class="op">==</span> <span class="st">"D"</span>           <span class="op">~</span> <span class="st">"Democratic"</span>,
+    <span class="va">.</span> <span class="op">==</span> <span class="st">"R"</span>           <span class="op">~</span> <span class="st">"Republican"</span>,
+    <span class="va">.</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"G"</span>, <span class="st">"L"</span><span class="op">)</span> <span class="op">~</span> <span class="st">"Other"</span>,
+    <span class="va">.</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"I"</span>, <span class="cn">NA</span><span class="op">)</span>  <span class="op">~</span> <span class="st">"Independent"</span> 
+  <span class="op">)</span>
+<span class="co">#&gt;  [1] "Other"       "Republican"  "Other"       "Democratic"  "Independent"</span>
+<span class="co">#&gt;  [6] "Independent" "Republican"  "Republican"  "Independent" "Independent"</span>
+<span class="co">#&gt; [11] "Independent" "Other"       "Other"       "Independent" "Other"      </span>
+<span class="co">#&gt; [16] "Republican"  "Independent" "Republican"  "Republican"  "Democratic"</span>
 
-<span class="kw">parties</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/switch_case.html">switch_case</a></span>(
+<span class="va">parties</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/switch_case.html">switch_case</a></span><span class="op">(</span>
     <span class="st">"D"</span>         <span class="op">~</span> <span class="st">"Democrat"</span>,
     <span class="st">"R"</span>         <span class="op">~</span> <span class="st">"Republican"</span>,
-    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"G"</span>, <span class="st">"L"</span>) <span class="op">~</span> <span class="st">"Other"</span>,
-    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"I"</span>, <span class="fl">NA</span>)  <span class="op">~</span> <span class="st">"Independent"</span>
-  )
-<span class="co">#&gt;  [1] "Independent" "Other"       "Republican"  "Independent" "Independent"</span>
-<span class="co">#&gt;  [6] "Republican"  "Democrat"    "Republican"  "Republican"  "Republican" </span>
-<span class="co">#&gt; [11] "Democrat"    "Independent" "Independent" "Independent" "Other"      </span>
-<span class="co">#&gt; [16] "Democrat"    "Other"       "Republican"  "Other"       "Democrat"</span>
-</pre></div>
+    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"G"</span>, <span class="st">"L"</span><span class="op">)</span> <span class="op">~</span> <span class="st">"Other"</span>,
+    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"I"</span>, <span class="cn">NA</span><span class="op">)</span>  <span class="op">~</span> <span class="st">"Independent"</span>
+  <span class="op">)</span>
+<span class="co">#&gt;  [1] "Other"       "Republican"  "Other"       "Democrat"    "Independent"</span>
+<span class="co">#&gt;  [6] "Independent" "Republican"  "Republican"  "Independent" "Independent"</span>
+<span class="co">#&gt; [11] "Independent" "Other"       "Other"       "Independent" "Other"      </span>
+<span class="co">#&gt; [16] "Republican"  "Independent" "Republican"  "Republican"  "Democrat"</span></code></pre></div>
+<p><code><a href="reference/grep_case.html">grep_case()</a></code> allows you to recode values with pattern matching.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">countries</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
+  <span class="st">"France"</span>, <span class="st">"Ostdeutschland"</span>, <span class="st">"Westdeutschland"</span>, <span class="st">"Nederland"</span>,
+  <span class="st">"België (Vlaanderen)"</span>, <span class="st">"Belgique (Wallonie)"</span>, <span class="st">"Luxembourg"</span>, <span class="st">"Italia"</span>
+<span class="op">)</span>
+
+<span class="fu"><a href="reference/grep_case.html">grep_case</a></span><span class="op">(</span>
+  <span class="va">countries</span>,
+  <span class="st">"Deutschland"</span> <span class="op">~</span> <span class="st">"Germany"</span>,
+  <span class="st">"Belg"</span>        <span class="op">~</span> <span class="st">"Belgium"</span>,
+  <span class="st">"Nederland"</span>   <span class="op">~</span> <span class="st">"Netherlands"</span>,
+  <span class="st">"Italia"</span>      <span class="op">~</span> <span class="st">"Italy"</span>,
+  preserve      <span class="op">=</span> <span class="cn">TRUE</span>,
+  ignore.case   <span class="op">=</span> <span class="cn">TRUE</span>
+<span class="op">)</span>
+<span class="co">#&gt; [1] "France"      "Germany"     "Germany"     "Netherlands" "Belgium"    </span>
+<span class="co">#&gt; [6] "Belgium"     "Luxembourg"  "Italy"</span></code></pre></div>
 <hr>
 <p>Hex sticker fonts are <a href="https://github.com/adobe-fonts/source-sans-pro">Source Sans Pro</a> by <a href="https://www.adobe.com">Adobe</a> and <a href="https://github.com/i-tu/Hasklig">Hasklig</a> by <a href="https://github.com/i-tu">Ian Tuomi</a>.</p>
 <p>Please note that <strong>incase</strong> is released with a <a href="https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
@@ -272,6 +287,7 @@
 <li><a href="https://cran.r-project.org/web/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-blueviolet.svg" alt="License: MIT"></a></li>
 <li><a href="https://github.com/rossellhayes/incase/actions"><img src="https://github.com/rossellhayes/incase/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
 <li><a href="https://codecov.io/gh/rossellhayes/incase"><img src="https://codecov.io/gh/rossellhayes/incase/branch/master/graph/badge.svg"></a></li>
+<li><a href="https://www.codefactor.io/repository/github/rossellhayes/incase"><img src="https://www.codefactor.io/repository/github/rossellhayes/incase/badge" alt="CodeFactor"></a></li>
 <li><a href="https://cran.r-project.org/package=incase"><img src="https://tinyverse.netlify.com/badge/incase" alt="Dependencies"></a></li>
 </ul>
 </div>
