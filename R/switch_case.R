@@ -24,7 +24,9 @@
 #'
 #' @return A vector of the same length as `x`.
 #'
-#' @seealso [in_case()], a pipeable alternative to [dplyr::case_when()]
+#' @seealso [grep_case()] to recode values with string pattern matching
+#'
+#'   [in_case()], a pipeable alternative to [dplyr::case_when()]
 #'
 #'   [if_case()], a pipeable alternative to [dplyr::if_else()]
 #'
@@ -48,3 +50,4 @@ switch_case <- function(x, ..., preserve = FALSE, default = NA) {
 
   in_case(!!!fs, default = default)
 }
+

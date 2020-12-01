@@ -87,6 +87,8 @@ parties \%>\%
   )
 }
 \seealso{
+\code{\link[=grep_case]{grep_case()}} to recode values with string pattern matching
+
 \code{\link[=in_case]{in_case()}}, a pipeable alternative to \code{\link[dplyr:case_when]{dplyr::case_when()}}
 
 \code{\link[=if_case]{if_case()}}, a pipeable alternative to \code{\link[dplyr:if_else]{dplyr::if_else()}}
