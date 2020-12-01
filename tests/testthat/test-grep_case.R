@@ -35,4 +35,26 @@ test_that("grep_case() with preserve", {
     grep_case(words, "cat" ~ "feline", "dog" ~ "canine", preserve = TRUE),
     c("feline", "canine", "feline", "canine", "ratatouille")
   )
+
+  countries <- c(
+    "France", "Ostdeutschland", "Westdeutschland", "Nederland",
+    "België (Vlaanderen)", "Belgique (Wallonie)", "Luxembourg", "Italia"
+  )
+
+  expect_equal(
+    grep_case(
+      countries,
+      "Deutschland" ~ "Germany",
+      "Belg"        ~ "Belgium",
+      "Nederland"   ~ "Netherlands",
+      "Italia"      ~ "Italy",
+      preserve      = TRUE,
+      ignore.case   = TRUE
+    ),
+    c(
+      "France", "Germany", "Germany", "Netherlands",
+      "Belgium", "Belgium", "Luxembourg", "Italy"
+    )
+  )
+
 })

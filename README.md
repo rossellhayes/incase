@@ -141,7 +141,7 @@ recoding discrete values.
 
 ``` r
 parties
-#>  [1] "I" "D" "R" "I" "I" NA  "R" "D" "D" "D" NA  "D" "L" NA  "L" NA  "I" "I" "I"
+#>  [1] "G" "R" "G" "D" "I" "I" "R" "R" "I" NA  "I" "L" "L" "I" "L" "R" "I" "R" "R"
 #> [20] "D"
 
 parties %>% 
@@ -151,10 +151,10 @@ parties %>%
     . %in% c("G", "L") ~ "Other",
     . %in% c("I", NA)  ~ "Independent" 
   )
-#>  [1] "Independent" "Democratic"  "Republican"  "Independent" "Independent"
-#>  [6] "Independent" "Republican"  "Democratic"  "Democratic"  "Democratic" 
-#> [11] "Independent" "Democratic"  "Other"       "Independent" "Other"      
-#> [16] "Independent" "Independent" "Independent" "Independent" "Democratic"
+#>  [1] "Other"       "Republican"  "Other"       "Democratic"  "Independent"
+#>  [6] "Independent" "Republican"  "Republican"  "Independent" "Independent"
+#> [11] "Independent" "Other"       "Other"       "Independent" "Other"      
+#> [16] "Republican"  "Independent" "Republican"  "Republican"  "Democratic"
 
 parties %>%
   switch_case(
@@ -163,10 +163,31 @@ parties %>%
     c("G", "L") ~ "Other",
     c("I", NA)  ~ "Independent"
   )
-#>  [1] "Independent" "Democrat"    "Republican"  "Independent" "Independent"
-#>  [6] "Independent" "Republican"  "Democrat"    "Democrat"    "Democrat"   
-#> [11] "Independent" "Democrat"    "Other"       "Independent" "Other"      
-#> [16] "Independent" "Independent" "Independent" "Independent" "Democrat"
+#>  [1] "Other"       "Republican"  "Other"       "Democrat"    "Independent"
+#>  [6] "Independent" "Republican"  "Republican"  "Independent" "Independent"
+#> [11] "Independent" "Other"       "Other"       "Independent" "Other"      
+#> [16] "Republican"  "Independent" "Republican"  "Republican"  "Democrat"
+```
+
+`grep_case()` allows you to recode values with pattern matching.
+
+``` r
+countries <- c(
+  "France", "Ostdeutschland", "Westdeutschland", "Nederland",
+  "België (Vlaanderen)", "Belgique (Wallonie)", "Luxembourg", "Italia"
+)
+
+grep_case(
+  countries,
+  "Deutschland" ~ "Germany",
+  "Belg"        ~ "Belgium",
+  "Nederland"   ~ "Netherlands",
+  "Italia"      ~ "Italy",
+  preserve      = TRUE,
+  ignore.case   = TRUE
+)
+#> [1] "France"      "Germany"     "Germany"     "Netherlands" "Belgium"    
+#> [6] "Belgium"     "Luxembourg"  "Italy"
 ```
 
 -----

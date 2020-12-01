@@ -145,6 +145,25 @@ parties %>%
   )
 ```
 
+`grep_case()` allows you to recode values with pattern matching.
+
+```{r}
+countries <- c(
+  "France", "Ostdeutschland", "Westdeutschland", "Nederland",
+  "België (Vlaanderen)", "Belgique (Wallonie)", "Luxembourg", "Italia"
+)
+
+grep_case(
+  countries,
+  "Deutschland" ~ "Germany",
+  "Belg"        ~ "Belgium",
+  "Nederland"   ~ "Netherlands",
+  "Italia"      ~ "Italy",
+  preserve      = TRUE,
+  ignore.case   = TRUE
+)
+```
+
 ---
 
 Hex sticker fonts are [Source Sans Pro](https://github.com/adobe-fonts/source-sans-pro) by [Adobe](https://www.adobe.com) and [Hasklig](https://github.com/i-tu/Hasklig) by [Ian Tuomi](https://github.com/i-tu).

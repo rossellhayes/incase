@@ -14,3 +14,18 @@ grep_case(
   "dog" ~ "canine",
   ignore.case = TRUE
 )
+
+countries <- c(
+  "France", "Ostdeutschland", "Westdeutschland", "Nederland",
+  "België (Vlaanderen)", "Belgique (Wallonie)", "Luxembourg", "Italia"
+)
+
+grep_case(
+  countries,
+  "Deutschland" ~ "Germany",
+  "Belg"        ~ "Belgium",
+  "Nederland"   ~ "Netherlands",
+  "Italia"      ~ "Italy",
+  preserve      = TRUE,
+  ignore.case   = TRUE
+)
