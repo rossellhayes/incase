@@ -43,6 +43,7 @@ THE SOFTWARE.
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://incase.rossellhayes.com}
   \item \url{https://github.com/rossellhayes/incase}
   \item Report bugs at \url{https://github.com/rossellhayes/incase/issues}
 }
