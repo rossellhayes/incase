@@ -12,6 +12,7 @@ MIT](https://img.shields.io/badge/license-MIT-blueviolet.svg)](https://cran.r-pr
 [![R build
 status](https://github.com/rossellhayes/incase/workflows/R-CMD-check/badge.svg)](https://github.com/rossellhayes/incase/actions)
 [![](https://codecov.io/gh/rossellhayes/incase/branch/master/graph/badge.svg)](https://codecov.io/gh/rossellhayes/incase)
+[![CodeFactor](https://www.codefactor.io/repository/github/rossellhayes/incase/badge)](https://www.codefactor.io/repository/github/rossellhayes/incase)
 [![Dependencies](https://tinyverse.netlify.com/badge/incase)](https://cran.r-project.org/package=incase)
 <!-- badges: end -->
 
@@ -140,7 +141,7 @@ recoding discrete values.
 
 ``` r
 parties
-#>  [1] "I" "L" "R" NA  "I" "R" "D" "R" "R" "R" "D" "I" "I" "I" "L" "D" "L" "R" "G"
+#>  [1] "I" "D" "R" "I" "I" NA  "R" "D" "D" "D" NA  "D" "L" NA  "L" NA  "I" "I" "I"
 #> [20] "D"
 
 parties %>% 
@@ -150,10 +151,10 @@ parties %>%
     . %in% c("G", "L") ~ "Other",
     . %in% c("I", NA)  ~ "Independent" 
   )
-#>  [1] "Independent" "Other"       "Republican"  "Independent" "Independent"
-#>  [6] "Republican"  "Democratic"  "Republican"  "Republican"  "Republican" 
-#> [11] "Democratic"  "Independent" "Independent" "Independent" "Other"      
-#> [16] "Democratic"  "Other"       "Republican"  "Other"       "Democratic"
+#>  [1] "Independent" "Democratic"  "Republican"  "Independent" "Independent"
+#>  [6] "Independent" "Republican"  "Democratic"  "Democratic"  "Democratic" 
+#> [11] "Independent" "Democratic"  "Other"       "Independent" "Other"      
+#> [16] "Independent" "Independent" "Independent" "Independent" "Democratic"
 
 parties %>%
   switch_case(
@@ -162,10 +163,10 @@ parties %>%
     c("G", "L") ~ "Other",
     c("I", NA)  ~ "Independent"
   )
-#>  [1] "Independent" "Other"       "Republican"  "Independent" "Independent"
-#>  [6] "Republican"  "Democrat"    "Republican"  "Republican"  "Republican" 
-#> [11] "Democrat"    "Independent" "Independent" "Independent" "Other"      
-#> [16] "Democrat"    "Other"       "Republican"  "Other"       "Democrat"
+#>  [1] "Independent" "Democrat"    "Republican"  "Independent" "Independent"
+#>  [6] "Independent" "Republican"  "Democrat"    "Democrat"    "Democrat"   
+#> [11] "Independent" "Democrat"    "Other"       "Independent" "Other"      
+#> [16] "Independent" "Independent" "Independent" "Independent" "Democrat"
 ```
 
 -----
