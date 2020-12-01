@@ -34,7 +34,9 @@ grep_case <- function(x, ..., preserve = FALSE, default = NA) {
   args <- fs[names(fs) %in% names(formals(grepl))]
   fs   <- fs[!fs %in% args]
 
-  if (length(args)) {args <- paste(names(args), "=", args)}
+  if (length(args)) {
+    args <- paste(names(args), "=", args)
+  }
 
   env <- lapply(fs, environment)
 

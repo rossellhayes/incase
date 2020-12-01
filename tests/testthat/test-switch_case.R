@@ -1,6 +1,8 @@
 yn <- c(NA, NA, "fizz", NA, "buzz", "fizz", NA, NA, "fizz", NA)
 yp <- c(1, 2, "fizz", 4, "buzz", "fizz", 7, 8, "fizz", 10)
-yd <- c("bam", "bam", "fizz", "bam", "buzz", "fizz", "bam", "bam", "fizz", "bam")
+yd <- c(
+  "bam", "bam", "fizz", "bam", "buzz", "fizz", "bam", "bam", "fizz", "bam"
+)
 
 test_that("unpiped unpreserved switch_case()", {
   x <- switch_case(

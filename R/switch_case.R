@@ -50,4 +50,3 @@ switch_case <- function(x, ..., preserve = FALSE, default = NA) {
 
   in_case(!!!fs, default = default)
 }
-
