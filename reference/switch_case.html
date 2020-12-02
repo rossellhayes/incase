@@ -185,10 +185,7 @@ Defaults to <code>NA</code>.</p></td>
   <span class='st'>"g"</span> <span class='op'>~</span> <span class='st'>"Green"</span>,
   <span class='st'>"l"</span> <span class='op'>~</span> <span class='st'>"Libertarian"</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] "Libertarian" "Green"       "Libertarian" "Green"       "Democrat"   
-#&gt;  [6] "Libertarian" "Libertarian" "Libertarian" "Republican"  "Independent"
-#&gt; [11] "Independent" "Libertarian" "Libertarian" "Green"       "Libertarian"
-#&gt; [16] "Republican"  "Green"       "Republican"  "Independent" "Democrat"   </div><div class='input'>
+</div><div class='output co'>#&gt; <span class='error'>Error in rlang::eval_tidy(pair[[lhs]], env = default_env): object 'lhs' not found</span></div><div class='input'>
 <span class='va'>parties</span> <span class='op'>%&gt;%</span>
   <span class='fu'>switch_case</span><span class='op'>(</span>
     <span class='st'>"d"</span> <span class='op'>~</span> <span class='st'>"Democrat"</span>,
@@ -197,50 +194,35 @@ Defaults to <code>NA</code>.</p></td>
     <span class='st'>"g"</span> <span class='op'>~</span> <span class='st'>"Green"</span>,
     <span class='st'>"l"</span> <span class='op'>~</span> <span class='st'>"Libertarian"</span>
   <span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] "Libertarian" "Green"       "Libertarian" "Green"       "Democrat"   
-#&gt;  [6] "Libertarian" "Libertarian" "Libertarian" "Republican"  "Independent"
-#&gt; [11] "Independent" "Libertarian" "Libertarian" "Green"       "Libertarian"
-#&gt; [16] "Republican"  "Green"       "Republican"  "Independent" "Democrat"   </div><div class='input'>
+</div><div class='output co'>#&gt; <span class='error'>Error in rlang::eval_tidy(pair[[lhs]], env = default_env): object 'lhs' not found</span></div><div class='input'>
 <span class='va'>parties</span> <span class='op'>%&gt;%</span>
   <span class='fu'>switch_case</span><span class='op'>(</span>
     <span class='st'>"d"</span> <span class='op'>~</span> <span class='st'>"Democrat"</span>,
     <span class='st'>"r"</span> <span class='op'>~</span> <span class='st'>"Republican"</span>,
     <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"i"</span>, <span class='st'>"g"</span>, <span class='st'>"l"</span><span class='op'>)</span> <span class='op'>~</span> <span class='st'>"Other"</span>
   <span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] "Other"      "Other"      "Other"      "Other"      "Democrat"  
-#&gt;  [6] "Other"      "Other"      "Other"      "Republican" "Other"     
-#&gt; [11] "Other"      "Other"      "Other"      "Other"      "Other"     
-#&gt; [16] "Republican" "Other"      "Republican" "Other"      "Democrat"  </div><div class='input'>
+</div><div class='output co'>#&gt; <span class='error'>Error in rlang::eval_tidy(pair[[lhs]], env = default_env): object 'lhs' not found</span></div><div class='input'>
 <span class='va'>parties</span> <span class='op'>%&gt;%</span>
   <span class='fu'>switch_case</span><span class='op'>(</span>
     <span class='st'>"d"</span> <span class='op'>~</span> <span class='st'>"Democrat"</span>,
     <span class='st'>"r"</span> <span class='op'>~</span> <span class='st'>"Republican"</span>,
     default <span class='op'>=</span> <span class='st'>"Other"</span>
   <span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] "Other"      "Other"      "Other"      "Other"      "Democrat"  
-#&gt;  [6] "Other"      "Other"      "Other"      "Republican" "Other"     
-#&gt; [11] "Other"      "Other"      "Other"      "Other"      "Other"     
-#&gt; [16] "Republican" "Other"      "Republican" "Other"      "Democrat"  </div><div class='input'>
+</div><div class='output co'>#&gt; <span class='error'>Error in rlang::eval_tidy(pair[[lhs]], env = default_env): object 'lhs' not found</span></div><div class='input'>
 <span class='va'>parties</span> <span class='op'>%&gt;%</span>
   <span class='fu'>switch_case</span><span class='op'>(</span>
     <span class='st'>"d"</span> <span class='op'>~</span> <span class='st'>"Democrat"</span>,
     <span class='st'>"r"</span> <span class='op'>~</span> <span class='st'>"Republican"</span>,
     preserve <span class='op'>=</span> <span class='cn'>FALSE</span>
   <span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] NA           NA           NA           NA           "Democrat"  
-#&gt;  [6] NA           NA           NA           "Republican" NA          
-#&gt; [11] NA           NA           NA           NA           NA          
-#&gt; [16] "Republican" NA           "Republican" NA           "Democrat"  </div><div class='input'>
+</div><div class='output co'>#&gt; <span class='error'>Error in rlang::eval_tidy(pair[[lhs]], env = default_env): object 'lhs' not found</span></div><div class='input'>
 <span class='va'>parties</span> <span class='op'>%&gt;%</span>
   <span class='fu'>switch_case</span><span class='op'>(</span>
     <span class='st'>"d"</span> <span class='op'>~</span> <span class='st'>"Democrat"</span>,
     <span class='st'>"r"</span> <span class='op'>~</span> <span class='st'>"Republican"</span>,
     preserve <span class='op'>=</span> <span class='cn'>TRUE</span>
   <span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] "l"          "g"          "l"          "g"          "Democrat"  
-#&gt;  [6] "l"          "l"          "l"          "Republican" "i"         
-#&gt; [11] "i"          "l"          "l"          "g"          "l"         
-#&gt; [16] "Republican" "g"          "Republican" "i"          "Democrat"  </div></pre>
+</div><div class='output co'>#&gt; <span class='error'>Error in rlang::eval_tidy(pair[[lhs]], env = default_env): object 'lhs' not found</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
