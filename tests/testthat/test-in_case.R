@@ -164,7 +164,7 @@ test_that("can pass quosures to in_case()", {
 
 test_that("can pass nested quosures to in_case()", {
   fs <- local({
-    foo <- mtcars$cyl[1:4]
+    foo <- mtcars[["cyl"]][1:4]
     rlang::quos(
       !!rlang::quo(foo) == 4 ~ 1,
       TRUE            ~ 0

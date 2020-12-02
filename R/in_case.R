@@ -97,13 +97,13 @@ in_case <- function(..., preserve = FALSE, default = NA) {
 
   for (i in seq_len(n)) {
     pair       <- quos_pairs[[i]]
-    query[[i]] <- rlang::eval_tidy(pair$lhs, env = default_env)
-    value[[i]] <- rlang::eval_tidy(pair$rhs, env = default_env)
+    query[[i]] <- rlang::eval_tidy(pair[[lhs]], env = default_env)
+    value[[i]] <- rlang::eval_tidy(pair[[rhs]], env = default_env)
 
     if (!is.logical(query[[i]])) {
       glubort(
         "Each formula's left hand side must be a logical vector:",
-        cross_bullet(), code(rlang::as_label(pair$lhs)),
+        cross_bullet(), code(rlang::as_label(pair[[lhs]])),
         "is not a logical vector."
       )
     }

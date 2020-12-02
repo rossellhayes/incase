@@ -3,8 +3,7 @@ y <- c("h", "m", "l")
 
 test_that("if_case()", {
   expect_equal(if_case(x < 2, "l", "h", "m"), y)
-  expect_equal(
-    {
+  expect_equal({
       x < 2
     } %>%
       if_case("l", "h", "m"),
