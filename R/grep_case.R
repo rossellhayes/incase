@@ -48,7 +48,7 @@ grep_case <- function(x, ..., preserve = FALSE, default = NA) {
   fs <- paste0(
     "grepl(", fs[1, ], ", ", deparse(substitute(x)), ",", args, ") ~", fs[2, ]
   )
-  fs  <- mapply(stats::as.formula, fs, env)
+  fs  <- Map(stats::as.formula, fs, env)
 
   if (preserve) {
     warn_if_default(default)

@@ -85,13 +85,18 @@ in_case <- function(..., preserve = FALSE, default = NA) {
   query       <- vector("list", n)
   value       <- vector("list", n)
   default_env <- rlang::caller_env()
-  quos_pairs  <- mapply(
-    validate_formula, fs, seq_along(fs),
-    MoreArgs = list(default_env = default_env, dots_env = rlang::current_env())
+
+  quos_pairs  <- Map(
+    function(x, i) {
+      validate_formula(
+        x, i, default_env = default_env, dots_env = rlang::current_env()
+      )
+    },
+    fs, seq_along(fs)
   )
 
   for (i in seq_len(n)) {
-    pair       <- quos_pairs[, i]
+    pair       <- quos_pairs[[i]]
     query[[i]] <- rlang::eval_tidy(pair$lhs, env = default_env)
     value[[i]] <- rlang::eval_tidy(pair$rhs, env = default_env)
 

@@ -41,7 +41,7 @@ switch_case <- function(x, ..., preserve = FALSE, default = NA) {
   env <- lapply(fs, environment)
   fs  <- lapply(fs, format)
   fs  <- paste(deparse(substitute(x)), "%in%", fs)
-  fs  <- mapply(stats::as.formula, fs, env)
+  fs  <- Map(stats::as.formula, fs, env)
 
   if (preserve) {
     warn_if_default(default)
