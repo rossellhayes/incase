@@ -17,13 +17,13 @@ grep_case(
 
 countries <- c(
   "France", "Ostdeutschland", "Westdeutschland", "Nederland",
-  "België (Vlaanderen)", "Belgique (Wallonie)", "Luxembourg", "Italia"
+  "Belgie (Vlaanderen)", "Belgique (Wallonie)", "Luxembourg", "Italia"
 )
 
 grep_case(
   countries,
   "Deutschland" ~ "Germany",
-  "Belg"        ~ "Belgium",
+  "Belgi(qu)?e" ~ "Belgium",
   "Nederland"   ~ "Netherlands",
   "Italia"      ~ "Italy",
   preserve      = TRUE,

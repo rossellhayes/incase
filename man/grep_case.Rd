@@ -10,15 +10,16 @@ grep_case(x, ..., preserve = FALSE, default = NA)
 \item{x}{A vector}
 
 \item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}> A sequence of two-sided
-formulas.
-Elements of \code{x} that match the left hand side (LHS) will be replaced with
-the value in the right hand side (RHS).
-
+formulas or named arguments.
+\itemize{
+\item \strong{Formulas}: Elements of \code{x} that match the \link{regex} pattern on the
+left hand side (LHS) of formulas will be replaced with the value in the
+right hand side (RHS).
 The LHS must evaluate to a character string.
-
 The RHS must be of length one.
-
-\code{NULL} inputs are ignored.}
+\code{NULL} inputs are ignored.
+\item \strong{Named arguments}: named arguments are passed to \code{\link[=grepl]{grepl()}}.
+}}
 
 \item{preserve}{If \code{TRUE}, unmatched elements of \code{x} will be returned
 unmodified.
@@ -53,6 +54,21 @@ grep_case(
   "cat" ~ "feline",
   "dog" ~ "canine",
   ignore.case = TRUE
+)
+
+countries <- c(
+  "France", "Ostdeutschland", "Westdeutschland", "Nederland",
+  "Belgie (Vlaanderen)", "Belgique (Wallonie)", "Luxembourg", "Italia"
+)
+
+grep_case(
+  countries,
+  "Deutschland" ~ "Germany",
+  "Belgi(qu)?e" ~ "Belgium",
+  "Nederland"   ~ "Netherlands",
+  "Italia"      ~ "Italy",
+  preserve      = TRUE,
+  ignore.case   = TRUE
 )
 }
 \seealso{
