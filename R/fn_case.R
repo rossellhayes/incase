@@ -2,7 +2,11 @@
 #'
 #' @inheritParams switch_case
 #'
-#' @param fn A function to apply to the left-hand side of each formula in `...`.
+#' @param fn A function to apply to the left-hand side of each formula in `...`
+#'
+#'   Either a quoted or unquoted function name, an anonymous [`function`], or
+#'   a [purrr-style formula][rlang::as_function()].
+#'
 #'   The function should take two inputs, the first being `x` and the second
 #'   being the left-hand side of the formula.
 #'   The function should return a logical vector, either of length 1 or the same

@@ -9,7 +9,11 @@ fn_case(x, fn, ..., preserve = FALSE, default = NA)
 \arguments{
 \item{x}{A vector}
 
-\item{fn}{A function to apply to the left-hand side of each formula in \code{...}.
+\item{fn}{A function to apply to the left-hand side of each formula in \code{...}
+
+Either a quoted or unquoted function name, an anonymous \code{\link{function}}, or
+a \link[rlang:as_function]{purrr-style formula}.
+
 The function should take two inputs, the first being \code{x} and the second
 being the left-hand side of the formula.
 The function should return a logical vector, either of length 1 or the same
@@ -68,7 +72,7 @@ countries <- c(
 
 fn_case(
   countries,
-  fn = function(x, pattern, ...) grepl(pattern, x, ...),
+  fn = stringr::str_detect,
   "Deutschland" ~ "Germany",
   "Belgi(qu)?e" ~ "Belgium",
   "Nederland"   ~ "Netherlands",
@@ -78,15 +82,18 @@ fn_case(
 )
 
 # Recode values in a range
-time  <- runif(10, 1, 12)
-hours <- time \%/\% 1 \%>\%
+time    <- runif(10, 1, 12)
+hours   <- time \%/\% 1
+minutes <- time \%\% 1 * 60
+
+hours <- hours \%>\%
   if_case(minutes > 32.5, (. + 1) \%\% 12, .) \%>\%
   switch_case(0 ~ 12, preserve = TRUE) \%>\%
   nombre::cardinal()
 
-time \%\% 1 * 60 \%>\%
+minutes \%>\%
   fn_case(
-    fn = function(x, y) {abs(x - y) <= 2.5},
+    fn = ~ abs(.x - .y) <= 2.5,
     0  ~ "o'clock",
     60 ~ "o'clock",
     30 ~ "half past",
