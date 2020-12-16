@@ -127,3 +127,23 @@ test_that("preserve and default", {
     switch_case(1:10, 5 ~ "buzz", preserve = TRUE, default = "bam")
   )
 })
+
+test_that("fn_switch_case()", {
+  data <- c(1, 2, 999, 888, 777)
+
+  expect_equal(
+    fn_switch_case(
+      data,
+      function(x) paste(rep(x, 3), collapse = ""),
+      7 ~ "Not asked",
+      8 ~ "Refused",
+      9 ~ "Missing",
+      preserve = TRUE
+    ),
+    c("1", "2", "Missing", "Refused", "Not asked")
+  )
+})
+
+test_that("fn_switch_case() errors", {
+  expect_error(fn_switch_case(1:10, function(x) x + 5))
+})

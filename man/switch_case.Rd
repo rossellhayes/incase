@@ -2,23 +2,28 @@
 % Please edit documentation in R/switch_case.R
 \name{switch_case}
 \alias{switch_case}
+\alias{fn_switch_case}
 \title{Switch-style recoding of values}
 \usage{
 switch_case(x, ..., preserve = FALSE, default = NA)
+
+fn_switch_case(x, fn, ..., preserve = FALSE, default = NA)
 }
 \arguments{
 \item{x}{A vector}
 
 \item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}> A sequence of two-sided
-formulas.
-Elements of \code{x} that match the left hand side (LHS) will be replaced with
-the value in the right hand side (RHS).
-
+formulas or named arguments.
+\itemize{
+\item \strong{Formulas}: Elements of \code{x} that match the left hand side (LHS) of
+formulas will be replaced with the value in the right hand side (RHS).
 The LHS must evaluate to an atomic vector.
-
 The RHS must be of length one.
-
-\code{NULL} inputs are ignored.}
+\code{NULL} inputs are ignored.
+\item \strong{Named arguments}: for \code{fn_switch_case()}, named arguments are passed
+to the function \code{fn}.
+For \code{switch_case()}, named arguments will raise an error.
+}}
 
 \item{preserve}{If \code{TRUE}, unmatched elements of \code{x} will be returned
 unmodified.
@@ -30,6 +35,8 @@ Defaults to \code{FALSE}.}
 \item{default}{If \code{preserve} is \code{FALSE}, a value to replace unmatched
 elements of \code{x}.
 Defaults to \code{NA}.}
+
+\item{fn}{A function to apply to the left-hand side of each formula in \code{...}}
 }
 \value{
 A vector of the same length as \code{x}.
@@ -85,9 +92,22 @@ parties \%>\%
     "r" ~ "Republican",
     preserve = TRUE
   )
+
+data <- c(1, 4, 8, 12, 999, 6, 2, 888, 4, 6, 777)
+
+fn_switch_case(
+  data,
+  function(x) paste(rep(x, 3), collapse = ""),
+  7 ~ "Not asked",
+  8 ~ "Refused",
+  9 ~ "Missing",
+  preserve = TRUE
+)
 }
 \seealso{
 \code{\link[=grep_case]{grep_case()}} to recode values with string pattern matching
+
+\code{\link[=fn_case]{fn_case()}}, which applies a function to both \code{x} and each formula's LHS
 
 \code{\link[=in_case]{in_case()}}, a pipeable alternative to \code{\link[dplyr:case_when]{dplyr::case_when()}}
 

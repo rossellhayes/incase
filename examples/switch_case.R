@@ -45,3 +45,14 @@ parties %>%
     "r" ~ "Republican",
     preserve = TRUE
   )
+
+data <- c(1, 4, 8, 12, 999, 6, 2, 888, 4, 6, 777)
+
+fn_switch_case(
+  data,
+  function(x) paste(rep(x, 3), collapse = ""),
+  7 ~ "Not asked",
+  8 ~ "Refused",
+  9 ~ "Missing",
+  preserve = TRUE
+)

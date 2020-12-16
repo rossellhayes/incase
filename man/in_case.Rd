@@ -102,7 +102,11 @@ try(
 \seealso{
 \code{\link[=if_case]{if_case()}}, a pipeable alternative to \code{\link[dplyr:if_else]{dplyr::if_else()}}
 
-\code{\link[=switch_case]{switch_case()}}, a reimplementation of \code{\link[=switch]{switch()}}
+\code{\link[=switch_case]{switch_case()}} a simpler alternative for when each case involves
+\code{\link{==}} or \code{\link{\%in\%}}
+
+\code{\link[=fn_case]{fn_case()}}, a simpler alternative for when each case uses the
+same function
 
 \code{\link[dplyr:case_when]{dplyr::case_when()}}, from which this function is derived
 }
