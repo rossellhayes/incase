@@ -72,13 +72,13 @@ countries <- c(
 
 fn_case(
   countries,
-  fn = stringr::str_detect,
-  "Deutschland" ~ "Germany",
-  "Belgi(qu)?e" ~ "Belgium",
-  "Nederland"   ~ "Netherlands",
-  "Italia"      ~ "Italy",
-  preserve      = TRUE,
-  ignore.case   = TRUE
+  fn = stringi::stri_detect_regex,
+  "Deutschland"    ~ "Germany",
+  "Belgi(qu)?e"    ~ "Belgium",
+  "Nederland"      ~ "Netherlands",
+  "Italia"         ~ "Italy",
+  preserve         = TRUE,
+  case_insensitive = TRUE
 )
 
 # Recode values in a range
