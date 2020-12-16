@@ -17,7 +17,9 @@
 #'
 #' @return A vector of the same length as `x`.
 #'
-#' @seealso [switch_case()] to recode values with exact matching
+#' @seealso [fn_case()], to apply a function other than `grepl()` to each case
+#'
+#'   [switch_case()] to recode values with exact matching
 #'
 #'   [in_case()], a pipeable alternative to [dplyr::case_when()]
 #'
@@ -30,30 +32,11 @@
 #' @example examples/grep_case.R
 
 grep_case <- function(x, ..., preserve = FALSE, default = NA) {
-  fs  <- compact_null(rlang::list2(...))
-
-  args <- fs[names(fs) %in% names(formals(grepl))]
-  fs   <- fs[!fs %in% args]
-
-  if (length(args)) {
-    args <- paste(paste(names(args), "=", args), collapse = ", ")
-  }
-
-  env <- lapply(fs, environment)
-
-  fs <- vapply(fs, format, character(1))
-  fs <- strsplit(fs, "~")
-  fs <- do.call("cbind", fs)
-
-  fs <- paste0(
-    "grepl(", fs[1, ], ", ", deparse(substitute(x)), ",", args, ") ~", fs[2, ]
+  fn_case(
+    x  = x,
+    fn = function(x, pattern, ...) grepl(pattern, x, ...),
+    ...,
+    preserve = preserve,
+    default  = default
   )
-  fs  <- Map(stats::as.formula, fs, env)
-
-  if (preserve) {
-    warn_if_default(default)
-    fs[[length(fs) + 1]] <- TRUE ~ x
-  }
-
-  in_case(!!!fs, default = default)
 }

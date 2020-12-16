@@ -36,7 +36,11 @@
 #'
 #' @seealso [if_case()], a pipeable alternative to [dplyr::if_else()]
 #'
-#'   [switch_case()], a reimplementation of [switch()]
+#'   [switch_case()] a simpler alternative for when each case involves
+#'   [`==`] or [`%in%`]
+#'
+#'   [fn_case()], a simpler alternative for when each case uses the
+#'   same function
 #'
 #'   [dplyr::case_when()], from which this function is derived
 #'

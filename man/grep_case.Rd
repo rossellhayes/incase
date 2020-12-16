@@ -72,6 +72,8 @@ grep_case(
 )
 }
 \seealso{
+\code{\link[=fn_case]{fn_case()}}, to apply a function other than \code{grepl()} to each case
+
 \code{\link[=switch_case]{switch_case()}} to recode values with exact matching
 
 \code{\link[=in_case]{in_case()}}, a pipeable alternative to \code{\link[dplyr:case_when]{dplyr::case_when()}}

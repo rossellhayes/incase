@@ -29,6 +29,7 @@ Suggests:
     covr,
     crayon,
     dplyr,
+    nombre,
     testthat
 Encoding: UTF-8
 LazyData: true

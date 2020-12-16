@@ -1,17 +1,21 @@
 #' Switch-style recoding of values
 #'
 #' @param x A vector
+#'
 #' @param ... <[`dynamic-dots`][rlang::dyn-dots]> A sequence of two-sided
-#'   formulas.
-#'   Elements of `x` that match the left hand side (LHS) will be replaced with
-#'   the value in the right hand side (RHS).
+#'   formulas or named arguments.
 #'
+#'   - **Formulas**: Elements of `x` that match the left hand side (LHS) of
+#'   formulas will be replaced with the value in the right hand side (RHS).
 #'   The LHS must evaluate to an atomic vector.
-#'
 #'   The RHS must be of length one.
-#'
 #'   `NULL` inputs are ignored.
 #'
+#'   - **Named arguments**: for `fn_switch_case()`, named arguments are passed
+#'   to the function `fn`.
+#'   For `switch_case()`, named arguments will raise an error.
+#'
+#' @param fn A function to apply to the left-hand side of each formula in `...`
 #' @param preserve If `TRUE`, unmatched elements of `x` will be returned
 #'   unmodified.
 #'   (The elements may have their type coerced to be compatible with
@@ -26,6 +30,8 @@
 #'
 #' @seealso [grep_case()] to recode values with string pattern matching
 #'
+#'   [fn_case()], which applies a function to both `x` and each formula's LHS
+#'
 #'   [in_case()], a pipeable alternative to [dplyr::case_when()]
 #'
 #'   [if_case()], a pipeable alternative to [dplyr::if_else()]
@@ -37,16 +43,53 @@
 #' @example examples/switch_case.R
 
 switch_case <- function(x, ..., preserve = FALSE, default = NA) {
-  fs  <- compact_null(rlang::list2(...))
-  env <- lapply(fs, environment)
-  fs  <- lapply(fs, format)
-  fs  <- paste(deparse(substitute(x)), "%in%", fs)
-  fs  <- Map(stats::as.formula, fs, env)
+  fn_case(
+    x  = x,
+    fn = `%in%`,
+    ...,
+    preserve = preserve,
+    default  = default
+  )
+}
 
-  if (preserve) {
-    warn_if_default(default)
-    fs[[length(fs) + 1]] <- TRUE ~ x
+#' @rdname switch_case
+#' @export
+
+fn_switch_case <- function(x, fn, ..., preserve = FALSE, default = NA) {
+  fn    <- rlang::as_function(fn)
+  input <- compact_null(rlang::list2(...))
+  fs    <- Filter(rlang::is_formula, input)
+  args  <- input[!input %in% fs]
+
+  n <- length(fs)
+  if (n == 0) rlang::abort("No cases provided")
+
+  query       <- vector("list", n)
+  value       <- vector("list", n)
+  default_env <- rlang::caller_env()
+
+  quos_pairs  <- Map(
+    function(x, i) {
+      validate_formula(
+        x, i, default_env = default_env, dots_env = rlang::current_env()
+      )
+    },
+    fs, seq_along(fs)
+  )
+
+  for (i in seq_len(n)) {
+    pair       <- quos_pairs[[i]]
+    value[[i]] <- rlang::eval_tidy(pair[["rhs"]], env = default_env)
+
+    query[[i]] <- rlang::eval_tidy(pair[["lhs"]], env = default_env)
+    query[[i]] <- do.call(fn, c(list(query[[i]]), args))
+
+    rlang::f_lhs(fs[[i]]) <- query[[i]]
+    rlang::f_rhs(fs[[i]]) <- value[[i]]
   }
 
-  in_case(!!!fs, default = default)
+  do.call(
+    switch_case,
+    c(list(x = x), fs, args, list(preserve = preserve, default = default))
+  )
 }
