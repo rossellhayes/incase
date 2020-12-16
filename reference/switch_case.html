@@ -88,7 +88,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -102,7 +102,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/rossellhayes/incase/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -128,7 +128,9 @@
     <p>Switch-style recoding of values</p>
     </div>
 
-    <pre class="usage"><span class='fu'>switch_case</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span>, preserve <span class='op'>=</span> <span class='cn'>FALSE</span>, default <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>switch_case</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span>, preserve <span class='op'>=</span> <span class='cn'>FALSE</span>, default <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span>
+
+<span class='fu'>fn_switch_case</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>fn</span>, <span class='va'>...</span>, preserve <span class='op'>=</span> <span class='cn'>FALSE</span>, default <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -140,12 +142,16 @@
     <tr>
       <th>...</th>
       <td><p>&lt;<code><a href='https://rlang.r-lib.org/reference/dyn-dots.html'>dynamic-dots</a></code>&gt; A sequence of two-sided
-formulas.
-Elements of <code>x</code> that match the left hand side (LHS) will be replaced with
-the value in the right hand side (RHS).</p>
-<p>The LHS must evaluate to an atomic vector.</p>
-<p>The RHS must be of length one.</p>
-<p><code>NULL</code> inputs are ignored.</p></td>
+formulas or named arguments.</p><ul>
+<li><p><strong>Formulas</strong>: Elements of <code>x</code> that match the left hand side (LHS) of
+formulas will be replaced with the value in the right hand side (RHS).
+The LHS must evaluate to an atomic vector.
+The RHS must be of length one.
+<code>NULL</code> inputs are ignored.</p></li>
+<li><p><strong>Named arguments</strong>: for <code>fn_switch_case()</code>, named arguments are passed
+to the function <code>fn</code>.
+For <code>switch_case()</code>, named arguments will raise an error.</p></li>
+</ul></td>
     </tr>
     <tr>
       <th>preserve</th>
@@ -162,6 +168,10 @@ Defaults to <code>FALSE</code>.</p></td>
 elements of <code>x</code>.
 Defaults to <code>NA</code>.</p></td>
     </tr>
+    <tr>
+      <th>fn</th>
+      <td><p>A function to apply to the left-hand side of each formula in <code>...</code></p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -170,6 +180,7 @@ Defaults to <code>NA</code>.</p></td>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='grep_case.html'>grep_case()</a></code> to recode values with string pattern matching</p>
+<p><code><a href='fn_case.html'>fn_case()</a></code>, which applies a function to both <code>x</code> and each formula's LHS</p>
 <p><code><a href='in_case.html'>in_case()</a></code>, a pipeable alternative to <code><a href='https://dplyr.tidyverse.org/reference/case_when.html'>dplyr::case_when()</a></code></p>
 <p><code><a href='if_case.html'>if_case()</a></code>, a pipeable alternative to <code><a href='https://dplyr.tidyverse.org/reference/if_else.html'>dplyr::if_else()</a></code></p>
 <p><code><a href='https://rdrr.io/r/base/switch.html'>switch()</a></code>, which inspired this function</p></div>
@@ -185,10 +196,10 @@ Defaults to <code>NA</code>.</p></td>
   <span class='st'>"g"</span> <span class='op'>~</span> <span class='st'>"Green"</span>,
   <span class='st'>"l"</span> <span class='op'>~</span> <span class='st'>"Libertarian"</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] "Libertarian" "Green"       "Libertarian" "Green"       "Democrat"   
-#&gt;  [6] "Libertarian" "Libertarian" "Libertarian" "Republican"  "Independent"
-#&gt; [11] "Independent" "Libertarian" "Libertarian" "Green"       "Libertarian"
-#&gt; [16] "Republican"  "Green"       "Republican"  "Independent" "Democrat"   </div><div class='input'>
+</div><div class='output co'>#&gt;  [1] "Libertarian" "Republican"  "Democrat"    "Green"       "Democrat"   
+#&gt;  [6] "Republican"  "Independent" "Democrat"    "Democrat"    "Republican" 
+#&gt; [11] "Libertarian" "Democrat"    "Green"       "Independent" "Green"      
+#&gt; [16] "Green"       "Independent" "Republican"  "Independent" "Republican" </div><div class='input'>
 <span class='va'>parties</span> <span class='op'>%&gt;%</span>
   <span class='fu'>switch_case</span><span class='op'>(</span>
     <span class='st'>"d"</span> <span class='op'>~</span> <span class='st'>"Democrat"</span>,
@@ -197,50 +208,62 @@ Defaults to <code>NA</code>.</p></td>
     <span class='st'>"g"</span> <span class='op'>~</span> <span class='st'>"Green"</span>,
     <span class='st'>"l"</span> <span class='op'>~</span> <span class='st'>"Libertarian"</span>
   <span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] "Libertarian" "Green"       "Libertarian" "Green"       "Democrat"   
-#&gt;  [6] "Libertarian" "Libertarian" "Libertarian" "Republican"  "Independent"
-#&gt; [11] "Independent" "Libertarian" "Libertarian" "Green"       "Libertarian"
-#&gt; [16] "Republican"  "Green"       "Republican"  "Independent" "Democrat"   </div><div class='input'>
+</div><div class='output co'>#&gt;  [1] "Libertarian" "Republican"  "Democrat"    "Green"       "Democrat"   
+#&gt;  [6] "Republican"  "Independent" "Democrat"    "Democrat"    "Republican" 
+#&gt; [11] "Libertarian" "Democrat"    "Green"       "Independent" "Green"      
+#&gt; [16] "Green"       "Independent" "Republican"  "Independent" "Republican" </div><div class='input'>
 <span class='va'>parties</span> <span class='op'>%&gt;%</span>
   <span class='fu'>switch_case</span><span class='op'>(</span>
     <span class='st'>"d"</span> <span class='op'>~</span> <span class='st'>"Democrat"</span>,
     <span class='st'>"r"</span> <span class='op'>~</span> <span class='st'>"Republican"</span>,
     <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"i"</span>, <span class='st'>"g"</span>, <span class='st'>"l"</span><span class='op'>)</span> <span class='op'>~</span> <span class='st'>"Other"</span>
   <span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] "Other"      "Other"      "Other"      "Other"      "Democrat"  
-#&gt;  [6] "Other"      "Other"      "Other"      "Republican" "Other"     
-#&gt; [11] "Other"      "Other"      "Other"      "Other"      "Other"     
-#&gt; [16] "Republican" "Other"      "Republican" "Other"      "Democrat"  </div><div class='input'>
+</div><div class='output co'>#&gt;  [1] "Other"      "Republican" "Democrat"   "Other"      "Democrat"  
+#&gt;  [6] "Republican" "Other"      "Democrat"   "Democrat"   "Republican"
+#&gt; [11] "Other"      "Democrat"   "Other"      "Other"      "Other"     
+#&gt; [16] "Other"      "Other"      "Republican" "Other"      "Republican"</div><div class='input'>
 <span class='va'>parties</span> <span class='op'>%&gt;%</span>
   <span class='fu'>switch_case</span><span class='op'>(</span>
     <span class='st'>"d"</span> <span class='op'>~</span> <span class='st'>"Democrat"</span>,
     <span class='st'>"r"</span> <span class='op'>~</span> <span class='st'>"Republican"</span>,
     default <span class='op'>=</span> <span class='st'>"Other"</span>
   <span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] "Other"      "Other"      "Other"      "Other"      "Democrat"  
-#&gt;  [6] "Other"      "Other"      "Other"      "Republican" "Other"     
-#&gt; [11] "Other"      "Other"      "Other"      "Other"      "Other"     
-#&gt; [16] "Republican" "Other"      "Republican" "Other"      "Democrat"  </div><div class='input'>
+</div><div class='output co'>#&gt;  [1] "Other"      "Republican" "Democrat"   "Other"      "Democrat"  
+#&gt;  [6] "Republican" "Other"      "Democrat"   "Democrat"   "Republican"
+#&gt; [11] "Other"      "Democrat"   "Other"      "Other"      "Other"     
+#&gt; [16] "Other"      "Other"      "Republican" "Other"      "Republican"</div><div class='input'>
 <span class='va'>parties</span> <span class='op'>%&gt;%</span>
   <span class='fu'>switch_case</span><span class='op'>(</span>
     <span class='st'>"d"</span> <span class='op'>~</span> <span class='st'>"Democrat"</span>,
     <span class='st'>"r"</span> <span class='op'>~</span> <span class='st'>"Republican"</span>,
     preserve <span class='op'>=</span> <span class='cn'>FALSE</span>
   <span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] NA           NA           NA           NA           "Democrat"  
-#&gt;  [6] NA           NA           NA           "Republican" NA          
-#&gt; [11] NA           NA           NA           NA           NA          
-#&gt; [16] "Republican" NA           "Republican" NA           "Democrat"  </div><div class='input'>
+</div><div class='output co'>#&gt;  [1] NA           "Republican" "Democrat"   NA           "Democrat"  
+#&gt;  [6] "Republican" NA           "Democrat"   "Democrat"   "Republican"
+#&gt; [11] NA           "Democrat"   NA           NA           NA          
+#&gt; [16] NA           NA           "Republican" NA           "Republican"</div><div class='input'>
 <span class='va'>parties</span> <span class='op'>%&gt;%</span>
   <span class='fu'>switch_case</span><span class='op'>(</span>
     <span class='st'>"d"</span> <span class='op'>~</span> <span class='st'>"Democrat"</span>,
     <span class='st'>"r"</span> <span class='op'>~</span> <span class='st'>"Republican"</span>,
     preserve <span class='op'>=</span> <span class='cn'>TRUE</span>
   <span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] "l"          "g"          "l"          "g"          "Democrat"  
-#&gt;  [6] "l"          "l"          "l"          "Republican" "i"         
-#&gt; [11] "i"          "l"          "l"          "g"          "l"         
-#&gt; [16] "Republican" "g"          "Republican" "i"          "Democrat"  </div></pre>
+</div><div class='output co'>#&gt;  [1] "l"          "Republican" "Democrat"   "g"          "Democrat"  
+#&gt;  [6] "Republican" "i"          "Democrat"   "Democrat"   "Republican"
+#&gt; [11] "l"          "Democrat"   "g"          "i"          "g"         
+#&gt; [16] "g"          "i"          "Republican" "i"          "Republican"</div><div class='input'>
+<span class='va'>data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>4</span>, <span class='fl'>8</span>, <span class='fl'>12</span>, <span class='fl'>999</span>, <span class='fl'>6</span>, <span class='fl'>2</span>, <span class='fl'>888</span>, <span class='fl'>4</span>, <span class='fl'>6</span>, <span class='fl'>777</span><span class='op'>)</span>
+
+<span class='fu'>fn_switch_case</span><span class='op'>(</span>
+  <span class='va'>data</span>,
+  <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='fl'>3</span><span class='op'>)</span>, collapse <span class='op'>=</span> <span class='st'>""</span><span class='op'>)</span>,
+  <span class='fl'>7</span> <span class='op'>~</span> <span class='st'>"Not asked"</span>,
+  <span class='fl'>8</span> <span class='op'>~</span> <span class='st'>"Refused"</span>,
+  <span class='fl'>9</span> <span class='op'>~</span> <span class='st'>"Missing"</span>,
+  preserve <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt;  [1] "1"         "4"         "8"         "12"        "Missing"   "6"        
+#&gt;  [7] "2"         "Refused"   "4"         "6"         "Not asked"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
