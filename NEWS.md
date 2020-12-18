@@ -1,3 +1,7 @@
+# incase 0.2.1
+
+* Fixed NOTE by removing unnecessary import of `stats`.
+
 # incase 0.2.0
 
 * Added `grep_case()` which works similarly to `switch_case()` but uses pattern matching instead of exact matching.
