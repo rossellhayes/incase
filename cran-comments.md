@@ -1,3 +1,7 @@
+# NOTE fix
+
+* This update fixes NOTEs in the previous submission by removing the unused import of stats.
+
 # Test environments
 * Local R installation, R 4.0.3 on Windows 10
 * GitHub Action
@@ -10,4 +14,7 @@
 
 # R CMD check results
 
-0 errors | 0 warnings | 0 notes
+0 errors | 0 warnings | 1 note
+
+* Days since last update: 2
+  - This update fixes a NOTE in the previous submission
