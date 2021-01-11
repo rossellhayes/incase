@@ -16,7 +16,7 @@ test_that("if_case()", {
 })
 
 test_that("if_case() errors", {
-  expect_error(if_case(x < 2, "l", "h", "m", "z"))
+  expect_error(if_case(x < 2, "l", "h", "m", "z"), "z")
   expect_error(if_case(x < 2, rep("l", 2), rep("h", 3), rep("m", 4)))
   expect_error(if_case(TRUE, "l", rep("h", 2), rep("m", 3)))
   expect_error(if_case(x, "l", "h", "m"))

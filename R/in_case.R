@@ -121,7 +121,7 @@ in_case <- function(..., preserve = FALSE, default = NA) {
   replaced   <- rep(FALSE, m)
 
   for (i in seq_len(n)) {
-    out      <- replace_with(out, query[[i]] & !replaced, value[[i]], NULL)
+    out      <- replace_with(out, query[[i]] & !replaced, value[[i]])
     replaced <- replaced | (query[[i]] & !is.na(query[[i]]))
   }
 

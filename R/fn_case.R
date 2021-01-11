@@ -90,7 +90,7 @@ fn_case <- function(x, fn, ..., preserve = FALSE, default = NA) {
   replaced   <- rep(FALSE, m)
 
   for (i in seq_len(length(query))) {
-    out      <- replace_with(out, query[[i]] & !replaced, value[[i]], NULL)
+    out      <- replace_with(out, query[[i]] & !replaced, value[[i]])
     replaced <- replaced | (query[[i]] & !is.na(query[[i]]))
   }
 

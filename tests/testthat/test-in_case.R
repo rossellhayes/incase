@@ -50,7 +50,10 @@ test_that("errors", {
   expect_error(in_case(3 ~ "fizz", 5 ~ "buzz", TRUE ~ x))
   expect_error(in_case(x))
   expect_error(in_case(x, 3 ~ "fizz", 5 ~ "buzz", x))
-  expect_error(in_case(c(TRUE, FALSE, TRUE) ~ 1, c(FALSE, TRUE) ~ 2))
+  expect_error(
+    in_case(c(TRUE, FALSE, TRUE) ~ 1, c(FALSE, TRUE) ~ 2),
+    "c(FALSE, TRUE)", fixed = TRUE
+  )
 })
 
 

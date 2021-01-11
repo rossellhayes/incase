@@ -1,5 +1,5 @@
-replace_with <- function(x, i, val, name, reason = NULL) {
-  check_length_val(length(val), length(x), name, reason)
+replace_with <- function(x, i, val, name) {
+  check_length_val(length(val), length(x), name)
 
   i[is.na(i)] <- FALSE
 

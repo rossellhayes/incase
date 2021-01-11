@@ -56,10 +56,9 @@ if_case <- function(condition, true, false, missing = NA, ...) {
 
   if (length(ellipsis)) {
     glubort(
-      "Arguments must not be passed to", code("..."), "in",
-      code("in_else()"), cross_bullet(),
-      plu::stick(ellipsis, code, max = 5), plu::ral("was", ellipsis),
-      "passed to", code("...")
+      "Arguments must not be passed to", code("..."), "in", code("if_case()"),
+      cross_bullet(), plu::stick(plu::more(code(ellipsis), type = "argument")),
+      plu::ral("was", ellipsis), "passed to", code("...")
     )
   }
 
@@ -81,16 +80,9 @@ if_case <- function(condition, true, false, missing = NA, ...) {
   storage.mode(missing) <- storage.mode(common)
 
   out <- true[rep(NA, length(condition))]
-  out <- replace_with(
-    out, condition, true, code("true"), paste("length of", code("condition"))
-  )
-  out <- replace_with(
-    out, !condition, false, code("false"), paste("length of", code("condition"))
-  )
-  out <- replace_with(
-    out, is.na(condition), missing,
-    code("missing"), paste("length of", code("condition"))
-  )
+  out <- replace_with(out, condition, true, code("true"))
+  out <- replace_with(out, !condition, false, code("false"))
+  out <- replace_with(out, is.na(condition), missing, code("missing"))
 
   out
 }
