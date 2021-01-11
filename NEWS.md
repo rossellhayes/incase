@@ -1,6 +1,7 @@
 # incase 0.2.1
 
 * Fixed NOTE by removing unnecessary import of `stats`.
+* Uses latest version of **plu** for more informative error messages.
 
 # incase 0.2.0
 
