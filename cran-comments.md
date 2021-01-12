@@ -14,7 +14,4 @@
 
 # R CMD check results
 
-0 errors | 0 warnings | 1 note
-
-* Days since last update: 2
-  - This update fixes a NOTE in the previous submission
+0 errors | 0 warnings | 0 notes
