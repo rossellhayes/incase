@@ -2,10 +2,13 @@
 
 export("%>%")
 export(fn_case)
+export(fn_case_fct)
 export(fn_switch_case)
 export(grep_case)
+export(grep_case_fct)
 export(if_case)
 export(in_case)
 export(switch_case)
+export(switch_case_fct)
 importFrom(magrittr,"%>%")
 importFrom(rlang,"%||%")
