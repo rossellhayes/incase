@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Switch-style recoding of values with string pattern matching — grep_case • incase</title>
+<title>Case statements returning a factor — switch_case_fct • incase</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,10 @@
 
 
 
-<meta property="og:title" content="Switch-style recoding of values with string pattern matching — grep_case" />
-<meta property="og:description" content="Switch-style recoding of values with string pattern matching" />
+<meta property="og:title" content="Case statements returning a factor — switch_case_fct" />
+<meta property="og:description" content="These functions are equivalent to switch_case(), grep_case(), and
+fn_case(), but return factors with their levels determined by the
+order of their case statements." />
 <meta property="og:image" content="https://incase.rossellhayes.com/logo.png" />
 
 
@@ -119,16 +121,22 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Switch-style recoding of values with string pattern matching</h1>
-    <small class="dont-index">Source: <a href='https://github.com/rossellhayes/incase/blob/master/R/grep_case.R'><code>R/grep_case.R</code></a></small>
-    <div class="hidden name"><code>grep_case.Rd</code></div>
+    <h1>Case statements returning a factor</h1>
+    <small class="dont-index">Source: <a href='https://github.com/rossellhayes/incase/blob/master/R/fn_case_fct.R'><code>R/fn_case_fct.R</code></a></small>
+    <div class="hidden name"><code>switch_case_fct.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Switch-style recoding of values with string pattern matching</p>
+    <p>These functions are equivalent to <code><a href='switch_case.html'>switch_case()</a></code>, <code><a href='grep_case.html'>grep_case()</a></code>, and
+<code><a href='fn_case.html'>fn_case()</a></code>, but return <a href='https://rdrr.io/r/base/factor.html'>factors</a> with their levels determined by the
+order of their case statements.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>grep_case</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span>, preserve <span class='op'>=</span> <span class='cn'>FALSE</span>, default <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>switch_case_fct</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span>, preserve <span class='op'>=</span> <span class='cn'>FALSE</span>, default <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span>
+
+<span class='fu'>grep_case_fct</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span>, preserve <span class='op'>=</span> <span class='cn'>FALSE</span>, default <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span>
+
+<span class='fu'>fn_case_fct</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>fn</span>, <span class='va'>...</span>, preserve <span class='op'>=</span> <span class='cn'>FALSE</span>, default <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -141,13 +149,13 @@
       <th>...</th>
       <td><p>&lt;<code><a href='https://rlang.r-lib.org/reference/dyn-dots.html'>dynamic-dots</a></code>&gt; A sequence of two-sided
 formulas or named arguments.</p><ul>
-<li><p><strong>Formulas</strong>: Elements of <code>x</code> that match the <a href='https://rdrr.io/r/base/regex.html'>regex</a> pattern on the
-left hand side (LHS) of formulas will be replaced with the value in the
-right hand side (RHS).
-The LHS must evaluate to a character string.
-The RHS must be of length one.
-<code>NULL</code> inputs are ignored.</p></li>
-<li><p><strong>Named arguments</strong>: named arguments are passed to <code><a href='https://rdrr.io/r/base/grep.html'>grepl()</a></code>.</p></li>
+<li><p><strong>Formulas</strong>: Elements of <code>x</code> that return <code>TRUE</code> when passed to <code>fn</code> with
+the left hand side (LHS) of each formula will be replaced with the value in
+the right hand side (RHS).
+The LHS must evaluate to a logical vector when passed to <code>fn</code> with <code>x</code>.
+The RHS must be of length 1 or the same length as all other RHS.</p></li>
+<li><p><strong>Named arguments</strong>: named arguments are passed as additional arguments
+to the function <code>fn</code>.</p></li>
 </ul></td>
     </tr>
     <tr>
@@ -165,53 +173,64 @@ Defaults to <code>FALSE</code>.</p></td>
 elements of <code>x</code>.
 Defaults to <code>NA</code>.</p></td>
     </tr>
+    <tr>
+      <th>fn</th>
+      <td><p>A function to apply to the left-hand side of each formula in <code>...</code></p>
+<p>Either a quoted or unquoted function name, an anonymous <code><a href='https://rdrr.io/r/base/function.html'>function</a></code>, or
+a <a href='https://rlang.r-lib.org/reference/as_function.html'>purrr-style formula</a>.</p>
+<p>The function should take two inputs, the first being <code>x</code> and the second
+being the left-hand side of the formula.
+The function should return a logical vector, either of length 1 or the same
+length as <code>x</code>.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A vector of the same length as <code>x</code>.</p>
+    <p>A factor vector of length 1 or n, matching the length of the logical
+input or output vectors.
+Levels are determined by the order of inputs to <code>...</code>.
+Inconsistent lengths will generate an error.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='fn_case.html'>fn_case()</a></code>, to apply a function other than <code><a href='https://rdrr.io/r/base/grep.html'>grepl()</a></code> to each case</p>
-<p><code><a href='switch_case.html'>switch_case()</a></code> to recode values with exact matching</p>
-<p><code><a href='in_case.html'>in_case()</a></code>, a pipeable alternative to <code><a href='https://dplyr.tidyverse.org/reference/case_when.html'>dplyr::case_when()</a></code></p>
-<p><code><a href='if_case.html'>if_case()</a></code>, a pipeable alternative to <code><a href='https://dplyr.tidyverse.org/reference/if_else.html'>dplyr::if_else()</a></code></p>
-<p><code><a href='https://rdrr.io/r/base/switch.html'>switch()</a></code> and <code><a href='https://rdrr.io/r/base/grep.html'>grepl()</a></code>, which inspired this function</p></div>
+    <div class='dont-index'><p><code><a href='switch_case.html'>switch_case()</a></code>, <code><a href='grep_case.html'>grep_case()</a></code>, and <code><a href='fn_case.html'>fn_case()</a></code>, on which these
+functions are based.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>words</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"caterpillar"</span>, <span class='st'>"dogwood"</span>, <span class='st'>"catastrophe"</span>, <span class='st'>"dogma"</span><span class='op'>)</span>
-
-<span class='fu'>grep_case</span><span class='op'>(</span>
-  <span class='va'>words</span>,
+    <pre class="examples"><div class='input'><span class='fu'>switch_case_fct</span><span class='op'>(</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span><span class='op'>)</span>,
+  <span class='st'>"c"</span> <span class='op'>~</span> <span class='st'>"cantaloupe"</span>,
+  <span class='st'>"b"</span> <span class='op'>~</span> <span class='st'>"banana"</span>,
+  <span class='st'>"a"</span> <span class='op'>~</span> <span class='st'>"apple"</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] apple      banana     cantaloupe
+#&gt; Levels: cantaloupe banana apple</div><div class='input'>
+<span class='fu'>grep_case_fct</span><span class='op'>(</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"caterpillar"</span>, <span class='st'>"dogwood"</span>, <span class='st'>"catastrophe"</span>, <span class='st'>"dogma"</span><span class='op'>)</span>,
   <span class='st'>"cat"</span> <span class='op'>~</span> <span class='st'>"feline"</span>,
   <span class='st'>"dog"</span> <span class='op'>~</span> <span class='st'>"canine"</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "feline" "canine" "feline" "canine"</div><div class='input'>
-<span class='va'>caps_words</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"caterpillar"</span>, <span class='st'>"dogwood"</span>, <span class='st'>"Catastrophe"</span>, <span class='st'>"DOGMA"</span><span class='op'>)</span>
-
-<span class='fu'>grep_case</span><span class='op'>(</span>
-  <span class='va'>caps_words</span>,
-  <span class='st'>"cat"</span> <span class='op'>~</span> <span class='st'>"feline"</span>,
-  <span class='st'>"dog"</span> <span class='op'>~</span> <span class='st'>"canine"</span>,
-  ignore.case <span class='op'>=</span> <span class='cn'>TRUE</span>
+</div><div class='output co'>#&gt; [1] feline canine feline canine
+#&gt; Levels: feline canine</div><div class='input'>
+<span class='fu'>fn_case_fct</span><span class='op'>(</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span><span class='op'>)</span>,
+  <span class='va'>`%in%`</span>,
+  <span class='st'>"c"</span> <span class='op'>~</span> <span class='st'>"cantaloupe"</span>,
+  <span class='st'>"b"</span> <span class='op'>~</span> <span class='st'>"banana"</span>,
+  <span class='st'>"a"</span> <span class='op'>~</span> <span class='st'>"apple"</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "feline" "canine" "feline" "canine"</div><div class='input'>
-<span class='va'>countries</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>
-  <span class='st'>"France"</span>, <span class='st'>"Ostdeutschland"</span>, <span class='st'>"Westdeutschland"</span>, <span class='st'>"Nederland"</span>,
-  <span class='st'>"Belgie (Vlaanderen)"</span>, <span class='st'>"Belgique (Wallonie)"</span>, <span class='st'>"Luxembourg"</span>, <span class='st'>"Italia"</span>
+</div><div class='output co'>#&gt; [1] apple      banana     cantaloupe
+#&gt; Levels: cantaloupe banana apple</div><div class='input'>
+<span class='fu'>fn_case_fct</span><span class='op'>(</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span>, <span class='st'>"d"</span><span class='op'>)</span>,
+  <span class='va'>`%in%`</span>,
+  <span class='st'>"c"</span> <span class='op'>~</span> <span class='st'>"cantaloupe"</span>,
+  <span class='st'>"b"</span> <span class='op'>~</span> <span class='st'>"banana"</span>,
+  <span class='st'>"a"</span> <span class='op'>~</span> <span class='st'>"apple"</span>,
+  preserve <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span>
-
-<span class='fu'>grep_case</span><span class='op'>(</span>
-  <span class='va'>countries</span>,
-  <span class='st'>"Deutschland"</span> <span class='op'>~</span> <span class='st'>"Germany"</span>,
-  <span class='st'>"Belgi(qu)?e"</span> <span class='op'>~</span> <span class='st'>"Belgium"</span>,
-  <span class='st'>"Nederland"</span>   <span class='op'>~</span> <span class='st'>"Netherlands"</span>,
-  <span class='st'>"Italia"</span>      <span class='op'>~</span> <span class='st'>"Italy"</span>,
-  preserve      <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  ignore.case   <span class='op'>=</span> <span class='cn'>TRUE</span>
-<span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "France"      "Germany"     "Germany"     "Netherlands" "Belgium"    
-#&gt; [6] "Belgium"     "Luxembourg"  "Italy"      </div></pre>
+</div><div class='output co'>#&gt; [1] apple      banana     cantaloupe d         
+#&gt; Levels: cantaloupe banana apple d</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
