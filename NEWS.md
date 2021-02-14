@@ -1,3 +1,5 @@
+# incase (development version)
+
 # incase 0.2.1
 
 * Fixed NOTE by removing unnecessary import of `stats`.
