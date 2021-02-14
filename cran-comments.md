@@ -1,7 +1,3 @@
-# NOTE fix
-
-* This update fixes NOTEs in the previous submission by removing the unused import of stats.
-
 # Test environments
 * Local R installation, R 4.0.3 on Windows 10
 * GitHub Action
