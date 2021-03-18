@@ -48,6 +48,10 @@ test_that("errors", {
   expect_warning(x %>% in_case(. > 3 ~ "f", preserve = TRUE, default = "p"))
   expect_error(in_case(x %% 3 == 0 ~ "fizz", preserve = TRUE))
   expect_error(in_case(3 ~ "fizz", 5 ~ "buzz", TRUE ~ x))
+  expect_error(in_case(y ~ "fizz", 5 ~ "buzz", TRUE ~ x), "y")
+  expect_error(
+    in_case(letters[1:3] ~ "buzz", TRUE ~ x), "letters[1:3]", fixed = TRUE
+  )
   expect_error(in_case(x))
   expect_error(in_case(x, 3 ~ "fizz", 5 ~ "buzz", x))
   expect_error(

@@ -55,17 +55,23 @@ if_case <- function(condition, true, false, missing = NA, ...) {
   }
 
   if (length(ellipsis)) {
-    glubort(
-      "Arguments must not be passed to", code("..."), "in", code("if_case()"),
-      cross_bullet(), plu::stick(plu::more(code(ellipsis), type = "argument")),
-      plu::ral("was", ellipsis), "passed to", code("...")
+    abort_msg(
+      paste(
+        "Arguments must not be passed to", code("..."), "in", code("if_case()")
+      ),
+      x = paste(
+        plu::stick(plu::more(code(ellipsis), type = "argument")),
+        plu::ral("was", ellipsis), "passed to", code("...")
+      )
     )
   }
 
   if (!is.logical(condition)) {
-    glubort(
-      code("condition"), "must be a logical vector, not",
-      code(paste(class(condition), collapse = "/"))
+    abort_msg(
+      paste(
+        code("condition"), "must be a logical vector, not",
+        code(paste(class(condition), collapse = "/"))
+      )
     )
   }
 

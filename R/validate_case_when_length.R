@@ -19,10 +19,9 @@ validate_case_when_length <- function(query, value, fs) {
   rhs_problems         <- rhs_lengths %in% inconsistent_lengths
   problems             <- lhs_problems | rhs_problems
 
-  glubort(
-    "All formulas must be the same length or length one.",
-    cross_bullet(),
-    check_length_val(
+  abort_msg(
+    "All formulas must be the same length or length one",
+    x = check_length_val(
       inconsistent_lengths,
       len,
       header = plu::stick(

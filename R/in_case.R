@@ -53,77 +53,18 @@ in_case <- function(..., preserve = FALSE, default = NA) {
 
   if (!rlang::is_formula(ellipsis[[1]])) {
     fs <- ellipsis[-1]
-
-    if (preserve) {
-      warn_if_default(default)
-      default <- ellipsis[[1]]
-    }
+    x  <- ellipsis[[1]]
   } else {
     fs <- ellipsis
-
-    if (preserve) {
-      glubort(
-        code("preserve"), " requires a vector to be piped into ",
-        code("in_case()"), ":", bullet(), " Try using ", code("default"),
-        " instead", .zero = TRUE
-      )
-    }
+    x  <- NULL
+    assert_no_preserve_without_pipe(preserve, "in_case()")
   }
 
-  n <- length(fs)
-  if (n == 0) rlang::abort("No cases provided")
+  assert_two_sided(fs, "in_case()")
 
-  nfs <- Filter(
-    function(fs) !rlang::is_formula(fs, lhs = TRUE) && !rlang::is_quosure(fs),
-    fs
+  replace(
+    fs, x, default, preserve,
+    default_env = rlang::caller_env(),
+    current_env = rlang::current_env()
   )
-
-  if (length(nfs)) {
-    glubort(
-      "Each argument to", code("in_case()"), "must be a two-sided formula:",
-      cross_bullet(), plu::stick(nfs, code, max = 5),
-      plu::ral("is {not} a {two-sided} formula.", nfs)
-    )
-  }
-
-  query       <- vector("list", n)
-  value       <- vector("list", n)
-  default_env <- rlang::caller_env()
-
-  quos_pairs  <- Map(
-    function(x, i) {
-      validate_formula(
-        x, i, default_env = default_env, dots_env = rlang::current_env()
-      )
-    },
-    fs, seq_along(fs)
-  )
-
-  for (i in seq_len(n)) {
-    pair       <- quos_pairs[[i]]
-    query[[i]] <- rlang::eval_tidy(pair[["lhs"]], env = default_env)
-    value[[i]] <- rlang::eval_tidy(pair[["rhs"]], env = default_env)
-
-    if (!is.logical(query[[i]])) {
-      glubort(
-        "Each formula's left hand side must be a logical vector:",
-        cross_bullet(), code(rlang::as_label(pair[["lhs"]])),
-        "is not a logical vector."
-      )
-    }
-  }
-
-  class      <- class(c(value, recursive = TRUE))
-  value      <- lapply(value, `class<-`, class)
-  m          <- validate_case_when_length(query, value, fs)
-  out        <- rep_len(default, m)
-  class(out) <- class
-  replaced   <- rep(FALSE, m)
-
-  for (i in seq_len(n)) {
-    out      <- replace_with(out, query[[i]] & !replaced, value[[i]])
-    replaced <- replaced | (query[[i]] & !is.na(query[[i]]))
-  }
-
-  out
 }

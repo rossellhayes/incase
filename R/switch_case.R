@@ -56,37 +56,27 @@ switch_case <- function(x, ..., preserve = FALSE, default = NA) {
 #' @export
 
 fn_switch_case <- function(x, fn, ..., preserve = FALSE, default = NA) {
-  fn    <- rlang::as_function(fn)
   input <- compact_null(rlang::list2(...))
   fs    <- Filter(rlang::is_formula, input)
   args  <- input[!input %in% fs]
 
-  n <- length(fs)
-  if (n == 0) rlang::abort("No cases provided")
+  assert_length(fs)
 
-  query       <- vector("list", n)
-  value       <- vector("list", n)
-  default_env <- rlang::caller_env()
-
-  quos_pairs  <- Map(
-    function(x, i) {
-      validate_formula(
-        x, i, default_env = default_env, dots_env = rlang::current_env()
-      )
-    },
-    fs, seq_along(fs)
+  pairs <- extract_formula_pairs(
+    fs,
+    default_env        = rlang::caller_env(),
+    current_env        = rlang::current_env(),
+    assert_logical_lhs = FALSE
   )
 
-  for (i in seq_len(n)) {
-    pair       <- quos_pairs[[i]]
-    value[[i]] <- rlang::eval_tidy(pair[["rhs"]], env = default_env)
-
-    query[[i]] <- rlang::eval_tidy(pair[["lhs"]], env = default_env)
-    query[[i]] <- do.call(fn, c(list(query[[i]]), args))
-
-    rlang::f_lhs(fs[[i]]) <- query[[i]]
-    rlang::f_rhs(fs[[i]]) <- value[[i]]
-  }
+  fs <- Map(
+    function(fs, query, value) {
+      rlang::f_lhs(fs) <- do.call(rlang::as_function(fn), c(list(query), args))
+      rlang::f_rhs(fs) <- value
+      fs
+    },
+    fs, pairs$query, pairs$value
+  )
 
   do.call(
     switch_case,

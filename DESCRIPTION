@@ -24,9 +24,7 @@ Imports:
     plu,
     rlang
 Suggests: 
-    cli,
     covr,
-    crayon,
     dplyr,
     nombre,
     stringi,
