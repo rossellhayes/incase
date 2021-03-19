@@ -100,6 +100,8 @@ try(
   )
 }
 \seealso{
+\code{\link[=in_case_fct]{in_case_fct()}} to create a factor
+
 \code{\link[=if_case]{if_case()}}, a pipeable alternative to \code{\link[dplyr:if_else]{dplyr::if_else()}}
 
 \code{\link[=switch_case]{switch_case()}} a simpler alternative for when each case involves

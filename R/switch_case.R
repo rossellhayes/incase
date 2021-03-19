@@ -28,7 +28,9 @@
 #'
 #' @return A vector of the same length as `x`.
 #'
-#' @seealso [grep_case()] to recode values with string pattern matching
+#' @seealso [switch_case_fct()] to create a factor
+#'
+#'   [grep_case()] to recode values with string pattern matching
 #'
 #'   [fn_case()], which applies a function to both `x` and each formula's LHS
 #'

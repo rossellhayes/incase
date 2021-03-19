@@ -80,8 +80,15 @@ switch_case_fct(
   c("a", "b", "c", "d"),
   "c" ~ "cantaloupe",
   "b" ~ "banana",
+  "a" ~ "apple"
+)
+
+switch_case_fct(
+  c("a", "b", "c", "d"),
+  "c" ~ "cantaloupe",
+  "b" ~ "banana",
   "a" ~ "apple",
-  "d" ~ "apple"
+  preserve = TRUE
 )
 
 grep_case_fct(
@@ -96,15 +103,6 @@ fn_case_fct(
   "c" ~ "cantaloupe",
   "b" ~ "banana",
   "a" ~ "apple"
-)
-
-fn_case_fct(
-  c("a", "b", "c", "d"),
-  `\%in\%`,
-  "c" ~ "cantaloupe",
-  "b" ~ "banana",
-  "a" ~ "apple",
-  preserve = TRUE
 )
 }
 \seealso{

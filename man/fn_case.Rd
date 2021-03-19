@@ -114,6 +114,8 @@ minutes \%>\%
   )
 }
 \seealso{
+\code{\link[=fn_case_fct]{fn_case_fct()}} to create a factor
+
 \code{\link[=fn_switch_case]{fn_switch_case()}}, which applies a function to each formula's LHS,
 but not \code{x}
 

@@ -17,7 +17,9 @@
 #'
 #' @return A vector of the same length as `x`.
 #'
-#' @seealso [fn_case()], to apply a function other than `grepl()` to each case
+#' @seealso [grep_case_fct()] to create a factor
+#'
+#'   [fn_case()], to apply a function other than `grepl()` to each case
 #'
 #'   [switch_case()] to recode values with exact matching
 #'

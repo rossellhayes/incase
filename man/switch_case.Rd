@@ -105,6 +105,8 @@ fn_switch_case(
 )
 }
 \seealso{
+\code{\link[=switch_case_fct]{switch_case_fct()}} to create a factor
+
 \code{\link[=grep_case]{grep_case()}} to recode values with string pattern matching
 
 \code{\link[=fn_case]{fn_case()}}, which applies a function to both \code{x} and each formula's LHS

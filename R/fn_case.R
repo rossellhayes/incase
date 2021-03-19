@@ -28,7 +28,9 @@
 #'   or output vectors.
 #'   Inconsistent lengths will generate an error.
 #'
-#' @seealso [fn_switch_case()], which applies a function to each formula's LHS,
+#' @seealso [fn_case_fct()] to create a factor
+#'
+#'   [fn_switch_case()], which applies a function to each formula's LHS,
 #'   but not `x`
 #'
 #'   [switch_case()], a simpler alternative for exact matching

@@ -72,6 +72,8 @@ grep_case(
 )
 }
 \seealso{
+\code{\link[=grep_case_fct]{grep_case_fct()}} to create a factor
+
 \code{\link[=fn_case]{fn_case()}}, to apply a function other than \code{grepl()} to each case
 
 \code{\link[=switch_case]{switch_case()}} to recode values with exact matching
