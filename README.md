@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![](https://www.r-pkg.org/badges/version/incase?color=brightgreen)](https://cran.r-project.org/package=incase)
-[![](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
 [![License:
 MIT](https://img.shields.io/badge/license-MIT-blueviolet.svg)](https://cran.r-project.org/web/licenses/MIT)
 [![R build
@@ -141,7 +141,7 @@ recoding discrete values.
 
 ``` r
 parties
-#>  [1] "G" "R" "G" "D" "I" "I" "R" "R" "I" NA  "I" "L" "L" "I" "L" "R" "I" "R" "R"
+#>  [1] "R" "I" "L" "I" "R" "D" "R" "D" "R" NA  "L" NA  "D" "I" "D" "L" "I" "D" "I"
 #> [20] "D"
 
 parties %>% 
@@ -151,10 +151,10 @@ parties %>%
     . %in% c("G", "L") ~ "Other",
     . %in% c("I", NA)  ~ "Independent" 
   )
-#>  [1] "Other"       "Republican"  "Other"       "Democratic"  "Independent"
-#>  [6] "Independent" "Republican"  "Republican"  "Independent" "Independent"
-#> [11] "Independent" "Other"       "Other"       "Independent" "Other"      
-#> [16] "Republican"  "Independent" "Republican"  "Republican"  "Democratic"
+#>  [1] "Republican"  "Independent" "Other"       "Independent" "Republican" 
+#>  [6] "Democratic"  "Republican"  "Democratic"  "Republican"  "Independent"
+#> [11] "Other"       "Independent" "Democratic"  "Independent" "Democratic" 
+#> [16] "Other"       "Independent" "Democratic"  "Independent" "Democratic"
 
 parties %>%
   switch_case(
@@ -163,10 +163,10 @@ parties %>%
     c("G", "L") ~ "Other",
     c("I", NA)  ~ "Independent"
   )
-#>  [1] "Other"       "Republican"  "Other"       "Democrat"    "Independent"
-#>  [6] "Independent" "Republican"  "Republican"  "Independent" "Independent"
-#> [11] "Independent" "Other"       "Other"       "Independent" "Other"      
-#> [16] "Republican"  "Independent" "Republican"  "Republican"  "Democrat"
+#>  [1] "Republican"  "Independent" "Other"       "Independent" "Republican" 
+#>  [6] "Democrat"    "Republican"  "Democrat"    "Republican"  "Independent"
+#> [11] "Other"       "Independent" "Democrat"    "Independent" "Democrat"   
+#> [16] "Other"       "Independent" "Democrat"    "Independent" "Democrat"
 ```
 
 `grep_case()` allows you to recode values with pattern matching.
@@ -190,7 +190,7 @@ grep_case(
 #> [6] "Belgium"     "Luxembourg"  "Italy"
 ```
 
------
+------------------------------------------------------------------------
 
 Hex sticker fonts are [Source Sans
 Pro](https://github.com/adobe-fonts/source-sans-pro) by
