@@ -1,8 +1,9 @@
 #' Case statements returning a factor
 #'
-#' These functions are equivalent to [switch_case()], [grep_case()], and
-#' [fn_case()], but return [factors][factor] with their levels determined by the
-#' order of their case statements.
+#' These functions are equivalent to [in_case()], [switch_case()],
+#' [grep_case()], [fn_case()], and [fn_switch_case()] but return
+#' [factors][factor] with their levels determined by the order of their
+#' case statements.
 #'
 #' @inheritParams fn_case
 #' @inheritParams in_case
@@ -12,8 +13,8 @@
 #'   Levels are determined by the order of inputs to `...`.
 #'   Inconsistent lengths will generate an error.
 #'
-#' @seealso [in_case()], [switch_case()], [grep_case()], and [fn_case()],
-#'   on which these functions are based.
+#' @seealso [in_case()], [switch_case()], [grep_case()], [fn_case()], and
+#'   [fn_case_fct()] on which these functions are based.
 #'
 #' @export
 #' @example examples/in_case_fct.R
@@ -78,5 +79,37 @@ fn_case_fct <- function(x, fn, ..., preserve = FALSE, default = NA) {
     factor      = TRUE,
     default_env = rlang::caller_env(),
     current_env = rlang::current_env()
+  )
+}
+
+#' @rdname in_case_fct
+#' @export
+
+fn_switch_case_fct <- function(x, fn, ..., preserve = FALSE, default = NA) {
+  input <- compact_null(rlang::list2(...))
+  fs    <- Filter(rlang::is_formula, input)
+  args  <- input[!input %in% fs]
+
+  assert_length(fs)
+
+  pairs <- extract_formula_pairs(
+    fs,
+    default_env        = rlang::caller_env(),
+    current_env        = rlang::current_env(),
+    assert_logical_lhs = FALSE
+  )
+
+  fs <- Map(
+    function(fs, query, value) {
+      rlang::f_lhs(fs) <- do.call(rlang::as_function(fn), c(list(query), args))
+      rlang::f_rhs(fs) <- value
+      fs
+    },
+    fs, pairs$query, pairs$value
+  )
+
+  do.call(
+    switch_case_fct,
+    c(list(x = x), fs, args, list(preserve = preserve, default = default))
   )
 }

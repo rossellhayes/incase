@@ -5,6 +5,7 @@
 \alias{switch_case_fct}
 \alias{grep_case_fct}
 \alias{fn_case_fct}
+\alias{fn_switch_case_fct}
 \title{Case statements returning a factor}
 \usage{
 in_case_fct(..., preserve = FALSE, default = NA)
@@ -14,6 +15,8 @@ switch_case_fct(x, ..., preserve = FALSE, default = NA)
 grep_case_fct(x, ..., preserve = FALSE, default = NA)
 
 fn_case_fct(x, fn, ..., preserve = FALSE, default = NA)
+
+fn_switch_case_fct(x, fn, ..., preserve = FALSE, default = NA)
 }
 \arguments{
 \item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}> A sequence of two-sided
@@ -58,9 +61,10 @@ Levels are determined by the order of inputs to \code{...}.
 Inconsistent lengths will generate an error.
 }
 \description{
-These functions are equivalent to \code{\link[=switch_case]{switch_case()}}, \code{\link[=grep_case]{grep_case()}}, and
-\code{\link[=fn_case]{fn_case()}}, but return \link[=factor]{factors} with their levels determined by the
-order of their case statements.
+These functions are equivalent to \code{\link[=in_case]{in_case()}}, \code{\link[=switch_case]{switch_case()}},
+\code{\link[=grep_case]{grep_case()}}, \code{\link[=fn_case]{fn_case()}}, and \code{\link[=fn_switch_case]{fn_switch_case()}} but return
+\link[=factor]{factors} with their levels determined by the order of their
+case statements.
 }
 \examples{
 1:10 \%>\%
@@ -106,6 +110,6 @@ fn_case_fct(
 )
 }
 \seealso{
-\code{\link[=in_case]{in_case()}}, \code{\link[=switch_case]{switch_case()}}, \code{\link[=grep_case]{grep_case()}}, and \code{\link[=fn_case]{fn_case()}},
-on which these functions are based.
+\code{\link[=in_case]{in_case()}}, \code{\link[=switch_case]{switch_case()}}, \code{\link[=grep_case]{grep_case()}}, \code{\link[=fn_case]{fn_case()}}, and
+\code{\link[=fn_case_fct]{fn_case_fct()}} on which these functions are based.
 }

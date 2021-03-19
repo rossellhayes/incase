@@ -105,7 +105,7 @@ fn_switch_case(
 )
 }
 \seealso{
-\code{\link[=switch_case_fct]{switch_case_fct()}} to create a factor
+\code{\link[=switch_case_fct]{switch_case_fct()}} and \code{\link[=fn_switch_case_fct]{fn_switch_case_fct()}} to create a factor
 
 \code{\link[=grep_case]{grep_case()}} to recode values with string pattern matching
 

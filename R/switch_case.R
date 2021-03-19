@@ -28,7 +28,7 @@
 #'
 #' @return A vector of the same length as `x`.
 #'
-#' @seealso [switch_case_fct()] to create a factor
+#' @seealso [switch_case_fct()] and [fn_switch_case_fct()] to create a factor
 #'
 #'   [grep_case()] to recode values with string pattern matching
 #'
