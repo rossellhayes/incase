@@ -1,0 +1,127 @@
+test_that("in_case_fct", {
+  x <- 1:10
+
+  expect_equal(
+    in_case_fct(
+      x %% 2 == 0 ~ "even",
+      x %% 2 == 1 ~ "odd"
+    ),
+    factor(rep(c("odd", "even"), 5), levels = c("even", "odd"))
+  )
+
+  expect_equal(
+    x %>%
+      in_case_fct(
+        . %% 2 == 0 ~ "even",
+        . %% 2 == 1 ~ "odd"
+      ),
+    factor(rep(c("odd", "even"), 5), levels = c("even", "odd"))
+  )
+
+  expect_equal(
+    x %>%
+      in_case_fct(
+        . %% 2 == 1 ~ "odd",
+        . %% 2 == 0 ~ "even"
+      ),
+    factor(rep(c("odd", "even"), 5), levels = c("odd", "even"))
+  )
+})
+
+test_that("switch_case_fct", {
+  expect_equal(
+    switch_case_fct(
+      c("a", "b", "c"),
+      "c" ~ "cantaloupe",
+      "b" ~ "banana",
+      "a" ~ "apple"
+    ),
+    factor(
+      c("apple", "banana", "cantaloupe"),
+      levels = c("cantaloupe", "banana", "apple")
+    )
+  )
+
+  expect_equal(
+    switch_case_fct(
+      c("a", "b", "c", "d"),
+      "c" ~ "cantaloupe",
+      "b" ~ "banana",
+      "a" ~ "apple"
+    ),
+    factor(
+      c("apple", "banana", "cantaloupe", NA),
+      levels = c("cantaloupe", "banana", "apple")
+    )
+  )
+
+  expect_equal(
+    switch_case_fct(
+      c("a", "b", "c", "d"),
+      "c" ~ "cantaloupe",
+      "b" ~ "banana",
+      "a" ~ "apple",
+      preserve = TRUE
+    ),
+    factor(
+      factor(
+        c("apple", "banana", "cantaloupe", "d"),
+        levels = c("cantaloupe", "banana", "apple", "d")
+      )
+    )
+  )
+
+  expect_equal(
+    switch_case_fct(
+      c("a", "b", "c", "d"),
+      "c" ~ "cantaloupe",
+      "b" ~ "banana",
+      "a" ~ "apple",
+      "d" ~ "banana"
+    ),
+    factor(
+      c("apple", "banana", "cantaloupe", "banana"),
+      levels = c("cantaloupe", "banana", "apple")
+    )
+  )
+})
+
+test_that("grep_case_fct", {
+  expect_equal(
+    grep_case_fct(
+      c("caterpillar", "dogwood", "catastrophe", "dogma"),
+      "cat" ~ "feline",
+      "dog" ~ "canine"
+    ),
+    factor(rep(c("feline", "canine"), 2), levels = c("feline", "canine"))
+  )
+})
+
+test_that("fn_case_fct", {
+  expect_equal(
+    fn_case_fct(
+      c("a", "b", "c"),
+      `%in%`,
+      "c" ~ "cantaloupe",
+      "b" ~ "banana",
+      "a" ~ "apple"
+    ),
+    factor(
+      c("apple", "banana", "cantaloupe"),
+      levels = c("cantaloupe", "banana", "apple")
+    )
+  )
+})
+
+test_that("errors", {
+  x <- 1:15
+
+  expect_error(
+    in_case(
+      x %% 15 == 0 ~ "fizzbuzz",
+      x %% 3  == 0 ~ "fizz",
+      x %% 5  == 0 ~ "buzz",
+      preserve = TRUE
+    )
+  )
+})
