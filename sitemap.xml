@@ -16,6 +16,9 @@
     <loc>https://incase.rossellhayes.com/reference/in_case.html</loc>
   </url>
   <url>
+    <loc>https://incase.rossellhayes.com/reference/in_case_fct.html</loc>
+  </url>
+  <url>
     <loc>https://incase.rossellhayes.com/reference/incase-package.html</loc>
   </url>
   <url>
@@ -23,8 +26,5 @@
   </url>
   <url>
     <loc>https://incase.rossellhayes.com/reference/switch_case.html</loc>
-  </url>
-  <url>
-    <loc>https://incase.rossellhayes.com/reference/switch_case_fct.html</loc>
   </url>
 </urlset>
