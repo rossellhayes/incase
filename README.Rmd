@@ -49,8 +49,8 @@ install.packages("incase")
 or the development version from [GitHub](https://github.com/rossellhayes/incase) with:
 
 ``` {r eval = FALSE}
-# install.packages("remotes")
-remotes::install_github("rossellhayes/incase")
+# install.packages("pak")
+pak::pkg_install("rossellhayes/incase")
 ```
 
 ## Usage

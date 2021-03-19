@@ -34,8 +34,8 @@ or the development version from
 [GitHub](https://github.com/rossellhayes/incase) with:
 
 ``` r
-# install.packages("remotes")
-remotes::install_github("rossellhayes/incase")
+# install.packages("pak")
+pak::pkg_install("rossellhayes/incase")
 ```
 
 ## Usage
@@ -141,8 +141,8 @@ recoding discrete values.
 
 ``` r
 parties
-#>  [1] "R" "I" "L" "I" "R" "D" "R" "D" "R" NA  "L" NA  "D" "I" "D" "L" "I" "D" "I"
-#> [20] "D"
+#>  [1] "I" "I" "R" "I" "I" "I" "R" "I" "G" "D" "I" "R" "R" "R" "D" "D" "I" "D" "R"
+#> [20] "I"
 
 parties %>% 
   in_case(
@@ -151,10 +151,10 @@ parties %>%
     . %in% c("G", "L") ~ "Other",
     . %in% c("I", NA)  ~ "Independent" 
   )
-#>  [1] "Republican"  "Independent" "Other"       "Independent" "Republican" 
-#>  [6] "Democratic"  "Republican"  "Democratic"  "Republican"  "Independent"
-#> [11] "Other"       "Independent" "Democratic"  "Independent" "Democratic" 
-#> [16] "Other"       "Independent" "Democratic"  "Independent" "Democratic"
+#>  [1] "Independent" "Independent" "Republican"  "Independent" "Independent"
+#>  [6] "Independent" "Republican"  "Independent" "Other"       "Democratic" 
+#> [11] "Independent" "Republican"  "Republican"  "Republican"  "Democratic" 
+#> [16] "Democratic"  "Independent" "Democratic"  "Republican"  "Independent"
 
 parties %>%
   switch_case(
@@ -163,10 +163,10 @@ parties %>%
     c("G", "L") ~ "Other",
     c("I", NA)  ~ "Independent"
   )
-#>  [1] "Republican"  "Independent" "Other"       "Independent" "Republican" 
-#>  [6] "Democrat"    "Republican"  "Democrat"    "Republican"  "Independent"
-#> [11] "Other"       "Independent" "Democrat"    "Independent" "Democrat"   
-#> [16] "Other"       "Independent" "Democrat"    "Independent" "Democrat"
+#>  [1] "Independent" "Independent" "Republican"  "Independent" "Independent"
+#>  [6] "Independent" "Republican"  "Independent" "Other"       "Democrat"   
+#> [11] "Independent" "Republican"  "Republican"  "Republican"  "Democrat"   
+#> [16] "Democrat"    "Independent" "Democrat"    "Republican"  "Independent"
 ```
 
 `grep_case()` allows you to recode values with pattern matching.
