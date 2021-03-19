@@ -97,8 +97,8 @@
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"incase"</span><span class="op">)</span></code></pre></div>
 <p>or the development version from <a href="https://github.com/rossellhayes/incase">GitHub</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># install.packages("remotes")</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"rossellhayes/incase"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="co"># install.packages("pak")</span>
+<span class="fu">pak</span><span class="fu">::</span><span class="fu">pkg_install</span><span class="op">(</span><span class="st">"rossellhayes/incase"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
@@ -194,8 +194,8 @@
 <p><code><a href="reference/switch_case.html">switch_case()</a></code> works as a convenient shorthand for <code><a href="reference/in_case.html">in_case()</a></code> when recoding discrete values.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">parties</span>
-<span class="co">#&gt;  [1] "G" "R" "G" "D" "I" "I" "R" "R" "I" NA  "I" "L" "L" "I" "L" "R" "I" "R" "R"</span>
-<span class="co">#&gt; [20] "D"</span>
+<span class="co">#&gt;  [1] "I" "I" "R" "I" "I" "I" "R" "I" "G" "D" "I" "R" "R" "R" "D" "D" "I" "D" "R"</span>
+<span class="co">#&gt; [20] "I"</span>
 
 <span class="va">parties</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="reference/in_case.html">in_case</a></span><span class="op">(</span>
@@ -204,10 +204,10 @@
     <span class="va">.</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"G"</span>, <span class="st">"L"</span><span class="op">)</span> <span class="op">~</span> <span class="st">"Other"</span>,
     <span class="va">.</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"I"</span>, <span class="cn">NA</span><span class="op">)</span>  <span class="op">~</span> <span class="st">"Independent"</span> 
   <span class="op">)</span>
-<span class="co">#&gt;  [1] "Other"       "Republican"  "Other"       "Democratic"  "Independent"</span>
-<span class="co">#&gt;  [6] "Independent" "Republican"  "Republican"  "Independent" "Independent"</span>
-<span class="co">#&gt; [11] "Independent" "Other"       "Other"       "Independent" "Other"      </span>
-<span class="co">#&gt; [16] "Republican"  "Independent" "Republican"  "Republican"  "Democratic"</span>
+<span class="co">#&gt;  [1] "Independent" "Independent" "Republican"  "Independent" "Independent"</span>
+<span class="co">#&gt;  [6] "Independent" "Republican"  "Independent" "Other"       "Democratic" </span>
+<span class="co">#&gt; [11] "Independent" "Republican"  "Republican"  "Republican"  "Democratic" </span>
+<span class="co">#&gt; [16] "Democratic"  "Independent" "Democratic"  "Republican"  "Independent"</span>
 
 <span class="va">parties</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="reference/switch_case.html">switch_case</a></span><span class="op">(</span>
@@ -216,10 +216,10 @@
     <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"G"</span>, <span class="st">"L"</span><span class="op">)</span> <span class="op">~</span> <span class="st">"Other"</span>,
     <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"I"</span>, <span class="cn">NA</span><span class="op">)</span>  <span class="op">~</span> <span class="st">"Independent"</span>
   <span class="op">)</span>
-<span class="co">#&gt;  [1] "Other"       "Republican"  "Other"       "Democrat"    "Independent"</span>
-<span class="co">#&gt;  [6] "Independent" "Republican"  "Republican"  "Independent" "Independent"</span>
-<span class="co">#&gt; [11] "Independent" "Other"       "Other"       "Independent" "Other"      </span>
-<span class="co">#&gt; [16] "Republican"  "Independent" "Republican"  "Republican"  "Democrat"</span></code></pre></div>
+<span class="co">#&gt;  [1] "Independent" "Independent" "Republican"  "Independent" "Independent"</span>
+<span class="co">#&gt;  [6] "Independent" "Republican"  "Independent" "Other"       "Democrat"   </span>
+<span class="co">#&gt; [11] "Independent" "Republican"  "Republican"  "Republican"  "Democrat"   </span>
+<span class="co">#&gt; [16] "Democrat"    "Independent" "Democrat"    "Republican"  "Independent"</span></code></pre></div>
 <p><code><a href="reference/grep_case.html">grep_case()</a></code> allows you to recode values with pattern matching.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">countries</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
@@ -283,7 +283,7 @@
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/package=incase"><img src="https://www.r-pkg.org/badges/version/incase?color=brightgreen"></a></li>
-<li><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg"></a></li>
+<li><a href="https://www.tidyverse.org/lifecycle/#stable"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg"></a></li>
 <li><a href="https://cran.r-project.org/web/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-blueviolet.svg" alt="License: MIT"></a></li>
 <li><a href="https://github.com/rossellhayes/incase/actions"><img src="https://github.com/rossellhayes/incase/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
 <li><a href="https://codecov.io/gh/rossellhayes/incase"><img src="https://codecov.io/gh/rossellhayes/incase/branch/master/graph/badge.svg"></a></li>

@@ -126,6 +126,18 @@
 <h1 class="page-header" data-toc-text="development version">
 <a href="#incase-development-version" class="anchor"></a>incase (development version)<small> Unreleased </small>
 </h1>
+<ul>
+<li>Added <code>*_case_fct()</code> family of functions
+<ul>
+<li>These work the same as their <code>*_case()</code> equivalents, but return factors</li>
+<li>Factor levels are determined by the order of case statements.</li>
+<li>
+<code><a href="../reference/in_case_fct.html">in_case_fct(x &lt; 10 ~ "Low", x &lt; 20 ~ "Medium", default = "High")</a></code> returns a factor with levels <code>"Low"</code>, <code>"Medium"</code>, and <code>"High"</code>.</li>
+</ul>
+</li>
+<li>Replaced examples using <code>stringi</code> with <code>stringr</code>.</li>
+<li>Removed <code>cli</code> and <code>crayon</code> from suggests. All styling is now handled by <code>rlang</code>.</li>
+</ul>
 </div>
     <div id="incase-021" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.1">
