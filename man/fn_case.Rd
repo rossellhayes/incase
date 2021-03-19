@@ -72,7 +72,7 @@ countries <- c(
 
 fn_case(
   countries,
-  fn = stringi::stri_detect_regex,
+  fn = stringr::str_detect,
   "Deutschland"    ~ "Germany",
   "Belgi(qu)?e"    ~ "Belgium",
   "Nederland"      ~ "Netherlands",

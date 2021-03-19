@@ -5,7 +5,7 @@ test_that("function and lambda equivalent", {
   expect_equal(
     fn_case(
       words,
-      fn = stringi::stri_detect_regex,
+      fn = stringr::str_detect,
       "cat" ~ "feline",
       "dog" ~ "canine"
     ),
