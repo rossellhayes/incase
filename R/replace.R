@@ -43,11 +43,11 @@ extract_formula_pairs <- function(
   )
 
   value <- lapply(
-    quos_pairs, function(x) {rlang::eval_tidy(x[["rhs"]], env = default_env)}
+    quos_pairs, function(x) {rlang::eval_tidy(x$rhs, env = default_env)}
   )
 
   query <- lapply(
-    quos_pairs, function(x) {rlang::eval_tidy(x[["lhs"]], env = default_env)}
+    quos_pairs, function(x) {rlang::eval_tidy(x$lhs, env = default_env)}
   )
 
   if (!is.null(fn)) {
