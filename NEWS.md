@@ -1,5 +1,14 @@
 # incase (development version)
 
+* Added `*_case_fct()` family of functions
+  - These work the same as their `*_case()` equivalents, but return factors
+  - Factor levels are determined by the order of case statements.
+  - `in_case_fct(x < 10 ~ "Low", x < 20 ~ "Medium", default = "High")` returns a factor with levels `"Low"`, `"Medium"`, and `"High"`.
+
+* Replaced examples using `stringi` with `stringr`.
+* Removed `cli` and `crayon` from suggests.
+  All styling is now handled by `rlang`.
+
 # incase 0.2.1
 
 * Fixed NOTE by removing unnecessary import of `stats`.
