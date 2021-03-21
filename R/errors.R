@@ -68,6 +68,6 @@ warn_if_default <- function(default) {
 
 code <- function(x) {
   x <- encodeString(x, quote = "`")
-  x <- paste0("\033[90m", x, "\033[39m")
+  if (requireNamespace("crayon", quietly = TRUE)) {x <- crayon::silver(x)}
   x
 }
