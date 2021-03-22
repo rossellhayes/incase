@@ -1,5 +1,7 @@
 replace <- function(
-  fs, x, default, preserve, fn = NULL, args = NULL, factor = FALSE,
+  fs, x, default, preserve,
+  fn = NULL, args = NULL,
+  factor = FALSE, ordered = FALSE,
   default_env, current_env
 ) {
   assert_length(fs)
@@ -16,7 +18,7 @@ replace <- function(
 
   class       <- class(c(pairs$value, recursive = TRUE))
   pairs$value <- lapply(pairs$value, `class<-`, class)
-  m           <- validate_case_when_length(pairs$query, pairs$value, fs)
+  m           <- validate_case_length(pairs$query, pairs$value, fs)
   out         <- rep_len(default, m)
   class(out)  <- class
   replaced    <- rep(FALSE, m)
@@ -26,9 +28,15 @@ replace <- function(
     replaced <- replaced | (pairs$query[[i]] & !is.na(pairs$query[[i]]))
   }
 
-  if (factor) {out <- factor(out, levels = unique(c(levels, out)))}
+  if (factor) {
+    return(factor(out, levels = unique(c(levels, out)), ordered = ordered))
+  }
 
   out
+}
+
+assert_length <- function(fs) {
+  if (!length(fs)) rlang::abort("No cases provided")
 }
 
 extract_formula_pairs <- function(
@@ -63,6 +71,16 @@ extract_formula_pairs <- function(
   list(value = value, query = query)
 }
 
+warn_if_default <- function(default) {
+  if (!is.null(default) && !is.na(default)) {
+    rlang::warn(
+      paste(
+        code("default"), "will have no effect if", code("preserve"),
+        "is", code("TRUE")
+      )
+    )
+  }
+}
 
 replace_with <- function(x, i, val, name = NULL) {
   check_length_val(length(val), length(x), name)

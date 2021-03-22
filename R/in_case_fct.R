@@ -7,6 +7,9 @@
 #'
 #' @inheritParams fn_case
 #' @inheritParams in_case
+#' @param ordered A logical.
+#'   If [`TRUE`], returns an [ordered] factor.
+#'   If [`FALSE`], returns an unordered factor.
 #'
 #' @return A factor vector of length 1 or n, matching the length of the logical
 #'   input or output vectors.
@@ -19,7 +22,7 @@
 #' @export
 #' @example examples/in_case_fct.R
 
-in_case_fct <- function(..., preserve = FALSE, default = NA) {
+in_case_fct <- function(..., preserve = FALSE, default = NA, ordered = FALSE) {
   ellipsis <- compact_null(rlang::list2(...))
 
   if (!rlang::is_formula(ellipsis[[1]])) {
@@ -34,7 +37,9 @@ in_case_fct <- function(..., preserve = FALSE, default = NA) {
   assert_two_sided(fs, "in_case_fct()")
 
   replace(
-    fs, x, default, preserve, factor = TRUE,
+    fs, x, default, preserve,
+    factor      = TRUE,
+    ordered     = ordered,
     default_env = rlang::caller_env(),
     current_env = rlang::current_env()
   )
@@ -43,33 +48,41 @@ in_case_fct <- function(..., preserve = FALSE, default = NA) {
 #' @rdname in_case_fct
 #' @export
 
-switch_case_fct <- function(x, ..., preserve = FALSE, default = NA) {
+switch_case_fct <- function(
+  x, ..., preserve = FALSE, default = NA, ordered = FALSE
+) {
   fn_case_fct(
     x  = x,
     fn = `%in%`,
     ...,
     preserve = preserve,
-    default  = default
+    default  = default,
+    ordered  = ordered
   )
 }
 
 #' @rdname in_case_fct
 #' @export
 
-grep_case_fct <- function(x, ..., preserve = FALSE, default = NA) {
+grep_case_fct <- function(
+  x, ..., preserve = FALSE, default = NA, ordered = FALSE
+) {
   fn_case_fct(
     x  = x,
     fn = function(x, pattern, ...) grepl(pattern, x, ...),
     ...,
     preserve = preserve,
-    default  = default
+    default  = default,
+    ordered  = ordered
   )
 }
 
 #' @rdname in_case_fct
 #' @export
 
-fn_case_fct <- function(x, fn, ..., preserve = FALSE, default = NA) {
+fn_case_fct <- function(
+  x, fn, ..., preserve = FALSE, default = NA, ordered = FALSE
+) {
   input <- compact_null(rlang::list2(...))
   fs    <- Filter(rlang::is_formula, input)
   args  <- input[!input %in% fs]
@@ -77,6 +90,7 @@ fn_case_fct <- function(x, fn, ..., preserve = FALSE, default = NA) {
   replace(
     fs, x, default, preserve, fn, args,
     factor      = TRUE,
+    ordered     = ordered,
     default_env = rlang::caller_env(),
     current_env = rlang::current_env()
   )
@@ -85,7 +99,9 @@ fn_case_fct <- function(x, fn, ..., preserve = FALSE, default = NA) {
 #' @rdname in_case_fct
 #' @export
 
-fn_switch_case_fct <- function(x, fn, ..., preserve = FALSE, default = NA) {
+fn_switch_case_fct <- function(
+  x, fn, ..., preserve = FALSE, default = NA, ordered = FALSE
+) {
   input <- compact_null(rlang::list2(...))
   fs    <- Filter(rlang::is_formula, input)
   args  <- input[!input %in% fs]
@@ -110,6 +126,9 @@ fn_switch_case_fct <- function(x, fn, ..., preserve = FALSE, default = NA) {
 
   do.call(
     switch_case_fct,
-    c(list(x = x), fs, args, list(preserve = preserve, default = default))
+    c(
+      list(x = x), fs, args,
+      list(preserve = preserve, default = default, ordered = ordered)
+    )
   )
 }
