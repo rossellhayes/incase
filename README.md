@@ -141,20 +141,8 @@ recoding discrete values.
 
 ``` r
 parties
-#>  [1] "I" "I" "R" "I" "I" "I" "R" "I" "G" "D" "I" "R" "R" "R" "D" "D" "I" "D" "R"
+#>  [1] "I" "I" "I" "D" "D" "R" "L" "I" "R" "D" "I" "R" "I" "D" "I" "R" "I" "D" "I"
 #> [20] "I"
-
-parties %>% 
-  in_case(
-    . == "D"           ~ "Democratic",
-    . == "R"           ~ "Republican",
-    . %in% c("G", "L") ~ "Other",
-    . %in% c("I", NA)  ~ "Independent" 
-  )
-#>  [1] "Independent" "Independent" "Republican"  "Independent" "Independent"
-#>  [6] "Independent" "Republican"  "Independent" "Other"       "Democratic" 
-#> [11] "Independent" "Republican"  "Republican"  "Republican"  "Democratic" 
-#> [16] "Democratic"  "Independent" "Democratic"  "Republican"  "Independent"
 
 parties %>%
   switch_case(
@@ -163,10 +151,10 @@ parties %>%
     c("G", "L") ~ "Other",
     c("I", NA)  ~ "Independent"
   )
-#>  [1] "Independent" "Independent" "Republican"  "Independent" "Independent"
-#>  [6] "Independent" "Republican"  "Independent" "Other"       "Democrat"   
-#> [11] "Independent" "Republican"  "Republican"  "Republican"  "Democrat"   
-#> [16] "Democrat"    "Independent" "Democrat"    "Republican"  "Independent"
+#>  [1] "Independent" "Independent" "Independent" "Democrat"    "Democrat"   
+#>  [6] "Republican"  "Other"       "Independent" "Republican"  "Democrat"   
+#> [11] "Independent" "Republican"  "Independent" "Democrat"    "Independent"
+#> [16] "Republican"  "Independent" "Democrat"    "Independent" "Independent"
 ```
 
 `grep_case()` allows you to recode values with pattern matching.
@@ -188,6 +176,42 @@ grep_case(
 )
 #> [1] "France"      "Germany"     "Germany"     "Netherlands" "Belgium"    
 #> [6] "Belgium"     "Luxembourg"  "Italy"
+```
+
+#### Easily recode to ordered factor
+
+When you need an ordered factor, the `*_fct()` family of functions lets
+you save a step by using the order of your cases as the order of your
+factor levels.
+
+``` r
+data <- runif(10, 0, 10)
+
+data
+#>  [1] 7.4606359 3.7943237 2.9041555 4.5753803 1.1387884 2.8011682 8.6905103
+#>  [8] 8.7983919 0.5584269 7.6018340
+
+data %>% 
+  in_case_fct(
+    . < 3   ~ "Low",
+    . < 7   ~ "Medium",
+    default = "High"
+  )
+#>  [1] High   Medium Low    Medium Low    Low    High   High   Low    High  
+#> Levels: Low Medium High
+
+parties %>%
+  switch_case_fct(
+    "D"         ~ "Democrat",
+    "R"         ~ "Republican",
+    c("G", "L") ~ "Other",
+    c("I", NA)  ~ "Independent"
+  )
+#>  [1] Independent Independent Independent Democrat    Democrat    Republican 
+#>  [7] Other       Independent Republican  Democrat    Independent Republican 
+#> [13] Independent Democrat    Independent Republican  Independent Democrat   
+#> [19] Independent Independent
+#> Levels: Democrat Republican Other Independent
 ```
 
 ------------------------------------------------------------------------
