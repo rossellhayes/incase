@@ -75,6 +75,10 @@ if_case <- function(condition, true, false, missing = NA, ...) {
     )
   }
 
+  check_condition_lengths(
+    condition, list(true = true, false = false, missing = missing)
+  )
+
   if (is.atomic(true) && is.atomic(false) && is.atomic(missing)) {
     common <- c(true, false, missing, recursive = TRUE)
   } else {
@@ -86,9 +90,30 @@ if_case <- function(condition, true, false, missing = NA, ...) {
   storage.mode(missing) <- storage.mode(common)
 
   out <- true[rep(NA, length(condition))]
-  out <- replace_with(out, condition, true, code("true"))
-  out <- replace_with(out, !condition, false, code("false"))
-  out <- replace_with(out, is.na(condition), missing, code("missing"))
+  out <- replace_with(out, condition,        true,    "true")
+  out <- replace_with(out, !condition,       false,   "false")
+  out <- replace_with(out, is.na(condition), missing, "missing")
 
   out
+}
+
+check_condition_lengths <- function(condition, replacements) {
+  replacement_lengths <- lengths(replacements)
+  problem             <- !replacement_lengths %in% c(0, 1, length(condition))
+
+  if (any(problem)) {
+    msg <- paste0(
+      code(names(replacements[problem])), " is length ",
+      value(replacement_lengths[problem]), "."
+    )
+    names(msg) <- rep("x", length(msg))
+
+    abort_msg(
+      paste0(
+        "Replacement vectors muct be the same length as ", code("conditon"),
+        " (", value(length(condition)), ") or length ", value(1), "."
+      ),
+      msg
+    )
+  }
 }
