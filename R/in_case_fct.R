@@ -23,7 +23,7 @@
 #' @example examples/in_case_fct.R
 
 in_case_fct <- function(..., preserve = FALSE, default = NA, ordered = FALSE) {
-  inputs <- in_case_setup(compact_list(...), preserve, "in_case_fct()")
+  inputs <- in_case_setup(..., preserve = preserve, fn = "in_case_fct()")
 
   replace(
     fs          = inputs$fs,
