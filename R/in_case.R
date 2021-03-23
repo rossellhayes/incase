@@ -51,22 +51,58 @@
 #' @example examples/in_case.R
 
 in_case <- function(..., preserve = FALSE, default = NA) {
-  ellipsis <- compact_null(rlang::list2(...))
+  inputs <- in_case_setup(compact_list(...), preserve, "in_case()")
 
+  replace(
+    fs          = inputs$fs,
+    x           = inputs$x,
+    default     = default,
+    preserve    = preserve,
+    default_env = rlang::caller_env(),
+    current_env = rlang::current_env()
+  )
+}
+
+in_case_setup <- function(ellipsis, preserve, fn) {
   if (!rlang::is_formula(ellipsis[[1]])) {
     fs <- ellipsis[-1]
     x  <- ellipsis[[1]]
   } else {
     fs <- ellipsis
     x  <- NULL
-    assert_no_preserve_without_pipe(preserve, "in_case()")
+    assert_no_preserve_without_pipe(preserve, fn)
   }
 
-  assert_two_sided(fs, "in_case()")
+  assert_two_sided(fs, fn)
 
-  replace(
-    fs, x, default, preserve,
-    default_env = rlang::caller_env(),
-    current_env = rlang::current_env()
+  list(fs = fs, x = x)
+}
+
+assert_two_sided <- function(fs, fn) {
+  nfs <- Filter(
+    function(fs) !rlang::is_formula(fs, lhs = TRUE) && !rlang::is_quosure(fs),
+    fs
   )
+
+  if (length(nfs)) {
+    abort_msg(
+      paste("Each argument to", code(fn), "must be a two-sided formula"),
+      x = paste(
+        plu::stick(plu::more(code(nfs), 5, "argument")),
+        plu::ral("is {not} a {two-sided} formula.", nfs)
+      )
+    )
+  }
+}
+
+assert_no_preserve_without_pipe <- function(preserve, fn) {
+  if (preserve) {
+    abort_msg(
+      paste(
+        "A vector must be piped into", code(fn),
+        "to use", code("preserve")
+      ),
+      paste("Try using", code("default"), "instead")
+    )
+  }
 }

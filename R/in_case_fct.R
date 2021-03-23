@@ -23,21 +23,13 @@
 #' @example examples/in_case_fct.R
 
 in_case_fct <- function(..., preserve = FALSE, default = NA, ordered = FALSE) {
-  ellipsis <- compact_null(rlang::list2(...))
-
-  if (!rlang::is_formula(ellipsis[[1]])) {
-    fs <- ellipsis[-1]
-    x  <- ellipsis[[1]]
-  } else {
-    fs <- ellipsis
-    x  <- NULL
-    assert_no_preserve_without_pipe(preserve, "in_case_fct()")
-  }
-
-  assert_two_sided(fs, "in_case_fct()")
+  inputs <- in_case_setup(compact_list(...), preserve, "in_case_fct()")
 
   replace(
-    fs, x, default, preserve,
+    fs          = inputs$fs,
+    x           = inputs$x,
+    default     = default,
+    preserve    = preserve,
     factor      = TRUE,
     ordered     = ordered,
     default_env = rlang::caller_env(),
@@ -83,7 +75,7 @@ grep_case_fct <- function(
 fn_case_fct <- function(
   x, fn, ..., preserve = FALSE, default = NA, ordered = FALSE
 ) {
-  input <- compact_null(rlang::list2(...))
+  input <- compact_list(...)
   fs    <- Filter(rlang::is_formula, input)
   args  <- input[!input %in% fs]
 
@@ -102,7 +94,7 @@ fn_case_fct <- function(
 fn_switch_case_fct <- function(
   x, fn, ..., preserve = FALSE, default = NA, ordered = FALSE
 ) {
-  input <- compact_null(rlang::list2(...))
+  input <- compact_list(...)
   fs    <- Filter(rlang::is_formula, input)
   args  <- input[!input %in% fs]
 

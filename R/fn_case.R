@@ -41,7 +41,7 @@
 #' @example examples/fn_case.R
 
 fn_case <- function(x, fn, ..., preserve = FALSE, default = NA) {
-  input <- compact_null(rlang::list2(...))
+  input <- compact_list(...)
   fs    <- Filter(rlang::is_formula, input)
   args  <- input[!input %in% fs]
 

@@ -35,10 +35,6 @@ replace <- function(
   out
 }
 
-assert_length <- function(fs) {
-  if (!length(fs)) rlang::abort("No cases provided")
-}
-
 extract_formula_pairs <- function(
   fs, x = NULL, fn = NULL, args = NULL, default_env, current_env,
   assert_logical_lhs = TRUE
@@ -69,6 +65,26 @@ extract_formula_pairs <- function(
   if (assert_logical_lhs) {assert_logical_lhs(query, quos_pairs)}
 
   list(value = value, query = query)
+}
+
+assert_logical_lhs <- function(query, quos_pairs) {
+  illogical <- !vapply(query, is.logical, logical(1))
+
+  if (any(illogical)) {
+    illogical_lhs <- vapply(
+      quos_pairs[illogical],
+      function(x) {rlang::as_label(x[["lhs"]])},
+      character(1)
+    )
+
+    abort_msg(
+      "Each formula's left hand side must evaluate to a logical vector",
+      x = paste(
+        plu::stick(plu::more(code(illogical_lhs), 5, "{left hand} side")),
+        plu::ral("{does|do}"), "not evaluate to a logical vector."
+      )
+    )
+  }
 }
 
 warn_if_default <- function(default) {
