@@ -94,32 +94,17 @@ fn_case_fct <- function(
 fn_switch_case_fct <- function(
   x, fn, ..., preserve = FALSE, default = NA, ordered = FALSE
 ) {
-  input <- compact_list(...)
-  fs    <- Filter(rlang::is_formula, input)
-  args  <- input[!input %in% fs]
-
-  assert_length(fs)
-
-  pairs <- extract_formula_pairs(
-    fs,
-    default_env        = rlang::caller_env(),
-    current_env        = rlang::current_env(),
-    assert_logical_lhs = FALSE
-  )
-
-  fs <- Map(
-    function(fs, query, value) {
-      rlang::f_lhs(fs) <- do.call(rlang::as_function(fn), c(list(query), args))
-      rlang::f_rhs(fs) <- value
-      fs
-    },
-    fs, pairs$query, pairs$value
+  inputs <- fn_switch_case_setup(
+    ...,
+    fn          = fn,
+    default_env = rlang::caller_env(),
+    current_env = rlang::current_env()
   )
 
   do.call(
     switch_case_fct,
     c(
-      list(x = x), fs, args,
+      list(x = x), inputs$fs, inputs$args,
       list(preserve = preserve, default = default, ordered = ordered)
     )
   )

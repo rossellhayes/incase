@@ -58,6 +58,23 @@ switch_case <- function(x, ..., preserve = FALSE, default = NA) {
 #' @export
 
 fn_switch_case <- function(x, fn, ..., preserve = FALSE, default = NA) {
+  inputs <- fn_switch_case_setup(
+    ...,
+    fn          = fn,
+    default_env = rlang::caller_env(),
+    current_env = rlang::current_env()
+  )
+
+  do.call(
+    switch_case,
+    c(
+      list(x = x), inputs$fs, inputs$args,
+      list(preserve = preserve, default = default)
+    )
+  )
+}
+
+fn_switch_case_setup <- function(..., fn, default_env, current_env) {
   input <- compact_list(...)
   fs    <- Filter(rlang::is_formula, input)
   args  <- input[!input %in% fs]
@@ -80,8 +97,5 @@ fn_switch_case <- function(x, fn, ..., preserve = FALSE, default = NA) {
     fs, pairs$query, pairs$value
   )
 
-  do.call(
-    switch_case,
-    c(list(x = x), fs, args, list(preserve = preserve, default = default))
-  )
+  list(fs = fs, args = args)
 }
