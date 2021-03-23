@@ -141,7 +141,7 @@ recoding discrete values.
 
 ``` r
 parties
-#>  [1] "I" "I" "I" "D" "D" "R" "L" "I" "R" "D" "I" "R" "I" "D" "I" "R" "I" "D" "I"
+#>  [1] "D" "R" "I" "D" "D" "D" "D" "D" "R" "I" "R" "D" "L" "I" "R" "R" "R" NA  "R"
 #> [20] "I"
 
 parties %>%
@@ -151,10 +151,10 @@ parties %>%
     c("G", "L") ~ "Other",
     c("I", NA)  ~ "Independent"
   )
-#>  [1] "Independent" "Independent" "Independent" "Democrat"    "Democrat"   
-#>  [6] "Republican"  "Other"       "Independent" "Republican"  "Democrat"   
-#> [11] "Independent" "Republican"  "Independent" "Democrat"    "Independent"
-#> [16] "Republican"  "Independent" "Democrat"    "Independent" "Independent"
+#>  [1] "Democrat"    "Republican"  "Independent" "Democrat"    "Democrat"   
+#>  [6] "Democrat"    "Democrat"    "Democrat"    "Republican"  "Independent"
+#> [11] "Republican"  "Democrat"    "Other"       "Independent" "Republican" 
+#> [16] "Republican"  "Republican"  "Independent" "Republican"  "Independent"
 ```
 
 `grep_case()` allows you to recode values with pattern matching.
@@ -178,27 +178,28 @@ grep_case(
 #> [6] "Belgium"     "Luxembourg"  "Italy"
 ```
 
-#### Easily recode to ordered factor
+#### Easily recode to (ordered) factor
 
 When you need an ordered factor, the `*_fct()` family of functions lets
 you save a step by using the order of your cases as the order of your
-factor levels.
+factor levels. Use `ordered = TRUE` to create an ordered factor and
+`ordered = FALSE` to make a regular-old factor.
 
 ``` r
 data <- runif(10, 0, 10)
-
 data
-#>  [1] 7.4606359 3.7943237 2.9041555 4.5753803 1.1387884 2.8011682 8.6905103
-#>  [8] 8.7983919 0.5584269 7.6018340
+#>  [1] 6.432747 3.090132 6.233845 9.861740 1.911344 5.838658 1.389635 3.245508
+#>  [9] 7.105421 2.692807
 
 data %>% 
   in_case_fct(
     . < 3   ~ "Low",
     . < 7   ~ "Medium",
-    default = "High"
+    default = "High",
+    ordered = TRUE
   )
-#>  [1] High   Medium Low    Medium Low    Low    High   High   Low    High  
-#> Levels: Low Medium High
+#>  [1] Medium Medium Medium High   Low    Medium Low    Medium High   Low   
+#> Levels: Low < Medium < High
 
 parties %>%
   switch_case_fct(
@@ -207,10 +208,10 @@ parties %>%
     c("G", "L") ~ "Other",
     c("I", NA)  ~ "Independent"
   )
-#>  [1] Independent Independent Independent Democrat    Democrat    Republican 
-#>  [7] Other       Independent Republican  Democrat    Independent Republican 
-#> [13] Independent Democrat    Independent Republican  Independent Democrat   
-#> [19] Independent Independent
+#>  [1] Democrat    Republican  Independent Democrat    Democrat    Democrat   
+#>  [7] Democrat    Democrat    Republican  Independent Republican  Democrat   
+#> [13] Other       Independent Republican  Republican  Republican  Independent
+#> [19] Republican  Independent
 #> Levels: Democrat Republican Other Independent
 ```
 

@@ -156,20 +156,21 @@ grep_case(
 )
 ```
 
-#### Easily recode to ordered factor
+#### Easily recode to (ordered) factor
 
 When you need an ordered factor, the `*_fct()` family of functions lets you save a step by using the order of your cases as the order of your factor levels.
+Use `ordered = TRUE` to create an ordered factor and `ordered = FALSE` to make a regular-old factor.
 
 ```{r}
 data <- runif(10, 0, 10)
-
 data
 
 data %>% 
   in_case_fct(
     . < 3   ~ "Low",
     . < 7   ~ "Medium",
-    default = "High"
+    default = "High",
+    ordered = TRUE
   )
 
 parties %>%
