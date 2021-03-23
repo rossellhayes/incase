@@ -203,10 +203,7 @@ but not <code>x</code></p>
   <span class='st'>"g"</span> <span class='op'>~</span> <span class='st'>"Green"</span>,
   <span class='st'>"l"</span> <span class='op'>~</span> <span class='st'>"Libertarian"</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] "Libertarian" "Green"       "Libertarian" "Green"       "Democrat"   
-#&gt;  [6] "Libertarian" "Libertarian" "Libertarian" "Republican"  "Independent"
-#&gt; [11] "Independent" "Libertarian" "Libertarian" "Green"       "Libertarian"
-#&gt; [16] "Republican"  "Green"       "Republican"  "Independent" "Democrat"   </div><div class='input'>
+</div><div class='output co'>#&gt; <span class='error'>Error in validate_case_length(pairs$query, pairs$value, fs): could not find function "validate_case_length"</span></div><div class='input'>
 <span class='co'># Replicate grep_case()</span>
 <span class='va'>countries</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>
   <span class='st'>"France"</span>, <span class='st'>"Ostdeutschland"</span>, <span class='st'>"Westdeutschland"</span>, <span class='st'>"Nederland"</span>,
@@ -223,8 +220,7 @@ but not <code>x</code></p>
   preserve         <span class='op'>=</span> <span class='cn'>TRUE</span>,
   case_insensitive <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "France"      "Germany"     "Germany"     "Netherlands" "Belgium"    
-#&gt; [6] "Belgium"     "Luxembourg"  "Italy"      </div><div class='input'>
+</div><div class='output co'>#&gt; <span class='error'>Error in validate_case_length(pairs$query, pairs$value, fs): could not find function "validate_case_length"</span></div><div class='input'>
 <span class='co'># Recode values in a range</span>
 <span class='va'>time</span>    <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>1</span>, <span class='fl'>12</span><span class='op'>)</span>
 <span class='va'>hours</span>   <span class='op'>&lt;-</span> <span class='va'>time</span> <span class='op'>%/%</span> <span class='fl'>1</span>
@@ -234,7 +230,7 @@ but not <code>x</code></p>
   <span class='fu'><a href='if_case.html'>if_case</a></span><span class='op'>(</span><span class='va'>minutes</span> <span class='op'>&gt;</span> <span class='fl'>32.5</span>, <span class='op'>(</span><span class='va'>.</span> <span class='op'>+</span> <span class='fl'>1</span><span class='op'>)</span> <span class='op'>%%</span> <span class='fl'>12</span>, <span class='va'>.</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='switch_case.html'>switch_case</a></span><span class='op'>(</span><span class='fl'>0</span> <span class='op'>~</span> <span class='fl'>12</span>, preserve <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>nombre</span><span class='fu'>::</span><span class='fu'><a href='https://nombre.rossellhayes.com/reference/cardinal.html'>cardinal</a></span><span class='op'>(</span><span class='op'>)</span>
-
+</div><div class='output co'>#&gt; <span class='error'>Error in validate_case_length(pairs$query, pairs$value, fs): could not find function "validate_case_length"</span></div><div class='input'>
 <span class='va'>minutes</span> <span class='op'>%&gt;%</span>
   <span class='fu'>fn_case</span><span class='op'>(</span>
     fn <span class='op'>=</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>abs</a></span><span class='op'>(</span><span class='va'>.x</span> <span class='op'>-</span> <span class='va'>.y</span><span class='op'>)</span> <span class='op'>&lt;=</span> <span class='fl'>2.5</span>,
@@ -256,11 +252,7 @@ but not <code>x</code></p>
     <span class='st'>"o'clock"</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='va'>hours</span>, <span class='va'>.</span><span class='op'>)</span>,
     default   <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='va'>.</span>, <span class='va'>hours</span><span class='op'>)</span>
   <span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] "twenty-five past eleven" "three o'clock"          
-#&gt;  [3] "twenty-five past three"  "half past eight"        
-#&gt;  [5] "half past six"           "five past eight"        
-#&gt;  [7] "quarter past eight"      "five past two"          
-#&gt;  [9] "twenty-five past nine"   "half past nine"         </div></pre>
+</div><div class='output co'>#&gt; <span class='error'>Error in validate_case_length(pairs$query, pairs$value, fs): could not find function "validate_case_length"</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

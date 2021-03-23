@@ -208,24 +208,21 @@ Inconsistent lengths will generate an error.</p>
     <span class='va'>.</span> <span class='op'>%%</span> <span class='fl'>2</span> <span class='op'>==</span> <span class='fl'>0</span> <span class='op'>~</span> <span class='st'>"even"</span>,
     <span class='va'>.</span> <span class='op'>%%</span> <span class='fl'>2</span> <span class='op'>==</span> <span class='fl'>1</span> <span class='op'>~</span> <span class='st'>"odd"</span>
   <span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] odd  even odd  even odd  even odd  even odd  even
-#&gt; Levels: even odd</div><div class='input'>
+</div><div class='output co'>#&gt; <span class='error'>Error in validate_case_length(pairs$query, pairs$value, fs): could not find function "validate_case_length"</span></div><div class='input'>
 <span class='fu'>switch_case_fct</span><span class='op'>(</span>
   <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span><span class='op'>)</span>,
   <span class='st'>"c"</span> <span class='op'>~</span> <span class='st'>"cantaloupe"</span>,
   <span class='st'>"b"</span> <span class='op'>~</span> <span class='st'>"banana"</span>,
   <span class='st'>"a"</span> <span class='op'>~</span> <span class='st'>"apple"</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] apple      banana     cantaloupe
-#&gt; Levels: cantaloupe banana apple</div><div class='input'>
+</div><div class='output co'>#&gt; <span class='error'>Error in validate_case_length(pairs$query, pairs$value, fs): could not find function "validate_case_length"</span></div><div class='input'>
 <span class='fu'>switch_case_fct</span><span class='op'>(</span>
   <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span>, <span class='st'>"d"</span><span class='op'>)</span>,
   <span class='st'>"c"</span> <span class='op'>~</span> <span class='st'>"cantaloupe"</span>,
   <span class='st'>"b"</span> <span class='op'>~</span> <span class='st'>"banana"</span>,
   <span class='st'>"a"</span> <span class='op'>~</span> <span class='st'>"apple"</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] apple      banana     cantaloupe &lt;NA&gt;      
-#&gt; Levels: cantaloupe banana apple</div><div class='input'>
+</div><div class='output co'>#&gt; <span class='error'>Error in validate_case_length(pairs$query, pairs$value, fs): could not find function "validate_case_length"</span></div><div class='input'>
 <span class='fu'>switch_case_fct</span><span class='op'>(</span>
   <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span>, <span class='st'>"d"</span><span class='op'>)</span>,
   <span class='st'>"c"</span> <span class='op'>~</span> <span class='st'>"cantaloupe"</span>,
@@ -233,15 +230,13 @@ Inconsistent lengths will generate an error.</p>
   <span class='st'>"a"</span> <span class='op'>~</span> <span class='st'>"apple"</span>,
   preserve <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] apple      banana     cantaloupe d         
-#&gt; Levels: cantaloupe banana apple d</div><div class='input'>
+</div><div class='output co'>#&gt; <span class='error'>Error in validate_case_length(pairs$query, pairs$value, fs): could not find function "validate_case_length"</span></div><div class='input'>
 <span class='fu'>grep_case_fct</span><span class='op'>(</span>
   <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"caterpillar"</span>, <span class='st'>"dogwood"</span>, <span class='st'>"catastrophe"</span>, <span class='st'>"dogma"</span><span class='op'>)</span>,
   <span class='st'>"cat"</span> <span class='op'>~</span> <span class='st'>"feline"</span>,
   <span class='st'>"dog"</span> <span class='op'>~</span> <span class='st'>"canine"</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] feline canine feline canine
-#&gt; Levels: feline canine</div><div class='input'>
+</div><div class='output co'>#&gt; <span class='error'>Error in validate_case_length(pairs$query, pairs$value, fs): could not find function "validate_case_length"</span></div><div class='input'>
 <span class='fu'>fn_case_fct</span><span class='op'>(</span>
   <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span><span class='op'>)</span>,
   <span class='va'>`%in%`</span>,
@@ -249,8 +244,7 @@ Inconsistent lengths will generate an error.</p>
   <span class='st'>"b"</span> <span class='op'>~</span> <span class='st'>"banana"</span>,
   <span class='st'>"a"</span> <span class='op'>~</span> <span class='st'>"apple"</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] apple      banana     cantaloupe
-#&gt; Levels: cantaloupe banana apple</div></pre>
+</div><div class='output co'>#&gt; <span class='error'>Error in validate_case_length(pairs$query, pairs$value, fs): could not find function "validate_case_length"</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

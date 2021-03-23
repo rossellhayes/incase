@@ -197,10 +197,7 @@ Defaults to <code>NA</code>.</p></td>
   <span class='st'>"g"</span> <span class='op'>~</span> <span class='st'>"Green"</span>,
   <span class='st'>"l"</span> <span class='op'>~</span> <span class='st'>"Libertarian"</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] "Libertarian" "Republican"  "Democrat"    "Green"       "Democrat"   
-#&gt;  [6] "Republican"  "Independent" "Democrat"    "Democrat"    "Republican" 
-#&gt; [11] "Libertarian" "Democrat"    "Green"       "Independent" "Green"      
-#&gt; [16] "Green"       "Independent" "Republican"  "Independent" "Republican" </div><div class='input'>
+</div><div class='output co'>#&gt; <span class='error'>Error in validate_case_length(pairs$query, pairs$value, fs): could not find function "validate_case_length"</span></div><div class='input'>
 <span class='va'>parties</span> <span class='op'>%&gt;%</span>
   <span class='fu'>switch_case</span><span class='op'>(</span>
     <span class='st'>"d"</span> <span class='op'>~</span> <span class='st'>"Democrat"</span>,
@@ -209,50 +206,35 @@ Defaults to <code>NA</code>.</p></td>
     <span class='st'>"g"</span> <span class='op'>~</span> <span class='st'>"Green"</span>,
     <span class='st'>"l"</span> <span class='op'>~</span> <span class='st'>"Libertarian"</span>
   <span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] "Libertarian" "Republican"  "Democrat"    "Green"       "Democrat"   
-#&gt;  [6] "Republican"  "Independent" "Democrat"    "Democrat"    "Republican" 
-#&gt; [11] "Libertarian" "Democrat"    "Green"       "Independent" "Green"      
-#&gt; [16] "Green"       "Independent" "Republican"  "Independent" "Republican" </div><div class='input'>
+</div><div class='output co'>#&gt; <span class='error'>Error in validate_case_length(pairs$query, pairs$value, fs): could not find function "validate_case_length"</span></div><div class='input'>
 <span class='va'>parties</span> <span class='op'>%&gt;%</span>
   <span class='fu'>switch_case</span><span class='op'>(</span>
     <span class='st'>"d"</span> <span class='op'>~</span> <span class='st'>"Democrat"</span>,
     <span class='st'>"r"</span> <span class='op'>~</span> <span class='st'>"Republican"</span>,
     <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"i"</span>, <span class='st'>"g"</span>, <span class='st'>"l"</span><span class='op'>)</span> <span class='op'>~</span> <span class='st'>"Other"</span>
   <span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] "Other"      "Republican" "Democrat"   "Other"      "Democrat"  
-#&gt;  [6] "Republican" "Other"      "Democrat"   "Democrat"   "Republican"
-#&gt; [11] "Other"      "Democrat"   "Other"      "Other"      "Other"     
-#&gt; [16] "Other"      "Other"      "Republican" "Other"      "Republican"</div><div class='input'>
+</div><div class='output co'>#&gt; <span class='error'>Error in validate_case_length(pairs$query, pairs$value, fs): could not find function "validate_case_length"</span></div><div class='input'>
 <span class='va'>parties</span> <span class='op'>%&gt;%</span>
   <span class='fu'>switch_case</span><span class='op'>(</span>
     <span class='st'>"d"</span> <span class='op'>~</span> <span class='st'>"Democrat"</span>,
     <span class='st'>"r"</span> <span class='op'>~</span> <span class='st'>"Republican"</span>,
     default <span class='op'>=</span> <span class='st'>"Other"</span>
   <span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] "Other"      "Republican" "Democrat"   "Other"      "Democrat"  
-#&gt;  [6] "Republican" "Other"      "Democrat"   "Democrat"   "Republican"
-#&gt; [11] "Other"      "Democrat"   "Other"      "Other"      "Other"     
-#&gt; [16] "Other"      "Other"      "Republican" "Other"      "Republican"</div><div class='input'>
+</div><div class='output co'>#&gt; <span class='error'>Error in validate_case_length(pairs$query, pairs$value, fs): could not find function "validate_case_length"</span></div><div class='input'>
 <span class='va'>parties</span> <span class='op'>%&gt;%</span>
   <span class='fu'>switch_case</span><span class='op'>(</span>
     <span class='st'>"d"</span> <span class='op'>~</span> <span class='st'>"Democrat"</span>,
     <span class='st'>"r"</span> <span class='op'>~</span> <span class='st'>"Republican"</span>,
     preserve <span class='op'>=</span> <span class='cn'>FALSE</span>
   <span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] NA           "Republican" "Democrat"   NA           "Democrat"  
-#&gt;  [6] "Republican" NA           "Democrat"   "Democrat"   "Republican"
-#&gt; [11] NA           "Democrat"   NA           NA           NA          
-#&gt; [16] NA           NA           "Republican" NA           "Republican"</div><div class='input'>
+</div><div class='output co'>#&gt; <span class='error'>Error in validate_case_length(pairs$query, pairs$value, fs): could not find function "validate_case_length"</span></div><div class='input'>
 <span class='va'>parties</span> <span class='op'>%&gt;%</span>
   <span class='fu'>switch_case</span><span class='op'>(</span>
     <span class='st'>"d"</span> <span class='op'>~</span> <span class='st'>"Democrat"</span>,
     <span class='st'>"r"</span> <span class='op'>~</span> <span class='st'>"Republican"</span>,
     preserve <span class='op'>=</span> <span class='cn'>TRUE</span>
   <span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] "l"          "Republican" "Democrat"   "g"          "Democrat"  
-#&gt;  [6] "Republican" "i"          "Democrat"   "Democrat"   "Republican"
-#&gt; [11] "l"          "Democrat"   "g"          "i"          "g"         
-#&gt; [16] "g"          "i"          "Republican" "i"          "Republican"</div><div class='input'>
+</div><div class='output co'>#&gt; <span class='error'>Error in validate_case_length(pairs$query, pairs$value, fs): could not find function "validate_case_length"</span></div><div class='input'>
 <span class='va'>data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>4</span>, <span class='fl'>8</span>, <span class='fl'>12</span>, <span class='fl'>999</span>, <span class='fl'>6</span>, <span class='fl'>2</span>, <span class='fl'>888</span>, <span class='fl'>4</span>, <span class='fl'>6</span>, <span class='fl'>777</span><span class='op'>)</span>
 
 <span class='fu'>fn_switch_case</span><span class='op'>(</span>
@@ -263,8 +245,7 @@ Defaults to <code>NA</code>.</p></td>
   <span class='fl'>9</span> <span class='op'>~</span> <span class='st'>"Missing"</span>,
   preserve <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] "1"         "4"         "8"         "12"        "Missing"   "6"        
-#&gt;  [7] "2"         "Refused"   "4"         "6"         "Not asked"</div></pre>
+</div><div class='output co'>#&gt; <span class='error'>Error in validate_case_length(pairs$query, pairs$value, fs): could not find function "validate_case_length"</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
