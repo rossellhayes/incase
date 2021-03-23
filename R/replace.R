@@ -1,3 +1,5 @@
+#' @importFrom rlang %||%
+
 replace <- function(
   fs, x, default, preserve,
   fn = NULL, args = NULL,
@@ -65,6 +67,20 @@ extract_formula_pairs <- function(
   if (assert_logical_lhs) {assert_logical_lhs(query, quos_pairs)}
 
   list(value = value, query = query)
+}
+
+validate_formula <- function(x, i, default_env, dots_env) {
+  if (rlang::is_quosure(x)) {
+    default_env <- rlang::quo_get_env(x)
+    x           <- rlang::quo_get_expr(x)
+  }
+
+  env <- rlang::f_env(x) %||% default_env
+
+  list(
+    lhs = rlang::new_quosure(rlang::f_lhs(x), env),
+    rhs = rlang::new_quosure(rlang::f_rhs(x), env)
+  )
 }
 
 assert_logical_lhs <- function(query, quos_pairs) {
