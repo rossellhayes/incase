@@ -83,8 +83,6 @@ warn_if_default <- function(default) {
 }
 
 replace_with <- function(x, i, val, name = NULL) {
-  check_length_val(length(val), length(x), name)
-
   i[is.na(i)] <- FALSE
 
   if (length(val) == 1L) {

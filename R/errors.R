@@ -51,23 +51,17 @@ assert_no_preserve_without_pipe <- function(preserve, fn) {
   }
 }
 
-assert_length <- function(fs) {
-  if (!length(fs)) rlang::abort("No cases provided")
+style <- function(x, quote, color) {
+
 }
 
-warn_if_default <- function(default) {
-  if (!is.null(default) && !is.na(default)) {
-    rlang::warn(
-      paste(
-        code("default"), "will have no effect if", code("preserve"),
-        "is", code("TRUE")
-      )
-    )
+style <- function(x, quote, color) {
+  if (!is.null(quote)) {x <- encodeString(x, quote = quote)}
+  if (rlang::is_installed("crayon")) {
+    x <- do.call(color, list(x), envir = asNamespace("crayon"))
   }
-}
-
-code <- function(x) {
-  x <- encodeString(x, quote = "`")
-  if (requireNamespace("crayon", quietly = TRUE)) {x <- crayon::silver(x)}
   x
 }
+
+code  <- function(x) {style(x, "`", "silver")}
+value <- function(x) {style(x, NULL, "blue")}
