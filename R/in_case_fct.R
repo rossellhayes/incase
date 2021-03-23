@@ -75,12 +75,10 @@ grep_case_fct <- function(
 fn_case_fct <- function(
   x, fn, ..., preserve = FALSE, default = NA, ordered = FALSE
 ) {
-  input <- compact_list(...)
-  fs    <- Filter(rlang::is_formula, input)
-  args  <- input[!input %in% fs]
+  inputs <- fn_case_setup(...)
 
   replace(
-    fs, x, default, preserve, fn, args,
+    inputs$fs, x, default, preserve, fn, inputs$args,
     factor      = TRUE,
     ordered     = ordered,
     default_env = rlang::caller_env(),

@@ -41,13 +41,19 @@
 #' @example examples/fn_case.R
 
 fn_case <- function(x, fn, ..., preserve = FALSE, default = NA) {
+  inputs <- fn_case_setup(...)
+
+  replace(
+    inputs$fs, x, default, preserve, fn, inputs$args,
+    default_env = rlang::caller_env(),
+    current_env = rlang::current_env()
+  )
+}
+
+fn_case_setup <- function(...) {
   input <- compact_list(...)
   fs    <- Filter(rlang::is_formula, input)
   args  <- input[!input %in% fs]
 
-  replace(
-    fs, x, default, preserve, fn, args,
-    default_env = rlang::caller_env(),
-    current_env = rlang::current_env()
-  )
+  list(fs = fs, args = args)
 }
