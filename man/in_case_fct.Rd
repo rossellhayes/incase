@@ -8,15 +8,15 @@
 \alias{fn_switch_case_fct}
 \title{Case statements returning a factor}
 \usage{
-in_case_fct(..., preserve = FALSE, default = NA)
+in_case_fct(..., preserve = FALSE, default = NA, ordered = FALSE)
 
-switch_case_fct(x, ..., preserve = FALSE, default = NA)
+switch_case_fct(x, ..., preserve = FALSE, default = NA, ordered = FALSE)
 
-grep_case_fct(x, ..., preserve = FALSE, default = NA)
+grep_case_fct(x, ..., preserve = FALSE, default = NA, ordered = FALSE)
 
-fn_case_fct(x, fn, ..., preserve = FALSE, default = NA)
+fn_case_fct(x, fn, ..., preserve = FALSE, default = NA, ordered = FALSE)
 
-fn_switch_case_fct(x, fn, ..., preserve = FALSE, default = NA)
+fn_switch_case_fct(x, fn, ..., preserve = FALSE, default = NA, ordered = FALSE)
 }
 \arguments{
 \item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}> A sequence of two-sided
@@ -41,6 +41,10 @@ Defaults to \code{FALSE}.}
 \item{default}{If \code{preserve} is \code{FALSE}, a value to replace unmatched
 elements of \code{x}.
 Defaults to \code{NA}.}
+
+\item{ordered}{A logical.
+If \code{\link{TRUE}}, returns an \link{ordered} factor.
+If \code{\link{FALSE}}, returns an unordered factor.}
 
 \item{x}{A vector}
 
