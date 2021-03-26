@@ -95,3 +95,19 @@ test_that("fn_case_list", {
   x <- list(U = 1:2, V = 3:4)
   expect_equal(in_herits(x), list(unlist(x)))
 })
+
+test_that("fn_switch_case_list()", {
+  data <- c(1, 2, 999, 888, 777)
+
+  expect_equal(
+    fn_switch_case_list(
+      data,
+      function(x) paste(rep(x, 3), collapse = ""),
+      7 ~ mtcars,
+      8 ~ letters,
+      9 ~ mtcars,
+      preserve = TRUE
+    ),
+    list(1, 2, mtcars, letters, mtcars)
+  )
+})

@@ -68,3 +68,25 @@ fn_case_list <- function(x, fn, ..., preserve = FALSE, default = NA) {
     current_env = rlang::current_env()
   )
 }
+
+#' @rdname in_case_list
+#' @export
+
+fn_switch_case_list <- function(
+  x, fn, ..., preserve = FALSE, default = NA, ordered = FALSE
+) {
+  inputs <- fn_switch_case_setup(
+    ...,
+    fn          = fn,
+    default_env = rlang::caller_env(),
+    current_env = rlang::current_env()
+  )
+
+  do.call(
+    switch_case_list,
+    c(
+      list(x = x), inputs$fs, inputs$args,
+      list(preserve = preserve, default = default)
+    )
+  )
+}
