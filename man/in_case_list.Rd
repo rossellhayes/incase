@@ -5,6 +5,7 @@
 \alias{switch_case_list}
 \alias{grep_case_list}
 \alias{fn_case_list}
+\alias{fn_switch_case_list}
 \title{Case statements returning a list}
 \usage{
 in_case_list(..., preserve = FALSE, default = NA)
@@ -14,6 +15,15 @@ switch_case_list(x, ..., preserve = FALSE, default = NA)
 grep_case_list(x, ..., preserve = FALSE, default = NA)
 
 fn_case_list(x, fn, ..., preserve = FALSE, default = NA)
+
+fn_switch_case_list(
+  x,
+  fn,
+  ...,
+  preserve = FALSE,
+  default = NA,
+  ordered = FALSE
+)
 }
 \arguments{
 \item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}> A sequence of two-sided
