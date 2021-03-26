@@ -59,3 +59,28 @@ minutes %>%
     "o'clock" ~ paste(hours, .),
     default   = paste(., hours)
   )
+
+# Replicate vctrs::vec_ptype_abbr() (used for tibble column labels)
+# Based on a contribution by Patrice Kiener
+in_herits <- function(x) {
+  fn_case(
+    x, inherits,
+    "factor"     ~ "fct",
+    "character"  ~ "chr",
+    "numeric"    ~ "dbl",
+    "integer"    ~ "int",
+    "logical"    ~ "lgl",
+    "complex"    ~ "cpl",
+    "raw"        ~ "raw",
+    "matrix"     ~ "mat",
+    "array"      ~ "arr",
+    "data.frame" ~ "df",
+    "list"       ~ "lst",
+    "function"   ~ "fn",
+    default      = class(x)[[1]]
+  )
+}
+
+in_herits(1:3)
+in_herits(letters[1:3])
+in_herits(fn_case)

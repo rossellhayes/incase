@@ -52,5 +52,10 @@ Useful links:
 \author{
 \strong{Maintainer}: Alexander Rossell Hayes \email{alexander@rossellhayes.com} (\href{https://orcid.org/0000-0001-9412-0457}{ORCID}) [copyright holder]
 
+Other contributors:
+\itemize{
+  \item Patrice Kiener \email{fattailsr@inmodelia.com} (\href{https://orcid.org/0000-0002-0505-9920}{ORCID}) (Contributed example for fn_case()) [contributor]
+}
+
 }
 \keyword{internal}
