@@ -129,14 +129,14 @@ test_that("zero-length conditions and values (#3041)", {
       TRUE  ~ integer(),
       FALSE ~ integer()
     ),
-    integer()
+    NULL
   )
   expect_equal(
     in_case(
       logical() ~ 1,
       logical() ~ 2
     ),
-    numeric()
+    NULL
   )
 })
 

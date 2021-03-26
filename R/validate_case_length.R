@@ -3,7 +3,11 @@ validate_case_length <- function(query, value, fs) {
   rhs_lengths <- lengths(value)
   all_lengths <- unique(c(lhs_lengths, rhs_lengths))
 
-  if (length(all_lengths) <= 1) {return(all_lengths[[1]])}
+  if (length(all_lengths) == 0) {
+    return(0)
+  } else if (length(all_lengths) == 1) {
+    return(all_lengths[[1]])
+  }
 
   non_atomic_lengths <- all_lengths[all_lengths != 1]
   len                <- non_atomic_lengths[[1]]
@@ -11,7 +15,6 @@ validate_case_length <- function(query, value, fs) {
   if (length(non_atomic_lengths) == 1) {return(len)}
 
   inconsistent_lengths <- non_atomic_lengths[non_atomic_lengths != len]
-  if (!length(inconsistent_lengths)) {return(len)}
 
   lhs_problems         <- lhs_lengths %in% inconsistent_lengths
   rhs_problems         <- rhs_lengths %in% inconsistent_lengths
