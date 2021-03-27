@@ -126,6 +126,9 @@
 <h1 class="page-header" data-toc-text="development version">
 <a href="#incase-development-version" class="anchor"></a>incase (development version)<small> Unreleased </small>
 </h1>
+<div id="new-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features" class="anchor"></a>New features</h2>
 <ul>
 <li>Added <code>*_case_fct()</code> family of functions
 <ul>
@@ -141,14 +144,33 @@
 <li>This allows the functions to return complex data types that would otherwise be broken by automatic type conversion.</li>
 </ul>
 </li>
-<li>Implemented lazy-ish evaluation of outputs in <code>*_case()</code> family.
+<li>Implemented lazy-ish evaluation of outputs.
 <ul>
-<li>If the LHS of a formula is never true, the RHS is not evaluated.</li>
+<li>If the LHS of a formula is never true, the RHS is not evaluated.
+<ul>
 <li>However, the RHS is still evaluated for all inputs if any input is TRUE.</li>
 </ul>
 </li>
+<li>If <code>condition</code> in <code><a href="../reference/if_case.html">if_case()</a></code> never takes one of the three logical values, the corresponding output is not evaluated.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div id="bug-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
+<ul>
+<li>
+<code><a href="../reference/if_case.html">if_case()</a></code> no longer produces an error if <code>condition</code> is only <code>NA</code>.</li>
+</ul>
+</div>
+<div id="miscellaneous" class="section level2">
+<h2 class="hasAnchor">
+<a href="#miscellaneous" class="anchor"></a>Miscellaneous</h2>
+<ul>
 <li>Removed <code>cli</code> and <code>crayon</code> from suggests. All styling is now handled by <code>rlang</code>.</li>
 </ul>
+</div>
 </div>
     <div id="incase-021" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.1">
