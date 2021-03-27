@@ -3,27 +3,43 @@
 replace <- function(
   fs, x, default, preserve,
   fn = NULL, args = NULL,
-  factor = FALSE, ordered = FALSE,
+  factor = FALSE, ordered = FALSE, list = FALSE,
   default_env, current_env
 ) {
   assert_length(fs)
 
-  pairs <- extract_formula_pairs(fs, x, fn, args, default_env, current_env)
+  pairs <- extract_formula_pairs(
+    fs, x, fn, args, default_env, current_env, list = list
+  )
 
   if (factor) {levels <- as.character(c(pairs$value, recursive = TRUE))}
 
   if (preserve) {
     warn_if_default(default)
-    pairs$query[[length(pairs$query) + 1]] <- TRUE
-    pairs$value[[length(pairs$value) + 1]] <- x
+
+    if (list) {
+      pairs$query[[length(pairs$value) + 1]] <- rep(TRUE, length(x))
+      pairs$value[[length(pairs$value) + 1]] <- as.list(x)
+    } else {
+      pairs$query[[length(pairs$query) + 1]] <- TRUE
+      pairs$value[[length(pairs$value) + 1]] <- x
+    }
   }
 
-  class       <- class(c(pairs$value, recursive = TRUE))
-  pairs$value <- lapply(pairs$value, `class<-`, class)
-  m           <- validate_case_length(pairs$query, pairs$value, fs)
-  out         <- rep_len(default, m)
-  class(out)  <- class
-  replaced    <- rep(FALSE, m)
+  n <- validate_case_length(pairs$query, pairs$value, fs)
+
+  if (n == 0) {return(NULL)}
+
+  if (list) {default <- list(default)}
+
+  out      <- rep_len(default, n)
+  replaced <- rep(FALSE, n)
+
+  if (!list) {
+    class       <- class(c(pairs$value, recursive = TRUE))
+    pairs$value <- lapply(pairs$value, `class<-`, class)
+    class(out)  <- class
+  }
 
   for (i in seq_along(pairs$query)) {
     out <- replace_with(out, pairs$query[[i]] & !replaced, pairs$value[[i]])
@@ -39,17 +55,13 @@ replace <- function(
 
 extract_formula_pairs <- function(
   fs, x = NULL, fn = NULL, args = NULL, default_env, current_env,
-  assert_logical_lhs = TRUE
+  logical_lhs = TRUE, list = FALSE
 ) {
   quos_pairs <- Map(
     function(x, i) {
       validate_formula(x, i, default_env = default_env, dots_env = current_env)
     },
     fs, seq_along(fs)
-  )
-
-  value <- lapply(
-    quos_pairs, function(x) {rlang::eval_tidy(x$rhs, env = default_env)}
   )
 
   query <- lapply(
@@ -64,7 +76,19 @@ extract_formula_pairs <- function(
     )
   }
 
-  if (assert_logical_lhs) {assert_logical_lhs(query, quos_pairs)}
+  if (logical_lhs) {
+    assert_logical_lhs(query, quos_pairs)
+    applicable <- which(vapply(query, any, logical(1)))
+    if (!length(applicable)) {applicable <- 0}
+    query      <- query[applicable]
+    quos_pairs <- quos_pairs[applicable]
+  }
+
+  value <- lapply(
+    quos_pairs, function(x) {rlang::eval_tidy(x$rhs, env = default_env)}
+  )
+
+  if (list) {value <- lapply(value, list)}
 
   list(value = value, query = query)
 }
@@ -116,6 +140,10 @@ warn_if_default <- function(default) {
 
 replace_with <- function(x, i, val, name = NULL) {
   i[is.na(i)] <- FALSE
+
+  # if (!rlang::is_atomic(val)) {
+    # x[i] <- list(val)
+  # } else
 
   if (length(val) == 1L) {
     x[i] <- val

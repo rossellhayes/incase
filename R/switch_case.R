@@ -83,9 +83,9 @@ fn_switch_case_setup <- function(..., fn, default_env, current_env) {
 
   pairs <- extract_formula_pairs(
     fs,
-    default_env        = rlang::caller_env(),
-    current_env        = rlang::current_env(),
-    assert_logical_lhs = FALSE
+    default_env = rlang::caller_env(),
+    current_env = rlang::current_env(),
+    logical_lhs = FALSE
   )
 
   fs <- Map(
