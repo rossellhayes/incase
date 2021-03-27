@@ -4,8 +4,16 @@
   - These work the same as their `*_case()` equivalents, but return factors
   - Factor levels are determined by the order of case statements.
   - `in_case_fct(x < 10 ~ "Low", x < 20 ~ "Medium", default = "High")` returns a factor with levels `"Low"`, `"Medium"`, and `"High"`.
+  
+* Added `*_case_list()` family
+  - These work the same as their `*_case()` equivalents, but return lists
+  - This allows the functions to return complex data types that would otherwise
+    be broken by automatic type conversion.
+    
+* Implemented lazy-ish evaluation of outputs in `*_case()` family.
+  - If the LHS of a formula is never true, the RHS is not evaluated.
+  - However, the RHS is still evaluated for all inputs if any input is TRUE.
 
-* Replaced examples using `stringi` with `stringr`.
 * Removed `cli` and `crayon` from suggests.
   All styling is now handled by `rlang`.
 
