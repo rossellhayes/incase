@@ -179,12 +179,12 @@ Defaults to <code>NA</code>.</p></td>
     <p>A vector of the same length as <code>x</code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='in_case_fct.html'>switch_case_fct()</a></code> and <code><a href='in_case_fct.html'>fn_switch_case_fct()</a></code> to create a factor</p>
+    <div class='dont-index'><p><code><a href='in_case_fct.html'>switch_case_fct()</a></code> and <code><a href='in_case_fct.html'>fn_switch_case_fct()</a></code> to return a factor
+and <code><a href='in_case_list.html'>switch_case_list()</a></code> and <code><a href='in_case_list.html'>fn_switch_case_list()</a></code> to return a list</p>
 <p><code><a href='grep_case.html'>grep_case()</a></code> to recode values with string pattern matching</p>
 <p><code><a href='fn_case.html'>fn_case()</a></code>, which applies a function to both <code>x</code> and each formula's LHS</p>
 <p><code><a href='in_case.html'>in_case()</a></code>, a pipeable alternative to <code><a href='https://dplyr.tidyverse.org/reference/case_when.html'>dplyr::case_when()</a></code></p>
-<p><code><a href='if_case.html'>if_case()</a></code>, a pipeable alternative to <code><a href='https://dplyr.tidyverse.org/reference/if_else.html'>dplyr::if_else()</a></code></p>
-<p><code><a href='https://rdrr.io/r/base/switch.html'>switch()</a></code>, which inspired this function</p></div>
+<p><code><a href='https://rdrr.io/r/base/switch.html'>switch()</a></code> and <code><a href='https://rdrr.io/r/base/match.html'>%in%</a></code>, which inspired this function</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='va'>parties</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"d"</span>, <span class='st'>"r"</span>, <span class='st'>"i"</span>, <span class='st'>"g"</span>, <span class='st'>"l"</span><span class='op'>)</span>, <span class='fl'>20</span>, replace <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
