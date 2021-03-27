@@ -34,15 +34,16 @@
 #'   or output vectors.
 #'   Inconsistent lengths will generate an error.
 #'
-#' @seealso [in_case_fct()] to create a factor
-#'
-#'   [if_case()], a pipeable alternative to [dplyr::if_else()]
+#' @seealso [in_case_fct()] to return a factor and
+#'   [in_case_list()] to return a list
 #'
 #'   [switch_case()] a simpler alternative for when each case involves
 #'   [`==`] or [`%in%`]
 #'
 #'   [fn_case()], a simpler alternative for when each case uses the
 #'   same function
+#'
+#'   [if_case()], a pipeable alternative to [dplyr::if_else()]
 #'
 #'   [dplyr::case_when()], from which this function is derived
 #'

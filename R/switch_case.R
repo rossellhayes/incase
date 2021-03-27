@@ -28,7 +28,8 @@
 #'
 #' @return A vector of the same length as `x`.
 #'
-#' @seealso [switch_case_fct()] and [fn_switch_case_fct()] to create a factor
+#' @seealso [switch_case_fct()] and [fn_switch_case_fct()] to return a factor
+#'   and [switch_case_list()] and [fn_switch_case_list()] to return a list
 #'
 #'   [grep_case()] to recode values with string pattern matching
 #'
@@ -36,9 +37,7 @@
 #'
 #'   [in_case()], a pipeable alternative to [dplyr::case_when()]
 #'
-#'   [if_case()], a pipeable alternative to [dplyr::if_else()]
-#'
-#'   [switch()], which inspired this function
+#'   [switch()] and [`%in%`], which inspired this function
 #'
 #' @export
 #'

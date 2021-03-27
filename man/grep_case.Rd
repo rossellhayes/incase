@@ -72,15 +72,14 @@ grep_case(
 )
 }
 \seealso{
-\code{\link[=grep_case_fct]{grep_case_fct()}} to create a factor
+\code{\link[=grep_case_fct]{grep_case_fct()}} to return a factor and
+\code{\link[=grep_case_list]{grep_case_list()}} to return a list
 
 \code{\link[=fn_case]{fn_case()}}, to apply a function other than \code{grepl()} to each case
 
 \code{\link[=switch_case]{switch_case()}} to recode values with exact matching
 
 \code{\link[=in_case]{in_case()}}, a pipeable alternative to \code{\link[dplyr:case_when]{dplyr::case_when()}}
-
-\code{\link[=if_case]{if_case()}}, a pipeable alternative to \code{\link[dplyr:if_else]{dplyr::if_else()}}
 
 \code{\link[=switch]{switch()}} and \code{\link[=grepl]{grepl()}}, which inspired this function
 }

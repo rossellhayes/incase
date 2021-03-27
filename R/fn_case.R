@@ -28,7 +28,8 @@
 #'   or output vectors.
 #'   Inconsistent lengths will generate an error.
 #'
-#' @seealso [fn_case_fct()] to create a factor
+#' @seealso [fn_case_fct()] to return a factor and
+#'   [fn_case_list()] to return a list
 #'
 #'   [fn_switch_case()], which applies a function to each formula's LHS,
 #'   but not `x`
@@ -36,6 +37,8 @@
 #'   [switch_case()], a simpler alternative for exact matching
 #'
 #'   [grep_case()], a simpler alternative for [regex] pattern matching
+#'
+#'   [in_case()], a pipeable alternative to [dplyr::case_when()]
 #'
 #' @export
 #' @example examples/fn_case.R

@@ -17,15 +17,14 @@
 #'
 #' @return A vector of the same length as `x`.
 #'
-#' @seealso [grep_case_fct()] to create a factor
+#' @seealso [grep_case_fct()] to return a factor and
+#'   [grep_case_list()] to return a list
 #'
 #'   [fn_case()], to apply a function other than `grepl()` to each case
 #'
 #'   [switch_case()] to recode values with exact matching
 #'
 #'   [in_case()], a pipeable alternative to [dplyr::case_when()]
-#'
-#'   [if_case()], a pipeable alternative to [dplyr::if_else()]
 #'
 #'   [switch()] and [grepl()], which inspired this function
 #'

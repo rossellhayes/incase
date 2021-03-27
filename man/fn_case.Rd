@@ -139,7 +139,8 @@ in_herits(letters[1:3])
 in_herits(fn_case)
 }
 \seealso{
-\code{\link[=fn_case_fct]{fn_case_fct()}} to create a factor
+\code{\link[=fn_case_fct]{fn_case_fct()}} to return a factor and
+\code{\link[=fn_case_list]{fn_case_list()}} to return a list
 
 \code{\link[=fn_switch_case]{fn_switch_case()}}, which applies a function to each formula's LHS,
 but not \code{x}
@@ -147,4 +148,6 @@ but not \code{x}
 \code{\link[=switch_case]{switch_case()}}, a simpler alternative for exact matching
 
 \code{\link[=grep_case]{grep_case()}}, a simpler alternative for \link{regex} pattern matching
+
+\code{\link[=in_case]{in_case()}}, a pipeable alternative to \code{\link[dplyr:case_when]{dplyr::case_when()}}
 }
