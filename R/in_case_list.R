@@ -72,9 +72,7 @@ fn_case_list <- function(x, fn, ..., preserve = FALSE, default = NA) {
 #' @rdname in_case_list
 #' @export
 
-fn_switch_case_list <- function(
-  x, fn, ..., preserve = FALSE, default = NA, ordered = FALSE
-) {
+fn_switch_case_list <- function(x, fn, ..., preserve = FALSE, default = NA) {
   inputs <- fn_switch_case_setup(
     ...,
     fn          = fn,
