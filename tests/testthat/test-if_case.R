@@ -13,8 +13,16 @@ test_that("if_case()", {
   )
   expect_equal(x %>% if_case(condition = . < 2, true = "l", "h", "m"), y)
   expect_equal(x %>% if_case(true = "l", "h", "m", condition = . < 2), y)
+})
 
-  expect_equal(if_case(TRUE, TRUE, stop()), TRUE)
+test_that("lazy-ish eval of if_case()", {
+  expect_equal(if_case(TRUE,  TRUE,   stop(), stop()), TRUE)
+  expect_equal(if_case(FALSE, stop(), FALSE,  stop()), FALSE)
+  expect_equal(if_case(NA,    stop(), stop(), NA),     NA)
+
+  expect_equal(TRUE  %>% if_case(TRUE,   stop(), stop()), TRUE)
+  expect_equal(FALSE %>% if_case(stop(), FALSE,  stop()), FALSE)
+  expect_equal(NA    %>% if_case(stop(), stop(), NA),     NA)
 })
 
 test_that("if_case() errors", {

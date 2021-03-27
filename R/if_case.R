@@ -34,7 +34,7 @@
 if_case <- function(condition, true, false, missing = NA, ...) {
   ellipsis <- list(...)
 
-  if (try(sys.call()[[2]] == ".", silent = TRUE)) {
+  if (try(identical(sys.call()[[2]], rlang::sym(".")), silent = TRUE)) {
     unspecified <- setdiff(names(formals()), names(sys.call()))
     ellipsis    <- list(...)
 
@@ -78,7 +78,7 @@ if_case <- function(condition, true, false, missing = NA, ...) {
 
   # Implement lazy-ish evaluation of output vectors
   if (!isTRUE(any(condition)))   {true    <- NULL}
-  if (isTRUE(all(condition)))    {false   <- NULL}
+  if (!isTRUE(any(!condition)))  {false   <- NULL}
   if (!isTRUE(anyNA(condition))) {missing <- NULL}
 
   true    <- true    %||% false %||% missing
