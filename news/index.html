@@ -135,7 +135,18 @@
 <code><a href="../reference/in_case_fct.html">in_case_fct(x &lt; 10 ~ "Low", x &lt; 20 ~ "Medium", default = "High")</a></code> returns a factor with levels <code>"Low"</code>, <code>"Medium"</code>, and <code>"High"</code>.</li>
 </ul>
 </li>
-<li>Replaced examples using <code>stringi</code> with <code>stringr</code>.</li>
+<li>Added <code>*_case_list()</code> family
+<ul>
+<li>These work the same as their <code>*_case()</code> equivalents, but return lists</li>
+<li>This allows the functions to return complex data types that would otherwise be broken by automatic type conversion.</li>
+</ul>
+</li>
+<li>Implemented lazy-ish evaluation of outputs in <code>*_case()</code> family.
+<ul>
+<li>If the LHS of a formula is never true, the RHS is not evaluated.</li>
+<li>However, the RHS is still evaluated for all inputs if any input is TRUE.</li>
+</ul>
+</li>
 <li>Removed <code>cli</code> and <code>crayon</code> from suggests. All styling is now handled by <code>rlang</code>.</li>
 </ul>
 </div>
