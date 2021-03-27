@@ -1,3 +1,3 @@
 .onLoad <- function(libname, pkgname) {
-  backports::import(pkgname, "lengths")
+  backports::import(pkgname, c("anyNA", "isTRUE", "lengths"))
 }
