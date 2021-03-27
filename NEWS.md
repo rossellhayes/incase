@@ -22,11 +22,6 @@
 
 * `if_case()` no longer produces an error if `condition` is only `NA`.
 
-## Miscellaneous
-
-* Removed `cli` and `crayon` from suggests.
-All styling is now handled by `rlang`.
-
 # incase 0.2.1
 
 * Fixed NOTE by removing unnecessary import of `stats`.
