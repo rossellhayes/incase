@@ -1,7 +1,7 @@
-test_that("function and lambda equivalent", {
-  words  <- c("caterpillar", "dogwood", "catastrophe", "dogma")
-  result <- c("feline", "canine", "feline", "canine")
+words  <- c("caterpillar", "dogwood", "catastrophe", "dogma")
+result <- c("feline", "canine", "feline", "canine")
 
+test_that("function and lambda equivalent", {
   expect_equal(
     fn_case(
       words,
@@ -25,9 +25,54 @@ test_that("function and lambda equivalent", {
   expect_equal(
     fn_case(
       words,
+      fn = function(x, pattern, ...) {grepl(pattern, x, ...)},
+      "cat" ~ "feline",
+      "dog" ~ "canine"
+    ),
+    result
+  )
+
+  expect_equal(
+    fn_case(
+      words,
       fn = ~ grepl(.y, .x),
       "cat" ~ "feline",
       "dog" ~ "canine"
+    ),
+    result
+  )
+})
+
+test_that("fn_case() ignore.case", {
+  expect_equal(
+    fn_case(
+      words,
+      fn = stringi::stri_detect_regex,
+      "cat" ~ "feline",
+      "dog" ~ "canine",
+      case_insensitive = TRUE
+    ),
+    result
+  )
+
+  expect_equal(
+    fn_case(
+      words,
+      fn = function(x, pattern, ...) {grepl(pattern, x, ...)},
+      "cat" ~ "feline",
+      "dog" ~ "canine",
+      ignore.case = TRUE
+    ),
+    result
+  )
+
+  expect_equal(
+    fn_case(
+      words,
+      fn = ~ grepl(.y, .x),
+      "cat" ~ "feline",
+      "dog" ~ "canine",
+      ignore.case = TRUE
     ),
     result
   )
