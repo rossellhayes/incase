@@ -16,14 +16,7 @@ grep_case_list(x, ..., preserve = FALSE, default = NA)
 
 fn_case_list(x, fn, ..., preserve = FALSE, default = NA)
 
-fn_switch_case_list(
-  x,
-  fn,
-  ...,
-  preserve = FALSE,
-  default = NA,
-  ordered = FALSE
-)
+fn_switch_case_list(x, fn, ..., preserve = FALSE, default = NA)
 }
 \arguments{
 \item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}> A sequence of two-sided
