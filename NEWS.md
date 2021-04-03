@@ -1,7 +1,6 @@
 # incase 0.3.0
 
 ## New features
-
 * Added `*_case_fct()` family of functions
   - These work the same as their `*_case()` equivalents, but return factors
   - Factor levels are determined by the order of case statements.
@@ -19,7 +18,6 @@
   the corresponding output is not evaluated.
   
 ## Bug fixes
-
 * `if_case()` no longer produces an error if `condition` is only `NA`.
 
 # incase 0.2.1
