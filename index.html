@@ -46,7 +46,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">incase</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -196,7 +196,7 @@
 <p><code><a href="reference/switch_case.html">switch_case()</a></code> works as a convenient shorthand for <code><a href="reference/in_case.html">in_case()</a></code> when recoding discrete values.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">parties</span>
-<span class="co">#&gt;  [1] "D" "R" "I" "D" "D" "D" "D" "D" "R" "I" "R" "D" "L" "I" "R" "R" "R" NA  "R"</span>
+<span class="co">#&gt;  [1] "I" "I" "I" NA  NA  "L" "D" "R" "I" NA  "I" "G" "I" "R" "D" "L" "L" "R" "D"</span>
 <span class="co">#&gt; [20] "I"</span>
 
 <span class="va">parties</span> <span class="op">%&gt;%</span>
@@ -206,10 +206,10 @@
     <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"G"</span>, <span class="st">"L"</span><span class="op">)</span> <span class="op">~</span> <span class="st">"Other"</span>,
     <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"I"</span>, <span class="cn">NA</span><span class="op">)</span>  <span class="op">~</span> <span class="st">"Independent"</span>
   <span class="op">)</span>
-<span class="co">#&gt;  [1] "Democrat"    "Republican"  "Independent" "Democrat"    "Democrat"   </span>
-<span class="co">#&gt;  [6] "Democrat"    "Democrat"    "Democrat"    "Republican"  "Independent"</span>
-<span class="co">#&gt; [11] "Republican"  "Democrat"    "Other"       "Independent" "Republican" </span>
-<span class="co">#&gt; [16] "Republican"  "Republican"  "Independent" "Republican"  "Independent"</span></code></pre></div>
+<span class="co">#&gt;  [1] "Independent" "Independent" "Independent" "Independent" "Independent"</span>
+<span class="co">#&gt;  [6] "Other"       "Democrat"    "Republican"  "Independent" "Independent"</span>
+<span class="co">#&gt; [11] "Independent" "Other"       "Independent" "Republican"  "Democrat"   </span>
+<span class="co">#&gt; [16] "Other"       "Other"       "Republican"  "Democrat"    "Independent"</span></code></pre></div>
 <p><code><a href="reference/grep_case.html">grep_case()</a></code> allows you to recode values with pattern matching.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">countries</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
@@ -235,8 +235,8 @@
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span>
 <span class="va">data</span>
-<span class="co">#&gt;  [1] 6.432747 3.090132 6.233845 9.861740 1.911344 5.838658 1.389635 3.245508</span>
-<span class="co">#&gt;  [9] 7.105421 2.692807</span>
+<span class="co">#&gt;  [1] 9.283039 7.851878 7.230907 1.880231 6.942045 7.995043 1.470314 8.706706</span>
+<span class="co">#&gt;  [9] 2.943369 4.361939</span>
 
 <span class="va">data</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="reference/in_case_fct.html">in_case_fct</a></span><span class="op">(</span>
@@ -245,7 +245,7 @@
     default <span class="op">=</span> <span class="st">"High"</span>,
     ordered <span class="op">=</span> <span class="cn">TRUE</span>
   <span class="op">)</span>
-<span class="co">#&gt;  [1] Medium Medium Medium High   Low    Medium Low    Medium High   Low   </span>
+<span class="co">#&gt;  [1] High   High   High   Low    Medium High   Low    High   Low    Medium</span>
 <span class="co">#&gt; Levels: Low &lt; Medium &lt; High</span>
 
 <span class="va">parties</span> <span class="op">%&gt;%</span>
@@ -255,13 +255,13 @@
     <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"G"</span>, <span class="st">"L"</span><span class="op">)</span> <span class="op">~</span> <span class="st">"Other"</span>,
     <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"I"</span>, <span class="cn">NA</span><span class="op">)</span>  <span class="op">~</span> <span class="st">"Independent"</span>
   <span class="op">)</span>
-<span class="co">#&gt;  [1] Democrat    Republican  Independent Democrat    Democrat    Democrat   </span>
-<span class="co">#&gt;  [7] Democrat    Democrat    Republican  Independent Republican  Democrat   </span>
-<span class="co">#&gt; [13] Other       Independent Republican  Republican  Republican  Independent</span>
-<span class="co">#&gt; [19] Republican  Independent</span>
+<span class="co">#&gt;  [1] Independent Independent Independent Independent Independent Other      </span>
+<span class="co">#&gt;  [7] Democrat    Republican  Independent Independent Independent Other      </span>
+<span class="co">#&gt; [13] Independent Republican  Democrat    Other       Other       Republican </span>
+<span class="co">#&gt; [19] Democrat    Independent</span>
 <span class="co">#&gt; Levels: Democrat Republican Other Independent</span></code></pre></div>
 <hr>
-<p>Hex sticker fonts are <a href="https://github.com/adobe-fonts/source-sans-pro">Source Sans Pro</a> by <a href="https://www.adobe.com">Adobe</a> and <a href="https://github.com/i-tu/Hasklig">Hasklig</a> by <a href="https://github.com/i-tu">Ian Tuomi</a>.</p>
+<p>Hex sticker fonts are <a href="https://github.com/adobe-fonts/source-sans">Source Sans by Adobe</a> and <a href="https://github.com/i-tu/Hasklig">Hasklig by Ian Tuomi</a>.</p>
 <p>Please note that <strong>incase</strong> is released with a <a href="https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 <p>* Intuitiveness may vary from person to person.</p>
 </div>
@@ -307,10 +307,10 @@
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/package=incase"><img src="https://www.r-pkg.org/badges/version/incase?color=brightgreen"></a></li>
-<li><a href="https://www.tidyverse.org/lifecycle/#stable"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html#stable"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg"></a></li>
 <li><a href="https://cran.r-project.org/web/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-blueviolet.svg" alt="License: MIT"></a></li>
 <li><a href="https://github.com/rossellhayes/incase/actions"><img src="https://github.com/rossellhayes/incase/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
-<li><a href="https://codecov.io/gh/rossellhayes/incase"><img src="https://codecov.io/gh/rossellhayes/incase/branch/master/graph/badge.svg"></a></li>
+<li><a href="https://codecov.io/gh/rossellhayes/incase"><img src="https://codecov.io/gh/rossellhayes/incase/branch/main/graph/badge.svg"></a></li>
 <li><a href="https://www.codefactor.io/repository/github/rossellhayes/incase"><img src="https://www.codefactor.io/repository/github/rossellhayes/incase/badge" alt="CodeFactor"></a></li>
 <li><a href="https://cran.r-project.org/package=incase"><img src="https://tinyverse.netlify.com/badge/incase" alt="Dependencies"></a></li>
 </ul>
