@@ -6,12 +6,12 @@
 <!-- badges: start -->
 
 [![](https://www.r-pkg.org/badges/version/incase?color=brightgreen)](https://cran.r-project.org/package=incase)
-[![](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
+[![](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![License:
 MIT](https://img.shields.io/badge/license-MIT-blueviolet.svg)](https://cran.r-project.org/web/licenses/MIT)
 [![R build
 status](https://github.com/rossellhayes/incase/workflows/R-CMD-check/badge.svg)](https://github.com/rossellhayes/incase/actions)
-[![](https://codecov.io/gh/rossellhayes/incase/branch/master/graph/badge.svg)](https://codecov.io/gh/rossellhayes/incase)
+[![](https://codecov.io/gh/rossellhayes/incase/branch/main/graph/badge.svg)](https://codecov.io/gh/rossellhayes/incase)
 [![CodeFactor](https://www.codefactor.io/repository/github/rossellhayes/incase/badge)](https://www.codefactor.io/repository/github/rossellhayes/incase)
 [![Dependencies](https://tinyverse.netlify.com/badge/incase)](https://cran.r-project.org/package=incase)
 <!-- badges: end -->
@@ -141,7 +141,7 @@ recoding discrete values.
 
 ``` r
 parties
-#>  [1] "D" "R" "I" "D" "D" "D" "D" "D" "R" "I" "R" "D" "L" "I" "R" "R" "R" NA  "R"
+#>  [1] "I" "I" "I" NA  NA  "L" "D" "R" "I" NA  "I" "G" "I" "R" "D" "L" "L" "R" "D"
 #> [20] "I"
 
 parties %>%
@@ -151,10 +151,10 @@ parties %>%
     c("G", "L") ~ "Other",
     c("I", NA)  ~ "Independent"
   )
-#>  [1] "Democrat"    "Republican"  "Independent" "Democrat"    "Democrat"   
-#>  [6] "Democrat"    "Democrat"    "Democrat"    "Republican"  "Independent"
-#> [11] "Republican"  "Democrat"    "Other"       "Independent" "Republican" 
-#> [16] "Republican"  "Republican"  "Independent" "Republican"  "Independent"
+#>  [1] "Independent" "Independent" "Independent" "Independent" "Independent"
+#>  [6] "Other"       "Democrat"    "Republican"  "Independent" "Independent"
+#> [11] "Independent" "Other"       "Independent" "Republican"  "Democrat"   
+#> [16] "Other"       "Other"       "Republican"  "Democrat"    "Independent"
 ```
 
 `grep_case()` allows you to recode values with pattern matching.
@@ -188,8 +188,8 @@ factor levels. Use `ordered = TRUE` to create an ordered factor and
 ``` r
 data <- runif(10, 0, 10)
 data
-#>  [1] 6.432747 3.090132 6.233845 9.861740 1.911344 5.838658 1.389635 3.245508
-#>  [9] 7.105421 2.692807
+#>  [1] 9.283039 7.851878 7.230907 1.880231 6.942045 7.995043 1.470314 8.706706
+#>  [9] 2.943369 4.361939
 
 data %>% 
   in_case_fct(
@@ -198,7 +198,7 @@ data %>%
     default = "High",
     ordered = TRUE
   )
-#>  [1] Medium Medium Medium High   Low    Medium Low    Medium High   Low   
+#>  [1] High   High   High   Low    Medium High   Low    High   Low    Medium
 #> Levels: Low < Medium < High
 
 parties %>%
@@ -208,20 +208,18 @@ parties %>%
     c("G", "L") ~ "Other",
     c("I", NA)  ~ "Independent"
   )
-#>  [1] Democrat    Republican  Independent Democrat    Democrat    Democrat   
-#>  [7] Democrat    Democrat    Republican  Independent Republican  Democrat   
-#> [13] Other       Independent Republican  Republican  Republican  Independent
-#> [19] Republican  Independent
+#>  [1] Independent Independent Independent Independent Independent Other      
+#>  [7] Democrat    Republican  Independent Independent Independent Other      
+#> [13] Independent Republican  Democrat    Other       Other       Republican 
+#> [19] Democrat    Independent
 #> Levels: Democrat Republican Other Independent
 ```
 
 ------------------------------------------------------------------------
 
-Hex sticker fonts are [Source Sans
-Pro](https://github.com/adobe-fonts/source-sans-pro) by
-[Adobe](https://www.adobe.com) and
-[Hasklig](https://github.com/i-tu/Hasklig) by [Ian
-Tuomi](https://github.com/i-tu).
+Hex sticker fonts are [Source Sans by
+Adobe](https://github.com/adobe-fonts/source-sans) and [Hasklig by Ian
+Tuomi](https://github.com/i-tu/Hasklig).
 
 Please note that **incase** is released with a [Contributor Code of
 Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
