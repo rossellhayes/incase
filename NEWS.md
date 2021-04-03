@@ -1,4 +1,4 @@
-# incase (development version)
+# incase 0.3.0
 
 ## New features
 
