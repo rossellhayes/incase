@@ -1,5 +1,7 @@
 # incase (development version)
 
+* Added `tibble` to suggested packages.
+
 # incase 0.3.0
 
 ## New features
