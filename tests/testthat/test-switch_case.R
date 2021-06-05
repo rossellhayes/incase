@@ -122,6 +122,35 @@ test_that("unpiped vectored switch_case()", {
   expect_equal(x, yn)
 })
 
+test_that("default from other variable switch_case()", {
+  input  <- dplyr::tibble(a = letters[1:5], b = 1:5)
+  output <- dplyr::tibble(a = letters[1:5], b = 1:5, c = c(10, 2:5))
+
+  x <- dplyr::tibble(a = letters[1:5], b = 1:5) %>%
+    dplyr::mutate(
+      c = switch_case(
+        a,
+        "a" ~ 10,
+        default = b
+      )
+    )
+
+  expect_equal(x, output)
+
+  output <- dplyr::tibble(a = letters[1:5], b = 1:5, c = 1:5)
+
+  x <- dplyr::tibble(a = letters[1:5], b = 1:5) %>%
+    dplyr::mutate(
+      c = switch_case(
+        a,
+        "z" ~ 10,
+        default = b
+      )
+    )
+
+  expect_equal(x, output)
+})
+
 test_that("preserve and default", {
   expect_warning(
     switch_case(1:10, 5 ~ "buzz", preserve = TRUE, default = "bam")

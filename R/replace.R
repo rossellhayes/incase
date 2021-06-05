@@ -9,7 +9,7 @@ replace <- function(
   assert_length(fs)
 
   pairs <- extract_formula_pairs(
-    fs, x, fn, args, default_env, current_env, list = list
+    fs, x, default, fn, args, default_env, current_env, list = list
   )
 
   if (factor) {levels <- as.character(c(pairs$value, recursive = TRUE))}
@@ -54,7 +54,7 @@ replace <- function(
 }
 
 extract_formula_pairs <- function(
-  fs, x = NULL, fn = NULL, args = NULL, default_env, current_env,
+  fs, x = NULL, default, fn = NULL, args = NULL, default_env, current_env,
   logical_lhs = TRUE, list = FALSE
 ) {
   quos_pairs <- Map(
@@ -78,14 +78,21 @@ extract_formula_pairs <- function(
 
   if (logical_lhs) {
     assert_logical_lhs(query, quos_pairs)
-    applicable <- which(vapply(query, any, logical(1)))
-    if (!length(applicable)) {applicable <- 0}
-    query      <- query[applicable]
-    quos_pairs <- quos_pairs[applicable]
+    applicable <- vapply(
+      query,
+      function(x) {any(x) && !all(is.na(x))},
+      logical(1)
+    )
+  } else {
+    applicable <- rep(TRUE, length(query))
   }
 
-  value <- lapply(
-    quos_pairs, function(x) {rlang::eval_tidy(x$rhs, env = default_env)}
+  value <- Map(
+    function(x, applicable) {
+      if (!applicable) return(default)
+      rlang::eval_tidy(x$rhs, env = default_env)
+    },
+    quos_pairs, applicable
   )
 
   if (list) {value <- lapply(value, list)}
