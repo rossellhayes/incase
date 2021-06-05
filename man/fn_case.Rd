@@ -83,6 +83,17 @@ fn_case(
 
 fn_case(
   countries,
+  fn = ~ grepl(.y, .x),
+  "Deutschland" ~ "Germany",
+  "Belgi(qu)?e" ~ "Belgium",
+  "Nederland"   ~ "Netherlands",
+  "Italia"      ~ "Italy",
+  preserve      = TRUE,
+  ignore.case   = TRUE
+)
+
+fn_case(
+  countries,
   fn = stringi::stri_detect_regex,
   "Deutschland"    ~ "Germany",
   "Belgi(qu)?e"    ~ "Belgium",
