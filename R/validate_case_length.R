@@ -20,24 +20,29 @@ validate_case_length <- function(query, value, fs) {
   rhs_problems         <- rhs_lengths %in% inconsistent_lengths
   problems             <- lhs_problems | rhs_problems
 
-  abort_msg(
-    paste0(
-      "All formulas' right-hand sides must be the same length (", value(len),
-      ") or ", value("1"), ":"
-    ),
+  cli::cli_abort(c(
+    "All formulas' right-hand sides must be the same length ({.val {len}}),
+     or {.val {1}}.",
     check_length_val(
       vapply(fs[problems], rlang::as_label, character(1)),
       inconsistent_lengths,
       len
     )
-  )
+  ))
 }
 
 check_length_val <- function(formulas, length_x, n) {
-  if (n > 1) {n <- paste(value(n), "or", value("1"))}
+  n <- if (n > 1) {
+    sprintf("{.or {.val {c(1, %d)}}}", n)
+  } else {
+    "{.val {1}}"
+  }
 
-  out <- paste0(
-    code(formulas), " should be length ", n, ", not ", value(length_x)
+  out <- sprintf(
+    "{.code %s} should be length %s, not {.val {%d}}.",
+    formulas,
+    n,
+    length_x
   )
   names(out) <- rep("x", length(out))
   out
