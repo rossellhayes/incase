@@ -1,18 +1,13 @@
 Type: Package
 Package: incase
 Title: Pipe-Friendly Vector Replacement with Case Statements
-Version: 0.3.1
-Authors@R: 
-    c(person(given = "Alexander",
-             family = "Rossell Hayes",
-             role = c("aut", "cre", "cph"),
-             email = "alexander@rossellhayes.com",
-             comment = c(ORCID = "0000-0001-9412-0457")),
-      person(given = "Patrice",
-             family = "Kiener",
-             role = "ctb",
-             email = "fattailsr@inmodelia.com",
-             comment = c("Contributed example for fn_case()", ORCID = "0000-0002-0505-9920")))
+Version: 0.3.1.9000
+Authors@R: c(
+    person("Alexander", "Rossell Hayes", , "alexander@rossellhayes.com", role = c("aut", "cre", "cph"),
+           comment = c(ORCID = "0000-0001-9412-0457")),
+    person("Patrice", "Kiener", , "fattailsr@inmodelia.com", role = "ctb",
+           comment = c("Contributed example for fn_case()", ORCID = "0000-0002-0505-9920"))
+  )
 Description: Offers a pipe-friendly alternative to the 'dplyr' functions
     case_when() and if_else(), as well as a number of user-friendly
     simplifications for common use cases.  These functions accept a vector
@@ -28,6 +23,7 @@ URL: https://incase.rossellhayes.com,
 BugReports: https://github.com/rossellhayes/incase/issues
 Imports:
     backports,
+    cli,
     magrittr,
     plu,
     rlang

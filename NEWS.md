@@ -1,3 +1,7 @@
+# incase (development version)
+
+* No longer rely on deprecated `plu` functions.
+
 # incase 0.3.1
 
 * Fixed bug where `*_case()` would return `NULL` if no conditions were `TRUE`.

@@ -124,33 +124,24 @@ assert_logical_lhs <- function(query, quos_pairs) {
       character(1)
     )
 
-    abort_msg(
-      "Each formula's left hand side must evaluate to a logical vector",
-      x = paste(
-        plu::stick(plu::more(code(illogical_lhs), 5, "{left hand} side")),
-        plu::ral("{does|do}"), "not evaluate to a logical vector."
-      )
-    )
+    cli::cli_abort(c(
+      "Each formula's left hand side must evaluate to a logical vector.",
+      x = "{.code {illogical_lhs}} {plu::ral('does', illogical_lhs)}
+        not evaluate to {plu::ral('a {logical} vector', illogical_lhs)}."
+    ))
   }
 }
 
 warn_if_default <- function(default) {
   if (!is.null(default) && !is.na(default)) {
-    rlang::warn(
-      paste(
-        code("default"), "will have no effect if", code("preserve"),
-        "is", code("TRUE")
-      )
+    cli::cli_warn(
+      "{.arg default} will have no effect if {.arg preserve} is {.val {TRUE}}."
     )
   }
 }
 
 replace_with <- function(x, i, val, name = NULL) {
   i[is.na(i)] <- FALSE
-
-  # if (!rlang::is_atomic(val)) {
-    # x[i] <- list(val)
-  # } else
 
   if (length(val) == 1L) {
     x[i] <- val

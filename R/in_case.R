@@ -52,7 +52,7 @@
 #' @example examples/in_case.R
 
 in_case <- function(..., preserve = FALSE, default = NA) {
-  inputs <- in_case_setup(..., preserve = preserve, fn = "in_case()")
+  inputs <- in_case_setup(..., preserve = preserve, fn = "in_case")
 
   replace(
     fs          = inputs$fs,
@@ -83,13 +83,11 @@ in_case_setup <- function(..., preserve, fn) {
 
 assert_no_preserve_without_pipe <- function(preserve, fn) {
   if (preserve) {
-    abort_msg(
-      paste(
-        "A vector must be piped into", code(fn),
-        "to use", code("preserve")
-      ),
-      paste("Try using", code("default"), "instead")
-    )
+    cli::cli_abort(c(
+      "The first argument to {.fn {fn}} must be a vector
+      to use the {.arg preserve} argument.",
+      "*" = "Try using {.arg default} instead."
+    ))
   }
 }
 
@@ -100,12 +98,9 @@ assert_two_sided <- function(fs, fn) {
   )
 
   if (length(nfs)) {
-    abort_msg(
-      paste("Each argument to", code(fn), "must be a two-sided formula"),
-      x = paste(
-        plu::stick(plu::more(code(nfs), 5, "argument")),
-        plu::ral("is {not} a {two-sided} formula.", nfs)
-      )
-    )
+    cli::cli_abort(c(
+      "Each argument to {.fn {fn}} must be a two-sided formula.",
+      x = "{.code {nfs}} {plu::ral('is {not} a {two-sided} formula.', nfs)}."
+    ))
   }
 }

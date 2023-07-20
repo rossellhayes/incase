@@ -55,25 +55,18 @@ if_case <- function(condition, true, false, missing = NA, ...) {
     }
   }
 
-  if (length(ellipsis)) {
-    abort_msg(
-      paste(
-        "Arguments must not be passed to", code("..."), "in", code("if_case()")
-      ),
-      x = paste(
-        plu::stick(plu::more(code(ellipsis), type = "argument")),
-        plu::ral("was", ellipsis), "passed to", code("...")
-      )
-    )
+  if (length(ellipsis) > 0) {
+    cli::cli_abort(c(
+      "Arguments must not be passed to {.arg ...} in {.fun if_case}.",
+      x = "{.code {ellipsis}} {plu::ral('was', ellipsis)} passed to {.arg ...}."
+    ))
   }
 
   if (!is.logical(condition)) {
-    abort_msg(
-      paste(
-        code("condition"), "must be a logical vector, not",
-        code(paste(class(condition), collapse = "/"))
-      )
-    )
+    cli::cli_abort(c(
+      "{.arg condition} must be {.type {logical(2)}}.",
+      x = "{.arg condition} is {.type {condition}}."
+    ))
   }
 
   # Implement lazy-ish evaluation of output vectors
@@ -112,18 +105,17 @@ check_condition_lengths <- function(condition, replacements) {
   problem             <- !replacement_lengths %in% c(0, 1, length(condition))
 
   if (any(problem)) {
-    msg <- paste0(
-      code(names(replacements[problem])), " is length ",
-      value(replacement_lengths[problem]), "."
+    msg <- sprintf(
+      "{.arg %s} is length {.val {%d}}.",
+      names(replacements[problem]),
+      replacement_lengths[problem]
     )
     names(msg) <- rep("x", length(msg))
 
-    abort_msg(
-      paste0(
-        "Replacement vectors muct be the same length as ", code("conditon"),
-        " (", value(length(condition)), ") or length ", value(1), "."
-      ),
+    cli::cli_abort(c(
+      "Replacement vectors must be the same length as {.arg condition},
+      ({.val {length(condition)}}) or length {.val {1}}.",
       msg
-    )
+    ))
   }
 }
