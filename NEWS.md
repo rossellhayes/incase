@@ -1,6 +1,6 @@
 # incase (development version)
 
-* No longer rely on deprecated `plu` functions.
+* No longer rely on deprecated `plu` functions (#4).
 
 # incase 0.3.1
 
