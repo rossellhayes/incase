@@ -1,3 +1,5 @@
+# incase (development version)
+
 # incase 0.3.1
 
 * Fixed bug where `*_case()` would return `NULL` if no conditions were `TRUE`.
