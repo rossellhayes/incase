@@ -2,6 +2,10 @@ assert_length <- function(fs, call = rlang::caller_env()) {
   if (!length(fs)) cli::cli_abort("No cases provided", call = call)
 }
 
+compact_list <- function(...) {
+  Filter(function(x) !is.null(x), rlang::list2(...))
+}
+
 # @staticimports pkg:stringstatic
 #  str_remove str_subset
 
