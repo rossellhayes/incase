@@ -28,7 +28,7 @@ replace <- function(
 
   n <- validate_case_length(pairs$query, pairs$value, fs)
 
-  if (n == 0) {
+  if (identical(n, 0L) || length(n) == 0) {
     return(default[0])
   }
 

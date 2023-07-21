@@ -3,9 +3,7 @@ validate_case_length <- function(query, value, fs) {
   rhs_lengths <- lengths(value)
   all_lengths <- unique(c(lhs_lengths, rhs_lengths))
 
-  if (length(all_lengths) == 0) {
-    return(0)
-  } else if (length(all_lengths) == 1) {
+  if (length(all_lengths) <= 1) {
     return(all_lengths)
   }
 

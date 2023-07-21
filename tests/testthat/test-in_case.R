@@ -43,6 +43,13 @@ test_that("fizz_buzz", {
   )
 })
 
+test_that("zero-length input", {
+  expect_equal(
+    in_case(logical() ~ integer(), default = character(1)),
+    character(0)
+  )
+})
+
 test_that("errors", {
   expect_warning(x %>% in_case(. > 3 ~ "f", preserve = TRUE, default = "p"))
   expect_error(in_case(x %% 3 == 0 ~ "fizz", preserve = TRUE))
