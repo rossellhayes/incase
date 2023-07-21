@@ -56,7 +56,13 @@ test_that("errors", {
   expect_error(in_case(x, 3 ~ "fizz", 5 ~ "buzz", x))
   expect_error(
     in_case(c(TRUE, FALSE, TRUE) ~ 1, c(FALSE, TRUE) ~ 2),
-    "c(FALSE, TRUE)", fixed = TRUE
+    "The left-hand side of `c(FALSE, TRUE) ~ 2`",
+    fixed = TRUE
+  )
+  expect_error(
+    in_case(TRUE ~ 1:3, TRUE ~ 1:2),
+    "The right-hand side of `TRUE ~ 1:2`",
+    fixed = TRUE
   )
 })
 
