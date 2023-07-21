@@ -48,6 +48,7 @@ replace <- function(
   for (i in seq_along(pairs$query)) {
     out <- replace_with(out, pairs$query[[i]] & !replaced, pairs$value[[i]])
     replaced <- replaced | (pairs$query[[i]] & !is.na(pairs$query[[i]]))
+    if (all(replaced)) break
   }
 
   if (factor) {
