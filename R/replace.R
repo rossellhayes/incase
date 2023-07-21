@@ -28,15 +28,19 @@ replace <- function(
 
   n <- validate_case_length(pairs$query, pairs$value, fs)
 
-  if (n == 0) {return(NULL)}
+  if (n == 0) {
+    return(default[0])
+  }
 
-  if (list) {default <- list(default)}
+  if (list) {
+    default <- list(default)
+  }
 
   out      <- rep_len(default, n)
   replaced <- rep(FALSE, n)
 
   if (!list) {
-    class       <- class(c(pairs$value, recursive = TRUE))
+    class       <- class(c(pairs$value, default, recursive = TRUE))
     pairs$value <- lapply(pairs$value, `class<-`, class)
     class(out)  <- class
   }
