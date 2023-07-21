@@ -66,6 +66,10 @@ in_case <- function(..., preserve = FALSE, default = NA) {
 }
 
 in_case_setup <- function(dots, preserve, fn) {
+  if (length(dots) == 0) {
+    return(list(fs = list(), x = vector()))
+  }
+
   if (!rlang::is_formula(dots[[1]])) {
     fs <- dots[-1]
     x  <- dots[[1]]

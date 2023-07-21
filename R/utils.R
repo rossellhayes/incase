@@ -1,5 +1,5 @@
-assert_length <- function(fs) {
-  if (!length(fs)) cli::cli_abort("No cases provided")
+assert_length <- function(fs, call = rlang::caller_env()) {
+  if (!length(fs)) cli::cli_abort("No cases provided", call = call)
 }
 
 # @staticimports pkg:stringstatic

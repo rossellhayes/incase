@@ -6,7 +6,7 @@ replace <- function(
   factor = FALSE, ordered = FALSE, list = FALSE,
   default_env, current_env
 ) {
-  assert_length(fs)
+  assert_length(fs, call = current_env)
 
   pairs <- extract_formula_pairs(
     fs, x, default, fn, args, default_env, current_env, list = list
@@ -18,11 +18,11 @@ replace <- function(
     warn_if_default(default)
 
     if (list) {
-      pairs$query[[length(pairs$value) + 1]] <- rep(TRUE, length(x))
-      pairs$value[[length(pairs$value) + 1]] <- as.list(x)
+      pairs$query <- append(pairs$query, list(rep(TRUE, length(x))))
+      pairs$value <- append(pairs$value, list(as.list(x)))
     } else {
-      pairs$query[[length(pairs$query) + 1]] <- TRUE
-      pairs$value[[length(pairs$value) + 1]] <- x
+      pairs$query <- append(pairs$query, list(TRUE))
+      pairs$value <- append(pairs$value, list(x))
     }
   }
 
