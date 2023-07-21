@@ -20,7 +20,8 @@
 #' @example examples/in_case_list.R
 
 in_case_list <- function(..., preserve = FALSE, default = NA) {
-  inputs <- in_case_setup(..., preserve = preserve, fn = "in_case_list()")
+  dots <- allow_dot_aliases(compact_list(...))
+  inputs <- in_case_setup(dots, preserve = preserve, fn = "in_case_list()")
 
   replace(
     inputs$fs, inputs$x, default, preserve,
@@ -60,7 +61,8 @@ grep_case_list <- function(x, ..., preserve = FALSE, default = NA) {
 #' @export
 
 fn_case_list <- function(x, fn, ..., preserve = FALSE, default = NA) {
-  inputs <- fn_case_setup(...)
+  dots <- allow_dot_aliases(compact_list(...))
+  inputs <- fn_case_setup(dots)
 
   replace(
     inputs$fs, x, default, preserve, fn, inputs$args, list = TRUE,
