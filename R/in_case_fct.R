@@ -23,7 +23,8 @@
 #' @example examples/in_case_fct.R
 
 in_case_fct <- function(..., preserve = FALSE, default = NA, ordered = FALSE) {
-  inputs <- in_case_setup(..., preserve = preserve, fn = "in_case_fct()")
+  dots <- allow_dot_aliases(compact_list(...))
+  inputs <- in_case_setup(dots, preserve = preserve, fn = "in_case_fct()")
 
   replace(
     fs          = inputs$fs,
@@ -75,7 +76,8 @@ grep_case_fct <- function(
 fn_case_fct <- function(
   x, fn, ..., preserve = FALSE, default = NA, ordered = FALSE
 ) {
-  inputs <- fn_case_setup(...)
+  dots <- allow_dot_aliases(compact_list(...))
+  inputs <- fn_case_setup(dots)
 
   replace(
     inputs$fs, x, default, preserve, fn, inputs$args,

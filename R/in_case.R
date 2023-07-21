@@ -52,7 +52,8 @@
 #' @example examples/in_case.R
 
 in_case <- function(..., preserve = FALSE, default = NA) {
-  inputs <- in_case_setup(..., preserve = preserve, fn = "in_case")
+  dots <- allow_dot_aliases(compact_list(...))
+  inputs <- in_case_setup(dots, preserve = preserve, fn = "in_case")
 
   replace(
     fs          = inputs$fs,
@@ -64,14 +65,16 @@ in_case <- function(..., preserve = FALSE, default = NA) {
   )
 }
 
-in_case_setup <- function(..., preserve, fn) {
-  ellipsis <- compact_list(...)
+in_case_setup <- function(dots, preserve, fn) {
+  if (length(dots) == 0) {
+    return(list(fs = list(), x = vector()))
+  }
 
-  if (!rlang::is_formula(ellipsis[[1]])) {
-    fs <- ellipsis[-1]
-    x  <- ellipsis[[1]]
+  if (!rlang::is_formula(dots[[1]])) {
+    fs <- dots[-1]
+    x  <- dots[[1]]
   } else {
-    fs <- ellipsis
+    fs <- dots
     x  <- NULL
     assert_no_preserve_without_pipe(preserve, fn)
   }

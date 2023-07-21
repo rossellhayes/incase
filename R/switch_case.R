@@ -78,7 +78,7 @@ fn_switch_case_setup <- function(..., fn, default_env, current_env) {
   fs    <- Filter(rlang::is_formula, input)
   args  <- input[!input %in% fs]
 
-  assert_length(fs)
+  assert_length(fs, call = current_env)
 
   pairs <- extract_formula_pairs(
     fs,

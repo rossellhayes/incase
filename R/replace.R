@@ -6,7 +6,7 @@ replace <- function(
   factor = FALSE, ordered = FALSE, list = FALSE,
   default_env, current_env
 ) {
-  assert_length(fs)
+  assert_length(fs, call = current_env)
 
   pairs <- extract_formula_pairs(
     fs, x, default, fn, args, default_env, current_env, list = list
@@ -18,25 +18,29 @@ replace <- function(
     warn_if_default(default)
 
     if (list) {
-      pairs$query[[length(pairs$value) + 1]] <- rep(TRUE, length(x))
-      pairs$value[[length(pairs$value) + 1]] <- as.list(x)
+      pairs$query <- append(pairs$query, list(rep(TRUE, length(x))))
+      pairs$value <- append(pairs$value, list(as.list(x)))
     } else {
-      pairs$query[[length(pairs$query) + 1]] <- TRUE
-      pairs$value[[length(pairs$value) + 1]] <- x
+      pairs$query <- append(pairs$query, list(TRUE))
+      pairs$value <- append(pairs$value, list(x))
     }
   }
 
   n <- validate_case_length(pairs$query, pairs$value, fs)
 
-  if (n == 0) {return(NULL)}
+  if (identical(n, 0L) || length(n) == 0) {
+    return(default[0])
+  }
 
-  if (list) {default <- list(default)}
+  if (list) {
+    default <- list(default)
+  }
 
   out      <- rep_len(default, n)
   replaced <- rep(FALSE, n)
 
   if (!list) {
-    class       <- class(c(pairs$value, recursive = TRUE))
+    class       <- class(c(pairs$value, default, recursive = TRUE))
     pairs$value <- lapply(pairs$value, `class<-`, class)
     class(out)  <- class
   }
@@ -44,6 +48,7 @@ replace <- function(
   for (i in seq_along(pairs$query)) {
     out <- replace_with(out, pairs$query[[i]] & !replaced, pairs$value[[i]])
     replaced <- replaced | (pairs$query[[i]] & !is.na(pairs$query[[i]]))
+    if (all(replaced)) break
   }
 
   if (factor) {

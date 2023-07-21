@@ -44,7 +44,8 @@
 #' @example examples/fn_case.R
 
 fn_case <- function(x, fn, ..., preserve = FALSE, default = NA) {
-  inputs <- fn_case_setup(...)
+  dots <- allow_dot_aliases(compact_list(...))
+  inputs <- fn_case_setup(dots)
 
   replace(
     inputs$fs, x, default, preserve, fn, inputs$args,
@@ -53,10 +54,9 @@ fn_case <- function(x, fn, ..., preserve = FALSE, default = NA) {
   )
 }
 
-fn_case_setup <- function(...) {
-  input <- compact_list(...)
-  fs    <- Filter(rlang::is_formula, input)
-  args  <- input[!input %in% fs]
+fn_case_setup <- function(dots) {
+  fs    <- Filter(rlang::is_formula, dots)
+  args  <- dots[!dots %in% fs]
 
   list(fs = fs, args = args)
 }
