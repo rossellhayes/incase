@@ -5,16 +5,6 @@ test_that("function and lambda equivalent", {
   expect_equal(
     fn_case(
       words,
-      fn = stringi::stri_detect_regex,
-      "cat" ~ "feline",
-      "dog" ~ "canine"
-    ),
-    result
-  )
-
-  expect_equal(
-    fn_case(
-      words,
       fn = function(x, pattern) {grepl(pattern, x)},
       "cat" ~ "feline",
       "dog" ~ "canine"
@@ -44,17 +34,6 @@ test_that("function and lambda equivalent", {
 })
 
 test_that("fn_case() ignore.case", {
-  expect_equal(
-    fn_case(
-      words,
-      fn = stringi::stri_detect_regex,
-      "cat" ~ "feline",
-      "dog" ~ "canine",
-      case_insensitive = TRUE
-    ),
-    result
-  )
-
   expect_equal(
     fn_case(
       words,

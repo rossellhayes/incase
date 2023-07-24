@@ -92,17 +92,6 @@ fn_case(
   ignore.case   = TRUE
 )
 
-fn_case(
-  countries,
-  fn = stringi::stri_detect_regex,
-  "Deutschland"    ~ "Germany",
-  "Belgi(qu)?e"    ~ "Belgium",
-  "Nederland"      ~ "Netherlands",
-  "Italia"         ~ "Italy",
-  preserve         = TRUE,
-  case_insensitive = TRUE
-)
-
 # Recode values in a range
 time    <- runif(10, 1, 12)
 hours   <- time \%/\% 1
@@ -110,8 +99,7 @@ minutes <- time \%\% 1 * 60
 
 hours <- hours \%>\%
   if_case(minutes > 32.5, (. + 1) \%\% 12, .) \%>\%
-  switch_case(0 ~ 12, preserve = TRUE) \%>\%
-  nombre::cardinal()
+  switch_case(0 ~ 12, preserve = TRUE)
 
 minutes \%>\%
   fn_case(
@@ -139,7 +127,8 @@ minutes \%>\%
 # Based on a contribution by Patrice Kiener
 in_herits <- function(x) {
   fn_case(
-    x, inherits,
+    x,
+    fn = inherits,
     "factor"     ~ "fct",
     "character"  ~ "chr",
     "numeric"    ~ "dbl",

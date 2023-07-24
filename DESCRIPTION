@@ -28,14 +28,10 @@ Imports:
     plu,
     rlang
 Suggests: 
-    covr,
-    crayon,
     dplyr,
-    nombre,
-    stringi,
     testthat (>= 3.0.0),
     tibble
 Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.3
