@@ -1,4 +1,4 @@
-# incase (development version)
+# incase 0.3.2
 
 * Accept named arguments with or without preceding dots, e.g. `default` or `.default` (#5).
 * Take `default` into account when determining the class of output (#5).
