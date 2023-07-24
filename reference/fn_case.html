@@ -132,10 +132,10 @@ but not <code>x</code></p>
 <span class="r-in"><span>  <span class="st">"g"</span> <span class="op">~</span> <span class="st">"Green"</span>,</span></span>
 <span class="r-in"><span>  <span class="st">"l"</span> <span class="op">~</span> <span class="st">"Libertarian"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "Independent" "Libertarian" "Independent" "Green"       "Libertarian"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "Democrat"    "Republican"  "Libertarian" "Republican"  "Democrat"   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "Democrat"    "Democrat"    "Libertarian" "Democrat"    "Green"      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "Independent" "Democrat"    "Independent" "Independent" "Green"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "Republican"  "Libertarian" "Green"       "Republican"  "Independent"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "Independent" "Libertarian" "Democrat"    "Libertarian" "Independent"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "Libertarian" "Republican"  "Democrat"    "Libertarian" "Green"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "Green"       "Green"       "Independent" "Green"       "Republican" </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Replicate grep_case()</span></span></span>
 <span class="r-in"><span><span class="va">countries</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
@@ -213,10 +213,10 @@ but not <code>x</code></p>
 <span class="r-in"><span>    <span class="st">"o'clock"</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">hours</span>, <span class="va">.</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>    default   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">.</span>, <span class="va">hours</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "five past five"        "five to eight"         "five to twelve"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4] "five past three"       "twenty-five past five" "half past one"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "five to seven"         "five to five"          "twenty to ten"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10] "ten past two"         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "ten to eleven"        "twenty-five past ten" "twenty-five to six"  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4] "five past six"        "ten to ten"           "twenty-five to four" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "quarter to eight"     "twenty to nine"       "twenty-five to two"  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10] "twenty-five past one"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Replicate vctrs::vec_ptype_abbr() (used for tibble column labels)</span></span></span>
 <span class="r-in"><span><span class="co"># Based on a contribution by Patrice Kiener</span></span></span>
