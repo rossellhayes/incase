@@ -18,7 +18,7 @@ Description: Offers a pipe-friendly alternative to the 'dplyr' functions
     integer outputs, and evaluate outputs somewhat lazily, so you don't
     waste time on long operations that won't be used.
 License: MIT + file LICENSE
-URL: https://incase.rossellhayes.com,
+URL: https://pkg.rossellhayes.com/incase/,
     https://github.com/rossellhayes/incase
 BugReports: https://github.com/rossellhayes/incase/issues
 Imports:
