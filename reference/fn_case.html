@@ -132,10 +132,10 @@ but not <code>x</code></p>
 <span class="r-in"><span>  <span class="st">"g"</span> <span class="op">~</span> <span class="st">"Green"</span>,</span></span>
 <span class="r-in"><span>  <span class="st">"l"</span> <span class="op">~</span> <span class="st">"Libertarian"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "Republican"  "Libertarian" "Green"       "Republican"  "Independent"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "Independent" "Libertarian" "Democrat"    "Libertarian" "Independent"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "Libertarian" "Republican"  "Democrat"    "Libertarian" "Green"      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "Green"       "Green"       "Independent" "Green"       "Republican" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "Independent" "Libertarian" "Democrat"    "Independent" "Libertarian"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "Green"       "Green"       "Green"       "Democrat"    "Green"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "Independent" "Green"       "Green"       "Libertarian" "Republican" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "Green"       "Green"       "Libertarian" "Libertarian" "Democrat"   </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Replicate grep_case()</span></span></span>
 <span class="r-in"><span><span class="va">countries</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
@@ -169,19 +169,6 @@ but not <code>x</code></p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "France"          "Ostdeutschland"  "Westdeutschland" "Netherlands"    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [5] "Belgium"         "Belgium"         "Luxembourg"      "Italy"          </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">fn_case</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="va">countries</span>,</span></span>
-<span class="r-in"><span>  fn <span class="op">=</span> <span class="fu">stringi</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/stringi/man/stri_detect.html" class="external-link">stri_detect_regex</a></span>,</span></span>
-<span class="r-in"><span>  <span class="st">"Deutschland"</span>    <span class="op">~</span> <span class="st">"Germany"</span>,</span></span>
-<span class="r-in"><span>  <span class="st">"Belgi(qu)?e"</span>    <span class="op">~</span> <span class="st">"Belgium"</span>,</span></span>
-<span class="r-in"><span>  <span class="st">"Nederland"</span>      <span class="op">~</span> <span class="st">"Netherlands"</span>,</span></span>
-<span class="r-in"><span>  <span class="st">"Italia"</span>         <span class="op">~</span> <span class="st">"Italy"</span>,</span></span>
-<span class="r-in"><span>  preserve         <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
-<span class="r-in"><span>  case_insensitive <span class="op">=</span> <span class="cn">TRUE</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "France"      "Germany"     "Germany"     "Netherlands" "Belgium"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [6] "Belgium"     "Luxembourg"  "Italy"      </span>
-<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Recode values in a range</span></span></span>
 <span class="r-in"><span><span class="va">time</span>    <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">1</span>, <span class="fl">12</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">hours</span>   <span class="op">&lt;-</span> <span class="va">time</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%/%</a></span> <span class="fl">1</span></span></span>
@@ -189,8 +176,7 @@ but not <code>x</code></p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">hours</span> <span class="op">&lt;-</span> <span class="va">hours</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="if_case.html">if_case</a></span><span class="op">(</span><span class="va">minutes</span> <span class="op">&gt;</span> <span class="fl">32.5</span>, <span class="op">(</span><span class="va">.</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%%</a></span> <span class="fl">12</span>, <span class="va">.</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="switch_case.html">switch_case</a></span><span class="op">(</span><span class="fl">0</span> <span class="op">~</span> <span class="fl">12</span>, preserve <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu">nombre</span><span class="fu">::</span><span class="fu"><a href="https://nombre.rossellhayes.com/reference/cardinal.html" class="external-link">cardinal</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="switch_case.html">switch_case</a></span><span class="op">(</span><span class="fl">0</span> <span class="op">~</span> <span class="fl">12</span>, preserve <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">minutes</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">fn_case</span><span class="op">(</span></span></span>
@@ -213,16 +199,17 @@ but not <code>x</code></p>
 <span class="r-in"><span>    <span class="st">"o'clock"</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">hours</span>, <span class="va">.</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>    default   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">.</span>, <span class="va">hours</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "ten to eleven"        "twenty-five past ten" "twenty-five to six"  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4] "five past six"        "ten to ten"           "twenty-five to four" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "quarter to eight"     "twenty to nine"       "twenty-five to two"  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10] "twenty-five past one"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "quarter to 3"       "half past 6"        "quarter to 11"     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4] "five past 9"        "twenty-five past 1" "quarter to 5"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "five to 6"          "quarter past 9"     "10 o'clock"        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10] "five to 5"         </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Replicate vctrs::vec_ptype_abbr() (used for tibble column labels)</span></span></span>
 <span class="r-in"><span><span class="co"># Based on a contribution by Patrice Kiener</span></span></span>
 <span class="r-in"><span><span class="va">in_herits</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="fu">fn_case</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="va">x</span>, <span class="va">inherits</span>,</span></span>
+<span class="r-in"><span>    <span class="va">x</span>,</span></span>
+<span class="r-in"><span>    fn <span class="op">=</span> <span class="va">inherits</span>,</span></span>
 <span class="r-in"><span>    <span class="st">"factor"</span>     <span class="op">~</span> <span class="st">"fct"</span>,</span></span>
 <span class="r-in"><span>    <span class="st">"character"</span>  <span class="op">~</span> <span class="st">"chr"</span>,</span></span>
 <span class="r-in"><span>    <span class="st">"numeric"</span>    <span class="op">~</span> <span class="st">"dbl"</span>,</span></span>
