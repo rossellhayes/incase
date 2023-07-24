@@ -119,6 +119,7 @@ validate_formula <- function(x, i, default_env, dots_env) {
   )
 }
 
+#' @importFrom plu ral
 assert_logical_lhs <- function(query, quos_pairs) {
   illogical <- !vapply(query, is.logical, logical(1))
 

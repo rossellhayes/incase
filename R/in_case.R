@@ -94,6 +94,7 @@ assert_no_preserve_without_pipe <- function(preserve, fn) {
   }
 }
 
+#' @importFrom plu ral
 assert_two_sided <- function(fs, fn) {
   nfs <- Filter(
     function(fs) !rlang::is_formula(fs, lhs = TRUE) && !rlang::is_quosure(fs),

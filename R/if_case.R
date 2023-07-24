@@ -27,6 +27,7 @@
 #'   [dplyr::if_else()], from which this function is derived
 #'
 #' @importFrom rlang %||%
+#' @importFrom plu ral
 #' @export
 #'
 #' @example examples/if_case.R
