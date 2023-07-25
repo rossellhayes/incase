@@ -11,7 +11,7 @@
 MIT](https://img.shields.io/badge/license-MIT-blueviolet.svg)](https://cran.r-project.org/web/licenses/MIT)
 [![R build
 status](https://github.com/rossellhayes/incase/workflows/R-CMD-check/badge.svg)](https://github.com/rossellhayes/incase/actions)
-[![](https://codecov.io/gh/rossellhayes/incase/branch/main/graph/badge.svg)](https://codecov.io/gh/rossellhayes/incase)
+[![](https://codecov.io/gh/rossellhayes/incase/branch/main/graph/badge.svg)](https://app.codecov.io/gh/rossellhayes/incase)
 [![CodeFactor](https://www.codefactor.io/repository/github/rossellhayes/incase/badge)](https://www.codefactor.io/repository/github/rossellhayes/incase)
 [![Dependencies](https://tinyverse.netlify.com/badge/incase)](https://cran.r-project.org/package=incase)
 <!-- badges: end -->
@@ -74,7 +74,7 @@ x <- -1:5
 
 # Replace -1 with NA
 dplyr::case_when(x == -1 ~ NA, TRUE ~ x)
-#> Error: must be a logical vector, not an integer vector.
+#> [1] NA  0  1  2  3  4  5
 dplyr::case_when(x == -1 ~ NA_integer_, TRUE ~ x)
 #> [1] NA  0  1  2  3  4  5
 in_case(x == -1 ~ NA, TRUE ~ x)
@@ -82,7 +82,7 @@ in_case(x == -1 ~ NA, TRUE ~ x)
 
 # Replace -1 with 0
 dplyr::case_when(x == -1 ~ 0, TRUE ~ x)
-#> Error: must be a double vector, not an integer vector.
+#> [1] 0 0 1 2 3 4 5
 dplyr::case_when(x == -1 ~ 0L, TRUE ~ x)
 #> [1] 0 0 1 2 3 4 5
 in_case(x == -1 ~ 0, TRUE ~ x)
@@ -141,8 +141,8 @@ recoding discrete values.
 
 ``` r
 parties
-#>  [1] "I" "I" "I" NA  NA  "L" "D" "R" "I" NA  "I" "G" "I" "R" "D" "L" "L" "R" "D"
-#> [20] "I"
+#>  [1] "D" NA  "I" NA  "I" "D" "G" "R" "R" "G" "R" "R" "D" "I" NA  "R" "D" "I" "I"
+#> [20] "R"
 
 parties %>%
   switch_case(
@@ -151,10 +151,10 @@ parties %>%
     c("G", "L") ~ "Other",
     c("I", NA)  ~ "Independent"
   )
-#>  [1] "Independent" "Independent" "Independent" "Independent" "Independent"
-#>  [6] "Other"       "Democrat"    "Republican"  "Independent" "Independent"
-#> [11] "Independent" "Other"       "Independent" "Republican"  "Democrat"   
-#> [16] "Other"       "Other"       "Republican"  "Democrat"    "Independent"
+#>  [1] "Democrat"    "Independent" "Independent" "Independent" "Independent"
+#>  [6] "Democrat"    "Other"       "Republican"  "Republican"  "Other"      
+#> [11] "Republican"  "Republican"  "Democrat"    "Independent" "Independent"
+#> [16] "Republican"  "Democrat"    "Independent" "Independent" "Republican"
 ```
 
 `grep_case()` allows you to recode values with pattern matching.
@@ -188,8 +188,8 @@ factor levels. Use `ordered = TRUE` to create an ordered factor and
 ``` r
 data <- runif(10, 0, 10)
 data
-#>  [1] 9.283039 7.851878 7.230907 1.880231 6.942045 7.995043 1.470314 8.706706
-#>  [9] 2.943369 4.361939
+#>  [1] 1.386485 6.928824 7.664163 9.890110 5.088233 3.057168 9.812904 7.826100
+#>  [9] 5.283799 4.634477
 
 data %>% 
   in_case_fct(
@@ -198,7 +198,7 @@ data %>%
     default = "High",
     ordered = TRUE
   )
-#>  [1] High   High   High   Low    Medium High   Low    High   Low    Medium
+#>  [1] Low    Medium High   High   Medium Medium High   High   Medium Medium
 #> Levels: Low < Medium < High
 
 parties %>%
@@ -208,10 +208,10 @@ parties %>%
     c("G", "L") ~ "Other",
     c("I", NA)  ~ "Independent"
   )
-#>  [1] Independent Independent Independent Independent Independent Other      
-#>  [7] Democrat    Republican  Independent Independent Independent Other      
-#> [13] Independent Republican  Democrat    Other       Other       Republican 
-#> [19] Democrat    Independent
+#>  [1] Democrat    Independent Independent Independent Independent Democrat   
+#>  [7] Other       Republican  Republican  Other       Republican  Republican 
+#> [13] Democrat    Independent Independent Republican  Democrat    Independent
+#> [19] Independent Republican 
 #> Levels: Democrat Republican Other Independent
 ```
 
