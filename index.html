@@ -191,8 +191,8 @@
 <p><code><a href="reference/switch_case.html">switch_case()</a></code> works as a convenient shorthand for <code><a href="reference/in_case.html">in_case()</a></code> when recoding discrete values.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">parties</span></span>
-<span><span class="co">#&gt;  [1] "D" NA  "I" NA  "I" "D" "G" "R" "R" "G" "R" "R" "D" "I" NA  "R" "D" "I" "I"</span></span>
-<span><span class="co">#&gt; [20] "R"</span></span>
+<span><span class="co">#&gt;  [1] "G" "I" "D" "I" "R" "D" "L" "D" NA  "L" NA  "G" "R" NA  "G" NA  "L" "D" "D"</span></span>
+<span><span class="co">#&gt; [20] "I"</span></span>
 <span></span>
 <span><span class="va">parties</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/switch_case.html">switch_case</a></span><span class="op">(</span></span>
@@ -201,10 +201,10 @@
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"G"</span>, <span class="st">"L"</span><span class="op">)</span> <span class="op">~</span> <span class="st">"Other"</span>,</span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"I"</span>, <span class="cn">NA</span><span class="op">)</span>  <span class="op">~</span> <span class="st">"Independent"</span></span>
 <span>  <span class="op">)</span></span>
-<span><span class="co">#&gt;  [1] "Democrat"    "Independent" "Independent" "Independent" "Independent"</span></span>
-<span><span class="co">#&gt;  [6] "Democrat"    "Other"       "Republican"  "Republican"  "Other"      </span></span>
-<span><span class="co">#&gt; [11] "Republican"  "Republican"  "Democrat"    "Independent" "Independent"</span></span>
-<span><span class="co">#&gt; [16] "Republican"  "Democrat"    "Independent" "Independent" "Republican"</span></span></code></pre></div>
+<span><span class="co">#&gt;  [1] "Other"       "Independent" "Democrat"    "Independent" "Republican" </span></span>
+<span><span class="co">#&gt;  [6] "Democrat"    "Other"       "Democrat"    "Independent" "Other"      </span></span>
+<span><span class="co">#&gt; [11] "Independent" "Other"       "Republican"  "Independent" "Other"      </span></span>
+<span><span class="co">#&gt; [16] "Independent" "Other"       "Democrat"    "Democrat"    "Independent"</span></span></code></pre></div>
 <p><code><a href="reference/grep_case.html">grep_case()</a></code> allows you to recode values with pattern matching.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">countries</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
@@ -230,8 +230,8 @@
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span></span>
 <span><span class="va">data</span></span>
-<span><span class="co">#&gt;  [1] 1.386485 6.928824 7.664163 9.890110 5.088233 3.057168 9.812904 7.826100</span></span>
-<span><span class="co">#&gt;  [9] 5.283799 4.634477</span></span>
+<span><span class="co">#&gt;  [1] 3.9075340 7.4098608 2.1540250 8.4599089 3.0487929 8.9268192 9.9001603</span></span>
+<span><span class="co">#&gt;  [8] 9.2022173 0.3128016 5.2452107</span></span>
 <span></span>
 <span><span class="va">data</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="reference/in_case_fct.html">in_case_fct</a></span><span class="op">(</span></span>
@@ -240,7 +240,7 @@
 <span>    default <span class="op">=</span> <span class="st">"High"</span>,</span>
 <span>    ordered <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span>  <span class="op">)</span></span>
-<span><span class="co">#&gt;  [1] Low    Medium High   High   Medium Medium High   High   Medium Medium</span></span>
+<span><span class="co">#&gt;  [1] Medium High   Low    High   Medium High   High   High   Low    Medium</span></span>
 <span><span class="co">#&gt; Levels: Low &lt; Medium &lt; High</span></span>
 <span></span>
 <span><span class="va">parties</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
@@ -250,10 +250,10 @@
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"G"</span>, <span class="st">"L"</span><span class="op">)</span> <span class="op">~</span> <span class="st">"Other"</span>,</span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"I"</span>, <span class="cn">NA</span><span class="op">)</span>  <span class="op">~</span> <span class="st">"Independent"</span></span>
 <span>  <span class="op">)</span></span>
-<span><span class="co">#&gt;  [1] Democrat    Independent Independent Independent Independent Democrat   </span></span>
-<span><span class="co">#&gt;  [7] Other       Republican  Republican  Other       Republican  Republican </span></span>
-<span><span class="co">#&gt; [13] Democrat    Independent Independent Republican  Democrat    Independent</span></span>
-<span><span class="co">#&gt; [19] Independent Republican </span></span>
+<span><span class="co">#&gt;  [1] Other       Independent Democrat    Independent Republican  Democrat   </span></span>
+<span><span class="co">#&gt;  [7] Other       Democrat    Independent Other       Independent Other      </span></span>
+<span><span class="co">#&gt; [13] Republican  Independent Other       Independent Other       Democrat   </span></span>
+<span><span class="co">#&gt; [19] Democrat    Independent</span></span>
 <span><span class="co">#&gt; Levels: Democrat Republican Other Independent</span></span></code></pre></div>
 <hr>
 <p>Hex sticker fonts are <a href="https://github.com/adobe-fonts/source-sans" class="external-link">Source Sans by Adobe</a> and <a href="https://github.com/i-tu/Hasklig" class="external-link">Hasklig by Ian Tuomi</a>.</p>
@@ -309,12 +309,11 @@
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/package=incase" class="external-link"><img src="https://www.r-pkg.org/badges/version/incase?color=brightgreen"></a></li>
+<li><a href="https://rossellhayes.r-universe.dev/incase" class="external-link"><img src="https://rossellhayes.r-universe.dev/badges/incase" alt="r-universe status badge"></a></li>
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg"></a></li>
 <li><a href="https://cran.r-project.org/web/licenses/MIT" class="external-link"><img src="https://img.shields.io/badge/license-MIT-blueviolet.svg" alt="License: MIT"></a></li>
 <li><a href="https://github.com/rossellhayes/incase/actions" class="external-link"><img src="https://github.com/rossellhayes/incase/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
 <li><a href="https://app.codecov.io/gh/rossellhayes/incase" class="external-link"><img src="https://codecov.io/gh/rossellhayes/incase/branch/main/graph/badge.svg"></a></li>
-<li><a href="https://www.codefactor.io/repository/github/rossellhayes/incase" class="external-link"><img src="https://www.codefactor.io/repository/github/rossellhayes/incase/badge" alt="CodeFactor"></a></li>
-<li><a href="https://cran.r-project.org/package=incase" class="external-link"><img src="https://tinyverse.netlify.com/badge/incase" alt="Dependencies"></a></li>
 </ul>
 </div>
 
