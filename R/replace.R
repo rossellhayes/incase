@@ -85,7 +85,7 @@ extract_formula_pairs <- function(
     assert_logical_lhs(query, quos_pairs)
     applicable <- vapply(
       query,
-      function(x) {any(x) && !all(is.na(x))},
+      function(x) isTRUE(any(x)),
       logical(1)
     )
   } else {

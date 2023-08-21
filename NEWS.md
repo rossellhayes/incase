@@ -2,6 +2,7 @@
 
 * Accept named arguments with or without preceding dots, e.g. `default` or `.default` (#5).
 * Take `default` into account when determining the class of output (#5).
+* Fix bug where replacement would fail if a condition evaluated to a vector made up of both `NA`s and `FALSE`s with no `TRUE`s.
 * Improve error messages (#5).
 * No longer rely on deprecated `plu` functions (#4).
 

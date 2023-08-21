@@ -50,6 +50,18 @@ test_that("zero-length input", {
   )
 })
 
+test_that("condition all NA and FALSE", {
+  x_with_na <- c(x, NA)
+
+  expect_equal(
+    in_case(
+      x_with_na > 5 ~ "high",
+      x_with_na <= 5 ~ "low"
+    ),
+    c(rep("low", 5), NA)
+  )
+})
+
 test_that("errors", {
   expect_warning(x %>% in_case(. > 3 ~ "f", preserve = TRUE, default = "p"))
   expect_error(in_case(x %% 3 == 0 ~ "fizz", preserve = TRUE))
