@@ -28,12 +28,11 @@ parties <- sample(
 
 <!-- badges: start -->
 `r badge_cran_release(color = "brightgreen")`
+`r badge_runiverse()`
 `r badge_lifecycle("stable")`
 `r badge_license(color = "blueviolet")`
 `r badge_github_actions(action = "R-CMD-check")`
 `r badge_codecov(branch = "main")`
-`r badge_codefactor()`
-`r badge_dependencies()`
 <!-- badges: end -->
 
 **incase** provides a more pipe-friendly alternative to [**dplyr**](https://github.com/tidyverse/dplyr)'s [`case_when()`](https://dplyr.tidyverse.org/reference/case_when.html) and [`if_else()`](https://dplyr.tidyverse.org/reference/if_else.html).

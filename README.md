@@ -6,14 +6,14 @@
 <!-- badges: start -->
 
 [![](https://www.r-pkg.org/badges/version/incase?color=brightgreen)](https://cran.r-project.org/package=incase)
+[![r-universe status
+badge](https://rossellhayes.r-universe.dev/badges/incase)](https://rossellhayes.r-universe.dev/incase)
 [![](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![License:
 MIT](https://img.shields.io/badge/license-MIT-blueviolet.svg)](https://cran.r-project.org/web/licenses/MIT)
 [![R build
 status](https://github.com/rossellhayes/incase/workflows/R-CMD-check/badge.svg)](https://github.com/rossellhayes/incase/actions)
 [![](https://codecov.io/gh/rossellhayes/incase/branch/main/graph/badge.svg)](https://app.codecov.io/gh/rossellhayes/incase)
-[![CodeFactor](https://www.codefactor.io/repository/github/rossellhayes/incase/badge)](https://www.codefactor.io/repository/github/rossellhayes/incase)
-[![Dependencies](https://tinyverse.netlify.com/badge/incase)](https://cran.r-project.org/package=incase)
 <!-- badges: end -->
 
 **incase** provides a more pipe-friendly alternative to
@@ -141,8 +141,8 @@ recoding discrete values.
 
 ``` r
 parties
-#>  [1] "D" NA  "I" NA  "I" "D" "G" "R" "R" "G" "R" "R" "D" "I" NA  "R" "D" "I" "I"
-#> [20] "R"
+#>  [1] "G" "I" "D" "I" "R" "D" "L" "D" NA  "L" NA  "G" "R" NA  "G" NA  "L" "D" "D"
+#> [20] "I"
 
 parties %>%
   switch_case(
@@ -151,10 +151,10 @@ parties %>%
     c("G", "L") ~ "Other",
     c("I", NA)  ~ "Independent"
   )
-#>  [1] "Democrat"    "Independent" "Independent" "Independent" "Independent"
-#>  [6] "Democrat"    "Other"       "Republican"  "Republican"  "Other"      
-#> [11] "Republican"  "Republican"  "Democrat"    "Independent" "Independent"
-#> [16] "Republican"  "Democrat"    "Independent" "Independent" "Republican"
+#>  [1] "Other"       "Independent" "Democrat"    "Independent" "Republican" 
+#>  [6] "Democrat"    "Other"       "Democrat"    "Independent" "Other"      
+#> [11] "Independent" "Other"       "Republican"  "Independent" "Other"      
+#> [16] "Independent" "Other"       "Democrat"    "Democrat"    "Independent"
 ```
 
 `grep_case()` allows you to recode values with pattern matching.
@@ -188,8 +188,8 @@ factor levels. Use `ordered = TRUE` to create an ordered factor and
 ``` r
 data <- runif(10, 0, 10)
 data
-#>  [1] 1.386485 6.928824 7.664163 9.890110 5.088233 3.057168 9.812904 7.826100
-#>  [9] 5.283799 4.634477
+#>  [1] 3.9075340 7.4098608 2.1540250 8.4599089 3.0487929 8.9268192 9.9001603
+#>  [8] 9.2022173 0.3128016 5.2452107
 
 data %>% 
   in_case_fct(
@@ -198,7 +198,7 @@ data %>%
     default = "High",
     ordered = TRUE
   )
-#>  [1] Low    Medium High   High   Medium Medium High   High   Medium Medium
+#>  [1] Medium High   Low    High   Medium High   High   High   Low    Medium
 #> Levels: Low < Medium < High
 
 parties %>%
@@ -208,10 +208,10 @@ parties %>%
     c("G", "L") ~ "Other",
     c("I", NA)  ~ "Independent"
   )
-#>  [1] Democrat    Independent Independent Independent Independent Democrat   
-#>  [7] Other       Republican  Republican  Other       Republican  Republican 
-#> [13] Democrat    Independent Independent Republican  Democrat    Independent
-#> [19] Independent Republican 
+#>  [1] Other       Independent Democrat    Independent Republican  Democrat   
+#>  [7] Other       Democrat    Independent Other       Independent Other      
+#> [13] Republican  Independent Other       Independent Other       Democrat   
+#> [19] Democrat    Independent
 #> Levels: Democrat Republican Other Independent
 ```
 
