@@ -28,7 +28,7 @@ test_that("fizz_buzz", {
       in_case(
         . %% 3 == 0 ~ "fizz",
         . %% 5 == 0 ~ "buzz",
-        preserve    = TRUE
+        preserve = TRUE
       ),
     y
   )
@@ -37,9 +37,52 @@ test_that("fizz_buzz", {
     in_case(
       x %% 3 == 0 ~ "fizz",
       x %% 5 == 0 ~ "buzz",
-      default     = "pass"
+      default = "pass"
     ),
     c("pass", "pass", "fizz", "pass", "buzz")
+  )
+})
+
+test_that("class coercion of return values", {
+  expect_equal(
+    in_case(
+      x == 1 ~ TRUE,
+      x == 2 ~ 2L,
+      x == 3 ~ 3,
+      x == 4 ~ as.raw(4),
+      x == 5 ~ "five"
+    ),
+    c("TRUE", "2", "3", "04", "five")
+  )
+})
+
+test_that("return list of tibbles", {
+  df1 <- data.frame(x = 1, y = 1)
+  df2 <- data.frame(x = 2, y = 2)
+
+  expect_equal(
+    in_case(
+      x > 3 ~ list(df1),
+      x <= 3 ~ list(df2)
+    ),
+    list(df2, df2, df2, df1, df1)
+  )
+
+  expect_equal(
+    in_case(
+      x > 3 ~ list(df1),
+      default = list(df2)
+    ),
+    list(df2, df2, df2, df1, df1)
+  )
+
+  expect_equal(
+    in_case(
+      x,
+      x > 3 ~ list(df1),
+      preserve = TRUE
+    ),
+    list(1, 2, 3, df1, df1)
   )
 })
 

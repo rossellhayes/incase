@@ -1,5 +1,8 @@
 # incase (development version)
 
+* `*_case()` functions can now use lists as return values.
+* `*_case()` functions no longer perform automatic type conversion on non-atomic return values.
+
 # incase 0.3.2
 
 * Accept named arguments with or without preceding dots, e.g. `default` or `.default` (#5).
