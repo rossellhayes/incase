@@ -12,7 +12,10 @@ test_that("grep_case() with ignore.case", {
 
   expect_equal(
     grep_case(
-      caps_words, "cat" ~ "feline", "dog" ~ "canine", ignore.case = TRUE
+      caps_words,
+      "cat" ~ "feline",
+      "dog" ~ "canine",
+      ignore.case = TRUE
     ),
     c("feline", "canine", "feline", "canine")
   )
@@ -71,5 +74,27 @@ test_that("grep_case() with preserve", {
       "Belgium", "Belgium", "Luxembourg", "Italy"
     )
   )
+})
 
+test_that("grep_case() with vector LHS", {
+  countries <- c(
+    "France", "Ostdeutschland", "West Germany", "Nederland",
+    "België (Vlaanderen)", "Belgique (Wallonie)", "Luxembourg", "Italia"
+  )
+
+  expect_equal(
+    grep_case(
+      countries,
+      c("german", "deutsch") ~ "Germany",
+      "belg" ~ "Belgium",
+      "nederland" ~ "Netherlands",
+      "italia" ~ "Italy",
+      ignore.case = TRUE,
+      preserve = TRUE
+    ),
+    c(
+      "France", "Germany", "Germany", "Netherlands",
+      "Belgium", "Belgium", "Luxembourg", "Italy"
+    )
+  )
 })
