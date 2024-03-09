@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">incase</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.9000</span>
       </span>
     </div>
 
@@ -132,10 +132,10 @@ but not <code>x</code></p>
 <span class="r-in"><span>  <span class="st">"g"</span> <span class="op">~</span> <span class="st">"Green"</span>,</span></span>
 <span class="r-in"><span>  <span class="st">"l"</span> <span class="op">~</span> <span class="st">"Libertarian"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "Democrat"    "Libertarian" "Independent" "Democrat"    "Republican" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "Libertarian" "Democrat"    "Green"       "Independent" "Libertarian"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "Democrat"    "Democrat"    "Democrat"    "Independent" "Democrat"   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "Green"       "Independent" "Green"       "Independent" "Democrat"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "Libertarian" "Green"       "Libertarian" "Green"       "Democrat"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "Libertarian" "Libertarian" "Libertarian" "Republican"  "Independent"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "Independent" "Libertarian" "Libertarian" "Green"       "Libertarian"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "Republican"  "Green"       "Republican"  "Independent" "Democrat"   </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Replicate grep_case()</span></span></span>
 <span class="r-in"><span><span class="va">countries</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
@@ -199,10 +199,10 @@ but not <code>x</code></p>
 <span class="r-in"><span>    <span class="st">"o'clock"</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">hours</span>, <span class="va">.</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>    default   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">.</span>, <span class="va">hours</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "twenty to 4"        "twenty past 10"     "five to 6"         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4] "twenty-five past 9" "11 o'clock"         "quarter past 6"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "half past 2"        "twenty past 10"     "quarter past 8"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10] "quarter to 3"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "twenty-five past 11" "3 o'clock"           "twenty-five past 3" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4] "half past 8"         "half past 6"         "five past 8"        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "quarter past 8"      "five past 2"         "twenty-five past 9" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10] "half past 9"        </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Replicate vctrs::vec_ptype_abbr() (used for tibble column labels)</span></span></span>
 <span class="r-in"><span><span class="co"># Based on a contribution by Patrice Kiener</span></span></span>

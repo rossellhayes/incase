@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">incase</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.9000</span>
       </span>
     </div>
 
@@ -48,7 +48,14 @@
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.3.2" id="incase-032">incase 0.3.2<a class="anchor" aria-label="anchor" href="#incase-032"></a></h2>
+<h2 class="page-header" data-toc-text="development version" id="incase-development-version">incase (development version)<a class="anchor" aria-label="anchor" href="#incase-development-version"></a></h2>
+<ul><li>
+<code>*_case()</code> functions can now use lists as return values.</li>
+<li>
+<code>*_case()</code> functions no longer perform automatic type conversion on non-atomic return values.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.3.2" id="incase-032">incase 0.3.2<small>2023-08-21</small><a class="anchor" aria-label="anchor" href="#incase-032"></a></h2>
 <ul><li>Accept named arguments with or without preceding dots, e.g. <code>default</code> or <code>.default</code> (<a href="https://github.com/rossellhayes/incase/issues/5" class="external-link">#5</a>).</li>
 <li>Take <code>default</code> into account when determining the class of output (<a href="https://github.com/rossellhayes/incase/issues/5" class="external-link">#5</a>).</li>
 <li>Fix bug where replacement would fail if a condition evaluated to a vector made up of both <code>NA</code>s and <code>FALSE</code>s with no <code>TRUE</code>s.</li>
