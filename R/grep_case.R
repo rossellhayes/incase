@@ -34,10 +34,20 @@
 
 grep_case <- function(x, ..., preserve = FALSE, default = NA) {
   fn_case(
-    x  = x,
-    fn = function(x, pattern, ...) grepl(pattern, x, ...),
+    x = x,
+    fn = grepl_any,
     ...,
     preserve = preserve,
-    default  = default
+    default = default
   )
+}
+
+grepl_any <- function(x, pattern, ...) {
+  logical <- vapply(pattern, grepl, logical(length(x)), x, ...)
+  logical <- matrix(logical, nrow = length(x))
+  apply(logical, 1, or_reduce)
+}
+
+or_reduce <- function(logical) {
+  Reduce(`|`, logical)
 }
