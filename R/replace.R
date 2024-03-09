@@ -1,10 +1,17 @@
 #' @importFrom rlang %||%
 
 replace <- function(
-  fs, x, default, preserve,
-  fn = NULL, args = NULL,
-  factor = FALSE, ordered = FALSE, list = FALSE,
-  default_env, current_env
+  fs,
+  x,
+  default,
+  preserve,
+  fn = NULL,
+  args = NULL,
+  factor = FALSE,
+  ordered = FALSE,
+  list = FALSE,
+  default_env,
+  current_env
 ) {
   assert_length(fs, call = current_env)
 
@@ -39,7 +46,7 @@ replace <- function(
   out      <- rep_len(default, n)
   replaced <- rep(FALSE, n)
 
-  if (!list) {
+  if (!list & all(vapply(pairs$value, is.atomic, logical(1)))) {
     class       <- class(c(pairs$value, default, recursive = TRUE))
     pairs$value <- lapply(pairs$value, `class<-`, class)
     class(out)  <- class
