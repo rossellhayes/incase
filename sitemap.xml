@@ -1,54 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://pkg.rossellhayes.com/incase/404.html</loc>
-  </url>
-  <url>
-    <loc>https://pkg.rossellhayes.com/incase/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>https://pkg.rossellhayes.com/incase/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://pkg.rossellhayes.com/incase/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://pkg.rossellhayes.com/incase/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://pkg.rossellhayes.com/incase/index.html</loc>
-  </url>
-  <url>
-    <loc>https://pkg.rossellhayes.com/incase/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://pkg.rossellhayes.com/incase/reference/fn_case.html</loc>
-  </url>
-  <url>
-    <loc>https://pkg.rossellhayes.com/incase/reference/grep_case.html</loc>
-  </url>
-  <url>
-    <loc>https://pkg.rossellhayes.com/incase/reference/if_case.html</loc>
-  </url>
-  <url>
-    <loc>https://pkg.rossellhayes.com/incase/reference/in_case.html</loc>
-  </url>
-  <url>
-    <loc>https://pkg.rossellhayes.com/incase/reference/in_case_fct.html</loc>
-  </url>
-  <url>
-    <loc>https://pkg.rossellhayes.com/incase/reference/in_case_list.html</loc>
-  </url>
-  <url>
-    <loc>https://pkg.rossellhayes.com/incase/reference/incase-package.html</loc>
-  </url>
-  <url>
-    <loc>https://pkg.rossellhayes.com/incase/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://pkg.rossellhayes.com/incase/reference/pipe.html</loc>
-  </url>
-  <url>
-    <loc>https://pkg.rossellhayes.com/incase/reference/switch_case.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://pkg.rossellhayes.com/incase/404.html</loc></url>
+<url><loc>https://pkg.rossellhayes.com/incase/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://pkg.rossellhayes.com/incase/LICENSE-text.html</loc></url>
+<url><loc>https://pkg.rossellhayes.com/incase/LICENSE.html</loc></url>
+<url><loc>https://pkg.rossellhayes.com/incase/authors.html</loc></url>
+<url><loc>https://pkg.rossellhayes.com/incase/index.html</loc></url>
+<url><loc>https://pkg.rossellhayes.com/incase/news/index.html</loc></url>
+<url><loc>https://pkg.rossellhayes.com/incase/reference/fn_case.html</loc></url>
+<url><loc>https://pkg.rossellhayes.com/incase/reference/grep_case.html</loc></url>
+<url><loc>https://pkg.rossellhayes.com/incase/reference/if_case.html</loc></url>
+<url><loc>https://pkg.rossellhayes.com/incase/reference/in_case.html</loc></url>
+<url><loc>https://pkg.rossellhayes.com/incase/reference/in_case_fct.html</loc></url>
+<url><loc>https://pkg.rossellhayes.com/incase/reference/in_case_list.html</loc></url>
+<url><loc>https://pkg.rossellhayes.com/incase/reference/incase-package.html</loc></url>
+<url><loc>https://pkg.rossellhayes.com/incase/reference/index.html</loc></url>
+<url><loc>https://pkg.rossellhayes.com/incase/reference/pipe.html</loc></url>
+<url><loc>https://pkg.rossellhayes.com/incase/reference/switch_case.html</loc></url>
 </urlset>
+
