@@ -113,6 +113,34 @@ test_that("fn_case_fct", {
   )
 })
 
+test_that("grep_case_fct() with vector LHS", {
+  countries <- c(
+    "France", "Ostdeutschland", "West Germany", "Nederland",
+    "België (Vlaanderen)", "Belgique (Wallonie)", "Luxembourg", "Italia"
+  )
+
+  expect_equal(
+    grep_case_fct(
+      countries,
+      c("german", "deutsch") ~ "Germany",
+      "belg" ~ "Belgium",
+      "nederland" ~ "Netherlands",
+      "italia" ~ "Italy",
+      ignore.case = TRUE,
+      preserve = TRUE
+    ),
+    factor(
+      c(
+        "France", "Germany", "Germany", "Netherlands",
+        "Belgium", "Belgium", "Luxembourg", "Italy"
+      ),
+      levels = c(
+        "Germany", "Belgium", "Netherlands", "Italy", "France", "Luxembourg"
+      )
+    )
+  )
+})
+
 test_that("errors", {
   x <- 1:15
 

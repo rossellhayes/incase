@@ -62,7 +62,7 @@ grep_case_fct <- function(
 ) {
   fn_case_fct(
     x  = x,
-    fn = function(x, pattern, ...) grepl(pattern, x, ...),
+    fn = grepl_any,
     ...,
     preserve = preserve,
     default  = default,

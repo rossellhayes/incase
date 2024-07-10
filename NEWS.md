@@ -2,7 +2,7 @@
 
 * `*_case()` functions can now use lists as return values (#7).
 * `*_case()` functions no longer perform automatic type conversion on non-atomic return values (#7).
-* `grep_case()` now supports vectors in the left-hand side of arguments (#8).
+* `grep_case()` and `grep_case_fct()` now support vectors in the left-hand side of arguments (#8).
 
 # incase 0.3.2
 
