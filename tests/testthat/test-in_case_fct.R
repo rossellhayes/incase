@@ -86,6 +86,36 @@ test_that("switch_case_fct", {
   )
 })
 
+test_that("switch_case_fct with default", {
+  expect_equal(
+    switch_case_fct(
+      c("a", "b", "c", "d"),
+      "c" ~ "cantaloupe",
+      "b" ~ "banana",
+      "a" ~ "apple",
+      .default = "fruit"
+    ),
+    factor(
+      c("apple", "banana", "cantaloupe", "fruit"),
+      levels = c("cantaloupe", "banana", "apple", "fruit")
+    )
+  )
+
+  expect_equal(
+    switch_case_fct(
+      c("a", "b", "c", "d"),
+      .default = "fruit",
+      "c" ~ "cantaloupe",
+      "b" ~ "banana",
+      "a" ~ "apple",
+    ),
+    factor(
+      c("apple", "banana", "cantaloupe", "fruit"),
+      levels = c("fruit", "cantaloupe", "banana", "apple")
+    )
+  )
+})
+
 test_that("grep_case_fct", {
   expect_equal(
     grep_case_fct(
