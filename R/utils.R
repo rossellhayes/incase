@@ -20,8 +20,8 @@ coalesce_deprecated <- function(.argument, argument) {
   if (.arg_name %in% names(call) & !identical(.argument, argument)) {
     cli::cli_abort(
       c(
-        "{.arg {arg_name}} and {.arg {.arg_name}} arguments cannot both be specified.",
-        "*" = "Please only specify {.arg {.arg_name}}."
+        "{.arg {arg_name}} and {.arg {(.arg_name)}} arguments cannot both be specified.",
+        "*" = "Please only specify {.arg {(.arg_name)}}."
       ),
       call = rlang::caller_env()
     )
