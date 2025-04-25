@@ -19,16 +19,18 @@
 #'
 #'   `NULL` inputs are ignored.
 #'
-#' @param preserve If `TRUE`, unmatched elements of the input will be
+#' @param .preserve If `TRUE`, unmatched elements of the input will be
 #'   returned unmodified.
 #'   (The elements may have their type coerced to be compatible with
 #'   replacement values.)
 #'   If `FALSE`, unmatched elements of the input will be replaced
-#'   with `default`.
+#'   with `.default`.
 #'   Defaults to `FALSE`.
-#' @param default If `preserve` is `FALSE`, a value to replace unmatched
+#' @param .default If `.preserve` is `FALSE`, a value to replace unmatched
 #'   elements of the input.
 #'   Defaults to `NA`.
+#' @param preserve,default `r lifecycle::badge("deprecated")`
+#'   Deprecated in favor of `.preserve` and `.default`
 #'
 #' @return A vector of length 1 or n, matching the length of the logical input
 #'   or output vectors.
@@ -51,21 +53,30 @@
 #'
 #' @example examples/in_case.R
 
-in_case <- function(..., preserve = FALSE, default = NA) {
+in_case <- function(
+  ...,
+  .preserve = FALSE,
+  .default = NA,
+  preserve = deprecated(),
+  default = deprecated()
+) {
+  .preserve <- coalesce_deprecated(.preserve, preserve)
+  .default <- coalesce_deprecated(.default, default)
+
   dots <- allow_dot_aliases(compact_list(...))
-  inputs <- in_case_setup(dots, preserve = preserve, fn = "in_case")
+  inputs <- in_case_setup(dots, .preserve = .preserve, fn = "in_case")
 
   replace(
     fs          = inputs$fs,
     x           = inputs$x,
-    default     = default,
-    preserve    = preserve,
+    .default     = .default,
+    .preserve    = .preserve,
     default_env = rlang::caller_env(),
     current_env = rlang::current_env()
   )
 }
 
-in_case_setup <- function(dots, preserve, fn) {
+in_case_setup <- function(dots, .preserve, fn) {
   if (length(dots) == 0) {
     return(list(fs = list(), x = vector()))
   }
@@ -76,7 +87,7 @@ in_case_setup <- function(dots, preserve, fn) {
   } else {
     fs <- dots
     x  <- NULL
-    assert_no_preserve_without_pipe(preserve, fn)
+    assert_no_preserve_without_pipe(.preserve, fn)
   }
 
   assert_two_sided(fs, fn)
@@ -84,12 +95,12 @@ in_case_setup <- function(dots, preserve, fn) {
   list(fs = fs, x = x)
 }
 
-assert_no_preserve_without_pipe <- function(preserve, fn) {
-  if (preserve) {
+assert_no_preserve_without_pipe <- function(.preserve, fn) {
+  if (.preserve) {
     cli::cli_abort(c(
       "The first argument to {.fn {fn}} must be a vector
-      to use the {.arg preserve} argument.",
-      "*" = "Try using {.arg default} instead."
+      to use the {.arg .preserve} argument.",
+      "*" = "Try using {.arg .default} instead."
     ))
   }
 }

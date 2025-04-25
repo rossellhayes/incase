@@ -16,15 +16,17 @@
 #'   For `switch_case()`, named arguments will raise an error.
 #'
 #' @param fn A function to apply to the left-hand side of each formula in `...`
-#' @param preserve If `TRUE`, unmatched elements of `x` will be returned
+#' @param .preserve If `TRUE`, unmatched elements of `x` will be returned
 #'   unmodified.
 #'   (The elements may have their type coerced to be compatible with
 #'   replacement values.)
-#'   If `FALSE`, unmatched elements of `x` will be replaced with `default`.
+#'   If `FALSE`, unmatched elements of `x` will be replaced with `.default`.
 #'   Defaults to `FALSE`.
-#' @param default If `preserve` is `FALSE`, a value to replace unmatched
+#' @param .default If `.preserve` is `FALSE`, a value to replace unmatched
 #'   elements of `x`.
 #'   Defaults to `NA`.
+#' @param preserve,default `r lifecycle::badge("deprecated")`
+#'   Deprecated in favor of `.preserve` and `.default`
 #'
 #' @return A vector of the same length as `x`.
 #'
@@ -43,20 +45,41 @@
 #'
 #' @example examples/switch_case.R
 
-switch_case <- function(x, ..., preserve = FALSE, default = NA) {
+switch_case <- function(
+  x,
+  ...,
+  .preserve = FALSE,
+  .default = NA,
+  preserve = deprecated(),
+  default = deprecated()
+) {
+  .preserve <- coalesce_deprecated(.preserve, preserve)
+  .default <- coalesce_deprecated(.default, default)
+
   fn_case(
     x  = x,
     fn = `%in%`,
     ...,
-    preserve = preserve,
-    default  = default
+    .preserve = .preserve,
+    .default  = .default
   )
 }
 
 #' @rdname switch_case
 #' @export
 
-fn_switch_case <- function(x, fn, ..., preserve = FALSE, default = NA) {
+fn_switch_case <- function(
+  x,
+  fn,
+  ...,
+  .preserve = FALSE,
+  .default = NA,
+  preserve = deprecated(),
+  default = deprecated()
+) {
+  .preserve <- coalesce_deprecated(.preserve, preserve)
+  .default <- coalesce_deprecated(.default, default)
+
   inputs <- fn_switch_case_setup(
     ...,
     fn          = fn,
@@ -68,7 +91,7 @@ fn_switch_case <- function(x, fn, ..., preserve = FALSE, default = NA) {
     switch_case,
     c(
       list(x = x), inputs$fs, inputs$args,
-      list(preserve = preserve, default = default)
+      list(.preserve = .preserve, .default = .default)
     )
   )
 }

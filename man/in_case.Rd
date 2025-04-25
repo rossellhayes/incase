@@ -4,7 +4,13 @@
 \alias{in_case}
 \title{A pipe-friendly general vectorized if}
 \usage{
-in_case(..., preserve = FALSE, default = NA)
+in_case(
+  ...,
+  .preserve = FALSE,
+  .default = NA,
+  preserve = deprecated(),
+  default = deprecated()
+)
 }
 \arguments{
 \item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}> A sequence of two-sided
@@ -20,17 +26,20 @@ The case of \code{n == 0} is treated as a variant of \code{n != 1}.
 
 \code{NULL} inputs are ignored.}
 
-\item{preserve}{If \code{TRUE}, unmatched elements of the input will be
+\item{.preserve}{If \code{TRUE}, unmatched elements of the input will be
 returned unmodified.
 (The elements may have their type coerced to be compatible with
 replacement values.)
 If \code{FALSE}, unmatched elements of the input will be replaced
-with \code{default}.
+with \code{.default}.
 Defaults to \code{FALSE}.}
 
-\item{default}{If \code{preserve} is \code{FALSE}, a value to replace unmatched
+\item{.default}{If \code{.preserve} is \code{FALSE}, a value to replace unmatched
 elements of the input.
 Defaults to \code{NA}.}
+
+\item{preserve, default}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+Deprecated in favor of \code{.preserve} and \code{.default}}
 }
 \value{
 A vector of length 1 or n, matching the length of the logical input
@@ -82,13 +91,13 @@ try(
   )
 )
 
-# default and preserve make it easier to handle unmatched values
+# .default and .preserve make it easier to handle unmatched values
 1:30 \%>\%
   in_case(
     . \%\% 15 == 0 ~ "fizz buzz",
     . \%\%  3 == 0 ~ "fizz",
     . \%\%  5 == 0 ~ "buzz",
-    default      = "pass"
+    .default     = "pass"
   )
 
 1:30 \%>\%
@@ -96,7 +105,7 @@ try(
     . \%\% 15 == 0 ~ "fizz buzz",
     . \%\%  3 == 0 ~ "fizz",
     . \%\%  5 == 0 ~ "buzz",
-    preserve     = TRUE
+    .preserve    = TRUE
   )
 }
 \seealso{

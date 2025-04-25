@@ -4,7 +4,14 @@
 \alias{grep_case}
 \title{Switch-style recoding of values with string pattern matching}
 \usage{
-grep_case(x, ..., preserve = FALSE, default = NA)
+grep_case(
+  x,
+  ...,
+  .preserve = FALSE,
+  .default = NA,
+  preserve = deprecated(),
+  default = deprecated()
+)
 }
 \arguments{
 \item{x}{A vector}
@@ -21,14 +28,14 @@ The RHS must be of length one.
 \item \strong{Named arguments}: named arguments are passed to \code{\link[=grepl]{grepl()}}.
 }}
 
-\item{preserve}{If \code{TRUE}, unmatched elements of \code{x} will be returned
+\item{.preserve, preserve}{If \code{TRUE}, unmatched elements of \code{x} will be returned
 unmodified.
 (The elements may have their type coerced to be compatible with
 replacement values.)
-If \code{FALSE}, unmatched elements of \code{x} will be replaced with \code{default}.
+If \code{FALSE}, unmatched elements of \code{x} will be replaced with \code{.default}.
 Defaults to \code{FALSE}.}
 
-\item{default}{If \code{preserve} is \code{FALSE}, a value to replace unmatched
+\item{.default, default}{If \code{.preserve} is \code{FALSE}, a value to replace unmatched
 elements of \code{x}.
 Defaults to \code{NA}.}
 }
@@ -67,7 +74,7 @@ grep_case(
   "Belgi(qu)?e" ~ "Belgium",
   "Nederland"   ~ "Netherlands",
   "Italia"      ~ "Italy",
-  preserve      = TRUE,
+  .preserve     = TRUE,
   ignore.case   = TRUE
 )
 }

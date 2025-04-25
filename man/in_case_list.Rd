@@ -8,15 +8,51 @@
 \alias{fn_switch_case_list}
 \title{Case statements returning a list}
 \usage{
-in_case_list(..., preserve = FALSE, default = NA)
+in_case_list(
+  ...,
+  .preserve = FALSE,
+  .default = NA,
+  preserve = deprecated(),
+  default = deprecated()
+)
 
-switch_case_list(x, ..., preserve = FALSE, default = NA)
+switch_case_list(
+  x,
+  ...,
+  .preserve = FALSE,
+  .default = NA,
+  preserve = deprecated(),
+  default = deprecated()
+)
 
-grep_case_list(x, ..., preserve = FALSE, default = NA)
+grep_case_list(
+  x,
+  ...,
+  .preserve = FALSE,
+  .default = NA,
+  preserve = deprecated(),
+  default = deprecated()
+)
 
-fn_case_list(x, fn, ..., preserve = FALSE, default = NA)
+fn_case_list(
+  x,
+  fn,
+  ...,
+  .preserve = FALSE,
+  .default = NA,
+  preserve = deprecated(),
+  default = deprecated()
+)
 
-fn_switch_case_list(x, fn, ..., preserve = FALSE, default = NA)
+fn_switch_case_list(
+  x,
+  fn,
+  ...,
+  .preserve = FALSE,
+  .default = NA,
+  preserve = deprecated(),
+  default = deprecated()
+)
 }
 \arguments{
 \item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}> A sequence of two-sided
@@ -31,14 +67,14 @@ The RHS must be of length 1 or the same length as all other RHS.
 to the function \code{fn}.
 }}
 
-\item{preserve}{If \code{TRUE}, unmatched elements of \code{x} will be returned
+\item{.preserve, preserve}{If \code{TRUE}, unmatched elements of \code{x} will be returned
 unmodified.
 (The elements may have their type coerced to be compatible with
 replacement values.)
-If \code{FALSE}, unmatched elements of \code{x} will be replaced with \code{default}.
+If \code{FALSE}, unmatched elements of \code{x} will be replaced with \code{.default}.
 Defaults to \code{FALSE}.}
 
-\item{default}{If \code{preserve} is \code{FALSE}, a value to replace unmatched
+\item{.default, default}{If \code{.preserve} is \code{FALSE}, a value to replace unmatched
 elements of \code{x}.
 Defaults to \code{NA}.}
 
@@ -70,8 +106,8 @@ when you want to create a list column inside a \link[tibble:tibble]{tibble}.
 \examples{
 1:3 \%>\%
   in_case_list(
-    . < 2   ~ mtcars,
-    default = letters
+    . < 2    ~ mtcars,
+    .default = letters
   )
 }
 \seealso{

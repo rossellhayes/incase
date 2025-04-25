@@ -5,9 +5,23 @@
 \alias{fn_switch_case}
 \title{Switch-style recoding of values}
 \usage{
-switch_case(x, ..., preserve = FALSE, default = NA)
+switch_case(
+  x,
+  ...,
+  .preserve = FALSE,
+  .default = NA,
+  preserve = deprecated(),
+  default = deprecated()
+)
 
-fn_switch_case(x, fn, ..., preserve = FALSE, default = NA)
+fn_switch_case(
+  x,
+  ...,
+  .preserve = FALSE,
+  .default = NA,
+  preserve = deprecated(),
+  default = deprecated()
+)
 }
 \arguments{
 \item{x}{A vector}
@@ -25,16 +39,19 @@ to the function \code{fn}.
 For \code{switch_case()}, named arguments will raise an error.
 }}
 
-\item{preserve}{If \code{TRUE}, unmatched elements of \code{x} will be returned
+\item{.preserve}{If \code{TRUE}, unmatched elements of \code{x} will be returned
 unmodified.
 (The elements may have their type coerced to be compatible with
 replacement values.)
-If \code{FALSE}, unmatched elements of \code{x} will be replaced with \code{default}.
+If \code{FALSE}, unmatched elements of \code{x} will be replaced with \code{.default}.
 Defaults to \code{FALSE}.}
 
-\item{default}{If \code{preserve} is \code{FALSE}, a value to replace unmatched
+\item{.default}{If \code{.preserve} is \code{FALSE}, a value to replace unmatched
 elements of \code{x}.
 Defaults to \code{NA}.}
+
+\item{preserve, default}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+Deprecated in favor of \code{.preserve} and \code{.default}}
 
 \item{fn}{A function to apply to the left-hand side of each formula in \code{...}}
 }
@@ -76,21 +93,21 @@ parties \%>\%
   switch_case(
     "d" ~ "Democrat",
     "r" ~ "Republican",
-    default = "Other"
+    .default = "Other"
   )
 
 parties \%>\%
   switch_case(
     "d" ~ "Democrat",
     "r" ~ "Republican",
-    preserve = FALSE
+    .preserve = FALSE
   )
 
 parties \%>\%
   switch_case(
     "d" ~ "Democrat",
     "r" ~ "Republican",
-    preserve = TRUE
+    .preserve = TRUE
   )
 
 data <- c(1, 4, 8, 12, 999, 6, 2, 888, 4, 6, 777)
@@ -101,7 +118,7 @@ fn_switch_case(
   7 ~ "Not asked",
   8 ~ "Refused",
   9 ~ "Missing",
-  preserve = TRUE
+  .preserve = TRUE
 )
 }
 \seealso{

@@ -23,7 +23,7 @@ switch_case_fct(
   "c" ~ "cantaloupe",
   "b" ~ "banana",
   "a" ~ "apple",
-  preserve = TRUE
+  .preserve = TRUE
 )
 
 grep_case_fct(

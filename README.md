@@ -94,8 +94,8 @@ of your `NA`s or adding `L` to your integers.
 
 ### Easy default values
 
-`in_case()` adds `preserve` and `default` arguments as a more intuitive
-alternative to `TRUE ~ ...`.\*
+`in_case()` adds `.preserve` and `.default` arguments as a more
+intuitive alternative to `TRUE ~ ...`.\*
 
 ``` r
 1:20 %>%
@@ -114,7 +114,7 @@ alternative to `TRUE ~ ...`.\*
     . %% 15 == 0 ~ "fizz buzz",
     . %%  3 == 0 ~ "fizz",
     . %%  5 == 0 ~ "buzz",
-    preserve     = TRUE
+    .preserve    = TRUE
   )
 #>  [1] "1"         "2"         "fizz"      "4"         "buzz"      "fizz"     
 #>  [7] "7"         "8"         "fizz"      "buzz"      "11"        "fizz"     
@@ -126,7 +126,7 @@ alternative to `TRUE ~ ...`.\*
     . %% 15 == 0 ~ "fizz buzz",
     . %%  3 == 0 ~ "fizz",
     . %%  5 == 0 ~ "buzz",
-    default      = "pass"
+    .default     = "pass"
   )
 #>  [1] "pass"      "pass"      "fizz"      "pass"      "buzz"      "fizz"     
 #>  [7] "pass"      "pass"      "fizz"      "buzz"      "pass"      "fizz"     
@@ -141,8 +141,8 @@ recoding discrete values.
 
 ``` r
 parties
-#>  [1] "G" "I" "D" "I" "R" "D" "L" "D" NA  "L" NA  "G" "R" NA  "G" NA  "L" "D" "D"
-#> [20] "I"
+#>  [1] "R" "I" "R" "R" "D" "G" "I" "D" "G" "G" "I" "D" NA  "I" "I" "R" NA  "I" "G"
+#> [20] "R"
 
 parties %>%
   switch_case(
@@ -151,10 +151,10 @@ parties %>%
     c("G", "L") ~ "Other",
     c("I", NA)  ~ "Independent"
   )
-#>  [1] "Other"       "Independent" "Democrat"    "Independent" "Republican" 
-#>  [6] "Democrat"    "Other"       "Democrat"    "Independent" "Other"      
-#> [11] "Independent" "Other"       "Republican"  "Independent" "Other"      
-#> [16] "Independent" "Other"       "Democrat"    "Democrat"    "Independent"
+#>  [1] "Republican"  "Independent" "Republican"  "Republican"  "Democrat"   
+#>  [6] "Other"       "Independent" "Democrat"    "Other"       "Other"      
+#> [11] "Independent" "Democrat"    "Independent" "Independent" "Independent"
+#> [16] "Republican"  "Independent" "Independent" "Other"       "Republican"
 ```
 
 `grep_case()` allows you to recode values with pattern matching.
@@ -182,23 +182,23 @@ grep_case(
 
 When you need an ordered factor, the `*_fct()` family of functions lets
 you save a step by using the order of your cases as the order of your
-factor levels. Use `ordered = TRUE` to create an ordered factor and
-`ordered = FALSE` to make a regular-old factor.
+factor levels. Use `.ordered = TRUE` to create an ordered factor and
+`.ordered = FALSE` to make a regular-old factor.
 
 ``` r
 data <- runif(10, 0, 10)
 data
-#>  [1] 3.9075340 7.4098608 2.1540250 8.4599089 3.0487929 8.9268192 9.9001603
-#>  [8] 9.2022173 0.3128016 5.2452107
+#>  [1] 8.4454267 1.6049231 0.5227919 2.3271123 8.1508663 2.2252478 3.8852771
+#>  [8] 9.6029983 4.8355979 9.6592282
 
 data %>% 
   in_case_fct(
-    . < 3   ~ "Low",
-    . < 7   ~ "Medium",
-    default = "High",
-    ordered = TRUE
+    . < 3    ~ "Low",
+    . < 7    ~ "Medium",
+    .default = "High",
+    .ordered = TRUE
   )
-#>  [1] Medium High   Low    High   Medium High   High   High   Low    Medium
+#>  [1] High   Low    Low    Low    High   Low    Medium High   Medium High  
 #> Levels: Low < Medium < High
 
 parties %>%
@@ -208,10 +208,10 @@ parties %>%
     c("G", "L") ~ "Other",
     c("I", NA)  ~ "Independent"
   )
-#>  [1] Other       Independent Democrat    Independent Republican  Democrat   
-#>  [7] Other       Democrat    Independent Other       Independent Other      
-#> [13] Republican  Independent Other       Independent Other       Democrat   
-#> [19] Democrat    Independent
+#>  [1] Republican  Independent Republican  Republican  Democrat    Other      
+#>  [7] Independent Democrat    Other       Other       Independent Democrat   
+#> [13] Independent Independent Independent Republican  Independent Independent
+#> [19] Other       Republican 
 #> Levels: Democrat Republican Other Independent
 ```
 

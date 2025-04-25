@@ -32,13 +32,23 @@
 #'
 #' @example examples/grep_case.R
 
-grep_case <- function(x, ..., preserve = FALSE, default = NA) {
+grep_case <- function(
+  x,
+  ...,
+  .preserve = FALSE,
+  .default = NA,
+  preserve = deprecated(),
+  default = deprecated()
+) {
+  .preserve <- coalesce_deprecated(.preserve, preserve)
+  .default <- coalesce_deprecated(.default, default)
+
   fn_case(
     x = x,
     fn = grepl_any,
     ...,
-    preserve = preserve,
-    default = default
+    .preserve = .preserve,
+    .default = .default
   )
 }
 

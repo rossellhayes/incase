@@ -19,12 +19,21 @@
 #' @export
 #' @example examples/in_case_list.R
 
-in_case_list <- function(..., preserve = FALSE, default = NA) {
+in_case_list <- function(
+  ...,
+  .preserve = FALSE,
+  .default = NA,
+  preserve = deprecated(),
+  default = deprecated()
+) {
+  .preserve <- coalesce_deprecated(.preserve, preserve)
+  .default <- coalesce_deprecated(.default, default)
+
   dots <- allow_dot_aliases(compact_list(...))
-  inputs <- in_case_setup(dots, preserve = preserve, fn = "in_case_list()")
+  inputs <- in_case_setup(dots, .preserve = .preserve, fn = "in_case_list")
 
   replace(
-    inputs$fs, inputs$x, default, preserve,
+    inputs$fs, inputs$x, .default, .preserve,
     list        = TRUE,
     default_env = rlang::caller_env(),
     current_env = rlang::current_env()
@@ -34,38 +43,69 @@ in_case_list <- function(..., preserve = FALSE, default = NA) {
 #' @rdname in_case_list
 #' @export
 
-switch_case_list <- function(x, ..., preserve = FALSE, default = NA) {
+switch_case_list <- function(
+  x,
+  ...,
+  .preserve = FALSE,
+  .default = NA,
+  preserve = deprecated(),
+  default = deprecated()
+) {
+  .preserve <- coalesce_deprecated(.preserve, preserve)
+  .default <- coalesce_deprecated(.default, default)
+
   fn_case_list(
     x  = x,
     fn = `%in%`,
     ...,
-    preserve = preserve,
-    default  = default
+    .preserve = .preserve,
+    .default  = .default
   )
 }
 
 #' @rdname in_case_list
 #' @export
 
-grep_case_list <- function(x, ..., preserve = FALSE, default = NA) {
+grep_case_list <- function(
+  x,
+  ...,
+  .preserve = FALSE,
+  .default = NA,
+  preserve = deprecated(),
+  default = deprecated()
+) {
+  .preserve <- coalesce_deprecated(.preserve, preserve)
+  .default <- coalesce_deprecated(.default, default)
+
   fn_case_list(
     x  = x,
     fn = function(x, pattern, ...) grepl(pattern, x, ...),
     ...,
-    preserve = preserve,
-    default  = default
+    .preserve = .preserve,
+    .default  = .default
   )
 }
 
 #' @rdname in_case_list
 #' @export
 
-fn_case_list <- function(x, fn, ..., preserve = FALSE, default = NA) {
+fn_case_list <- function(
+  x,
+  fn,
+  ...,
+  .preserve = FALSE,
+  .default = NA,
+  preserve = deprecated(),
+  default = deprecated()
+) {
+  .preserve <- coalesce_deprecated(.preserve, preserve)
+  .default <- coalesce_deprecated(.default, default)
+
   dots <- allow_dot_aliases(compact_list(...))
   inputs <- fn_case_setup(dots)
 
   replace(
-    inputs$fs, x, default, preserve, fn, inputs$args, list = TRUE,
+    inputs$fs, x, .default, .preserve, fn, inputs$args, list = TRUE,
     default_env = rlang::caller_env(),
     current_env = rlang::current_env()
   )
@@ -74,7 +114,18 @@ fn_case_list <- function(x, fn, ..., preserve = FALSE, default = NA) {
 #' @rdname in_case_list
 #' @export
 
-fn_switch_case_list <- function(x, fn, ..., preserve = FALSE, default = NA) {
+fn_switch_case_list <- function(
+  x,
+  fn,
+  ...,
+  .preserve = FALSE,
+  .default = NA,
+  preserve = deprecated(),
+  default = deprecated()
+) {
+  .preserve <- coalesce_deprecated(.preserve, preserve)
+  .default <- coalesce_deprecated(.default, default)
+
   inputs <- fn_switch_case_setup(
     ...,
     fn          = fn,
@@ -86,7 +137,7 @@ fn_switch_case_list <- function(x, fn, ..., preserve = FALSE, default = NA) {
     switch_case_list,
     c(
       list(x = x), inputs$fs, inputs$args,
-      list(preserve = preserve, default = default)
+      list(.preserve = .preserve, .default = .default)
     )
   )
 }

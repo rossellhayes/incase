@@ -7,9 +7,11 @@
 #'
 #' @inheritParams fn_case
 #' @inheritParams in_case
-#' @param ordered A logical.
+#' @param .ordered A logical.
 #'   If [`TRUE`], returns an [ordered] factor.
 #'   If [`FALSE`], returns an unordered factor.
+#' @param preserve,default,ordered `r lifecycle::badge("deprecated")`
+#'   Deprecated in favor of `.preserve`, `.default`, and `.ordered`
 #'
 #' @return A factor vector of length 1 or n, matching the length of the logical
 #'   input or output vectors.
@@ -22,17 +24,29 @@
 #' @export
 #' @example examples/in_case_fct.R
 
-in_case_fct <- function(..., preserve = FALSE, default = NA, ordered = FALSE) {
+in_case_fct <- function(
+  ...,
+  .preserve = FALSE,
+  .default = NA,
+  .ordered = FALSE,
+  preserve = deprecated(),
+  default = deprecated(),
+  ordered = deprecated()
+) {
+  .preserve <- coalesce_deprecated(.preserve, preserve)
+  .default <- coalesce_deprecated(.default, default)
+  .ordered <- coalesce_deprecated(.ordered, ordered)
+
   dots <- allow_dot_aliases(compact_list(...))
-  inputs <- in_case_setup(dots, preserve = preserve, fn = "in_case_fct()")
+  inputs <- in_case_setup(dots, .preserve = .preserve, fn = "in_case_fct")
 
   replace(
     fs          = inputs$fs,
     x           = inputs$x,
-    default     = default,
-    preserve    = preserve,
+    .default    = .default,
+    .preserve   = .preserve,
     factor      = TRUE,
-    ordered     = ordered,
+    .ordered    = .ordered,
     default_env = rlang::caller_env(),
     current_env = rlang::current_env()
   )
@@ -42,15 +56,26 @@ in_case_fct <- function(..., preserve = FALSE, default = NA, ordered = FALSE) {
 #' @export
 
 switch_case_fct <- function(
-  x, ..., preserve = FALSE, default = NA, ordered = FALSE
+  x,
+  ...,
+  .preserve = FALSE,
+  .default = NA,
+  .ordered = FALSE,
+  preserve = deprecated(),
+  default = deprecated(),
+  ordered = deprecated()
 ) {
+  .preserve <- coalesce_deprecated(.preserve, preserve)
+  .default <- coalesce_deprecated(.default, default)
+  .ordered <- coalesce_deprecated(.ordered, ordered)
+
   fn_case_fct(
     x  = x,
     fn = `%in%`,
     ...,
-    preserve = preserve,
-    default  = default,
-    ordered  = ordered
+    .preserve = .preserve,
+    .default  = .default,
+    .ordered  = .ordered
   )
 }
 
@@ -58,15 +83,26 @@ switch_case_fct <- function(
 #' @export
 
 grep_case_fct <- function(
-  x, ..., preserve = FALSE, default = NA, ordered = FALSE
+  x,
+  ...,
+  .preserve = FALSE,
+  .default = NA,
+  .ordered = FALSE,
+  preserve = deprecated(),
+  default = deprecated(),
+  ordered = deprecated()
 ) {
+  .preserve <- coalesce_deprecated(.preserve, preserve)
+  .default <- coalesce_deprecated(.default, default)
+  .ordered <- coalesce_deprecated(.ordered, ordered)
+
   fn_case_fct(
     x  = x,
     fn = grepl_any,
     ...,
-    preserve = preserve,
-    default  = default,
-    ordered  = ordered
+    .preserve = .preserve,
+    .default  = .default,
+    .ordered  = .ordered
   )
 }
 
@@ -74,15 +110,27 @@ grep_case_fct <- function(
 #' @export
 
 fn_case_fct <- function(
-  x, fn, ..., preserve = FALSE, default = NA, ordered = FALSE
+  x,
+  fn,
+  ...,
+  .preserve = FALSE,
+  .default = NA,
+  .ordered = FALSE,
+  preserve = deprecated(),
+  default = deprecated(),
+  ordered = deprecated()
 ) {
+  .preserve <- coalesce_deprecated(.preserve, preserve)
+  .default <- coalesce_deprecated(.default, default)
+  .ordered <- coalesce_deprecated(.ordered, ordered)
+
   dots <- allow_dot_aliases(compact_list(...))
   inputs <- fn_case_setup(dots)
 
   replace(
-    inputs$fs, x, default, preserve, fn, inputs$args,
+    inputs$fs, x, .default, .preserve, fn, inputs$args,
     factor      = TRUE,
-    ordered     = ordered,
+    .ordered    = .ordered,
     default_env = rlang::caller_env(),
     current_env = rlang::current_env()
   )
@@ -92,8 +140,20 @@ fn_case_fct <- function(
 #' @export
 
 fn_switch_case_fct <- function(
-  x, fn, ..., preserve = FALSE, default = NA, ordered = FALSE
+  x,
+  fn,
+  ...,
+  .preserve = FALSE,
+  .default = NA,
+  .ordered = FALSE,
+  preserve = deprecated(),
+  default = deprecated(),
+  ordered = deprecated()
 ) {
+  .preserve <- coalesce_deprecated(.preserve, preserve)
+  .default <- coalesce_deprecated(.default, default)
+  .ordered <- coalesce_deprecated(.ordered, ordered)
+
   inputs <- fn_switch_case_setup(
     ...,
     fn          = fn,
@@ -105,7 +165,7 @@ fn_switch_case_fct <- function(
     switch_case_fct,
     c(
       list(x = x), inputs$fs, inputs$args,
-      list(preserve = preserve, default = default, ordered = ordered)
+      list(.preserve = .preserve, .default = .default, .ordered = .ordered)
     )
   )
 }
