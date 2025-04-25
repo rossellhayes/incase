@@ -221,3 +221,82 @@ test_that("fn_switch_case()", {
 test_that("fn_switch_case() errors", {
   expect_error(fn_switch_case(1:10, function(x) x + 5))
 })
+
+test_that("warning for deprecated argument", {
+  lifecycle::expect_deprecated(
+    preserve <- switch_case(
+      1:10,
+      3 ~ "fizz",
+      5 ~ "buzz",
+      6 ~ "fizz",
+      9 ~ "fizz",
+      preserve = FALSE
+    ),
+    "The `preserve` argument of `switch_case()` is deprecated as of incase 0.3.3.",
+    fixed = TRUE
+  )
+
+  expect_equal(
+    preserve,
+    switch_case(
+      1:10,
+      3 ~ "fizz",
+      5 ~ "buzz",
+      6 ~ "fizz",
+      9 ~ "fizz",
+      .preserve = FALSE
+    )
+  )
+
+  lifecycle::expect_deprecated(
+    default <- switch_case(
+      1:10,
+      3 ~ "fizz",
+      5 ~ "buzz",
+      6 ~ "fizz",
+      9 ~ "fizz",
+      default = "bam"
+    ),
+    "The `default` argument of `switch_case()` is deprecated as of incase 0.3.3.",
+    fixed = TRUE
+  )
+
+  expect_equal(
+    default,
+    switch_case(
+      1:10,
+      3 ~ "fizz",
+      5 ~ "buzz",
+      6 ~ "fizz",
+      9 ~ "fizz",
+      .default = "bam"
+    )
+  )
+
+  data <- c(1, 2, 999, 888, 777)
+
+  lifecycle::expect_deprecated(
+    preserve <- fn_switch_case(
+      data,
+      function(x) paste(rep(x, 3), collapse = ""),
+      7 ~ "Not asked",
+      8 ~ "Refused",
+      9 ~ "Missing",
+      preserve = TRUE
+    ),
+    "The `preserve` argument of `fn_switch_case()` is deprecated as of incase 0.3.3.",
+    fixed = TRUE
+  )
+
+  expect_equal(
+    preserve,
+    fn_switch_case(
+      data,
+      function(x) paste(rep(x, 3), collapse = ""),
+      7 ~ "Not asked",
+      8 ~ "Refused",
+      9 ~ "Missing",
+      .preserve = TRUE
+    )
+  )
+})

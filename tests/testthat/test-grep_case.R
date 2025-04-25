@@ -98,3 +98,18 @@ test_that("grep_case() with vector LHS", {
     )
   )
 })
+
+test_that("warning for deprecated argument", {
+  words <- c("caterpillar", "dogwood", "catastrophe", "dogma", "ratatouille")
+
+  lifecycle::expect_deprecated(
+    preserve <- grep_case(words, "cat" ~ "feline", "dog" ~ "canine", preserve = FALSE),
+    "The `preserve` argument of `grep_case()` is deprecated as of incase 0.3.3.",
+    fixed = TRUE
+  )
+
+  expect_equal(
+    preserve,
+    grep_case(words, "cat" ~ "feline", "dog" ~ "canine", .preserve = FALSE)
+  )
+})

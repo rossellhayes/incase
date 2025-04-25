@@ -176,3 +176,28 @@ test_that("fn_switch_case_fct()", {
 test_that("fn_switch_case_fct() errors", {
   expect_error(fn_switch_case_fct(1:10, function(x) x + 5))
 })
+
+test_that("warning for deprecated argument", {
+  lifecycle::expect_deprecated(
+    preserve <- switch_case_fct(
+      c("a", "b", "c", "d"),
+      "c" ~ "cantaloupe",
+      "b" ~ "banana",
+      "a" ~ "apple",
+      preserve = TRUE
+    ),
+    "The `preserve` argument of `switch_case_fct()` is deprecated as of incase 0.3.3.",
+    fixed = TRUE
+  )
+
+  expect_equal(
+    preserve,
+    switch_case_fct(
+      c("a", "b", "c", "d"),
+      "c" ~ "cantaloupe",
+      "b" ~ "banana",
+      "a" ~ "apple",
+      .preserve = TRUE
+    )
+  )
+})

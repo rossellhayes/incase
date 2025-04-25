@@ -111,3 +111,27 @@ test_that("fn_switch_case_list()", {
     list(1, 2, mtcars, letters, mtcars)
   )
 })
+
+test_that("warning for deprecated argument", {
+  lifecycle::expect_deprecated(
+    default <- 1:3 %>% in_case_list(. < 2 ~ mtcars, default = letters),
+    "The `default` argument of `in_case_list()` is deprecated as of incase 0.3.3.",
+    fixed = TRUE
+  )
+
+  expect_equal(
+    default,
+    1:3 %>% in_case_list(. < 2 ~ mtcars, .default = letters)
+  )
+
+  lifecycle::expect_deprecated(
+    preserve <- 1:3 %>% in_case_list(. < 2 ~ mtcars, preserve = TRUE),
+    "The `preserve` argument of `in_case_list()` is deprecated as of incase 0.3.3.",
+    fixed = TRUE
+  )
+
+  expect_equal(
+    preserve,
+    1:3 %>% in_case_list(. < 2 ~ mtcars, .preserve = TRUE)
+  )
+})

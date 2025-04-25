@@ -128,6 +128,48 @@ test_that("errors", {
   )
 })
 
+test_that("warning for deprecated argument", {
+  lifecycle::expect_deprecated(
+    preserve <- x %>%
+      in_case(
+        . %% 3 == 0 ~ "fizz",
+        . %% 5 == 0 ~ "buzz",
+        preserve = TRUE
+      ),
+    "The `preserve` argument of `in_case()` is deprecated as of incase 0.3.3.",
+    fixed = TRUE
+  )
+
+  expect_equal(
+    preserve,
+    x %>%
+      in_case(
+        . %% 3 == 0 ~ "fizz",
+        . %% 5 == 0 ~ "buzz",
+        .preserve = TRUE
+      )
+  )
+
+  lifecycle::expect_deprecated(
+    default <- in_case(
+      x %% 3 == 0 ~ "fizz",
+      x %% 5 == 0 ~ "buzz",
+      default = "pass"
+    ),
+    "The `default` argument of `in_case()` is deprecated as of incase 0.3.3.",
+    fixed = TRUE
+  )
+
+  expect_equal(
+    default,
+    in_case(
+      x %% 3 == 0 ~ "fizz",
+      x %% 5 == 0 ~ "buzz",
+      .default = "pass"
+    )
+  )
+})
+
 # These tests are adapted from tests in the dplyr package
 # https://github.com/tidyverse/stringr
 #
