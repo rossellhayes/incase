@@ -141,6 +141,19 @@ test_that("grep_case_fct() with vector LHS", {
   )
 })
 
+test_that("ordered", {
+  x <- 1:10
+
+  expect_equal(
+    in_case_fct(
+      x %% 2 == 0 ~ "even",
+      x %% 2 == 1 ~ "odd",
+      .ordered = TRUE
+    ),
+    factor(rep(c("odd", "even"), 5), levels = c("even", "odd"), ordered = TRUE)
+  )
+})
+
 test_that("errors", {
   x <- 1:15
 
@@ -198,6 +211,26 @@ test_that("warning for deprecated argument", {
       "b" ~ "banana",
       "a" ~ "apple",
       .preserve = TRUE
+    )
+  )
+
+  x <- 1:10
+  lifecycle::expect_deprecated(
+    ordered <- in_case_fct(
+      x %% 2 == 0 ~ "even",
+      x %% 2 == 1 ~ "odd",
+      ordered = TRUE
+    ),
+    "The `ordered` argument of `in_case_fct()` is deprecated as of incase 0.3.3.",
+    fixed = TRUE
+  )
+
+  expect_equal(
+    ordered,
+    ordered <- in_case_fct(
+      x %% 2 == 0 ~ "even",
+      x %% 2 == 1 ~ "odd",
+      .ordered = TRUE
     )
   )
 })
