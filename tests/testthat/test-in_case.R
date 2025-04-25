@@ -168,6 +168,39 @@ test_that("warning for deprecated argument", {
       .default = "pass"
     )
   )
+
+  # No error if duplicated dotted and undotted argument
+
+  lifecycle::expect_deprecated(
+    default <- in_case(
+      x %% 3 == 0 ~ "fizz",
+      x %% 5 == 0 ~ "buzz",
+      .default = "pass",
+      default = "pass"
+    ),
+    "The `default` argument of `in_case()` is deprecated as of incase 0.3.3.",
+    fixed = TRUE
+  )
+
+  expect_equal(
+    default,
+    in_case(
+      x %% 3 == 0 ~ "fizz",
+      x %% 5 == 0 ~ "buzz",
+      .default = "pass"
+    )
+  )
+
+  expect_error(
+    in_case(
+      x %% 3 == 0 ~ "fizz",
+      x %% 5 == 0 ~ "buzz",
+      .default = "pass",
+      default = "fail"
+    ),
+    "`default` and `.default` arguments cannot both be specified.",
+    fixed = TRUE
+  )
 })
 
 # These tests are adapted from tests in the dplyr package
