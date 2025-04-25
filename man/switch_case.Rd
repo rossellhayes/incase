@@ -16,6 +16,7 @@ switch_case(
 
 fn_switch_case(
   x,
+  fn,
   ...,
   .preserve = FALSE,
   .default = NA,
