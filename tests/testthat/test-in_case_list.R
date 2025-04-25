@@ -11,37 +11,37 @@ test_that("in_case_list", {
   )
 
   expect_equal(
-    1:3 %>% in_case_list(. < 2 ~ mtcars, default = letters),
+    1:3 %>% in_case_list(. < 2 ~ mtcars, .default = letters),
     list(mtcars, letters, letters)
   )
 
   expect_equal(
     dplyr::tibble(x = 1:3) %>%
-      dplyr::mutate(y = x %>% in_case_list(. < 2 ~ mtcars, default = letters)),
+      dplyr::mutate(y = x %>% in_case_list(. < 2 ~ mtcars, .default = letters)),
     dplyr::tibble(x = 1:3, y = list(mtcars, letters, letters))
   )
 
   expect_equal(
-    1:3 %>% in_case_list(. < 2 ~ mtcars, preserve = TRUE),
+    1:3 %>% in_case_list(. < 2 ~ mtcars, .preserve = TRUE),
     list(mtcars, 2, 3)
   )
 
   expect_equal(
     dplyr::tibble(x = 1:3) %>%
-      dplyr::mutate(y = x %>% in_case_list(. < 2 ~ mtcars, preserve = TRUE)),
+      dplyr::mutate(y = x %>% in_case_list(. < 2 ~ mtcars, .preserve = TRUE)),
     dplyr::tibble(x = 1:3, y = list(mtcars, 2, 3))
   )
 })
 
 test_that("switch_case_list", {
   expect_equal(
-    1:3 %>% switch_case_list(2 ~ mtcars, default = letters),
+    1:3 %>% switch_case_list(2 ~ mtcars, .default = letters),
     list(letters, mtcars, letters)
   )
 
   expect_equal(
     dplyr::tibble(x = 1:3) %>%
-      dplyr::mutate(y = switch_case_list(x, 2 ~ mtcars, default = letters)),
+      dplyr::mutate(y = switch_case_list(x, 2 ~ mtcars, .default = letters)),
     dplyr::tibble(x = 1:3, y = list(letters, mtcars, letters))
   )
 })
@@ -50,13 +50,13 @@ test_that("grep_case_list", {
   names <- c("bat", "cat", "dog")
 
   expect_equal(
-    names %>% grep_case_list("a" ~ mtcars, default = letters),
+    names %>% grep_case_list("a" ~ mtcars, .default = letters),
     list(mtcars, mtcars, letters)
   )
 
   expect_equal(
     dplyr::tibble(x = names) %>%
-      dplyr::mutate(y = grep_case_list(x, "a" ~ mtcars, default = letters)),
+      dplyr::mutate(y = grep_case_list(x, "a" ~ mtcars, .default = letters)),
     dplyr::tibble(x = names, y = list(mtcars, mtcars, letters))
   )
 })
@@ -106,7 +106,7 @@ test_that("fn_switch_case_list()", {
       7 ~ mtcars,
       8 ~ letters,
       9 ~ mtcars,
-      preserve = TRUE
+      .preserve = TRUE
     ),
     list(1, 2, mtcars, letters, mtcars)
   )

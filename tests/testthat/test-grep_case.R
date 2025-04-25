@@ -45,12 +45,12 @@ test_that("grep_case() with preserve", {
   )
 
   expect_equal(
-    grep_case(words, "cat" ~ "feline", "dog" ~ "canine", preserve = FALSE),
+    grep_case(words, "cat" ~ "feline", "dog" ~ "canine", .preserve = FALSE),
     c("feline", "canine", "feline", "canine", NA)
   )
 
   expect_equal(
-    grep_case(words, "cat" ~ "feline", "dog" ~ "canine", preserve = TRUE),
+    grep_case(words, "cat" ~ "feline", "dog" ~ "canine", .preserve = TRUE),
     c("feline", "canine", "feline", "canine", "ratatouille")
   )
 
@@ -66,7 +66,7 @@ test_that("grep_case() with preserve", {
       "Belg"        ~ "Belgium",
       "Nederland"   ~ "Netherlands",
       "Italia"      ~ "Italy",
-      preserve      = TRUE,
+      .preserve      = TRUE,
       ignore.case   = TRUE
     ),
     c(
@@ -90,7 +90,7 @@ test_that("grep_case() with vector LHS", {
       "nederland" ~ "Netherlands",
       "italia" ~ "Italy",
       ignore.case = TRUE,
-      preserve = TRUE
+      .preserve = TRUE
     ),
     c(
       "France", "Germany", "Germany", "Netherlands",

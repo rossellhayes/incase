@@ -61,7 +61,7 @@ test_that("switch_case_fct", {
       "c" ~ "cantaloupe",
       "b" ~ "banana",
       "a" ~ "apple",
-      preserve = TRUE
+      .preserve = TRUE
     ),
     factor(
       factor(
@@ -127,7 +127,7 @@ test_that("grep_case_fct() with vector LHS", {
       "nederland" ~ "Netherlands",
       "italia" ~ "Italy",
       ignore.case = TRUE,
-      preserve = TRUE
+      .preserve = TRUE
     ),
     factor(
       c(
@@ -149,7 +149,7 @@ test_that("errors", {
       x %% 15 == 0 ~ "fizzbuzz",
       x %% 3  == 0 ~ "fizz",
       x %% 5  == 0 ~ "buzz",
-      preserve = TRUE
+      .preserve = TRUE
     )
   )
 })
@@ -164,7 +164,7 @@ test_that("fn_switch_case_fct()", {
       7 ~ "Not asked",
       8 ~ "Refused",
       9 ~ "Missing",
-      preserve = TRUE
+      .preserve = TRUE
     ),
     factor(
       c("1", "2", "Missing", "Refused", "Not asked"),
