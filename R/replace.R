@@ -11,7 +11,9 @@ replace <- function(
   .ordered = FALSE,
   list = FALSE,
   default_env,
-  current_env
+  current_env,
+  dots_idx = NULL,
+  .default_idx = NULL
 ) {
   assert_length(fs, call = current_env)
 
@@ -19,7 +21,22 @@ replace <- function(
     fs, x, .default, fn, args, default_env, current_env, list = list
   )
 
-  if (factor) {levels <- as.character(c(pairs$value, recursive = TRUE))}
+  if (factor) {
+    if (length(.default_idx) > 0) {
+      levels <- c(
+        append(
+          pairs$value,
+          .default,
+          after = max(which(dots_idx < .default_idx), 0)
+        ),
+        recursive = TRUE
+      )
+    } else {
+      levels <- c(pairs$value, recursive = TRUE)
+    }
+
+    levels <- as.character(levels)
+  }
 
   if (.preserve) {
     warn_if_default(.default)

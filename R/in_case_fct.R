@@ -15,7 +15,7 @@
 #'
 #' @return A factor vector of length 1 or n, matching the length of the logical
 #'   input or output vectors.
-#'   Levels are determined by the order of inputs to `...`.
+#'   Levels are determined by the order of inputs to `...` and `.default`.
 #'   Inconsistent lengths will generate an error.
 #'
 #' @seealso [in_case()], [switch_case()], [grep_case()], [fn_case()], and
@@ -37,7 +37,11 @@ in_case_fct <- function(
   .default <- coalesce_deprecated(.default, default)
   .ordered <- coalesce_deprecated(.ordered, ordered)
 
+  call <- rlang::current_call()
   dots <- compact_list(...)
+  dots_idx <- which(as.list(call) %in% dots)
+  .default_idx <- which(names(call) %in% c("default", ".default"))
+
   inputs <- in_case_setup(dots, .preserve = .preserve, fn = "in_case_fct")
 
   replace(
@@ -48,7 +52,9 @@ in_case_fct <- function(
     factor      = TRUE,
     .ordered    = .ordered,
     default_env = rlang::caller_env(),
-    current_env = rlang::current_env()
+    current_env = rlang::current_env(),
+    dots_idx = dots_idx,
+    .default_idx = .default_idx
   )
 }
 
@@ -69,14 +75,10 @@ switch_case_fct <- function(
   .default <- coalesce_deprecated(.default, default)
   .ordered <- coalesce_deprecated(.ordered, ordered)
 
-  fn_case_fct(
-    x  = x,
-    fn = `%in%`,
-    ...,
-    .preserve = .preserve,
-    .default  = .default,
-    .ordered  = .ordered
-  )
+  args <- as.list(rlang::current_call())[-1]
+  args <- dot_arg_names(args)
+
+  eval.parent(rlang::call2("fn_case_fct", fn = `%in%`, !!!args))
 }
 
 #' @rdname in_case_fct
@@ -96,14 +98,10 @@ grep_case_fct <- function(
   .default <- coalesce_deprecated(.default, default)
   .ordered <- coalesce_deprecated(.ordered, ordered)
 
-  fn_case_fct(
-    x  = x,
-    fn = grepl_any,
-    ...,
-    .preserve = .preserve,
-    .default  = .default,
-    .ordered  = .ordered
-  )
+  args <- as.list(rlang::current_call())[-1]
+  args <- dot_arg_names(args)
+
+  eval.parent(rlang::call2("fn_case_fct", fn = grepl_any, !!!args))
 }
 
 #' @rdname in_case_fct
@@ -124,15 +122,21 @@ fn_case_fct <- function(
   .default <- coalesce_deprecated(.default, default)
   .ordered <- coalesce_deprecated(.ordered, ordered)
 
+  call <- rlang::current_call()
   dots <- compact_list(...)
+  dots_idx <- which(as.list(call) %in% dots)
+  .default_idx <- which(names(call) %in% c("default", ".default"))
+
   inputs <- fn_case_setup(dots)
 
   replace(
     inputs$fs, x, .default, .preserve, fn, inputs$args,
-    factor      = TRUE,
-    .ordered    = .ordered,
+    factor = TRUE,
+    .ordered = .ordered,
     default_env = rlang::caller_env(),
-    current_env = rlang::current_env()
+    current_env = rlang::current_env(),
+    dots_idx = dots_idx,
+    .default_idx = .default_idx
   )
 }
 
@@ -154,18 +158,17 @@ fn_switch_case_fct <- function(
   .default <- coalesce_deprecated(.default, default)
   .ordered <- coalesce_deprecated(.ordered, ordered)
 
-  inputs <- fn_switch_case_setup(
-    ...,
-    fn          = fn,
-    default_env = rlang::caller_env(),
-    current_env = rlang::current_env()
+  eval.parent(fn_switch_case_call("switch_case_fct", fn, ...))
+}
+
+dot_arg_names <- function(args) {
+  rlang::names2(args) <- switch_case(
+    rlang::names2(args),
+    "preserve" ~ ".preserve",
+    "default" ~ ".default",
+    "ordered" ~ ".ordered",
+    .preserve = TRUE
   )
 
-  do.call(
-    switch_case_fct,
-    c(
-      list(x = x), inputs$fs, inputs$args,
-      list(.preserve = .preserve, .default = .default, .ordered = .ordered)
-    )
-  )
+  args
 }

@@ -110,7 +110,7 @@ length as \code{x}.}
 \value{
 A factor vector of length 1 or n, matching the length of the logical
 input or output vectors.
-Levels are determined by the order of inputs to \code{...}.
+Levels are determined by the order of inputs to \code{...} and \code{.default}.
 Inconsistent lengths will generate an error.
 }
 \description{
