@@ -110,8 +110,16 @@ length as \code{x}.}
 \value{
 A factor vector of length 1 or n, matching the length of the logical
 input or output vectors.
-Levels are determined by the order of inputs to \code{...}.
+Levels are determined by the order of inputs to \code{...} and \code{.default}.
 Inconsistent lengths will generate an error.
+
+The position of the \code{.default} argument is taken into account when setting
+factor levels in \verb{*_case_fct()} functions.
+For example, if the \code{.default} argument is given before any case
+statements, the default value will be the first level of the factor;
+if the \code{.default} argument is positioned in between two case statements,
+the default value will be ordered in between the value of the two
+case statements.
 }
 \description{
 These functions are equivalent to \code{\link[=in_case]{in_case()}}, \code{\link[=switch_case]{switch_case()}},
@@ -146,6 +154,30 @@ switch_case_fct(
   "b" ~ "banana",
   "a" ~ "apple",
   .preserve = TRUE
+)
+
+switch_case_fct(
+  c("a", "b", "c", "d"),
+  "c" ~ "cantaloupe",
+  "b" ~ "banana",
+  "a" ~ "apple",
+  .default = "other"
+)
+
+switch_case_fct(
+  c("a", "b", "c", "d"),
+  .default = "other",
+  "c" ~ "cantaloupe",
+  "b" ~ "banana",
+  "a" ~ "apple"
+)
+
+switch_case_fct(
+  c("a", "b", "c", "d"),
+  "c" ~ "cantaloupe",
+  "b" ~ "banana",
+  .default = "other",
+  "a" ~ "apple"
 )
 
 grep_case_fct(

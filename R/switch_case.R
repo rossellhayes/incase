@@ -80,26 +80,43 @@ fn_switch_case <- function(
   .preserve <- coalesce_deprecated(.preserve, preserve)
   .default <- coalesce_deprecated(.default, default)
 
-  inputs <- fn_switch_case_setup(
-    ...,
+  eval.parent(fn_switch_case_call("switch_case", fn, ...))
+}
+
+fn_switch_case_call <- function(
+  switch_case_fn,
+  fn,
+  ...,
+  call = rlang::caller_call(),
+  current_fn = rlang::caller_fn()
+) {
+  args <- as.list(call)[-1]
+  args <- dot_arg_names(args)
+
+  dots <- compact_list(...)
+  dots_idx <- which(args %in% dots)
+
+  dots <- fn_switch_case_setup(
+    dots,
     fn          = fn,
     default_env = rlang::caller_env(),
     current_env = rlang::current_env()
   )
 
-  do.call(
-    switch_case,
-    c(
-      list(x = x), inputs$fs, inputs$args,
-      list(.preserve = .preserve, .default = .default)
-    )
-  )
+  args[dots_idx] <- dots
+  args <- args[!vapply(args, rlang::is_missing, logical(1))]
+
+  fn_idx <- which(args == rlang::call_match(call, current_fn)[["fn"]])
+  args <- args[-fn_idx]
+
+  rlang::call2(switch_case_fn, !!!args)
 }
 
-fn_switch_case_setup <- function(..., fn, default_env, current_env) {
-  input <- compact_list(...)
-  fs    <- Filter(rlang::is_formula, input)
-  args  <- input[!input %in% fs]
+fn_switch_case_setup <- function(dots, fn, default_env, current_env) {
+  are_formulas <- vapply(dots, rlang::is_formula, logical(1))
+
+  fs    <- dots[are_formulas]
+  args  <- dots[!are_formulas]
 
   assert_length(fs, call = current_env)
 
@@ -119,5 +136,8 @@ fn_switch_case_setup <- function(..., fn, default_env, current_env) {
     fs, pairs$query, pairs$value
   )
 
-  list(fs = fs, args = args)
+  dots[are_formulas] <- fs
+  dots[!are_formulas] <- list(rlang::missing_arg())
+
+  dots
 }

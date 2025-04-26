@@ -26,6 +26,30 @@ switch_case_fct(
   .preserve = TRUE
 )
 
+switch_case_fct(
+  c("a", "b", "c", "d"),
+  "c" ~ "cantaloupe",
+  "b" ~ "banana",
+  "a" ~ "apple",
+  .default = "other"
+)
+
+switch_case_fct(
+  c("a", "b", "c", "d"),
+  .default = "other",
+  "c" ~ "cantaloupe",
+  "b" ~ "banana",
+  "a" ~ "apple"
+)
+
+switch_case_fct(
+  c("a", "b", "c", "d"),
+  "c" ~ "cantaloupe",
+  "b" ~ "banana",
+  .default = "other",
+  "a" ~ "apple"
+)
+
 grep_case_fct(
   c("caterpillar", "dogwood", "catastrophe", "dogma"),
   "cat" ~ "feline",

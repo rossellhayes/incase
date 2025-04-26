@@ -2,6 +2,9 @@
 
 * The arguments `preserve`, `default`, and `ordered` have been deprecated in favor of `.preserve`, `.default`, and `.ordered` (#9).
   - Using undotted arguments will now trigger a warning. In future versions, these arguments will be removed.
+* The position of the `.default` argument is now taken into account when setting factor levels in `*_case_fct()` functions (#10).
+  - e.g. if the `.default` argument is given before any case statements, the default value will be the first level of the factor;
+  if the `.default` argument is positioned in between two case statements, the default value will be ordered in between the value of the two case statements.
 * `grep_case()` and `grep_case_fct()` now support vectors in the left-hand side of arguments (#8).
 * `*_case()` functions can now use lists as return values (#7).
 * `*_case()` functions no longer perform automatic type conversion on non-atomic return values (#7).
