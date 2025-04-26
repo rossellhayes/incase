@@ -68,7 +68,13 @@ fn_case <- function(
     fn = fn,
     args = inputs$args,
     default_env = rlang::caller_env(),
-    current_env = rlang::current_env()
+    current_env = if (
+      identical(environment(rlang::caller_fn()), asNamespace("incase"))
+    ) {
+      rlang::caller_env()
+    } else {
+      rlang::current_env()
+    }
   )
 }
 
