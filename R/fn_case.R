@@ -49,6 +49,7 @@ fn_case <- function(
   ...,
   .preserve = FALSE,
   .default = NA,
+  .exhaustive = FALSE,
   preserve = deprecated(),
   default = deprecated()
 ) {
@@ -59,9 +60,15 @@ fn_case <- function(
   inputs <- fn_case_setup(dots)
 
   replace(
-    inputs$fs, x, .default, .preserve, fn, inputs$args,
-    default_env = rlang::caller_env(),
-    current_env = rlang::current_env()
+    fs = inputs$fs,
+    x = x,
+    .default = .default,
+    .preserve = .preserve,
+    .exhaustive = .exhaustive,
+    fn = fn,
+    args = inputs$args,
+    default_env = first_incase_frame_parent(),
+    current_env = first_incase_frame()
   )
 }
 

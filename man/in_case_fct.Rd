@@ -24,6 +24,7 @@ switch_case_fct(
   .preserve = FALSE,
   .default = NA,
   .ordered = FALSE,
+  .exhaustive = FALSE,
   preserve = deprecated(),
   default = deprecated(),
   ordered = deprecated()
@@ -35,6 +36,7 @@ grep_case_fct(
   .preserve = FALSE,
   .default = NA,
   .ordered = FALSE,
+  .exhaustive = FALSE,
   preserve = deprecated(),
   default = deprecated(),
   ordered = deprecated()
@@ -47,6 +49,7 @@ fn_case_fct(
   .preserve = FALSE,
   .default = NA,
   .ordered = FALSE,
+  .exhaustive = FALSE,
   preserve = deprecated(),
   default = deprecated(),
   ordered = deprecated()
@@ -59,6 +62,7 @@ fn_switch_case_fct(
   .preserve = FALSE,
   .default = NA,
   .ordered = FALSE,
+  .exhaustive = FALSE,
   preserve = deprecated(),
   default = deprecated(),
   ordered = deprecated()
@@ -96,6 +100,15 @@ If \code{\link{FALSE}}, returns an unordered factor.}
 Deprecated in favor of \code{.preserve}, \code{.default}, and \code{.ordered}}
 
 \item{x}{A vector}
+
+\item{.exhaustive}{If \code{TRUE}, unmatched elements of \code{x} will result in
+an error.
+This can be useful to ensure you aren't accidentally forgetting to recode
+any values.
+Defaults to \code{FALSE}.
+
+Note that if \code{.preserve} is \code{TRUE},
+\code{.exhaustive} will never have any effect.}
 
 \item{fn}{A function to apply to the left-hand side of each formula in \code{...}
 

@@ -585,6 +585,34 @@ test_that("fn_switch_case_fct() with arguments and default", {
   )
 })
 
+test_that("exhaustive *_case_fct()", {
+  error <- expect_error(
+    switch_case_fct(
+      c("a", "b", "c"),
+      "c" ~ "cantaloupe",
+      "b" ~ "banana",
+      .exhaustive = TRUE
+    ),
+    "The following value was not matched: a.",
+  )
+
+  expect_equal(error$call[[1]], rlang::sym("switch_case_fct"))
+
+  expect_equal(
+    switch_case_fct(
+      c("a", "b", "c"),
+      "c" ~ "cantaloupe",
+      "b" ~ "banana",
+      "a" ~ "apple",
+      .exhaustive = TRUE
+    ),
+    factor(
+      c("apple", "banana", "cantaloupe"),
+      levels = c("cantaloupe", "banana", "apple")
+    )
+  )
+})
+
 test_that("fn_switch_case_fct() errors", {
   expect_error(fn_switch_case_fct(1:10, function(x) x + 5))
 })

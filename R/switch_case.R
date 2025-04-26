@@ -25,6 +25,16 @@
 #' @param .default If `.preserve` is `FALSE`, a value to replace unmatched
 #'   elements of `x`.
 #'   Defaults to `NA`.
+#'
+#' @param .exhaustive If `TRUE`, unmatched elements of `x` will result in
+#'   an error.
+#'   This can be useful to ensure you aren't accidentally forgetting to recode
+#'   any values.
+#'   Defaults to `FALSE`.
+#'
+#'   Note that if `.preserve` is `TRUE`,
+#'   `.exhaustive` will never have any effect.
+#'
 #' @param preserve,default `r lifecycle::badge("deprecated")`
 #'   Deprecated in favor of `.preserve` and `.default`
 #'
@@ -50,18 +60,19 @@ switch_case <- function(
   ...,
   .preserve = FALSE,
   .default = NA,
+  .exhaustive = FALSE,
   preserve = deprecated(),
   default = deprecated()
 ) {
-  .preserve <- coalesce_deprecated(.preserve, preserve)
-  .default <- coalesce_deprecated(.default, default)
-
   fn_case(
     x  = x,
     fn = `%in%`,
     ...,
     .preserve = .preserve,
-    .default  = .default
+    .default  = .default,
+    .exhaustive = .exhaustive,
+    preserve = preserve,
+    default = default
   )
 }
 
@@ -74,12 +85,10 @@ fn_switch_case <- function(
   ...,
   .preserve = FALSE,
   .default = NA,
+  .exhaustive = FALSE,
   preserve = deprecated(),
   default = deprecated()
 ) {
-  .preserve <- coalesce_deprecated(.preserve, preserve)
-  .default <- coalesce_deprecated(.default, default)
-
   eval.parent(fn_switch_case_call("switch_case", fn, ...))
 }
 
@@ -91,7 +100,6 @@ fn_switch_case_call <- function(
   current_fn = rlang::caller_fn()
 ) {
   args <- as.list(call)[-1]
-  args <- dot_arg_names(args)
 
   dots <- compact_list(...)
   dots_idx <- which(args %in% dots)

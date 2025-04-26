@@ -1,7 +1,7 @@
-yn <- c(NA, NA, "fizz", NA, "buzz", "fizz", NA, NA, "fizz", NA)
-yp <- c(1, 2, "fizz", 4, "buzz", "fizz", 7, 8, "fizz", 10)
+yn <- c(NA, NA, "fizz", NA, "buzz", "fizz", NA, NA, "fizz", "buzz")
+yp <- c(1, 2, "fizz", 4, "buzz", "fizz", 7, 8, "fizz", "buzz")
 yd <- c(
-  "bam", "bam", "fizz", "bam", "buzz", "fizz", "bam", "bam", "fizz", "bam"
+  "bam", "bam", "fizz", "bam", "buzz", "fizz", "bam", "bam", "fizz", "buzz"
 )
 
 test_that("unpiped unpreserved switch_case()", {
@@ -11,6 +11,7 @@ test_that("unpiped unpreserved switch_case()", {
     5 ~ "buzz",
     6 ~ "fizz",
     9 ~ "fizz",
+    10 ~ "buzz",
     .preserve = FALSE
   )
 
@@ -21,7 +22,8 @@ test_that("unpiped unpreserved switch_case()", {
     3 ~ "fizz",
     5 ~ "buzz",
     6 ~ "fizz",
-    9 ~ "fizz"
+    9 ~ "fizz",
+    10 ~ "buzz"
   )
 
   expect_equal(x, yn)
@@ -34,6 +36,7 @@ test_that("unpiped preserved switch_case()", {
     5 ~ "buzz",
     6 ~ "fizz",
     9 ~ "fizz",
+    10 ~ "buzz",
     .preserve = TRUE
   )
 
@@ -47,6 +50,7 @@ test_that("unpiped defaulted switch_case()", {
     5 ~ "buzz",
     6 ~ "fizz",
     9 ~ "fizz",
+    10 ~ "buzz",
     .default = "bam"
   )
 
@@ -57,7 +61,7 @@ test_that("unpiped vectored switch_case()", {
   x <- switch_case(
     1:10,
     c(3, 6, 9) ~ "fizz",
-    5          ~ "buzz"
+    c(5, 10) ~ "buzz"
   )
 
   expect_equal(x, yn)
@@ -70,6 +74,7 @@ test_that("piped unpreserved switch_case()", {
       5 ~ "buzz",
       6 ~ "fizz",
       9 ~ "fizz",
+      10 ~ "buzz",
       .preserve = FALSE
     )
 
@@ -80,7 +85,8 @@ test_that("piped unpreserved switch_case()", {
       3 ~ "fizz",
       5 ~ "buzz",
       6 ~ "fizz",
-      9 ~ "fizz"
+      9 ~ "fizz",
+      10 ~ "buzz"
     )
 
   expect_equal(x, yn)
@@ -93,6 +99,7 @@ test_that("piped preserved switch_case()", {
       5 ~ "buzz",
       6 ~ "fizz",
       9 ~ "fizz",
+      10 ~ "buzz",
       .preserve = TRUE
     )
 
@@ -106,6 +113,7 @@ test_that("piped defaulted switch_case()", {
       5 ~ "buzz",
       6 ~ "fizz",
       9 ~ "fizz",
+      10 ~ "buzz",
       .default = "bam"
     )
 
@@ -116,10 +124,47 @@ test_that("unpiped vectored switch_case()", {
   x <- 1:10 %>%
     switch_case(
       c(3, 6, 9) ~ "fizz",
-      5          ~ "buzz"
+      c(5, 10) ~ "buzz"
     )
 
   expect_equal(x, yn)
+})
+
+test_that("exhaustive switch_case()", {
+  error <- expect_error(
+    switch_case(
+      1:10,
+      c(3, 6, 9) ~ "fizz",
+      c(5, 10) ~ "buzz",
+      .exhaustive = TRUE
+    ),
+    "The following values were not matched: 1, 2, 4, 7, and 8.",
+    fixed = TRUE
+  )
+
+  expect_equal(error$call[[1]], rlang::sym("switch_case"))
+
+  expect_equal(
+    switch_case(
+      1:10,
+      c(3, 6, 9) ~ "fizz",
+      c(5, 10) ~ "buzz",
+      1:10 ~ "bam",
+      .exhaustive = TRUE
+    ),
+    yd
+  )
+
+  expect_equal(
+    switch_case(
+      1:10,
+      c(3, 6, 9) ~ "fizz",
+      c(5, 10) ~ "buzz",
+      .preserve = TRUE,
+      .exhaustive = TRUE
+    ),
+    c(1, 2, "fizz", 4, "buzz", "fizz", 7, 8, "fizz", "buzz")
+  )
 })
 
 test_that("default from other variable switch_case()", {
@@ -173,6 +218,38 @@ test_that("fn_switch_case()", {
   )
 })
 
+test_that("fn_switch_case() exhaustive", {
+  data <- c(1, 2, 999, 888, 777)
+
+  error <- expect_error(
+    fn_switch_case(
+      data,
+      function(x) strrep(x, 3),
+      7 ~ "Not asked",
+      8 ~ "Refused",
+      9 ~ "Missing",
+      .exhaustive = TRUE
+    ),
+    "The following values were not matched: 1 and 2.",
+    fixed = TRUE
+  )
+
+  expect_equal(error$call[[1]], rlang::sym("fn_switch_case"))
+
+  expect_equal(
+    fn_switch_case(
+      c(111, 222, 999, 888, 777),
+      function(x) strrep(x, 3),
+      1:2 ~ "Valid",
+      7 ~ "Not asked",
+      8 ~ "Refused",
+      9 ~ "Missing",
+      .exhaustive = TRUE
+    ),
+    c("Valid", "Valid", "Missing", "Refused", "Not asked")
+  )
+})
+
 test_that("fn_switch_case() errors", {
   expect_error(fn_switch_case(1:10, function(x) x + 5))
 })
@@ -185,6 +262,7 @@ test_that("warning for deprecated argument", {
       5 ~ "buzz",
       6 ~ "fizz",
       9 ~ "fizz",
+      10 ~ "buzz",
       preserve = FALSE
     ),
     "The `preserve` argument of `switch_case()` is deprecated as of incase 0.3.3.",
@@ -199,6 +277,7 @@ test_that("warning for deprecated argument", {
       5 ~ "buzz",
       6 ~ "fizz",
       9 ~ "fizz",
+      10 ~ "buzz",
       .preserve = FALSE
     )
   )
@@ -210,6 +289,7 @@ test_that("warning for deprecated argument", {
       5 ~ "buzz",
       6 ~ "fizz",
       9 ~ "fizz",
+      10 ~ "buzz",
       default = "bam"
     ),
     "The `default` argument of `switch_case()` is deprecated as of incase 0.3.3.",
@@ -224,6 +304,7 @@ test_that("warning for deprecated argument", {
       5 ~ "buzz",
       6 ~ "fizz",
       9 ~ "fizz",
+      10 ~ "buzz",
       .default = "bam"
     )
   )

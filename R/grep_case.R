@@ -37,18 +37,19 @@ grep_case <- function(
   ...,
   .preserve = FALSE,
   .default = NA,
+  .exhaustive = FALSE,
   preserve = deprecated(),
   default = deprecated()
 ) {
-  .preserve <- coalesce_deprecated(.preserve, preserve)
-  .default <- coalesce_deprecated(.default, default)
-
   fn_case(
     x = x,
     fn = grepl_any,
     ...,
     .preserve = .preserve,
-    .default = .default
+    .default = .default,
+    .exhaustive = .exhaustive,
+    preserve = preserve,
+    default = default
   )
 }
 

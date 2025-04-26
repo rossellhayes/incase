@@ -53,14 +53,14 @@ in_case_fct <- function(
   inputs <- in_case_setup(dots, .preserve = .preserve, fn = "in_case_fct")
 
   replace(
-    fs          = inputs$fs,
-    x           = inputs$x,
-    .default    = .default,
-    .preserve   = .preserve,
-    factor      = TRUE,
-    .ordered    = .ordered,
-    default_env = rlang::caller_env(),
-    current_env = rlang::current_env(),
+    fs = inputs$fs,
+    x = inputs$x,
+    .default = .default,
+    .preserve = .preserve,
+    factor = TRUE,
+    .ordered = .ordered,
+    default_env = first_incase_frame_parent(),
+    current_env = first_incase_frame(),
     dots_idx = dots_idx,
     .default_idx = .default_idx
   )
@@ -75,16 +75,12 @@ switch_case_fct <- function(
   .preserve = FALSE,
   .default = NA,
   .ordered = FALSE,
+  .exhaustive = FALSE,
   preserve = deprecated(),
   default = deprecated(),
   ordered = deprecated()
 ) {
-  .preserve <- coalesce_deprecated(.preserve, preserve)
-  .default <- coalesce_deprecated(.default, default)
-  .ordered <- coalesce_deprecated(.ordered, ordered)
-
   args <- as.list(rlang::current_call())[-1]
-  args <- dot_arg_names(args)
 
   eval.parent(rlang::call2("fn_case_fct", fn = `%in%`, !!!args))
 }
@@ -98,16 +94,12 @@ grep_case_fct <- function(
   .preserve = FALSE,
   .default = NA,
   .ordered = FALSE,
+  .exhaustive = FALSE,
   preserve = deprecated(),
   default = deprecated(),
   ordered = deprecated()
 ) {
-  .preserve <- coalesce_deprecated(.preserve, preserve)
-  .default <- coalesce_deprecated(.default, default)
-  .ordered <- coalesce_deprecated(.ordered, ordered)
-
   args <- as.list(rlang::current_call())[-1]
-  args <- dot_arg_names(args)
 
   eval.parent(rlang::call2("fn_case_fct", fn = grepl_any, !!!args))
 }
@@ -122,6 +114,7 @@ fn_case_fct <- function(
   .preserve = FALSE,
   .default = NA,
   .ordered = FALSE,
+  .exhaustive = FALSE,
   preserve = deprecated(),
   default = deprecated(),
   ordered = deprecated()
@@ -138,11 +131,17 @@ fn_case_fct <- function(
   inputs <- fn_case_setup(dots)
 
   replace(
-    inputs$fs, x, .default, .preserve, fn, inputs$args,
+    fs = inputs$fs,
+    x = x,
+    .default = .default,
+    .preserve = .preserve,
+    .exhaustive = .exhaustive,
+    fn = fn,
+    args = inputs$args,
     factor = TRUE,
     .ordered = .ordered,
-    default_env = rlang::caller_env(),
-    current_env = rlang::current_env(),
+    default_env = first_incase_frame_parent(),
+    current_env = first_incase_frame(),
     dots_idx = dots_idx,
     .default_idx = .default_idx
   )
@@ -158,25 +157,10 @@ fn_switch_case_fct <- function(
   .preserve = FALSE,
   .default = NA,
   .ordered = FALSE,
+  .exhaustive = FALSE,
   preserve = deprecated(),
   default = deprecated(),
   ordered = deprecated()
 ) {
-  .preserve <- coalesce_deprecated(.preserve, preserve)
-  .default <- coalesce_deprecated(.default, default)
-  .ordered <- coalesce_deprecated(.ordered, ordered)
-
   eval.parent(fn_switch_case_call("switch_case_fct", fn, ...))
-}
-
-dot_arg_names <- function(args) {
-  rlang::names2(args) <- switch_case(
-    rlang::names2(args),
-    "preserve" ~ ".preserve",
-    "default" ~ ".default",
-    "ordered" ~ ".ordered",
-    .preserve = TRUE
-  )
-
-  args
 }

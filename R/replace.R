@@ -5,6 +5,7 @@ replace <- function(
   x,
   .default,
   .preserve,
+  .exhaustive = FALSE,
   fn = NULL,
   args = NULL,
   factor = FALSE,
@@ -73,6 +74,18 @@ replace <- function(
     out <- replace_with(out, pairs$query[[i]] & !replaced, pairs$value[[i]])
     replaced <- replaced | (pairs$query[[i]] & !is.na(pairs$query[[i]]))
     if (all(replaced)) break
+  }
+
+  if (.exhaustive & !all(replaced)) {
+    cli::cli_abort(
+      c(
+        "Not all values were matched.",
+        "x" = "The following {plu::ral('value was', unique(x[!replaced]))} not matched: {unique(x[!replaced])}.",
+        "i" = "This error was generated because {.arg .exhaustive} is {.val {TRUE}}.",
+        " " = "If you don't care about matching all values, you can set {.arg .exhaustive} to {.val {FALSE}}."
+      ),
+      call = current_env
+    )
   }
 
   if (factor) {
