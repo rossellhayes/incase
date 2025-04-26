@@ -45,12 +45,12 @@ test_that("grep_case() with preserve", {
   )
 
   expect_equal(
-    grep_case(words, "cat" ~ "feline", "dog" ~ "canine", preserve = FALSE),
+    grep_case(words, "cat" ~ "feline", "dog" ~ "canine", .preserve = FALSE),
     c("feline", "canine", "feline", "canine", NA)
   )
 
   expect_equal(
-    grep_case(words, "cat" ~ "feline", "dog" ~ "canine", preserve = TRUE),
+    grep_case(words, "cat" ~ "feline", "dog" ~ "canine", .preserve = TRUE),
     c("feline", "canine", "feline", "canine", "ratatouille")
   )
 
@@ -66,7 +66,7 @@ test_that("grep_case() with preserve", {
       "Belg"        ~ "Belgium",
       "Nederland"   ~ "Netherlands",
       "Italia"      ~ "Italy",
-      preserve      = TRUE,
+      .preserve      = TRUE,
       ignore.case   = TRUE
     ),
     c(
@@ -90,11 +90,26 @@ test_that("grep_case() with vector LHS", {
       "nederland" ~ "Netherlands",
       "italia" ~ "Italy",
       ignore.case = TRUE,
-      preserve = TRUE
+      .preserve = TRUE
     ),
     c(
       "France", "Germany", "Germany", "Netherlands",
       "Belgium", "Belgium", "Luxembourg", "Italy"
     )
+  )
+})
+
+test_that("warning for deprecated argument", {
+  words <- c("caterpillar", "dogwood", "catastrophe", "dogma", "ratatouille")
+
+  lifecycle::expect_deprecated(
+    preserve <- grep_case(words, "cat" ~ "feline", "dog" ~ "canine", preserve = FALSE),
+    "The `preserve` argument of `grep_case()` is deprecated as of incase 0.3.3.",
+    fixed = TRUE
+  )
+
+  expect_equal(
+    preserve,
+    grep_case(words, "cat" ~ "feline", "dog" ~ "canine", .preserve = FALSE)
   )
 })

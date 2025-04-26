@@ -3,12 +3,12 @@
 replace <- function(
   fs,
   x,
-  default,
-  preserve,
+  .default,
+  .preserve,
   fn = NULL,
   args = NULL,
   factor = FALSE,
-  ordered = FALSE,
+  .ordered = FALSE,
   list = FALSE,
   default_env,
   current_env
@@ -16,13 +16,13 @@ replace <- function(
   assert_length(fs, call = current_env)
 
   pairs <- extract_formula_pairs(
-    fs, x, default, fn, args, default_env, current_env, list = list
+    fs, x, .default, fn, args, default_env, current_env, list = list
   )
 
   if (factor) {levels <- as.character(c(pairs$value, recursive = TRUE))}
 
-  if (preserve) {
-    warn_if_default(default)
+  if (.preserve) {
+    warn_if_default(.default)
 
     if (list) {
       pairs$query <- append(pairs$query, list(rep(TRUE, length(x))))
@@ -36,18 +36,18 @@ replace <- function(
   n <- validate_case_length(pairs$query, pairs$value, fs)
 
   if (identical(n, 0L) || length(n) == 0) {
-    return(default[0])
+    return(.default[0])
   }
 
   if (list) {
-    default <- list(default)
+    .default <- list(.default)
   }
 
-  out      <- rep_len(default, n)
+  out      <- rep_len(.default, n)
   replaced <- rep(FALSE, n)
 
   if (!list & all(vapply(pairs$value, is.atomic, logical(1)))) {
-    class       <- class(c(pairs$value, default, recursive = TRUE))
+    class       <- class(c(pairs$value, .default, recursive = TRUE))
     pairs$value <- lapply(pairs$value, `class<-`, class)
     class(out)  <- class
   }
@@ -59,14 +59,14 @@ replace <- function(
   }
 
   if (factor) {
-    return(factor(out, levels = unique(c(levels, out)), ordered = ordered))
+    return(factor(out, levels = unique(c(levels, out)), ordered = .ordered))
   }
 
   out
 }
 
 extract_formula_pairs <- function(
-  fs, x = NULL, default, fn = NULL, args = NULL, default_env, current_env,
+  fs, x = NULL, .default, fn = NULL, args = NULL, default_env, current_env,
   logical_lhs = TRUE, list = FALSE
 ) {
   quos_pairs <- Map(
@@ -101,7 +101,7 @@ extract_formula_pairs <- function(
 
   value <- Map(
     function(x, applicable) {
-      if (!applicable) return(default)
+      if (!applicable) return(.default)
       rlang::eval_tidy(x$rhs, env = default_env)
     },
     quos_pairs, applicable
@@ -145,10 +145,10 @@ assert_logical_lhs <- function(query, quos_pairs) {
   }
 }
 
-warn_if_default <- function(default) {
-  if (!is.null(default) && !is.na(default)) {
+warn_if_default <- function(.default) {
+  if (!is.null(.default) && !is.na(.default)) {
     cli::cli_warn(
-      "{.arg default} will have no effect if {.arg preserve} is {.val {TRUE}}."
+      "{.arg .default} will have no effect if {.arg .preserve} is {.val {TRUE}}."
     )
   }
 }

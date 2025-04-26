@@ -93,7 +93,7 @@ With **incase**, you no longer have to worry about specifying the type of your `
 
 ### Easy default values
 
-`in_case()` adds `preserve` and `default` arguments as a more intuitive alternative to `TRUE ~ ...`.*
+`in_case()` adds `.preserve` and `.default` arguments as a more intuitive alternative to `TRUE ~ ...`.*
 
 ```{r}
 1:20 %>%
@@ -108,7 +108,7 @@ With **incase**, you no longer have to worry about specifying the type of your `
     . %% 15 == 0 ~ "fizz buzz",
     . %%  3 == 0 ~ "fizz",
     . %%  5 == 0 ~ "buzz",
-    preserve     = TRUE
+    .preserve    = TRUE
   )
 
 1:20 %>%
@@ -116,7 +116,7 @@ With **incase**, you no longer have to worry about specifying the type of your `
     . %% 15 == 0 ~ "fizz buzz",
     . %%  3 == 0 ~ "fizz",
     . %%  5 == 0 ~ "buzz",
-    default      = "pass"
+    .default     = "pass"
   )
 ```
 
@@ -158,7 +158,7 @@ grep_case(
 #### Easily recode to (ordered) factor
 
 When you need an ordered factor, the `*_fct()` family of functions lets you save a step by using the order of your cases as the order of your factor levels.
-Use `ordered = TRUE` to create an ordered factor and `ordered = FALSE` to make a regular-old factor.
+Use `.ordered = TRUE` to create an ordered factor and `.ordered = FALSE` to make a regular-old factor.
 
 ```{r}
 data <- runif(10, 0, 10)
@@ -166,10 +166,10 @@ data
 
 data %>% 
   in_case_fct(
-    . < 3   ~ "Low",
-    . < 7   ~ "Medium",
-    default = "High",
-    ordered = TRUE
+    . < 3    ~ "Low",
+    . < 7    ~ "Medium",
+    .default = "High",
+    .ordered = TRUE
   )
 
 parties %>%
