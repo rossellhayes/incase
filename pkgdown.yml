@@ -1,8 +1,8 @@
 pandoc: 3.1.11
-pkgdown: 2.1.0
+pkgdown: 2.1.1
 pkgdown_sha: ~
 articles: {}
-last_built: 2024-07-10T22:21Z
+last_built: 2025-04-26T01:27Z
 urls:
   reference: https://pkg.rossellhayes.com/incase/reference
   article: https://pkg.rossellhayes.com/incase/articles

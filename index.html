@@ -140,7 +140,7 @@
 <div class="section level3">
 <h3 id="easy-default-values">Easy default values<a class="anchor" aria-label="anchor" href="#easy-default-values"></a>
 </h3>
-<p><code><a href="reference/in_case.html">in_case()</a></code> adds <code>preserve</code> and <code>default</code> arguments as a more intuitive alternative to <code>TRUE ~ ...</code>.*</p>
+<p><code><a href="reference/in_case.html">in_case()</a></code> adds <code>.preserve</code> and <code>.default</code> arguments as a more intuitive alternative to <code>TRUE ~ ...</code>.*</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fl">1</span><span class="op">:</span><span class="fl">20</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/in_case.html">in_case</a></span><span class="op">(</span></span>
@@ -158,7 +158,7 @@
 <span>    <span class="va">.</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%%</a></span> <span class="fl">15</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"fizz buzz"</span>,</span>
 <span>    <span class="va">.</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%%</a></span>  <span class="fl">3</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"fizz"</span>,</span>
 <span>    <span class="va">.</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%%</a></span>  <span class="fl">5</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"buzz"</span>,</span>
-<span>    preserve     <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>    .preserve    <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="co">#&gt;  [1] "1"         "2"         "fizz"      "4"         "buzz"      "fizz"     </span></span>
 <span><span class="co">#&gt;  [7] "7"         "8"         "fizz"      "buzz"      "11"        "fizz"     </span></span>
@@ -170,7 +170,7 @@
 <span>    <span class="va">.</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%%</a></span> <span class="fl">15</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"fizz buzz"</span>,</span>
 <span>    <span class="va">.</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%%</a></span>  <span class="fl">3</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"fizz"</span>,</span>
 <span>    <span class="va">.</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%%</a></span>  <span class="fl">5</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"buzz"</span>,</span>
-<span>    default      <span class="op">=</span> <span class="st">"pass"</span></span>
+<span>    .default     <span class="op">=</span> <span class="st">"pass"</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="co">#&gt;  [1] "pass"      "pass"      "fizz"      "pass"      "buzz"      "fizz"     </span></span>
 <span><span class="co">#&gt;  [7] "pass"      "pass"      "fizz"      "buzz"      "pass"      "fizz"     </span></span>
@@ -183,8 +183,8 @@
 <p><code><a href="reference/switch_case.html">switch_case()</a></code> works as a convenient shorthand for <code><a href="reference/in_case.html">in_case()</a></code> when recoding discrete values.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">parties</span></span>
-<span><span class="co">#&gt;  [1] "G" "I" "D" "I" "R" "D" "L" "D" NA  "L" NA  "G" "R" NA  "G" NA  "L" "D" "D"</span></span>
-<span><span class="co">#&gt; [20] "I"</span></span>
+<span><span class="co">#&gt;  [1] "R" "I" "R" "R" "D" "G" "I" "D" "G" "G" "I" "D" NA  "I" "I" "R" NA  "I" "G"</span></span>
+<span><span class="co">#&gt; [20] "R"</span></span>
 <span></span>
 <span><span class="va">parties</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/switch_case.html">switch_case</a></span><span class="op">(</span></span>
@@ -193,10 +193,10 @@
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"G"</span>, <span class="st">"L"</span><span class="op">)</span> <span class="op">~</span> <span class="st">"Other"</span>,</span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"I"</span>, <span class="cn">NA</span><span class="op">)</span>  <span class="op">~</span> <span class="st">"Independent"</span></span>
 <span>  <span class="op">)</span></span>
-<span><span class="co">#&gt;  [1] "Other"       "Independent" "Democrat"    "Independent" "Republican" </span></span>
-<span><span class="co">#&gt;  [6] "Democrat"    "Other"       "Democrat"    "Independent" "Other"      </span></span>
-<span><span class="co">#&gt; [11] "Independent" "Other"       "Republican"  "Independent" "Other"      </span></span>
-<span><span class="co">#&gt; [16] "Independent" "Other"       "Democrat"    "Democrat"    "Independent"</span></span></code></pre></div>
+<span><span class="co">#&gt;  [1] "Republican"  "Independent" "Republican"  "Republican"  "Democrat"   </span></span>
+<span><span class="co">#&gt;  [6] "Other"       "Independent" "Democrat"    "Other"       "Other"      </span></span>
+<span><span class="co">#&gt; [11] "Independent" "Democrat"    "Independent" "Independent" "Independent"</span></span>
+<span><span class="co">#&gt; [16] "Republican"  "Independent" "Independent" "Other"       "Republican"</span></span></code></pre></div>
 <p><code><a href="reference/grep_case.html">grep_case()</a></code> allows you to recode values with pattern matching.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">countries</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
@@ -218,21 +218,21 @@
 <div class="section level4">
 <h4 id="easily-recode-to-ordered-factor">Easily recode to (ordered) factor<a class="anchor" aria-label="anchor" href="#easily-recode-to-ordered-factor"></a>
 </h4>
-<p>When you need an ordered factor, the <code>*_fct()</code> family of functions lets you save a step by using the order of your cases as the order of your factor levels. Use <code>ordered = TRUE</code> to create an ordered factor and <code>ordered = FALSE</code> to make a regular-old factor.</p>
+<p>When you need an ordered factor, the <code>*_fct()</code> family of functions lets you save a step by using the order of your cases as the order of your factor levels. Use <code>.ordered = TRUE</code> to create an ordered factor and <code>.ordered = FALSE</code> to make a regular-old factor.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span></span>
 <span><span class="va">data</span></span>
-<span><span class="co">#&gt;  [1] 3.9075340 7.4098608 2.1540250 8.4599089 3.0487929 8.9268192 9.9001603</span></span>
-<span><span class="co">#&gt;  [8] 9.2022173 0.3128016 5.2452107</span></span>
+<span><span class="co">#&gt;  [1] 8.4454267 1.6049231 0.5227919 2.3271123 8.1508663 2.2252478 3.8852771</span></span>
+<span><span class="co">#&gt;  [8] 9.6029983 4.8355979 9.6592282</span></span>
 <span></span>
 <span><span class="va">data</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="reference/in_case_fct.html">in_case_fct</a></span><span class="op">(</span></span>
-<span>    <span class="va">.</span> <span class="op">&lt;</span> <span class="fl">3</span>   <span class="op">~</span> <span class="st">"Low"</span>,</span>
-<span>    <span class="va">.</span> <span class="op">&lt;</span> <span class="fl">7</span>   <span class="op">~</span> <span class="st">"Medium"</span>,</span>
-<span>    default <span class="op">=</span> <span class="st">"High"</span>,</span>
-<span>    ordered <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>    <span class="va">.</span> <span class="op">&lt;</span> <span class="fl">3</span>    <span class="op">~</span> <span class="st">"Low"</span>,</span>
+<span>    <span class="va">.</span> <span class="op">&lt;</span> <span class="fl">7</span>    <span class="op">~</span> <span class="st">"Medium"</span>,</span>
+<span>    .default <span class="op">=</span> <span class="st">"High"</span>,</span>
+<span>    .ordered <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span>  <span class="op">)</span></span>
-<span><span class="co">#&gt;  [1] Medium High   Low    High   Medium High   High   High   Low    Medium</span></span>
+<span><span class="co">#&gt;  [1] High   Low    Low    Low    High   Low    Medium High   Medium High  </span></span>
 <span><span class="co">#&gt; Levels: Low &lt; Medium &lt; High</span></span>
 <span></span>
 <span><span class="va">parties</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
@@ -242,10 +242,10 @@
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"G"</span>, <span class="st">"L"</span><span class="op">)</span> <span class="op">~</span> <span class="st">"Other"</span>,</span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"I"</span>, <span class="cn">NA</span><span class="op">)</span>  <span class="op">~</span> <span class="st">"Independent"</span></span>
 <span>  <span class="op">)</span></span>
-<span><span class="co">#&gt;  [1] Other       Independent Democrat    Independent Republican  Democrat   </span></span>
-<span><span class="co">#&gt;  [7] Other       Democrat    Independent Other       Independent Other      </span></span>
-<span><span class="co">#&gt; [13] Republican  Independent Other       Independent Other       Democrat   </span></span>
-<span><span class="co">#&gt; [19] Democrat    Independent</span></span>
+<span><span class="co">#&gt;  [1] Republican  Independent Republican  Republican  Democrat    Other      </span></span>
+<span><span class="co">#&gt;  [7] Independent Democrat    Other       Other       Independent Democrat   </span></span>
+<span><span class="co">#&gt; [13] Independent Independent Independent Republican  Independent Independent</span></span>
+<span><span class="co">#&gt; [19] Other       Republican </span></span>
 <span><span class="co">#&gt; Levels: Democrat Republican Other Independent</span></span></code></pre></div>
 <hr>
 <p>Hex sticker fonts are <a href="https://github.com/adobe-fonts/source-sans" class="external-link">Source Sans by Adobe</a> and <a href="https://github.com/i-tu/Hasklig" class="external-link">Hasklig by Ian Tuomi</a>.</p>
@@ -320,7 +320,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
       </footer>

@@ -59,15 +59,61 @@ case statements.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">in_case_fct</span><span class="op">(</span><span class="va">...</span>, preserve <span class="op">=</span> <span class="cn">FALSE</span>, default <span class="op">=</span> <span class="cn">NA</span>, ordered <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">in_case_fct</span><span class="op">(</span></span>
+<span>  <span class="va">...</span>,</span>
+<span>  .preserve <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  .default <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  .ordered <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  preserve <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  default <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  ordered <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">switch_case_fct</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, preserve <span class="op">=</span> <span class="cn">FALSE</span>, default <span class="op">=</span> <span class="cn">NA</span>, ordered <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu">switch_case_fct</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  .preserve <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  .default <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  .ordered <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  preserve <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  default <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  ordered <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">grep_case_fct</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, preserve <span class="op">=</span> <span class="cn">FALSE</span>, default <span class="op">=</span> <span class="cn">NA</span>, ordered <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu">grep_case_fct</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  .preserve <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  .default <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  .ordered <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  preserve <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  default <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  ordered <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">fn_case_fct</span><span class="op">(</span><span class="va">x</span>, <span class="va">fn</span>, <span class="va">...</span>, preserve <span class="op">=</span> <span class="cn">FALSE</span>, default <span class="op">=</span> <span class="cn">NA</span>, ordered <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu">fn_case_fct</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">fn</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  .preserve <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  .default <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  .ordered <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  preserve <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  default <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  ordered <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">fn_switch_case_fct</span><span class="op">(</span><span class="va">x</span>, <span class="va">fn</span>, <span class="va">...</span>, preserve <span class="op">=</span> <span class="cn">FALSE</span>, default <span class="op">=</span> <span class="cn">NA</span>, ordered <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">fn_switch_case_fct</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">fn</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  .preserve <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  .default <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  .ordered <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  preserve <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  default <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  ordered <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -86,25 +132,30 @@ to the function <code>fn</code>.</p></li>
 </ul></dd>
 
 
-<dt id="arg-preserve">preserve<a class="anchor" aria-label="anchor" href="#arg-preserve"></a></dt>
+<dt id="arg--preserve">.preserve<a class="anchor" aria-label="anchor" href="#arg--preserve"></a></dt>
 <dd><p>If <code>TRUE</code>, unmatched elements of <code>x</code> will be returned
 unmodified.
 (The elements may have their type coerced to be compatible with
 replacement values.)
-If <code>FALSE</code>, unmatched elements of <code>x</code> will be replaced with <code>default</code>.
+If <code>FALSE</code>, unmatched elements of <code>x</code> will be replaced with <code>.default</code>.
 Defaults to <code>FALSE</code>.</p></dd>
 
 
-<dt id="arg-default">default<a class="anchor" aria-label="anchor" href="#arg-default"></a></dt>
-<dd><p>If <code>preserve</code> is <code>FALSE</code>, a value to replace unmatched
+<dt id="arg--default">.default<a class="anchor" aria-label="anchor" href="#arg--default"></a></dt>
+<dd><p>If <code>.preserve</code> is <code>FALSE</code>, a value to replace unmatched
 elements of <code>x</code>.
 Defaults to <code>NA</code>.</p></dd>
 
 
-<dt id="arg-ordered">ordered<a class="anchor" aria-label="anchor" href="#arg-ordered"></a></dt>
+<dt id="arg--ordered">.ordered<a class="anchor" aria-label="anchor" href="#arg--ordered"></a></dt>
 <dd><p>A logical.
 If <code><a href="https://rdrr.io/r/base/logical.html" class="external-link">TRUE</a></code>, returns an <a href="https://rdrr.io/r/base/factor.html" class="external-link">ordered</a> factor.
 If <code><a href="https://rdrr.io/r/base/logical.html" class="external-link">FALSE</a></code>, returns an unordered factor.</p></dd>
+
+
+<dt id="arg-preserve-default-ordered">preserve, default, ordered<a class="anchor" aria-label="anchor" href="#arg-preserve-default-ordered"></a></dt>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a>
+Deprecated in favor of <code>.preserve</code>, <code>.default</code>, and <code>.ordered</code></p></dd>
 
 
 <dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
@@ -167,7 +218,7 @@ Inconsistent lengths will generate an error.</p>
 <span class="r-in"><span>  <span class="st">"c"</span> <span class="op">~</span> <span class="st">"cantaloupe"</span>,</span></span>
 <span class="r-in"><span>  <span class="st">"b"</span> <span class="op">~</span> <span class="st">"banana"</span>,</span></span>
 <span class="r-in"><span>  <span class="st">"a"</span> <span class="op">~</span> <span class="st">"apple"</span>,</span></span>
-<span class="r-in"><span>  preserve <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span>  .preserve <span class="op">=</span> <span class="cn">TRUE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] apple      banana     cantaloupe d         </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Levels: cantaloupe banana apple d</span>
@@ -203,7 +254,7 @@ Inconsistent lengths will generate an error.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
       </footer></div>

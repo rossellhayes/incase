@@ -49,12 +49,15 @@
 
     <div class="section level2">
 <h2 class="page-header" data-toc-text="development version" id="incase-development-version">incase (development version)<a class="anchor" aria-label="anchor" href="#incase-development-version"></a></h2>
-<ul><li>
+<ul><li>The arguments <code>preserve</code>, <code>default</code>, and <code>ordered</code> have been deprecated in favor of <code>.preserve</code>, <code>.default</code>, and <code>.ordered</code> (<a href="https://github.com/rossellhayes/incase/issues/9" class="external-link">#9</a>).
+<ul><li>Using undotted arguments will now trigger a warning. In future versions, these arguments will be removed.</li>
+</ul></li>
+<li>
+<code><a href="../reference/grep_case.html">grep_case()</a></code> and <code><a href="../reference/in_case_fct.html">grep_case_fct()</a></code> now support vectors in the left-hand side of arguments (<a href="https://github.com/rossellhayes/incase/issues/8" class="external-link">#8</a>).</li>
+<li>
 <code>*_case()</code> functions can now use lists as return values (<a href="https://github.com/rossellhayes/incase/issues/7" class="external-link">#7</a>).</li>
 <li>
 <code>*_case()</code> functions no longer perform automatic type conversion on non-atomic return values (<a href="https://github.com/rossellhayes/incase/issues/7" class="external-link">#7</a>).</li>
-<li>
-<code><a href="../reference/grep_case.html">grep_case()</a></code> and <code><a href="../reference/in_case_fct.html">grep_case_fct()</a></code> now support vectors in the left-hand side of arguments (<a href="https://github.com/rossellhayes/incase/issues/8" class="external-link">#8</a>).</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.3.2" id="incase-032">incase 0.3.2<small>2023-08-21</small><a class="anchor" aria-label="anchor" href="#incase-032"></a></h2>
@@ -125,7 +128,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
       </footer></div>

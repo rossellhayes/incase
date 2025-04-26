@@ -61,7 +61,13 @@ attempts to handle inconsistent types (see examples).</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">in_case</span><span class="op">(</span><span class="va">...</span>, preserve <span class="op">=</span> <span class="cn">FALSE</span>, default <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">in_case</span><span class="op">(</span></span>
+<span>  <span class="va">...</span>,</span>
+<span>  .preserve <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  .default <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  preserve <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  default <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -80,20 +86,25 @@ The case of <code>n == 0</code> is treated as a variant of <code>n != 1</code>.<
 <p><code>NULL</code> inputs are ignored.</p></dd>
 
 
-<dt id="arg-preserve">preserve<a class="anchor" aria-label="anchor" href="#arg-preserve"></a></dt>
+<dt id="arg--preserve">.preserve<a class="anchor" aria-label="anchor" href="#arg--preserve"></a></dt>
 <dd><p>If <code>TRUE</code>, unmatched elements of the input will be
 returned unmodified.
 (The elements may have their type coerced to be compatible with
 replacement values.)
 If <code>FALSE</code>, unmatched elements of the input will be replaced
-with <code>default</code>.
+with <code>.default</code>.
 Defaults to <code>FALSE</code>.</p></dd>
 
 
-<dt id="arg-default">default<a class="anchor" aria-label="anchor" href="#arg-default"></a></dt>
-<dd><p>If <code>preserve</code> is <code>FALSE</code>, a value to replace unmatched
+<dt id="arg--default">.default<a class="anchor" aria-label="anchor" href="#arg--default"></a></dt>
+<dd><p>If <code>.preserve</code> is <code>FALSE</code>, a value to replace unmatched
 elements of the input.
 Defaults to <code>NA</code>.</p></dd>
+
+
+<dt id="arg-preserve-default">preserve, default<a class="anchor" aria-label="anchor" href="#arg-preserve-default"></a></dt>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a>
+Deprecated in favor of <code>.preserve</code> and <code>.default</code></p></dd>
 
 </dl></div>
     <div id="value">
@@ -167,13 +178,13 @@ same function</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] NA NA  5 NA  7  5 NA NA  5  7 NA  5 NA NA 35 NA NA  5 NA  7  5 NA NA  5  7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [26] NA  5 NA NA 35</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># default and preserve make it easier to handle unmatched values</span></span></span>
+<span class="r-in"><span><span class="co"># .default and .preserve make it easier to handle unmatched values</span></span></span>
 <span class="r-in"><span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">in_case</span><span class="op">(</span></span></span>
 <span class="r-in"><span>    <span class="va">.</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%%</a></span> <span class="fl">15</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"fizz buzz"</span>,</span></span>
 <span class="r-in"><span>    <span class="va">.</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%%</a></span>  <span class="fl">3</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"fizz"</span>,</span></span>
 <span class="r-in"><span>    <span class="va">.</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%%</a></span>  <span class="fl">5</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"buzz"</span>,</span></span>
-<span class="r-in"><span>    default      <span class="op">=</span> <span class="st">"pass"</span></span></span>
+<span class="r-in"><span>    .default     <span class="op">=</span> <span class="st">"pass"</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "pass"      "pass"      "fizz"      "pass"      "buzz"      "fizz"     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "pass"      "pass"      "fizz"      "buzz"      "pass"      "fizz"     </span>
@@ -186,7 +197,7 @@ same function</p>
 <span class="r-in"><span>    <span class="va">.</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%%</a></span> <span class="fl">15</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"fizz buzz"</span>,</span></span>
 <span class="r-in"><span>    <span class="va">.</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%%</a></span>  <span class="fl">3</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"fizz"</span>,</span></span>
 <span class="r-in"><span>    <span class="va">.</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%%</a></span>  <span class="fl">5</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"buzz"</span>,</span></span>
-<span class="r-in"><span>    preserve     <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span>    .preserve    <span class="op">=</span> <span class="cn">TRUE</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "1"         "2"         "fizz"      "4"         "buzz"      "fizz"     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "7"         "8"         "fizz"      "buzz"      "11"        "fizz"     </span>
@@ -207,7 +218,7 @@ same function</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
       </footer></div>

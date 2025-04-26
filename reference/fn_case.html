@@ -53,7 +53,15 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fn_case</span><span class="op">(</span><span class="va">x</span>, <span class="va">fn</span>, <span class="va">...</span>, preserve <span class="op">=</span> <span class="cn">FALSE</span>, default <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fn_case</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">fn</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  .preserve <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  .default <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  preserve <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  default <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -86,17 +94,17 @@ to the function <code>fn</code>.</p></li>
 </ul></dd>
 
 
-<dt id="arg-preserve">preserve<a class="anchor" aria-label="anchor" href="#arg-preserve"></a></dt>
+<dt id="arg--preserve-preserve">.preserve, preserve<a class="anchor" aria-label="anchor" href="#arg--preserve-preserve"></a></dt>
 <dd><p>If <code>TRUE</code>, unmatched elements of <code>x</code> will be returned
 unmodified.
 (The elements may have their type coerced to be compatible with
 replacement values.)
-If <code>FALSE</code>, unmatched elements of <code>x</code> will be replaced with <code>default</code>.
+If <code>FALSE</code>, unmatched elements of <code>x</code> will be replaced with <code>.default</code>.
 Defaults to <code>FALSE</code>.</p></dd>
 
 
-<dt id="arg-default">default<a class="anchor" aria-label="anchor" href="#arg-default"></a></dt>
-<dd><p>If <code>preserve</code> is <code>FALSE</code>, a value to replace unmatched
+<dt id="arg--default-default">.default, default<a class="anchor" aria-label="anchor" href="#arg--default-default"></a></dt>
+<dd><p>If <code>.preserve</code> is <code>FALSE</code>, a value to replace unmatched
 elements of <code>x</code>.
 Defaults to <code>NA</code>.</p></dd>
 
@@ -150,7 +158,7 @@ but not <code>x</code></p>
 <span class="r-in"><span>  <span class="st">"Belgi(qu)?e"</span> <span class="op">~</span> <span class="st">"Belgium"</span>,</span></span>
 <span class="r-in"><span>  <span class="st">"Nederland"</span>   <span class="op">~</span> <span class="st">"Netherlands"</span>,</span></span>
 <span class="r-in"><span>  <span class="st">"Italia"</span>      <span class="op">~</span> <span class="st">"Italy"</span>,</span></span>
-<span class="r-in"><span>  preserve      <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>  .preserve     <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>  ignore.case   <span class="op">=</span> <span class="cn">TRUE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "France"      "Germany"     "Germany"     "Netherlands" "Belgium"    </span>
@@ -163,7 +171,7 @@ but not <code>x</code></p>
 <span class="r-in"><span>  <span class="st">"Belgi(qu)?e"</span> <span class="op">~</span> <span class="st">"Belgium"</span>,</span></span>
 <span class="r-in"><span>  <span class="st">"Nederland"</span>   <span class="op">~</span> <span class="st">"Netherlands"</span>,</span></span>
 <span class="r-in"><span>  <span class="st">"Italia"</span>      <span class="op">~</span> <span class="st">"Italy"</span>,</span></span>
-<span class="r-in"><span>  preserve      <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>  .preserve     <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>  ignore.case   <span class="op">=</span> <span class="cn">TRUE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "France"          "Ostdeutschland"  "Westdeutschland" "Netherlands"    </span>
@@ -176,7 +184,7 @@ but not <code>x</code></p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">hours</span> <span class="op">&lt;-</span> <span class="va">hours</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="if_case.html">if_case</a></span><span class="op">(</span><span class="va">minutes</span> <span class="op">&gt;</span> <span class="fl">32.5</span>, <span class="op">(</span><span class="va">.</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%%</a></span> <span class="fl">12</span>, <span class="va">.</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="switch_case.html">switch_case</a></span><span class="op">(</span><span class="fl">0</span> <span class="op">~</span> <span class="fl">12</span>, preserve <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="switch_case.html">switch_case</a></span><span class="op">(</span><span class="fl">0</span> <span class="op">~</span> <span class="fl">12</span>, .preserve <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">minutes</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">fn_case</span><span class="op">(</span></span></span>
@@ -197,7 +205,7 @@ but not <code>x</code></p>
 <span class="r-in"><span>  <span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="switch_case.html">switch_case</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    <span class="st">"o'clock"</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">hours</span>, <span class="va">.</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>    default   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">.</span>, <span class="va">hours</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    .default  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">.</span>, <span class="va">hours</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "twenty-five past 11" "3 o'clock"           "twenty-five past 3" </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [4] "half past 8"         "half past 6"         "five past 8"        </span>
@@ -222,7 +230,7 @@ but not <code>x</code></p>
 <span class="r-in"><span>    <span class="st">"data.frame"</span> <span class="op">~</span> <span class="st">"df"</span>,</span></span>
 <span class="r-in"><span>    <span class="st">"list"</span>       <span class="op">~</span> <span class="st">"lst"</span>,</span></span>
 <span class="r-in"><span>    <span class="st">"function"</span>   <span class="op">~</span> <span class="st">"fn"</span>,</span></span>
-<span class="r-in"><span>    default      <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span></span>
+<span class="r-in"><span>    .default     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span></span></span>
@@ -246,7 +254,7 @@ but not <code>x</code></p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
       </footer></div>
