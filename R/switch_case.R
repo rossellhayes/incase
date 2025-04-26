@@ -25,6 +25,16 @@
 #' @param .default If `.preserve` is `FALSE`, a value to replace unmatched
 #'   elements of `x`.
 #'   Defaults to `NA`.
+#'
+#' @param .exhaustive If `TRUE`, unmatched elements of `x` will result in
+#'   an error.
+#'   This can be useful to ensure you aren't accidentally forgetting to recode
+#'   any values.
+#'   Defaults to `FALSE`.
+#'
+#'   Note that if `.preserve` is `TRUE`,
+#'   `.exhaustive` will never have any effect.
+#'
 #' @param preserve,default `r lifecycle::badge("deprecated")`
 #'   Deprecated in favor of `.preserve` and `.default`
 #'
@@ -50,6 +60,7 @@ switch_case <- function(
   ...,
   .preserve = FALSE,
   .default = NA,
+  .exhaustive = FALSE,
   preserve = deprecated(),
   default = deprecated()
 ) {
@@ -61,7 +72,8 @@ switch_case <- function(
     fn = `%in%`,
     ...,
     .preserve = .preserve,
-    .default  = .default
+    .default  = .default,
+    .exhaustive = .exhaustive
   )
 }
 

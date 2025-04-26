@@ -130,6 +130,42 @@ test_that("unpiped vectored switch_case()", {
   expect_equal(x, yn)
 })
 
+
+test_that("exhaustive switch_case()", {
+  expect_error(
+    switch_case(
+      1:10,
+      c(3, 6, 9) ~ "fizz",
+      c(5, 10) ~ "buzz",
+      .exhaustive = TRUE
+    ),
+    "The following values were not matched: 1, 2, 4, 7, and 8.",
+    fixed = TRUE
+  )
+
+  expect_equal(
+    switch_case(
+      1:10,
+      c(3, 6, 9) ~ "fizz",
+      c(5, 10) ~ "buzz",
+      1:10 ~ "bam",
+      .exhaustive = TRUE
+    ),
+    yd
+  )
+
+  expect_equal(
+    switch_case(
+      1:10,
+      c(3, 6, 9) ~ "fizz",
+      c(5, 10) ~ "buzz",
+      .preserve = TRUE,
+      .exhaustive = TRUE
+    ),
+    c(1, 2, "fizz", 4, "buzz", "fizz", 7, 8, "fizz", "buzz")
+  )
+})
+
 test_that("default from other variable switch_case()", {
   input  <- dplyr::tibble(a = letters[1:5], b = 1:5)
   output <- dplyr::tibble(a = letters[1:5], b = 1:5, c = c(10, 2:5))

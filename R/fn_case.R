@@ -49,6 +49,7 @@ fn_case <- function(
   ...,
   .preserve = FALSE,
   .default = NA,
+  .exhaustive = FALSE,
   preserve = deprecated(),
   default = deprecated()
 ) {
@@ -63,6 +64,7 @@ fn_case <- function(
     x = x,
     .default = .default,
     .preserve = .preserve,
+    .exhaustive = .exhaustive,
     fn = fn,
     args = inputs$args,
     default_env = rlang::caller_env(),

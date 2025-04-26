@@ -10,6 +10,7 @@ fn_case(
   ...,
   .preserve = FALSE,
   .default = NA,
+  .exhaustive = FALSE,
   preserve = deprecated(),
   default = deprecated()
 )
@@ -49,6 +50,15 @@ Defaults to \code{FALSE}.}
 \item{.default, default}{If \code{.preserve} is \code{FALSE}, a value to replace unmatched
 elements of \code{x}.
 Defaults to \code{NA}.}
+
+\item{.exhaustive}{If \code{TRUE}, unmatched elements of \code{x} will result in
+an error.
+This can be useful to ensure you aren't accidentally forgetting to recode
+any values.
+Defaults to \code{FALSE}.
+
+Note that if \code{.preserve} is \code{TRUE},
+\code{.exhaustive} will never have any effect.}
 }
 \value{
 A vector of length 1 or n, matching the length of the logical input
