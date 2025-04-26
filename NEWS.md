@@ -1,8 +1,10 @@
 # incase (development version)
 
+* The arguments `preserve`, `default`, and `ordered` have been deprecated in favor of `.preserve`, `.default`, and `.ordered` (#9).
+  - Using undotted arguments will now trigger a warning. In future versions, these arguments will be removed.
+* `grep_case()` and `grep_case_fct()` now support vectors in the left-hand side of arguments (#8).
 * `*_case()` functions can now use lists as return values (#7).
 * `*_case()` functions no longer perform automatic type conversion on non-atomic return values (#7).
-* `grep_case()` and `grep_case_fct()` now support vectors in the left-hand side of arguments (#8).
 
 # incase 0.3.2
 
