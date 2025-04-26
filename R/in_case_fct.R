@@ -53,12 +53,12 @@ in_case_fct <- function(
   inputs <- in_case_setup(dots, .preserve = .preserve, fn = "in_case_fct")
 
   replace(
-    fs          = inputs$fs,
-    x           = inputs$x,
-    .default    = .default,
-    .preserve   = .preserve,
-    factor      = TRUE,
-    .ordered    = .ordered,
+    fs = inputs$fs,
+    x = inputs$x,
+    .default = .default,
+    .preserve = .preserve,
+    factor = TRUE,
+    .ordered = .ordered,
     default_env = rlang::caller_env(),
     current_env = rlang::current_env(),
     dots_idx = dots_idx,
@@ -138,7 +138,12 @@ fn_case_fct <- function(
   inputs <- fn_case_setup(dots)
 
   replace(
-    inputs$fs, x, .default, .preserve, fn, inputs$args,
+    fs = inputs$fs,
+    x = x,
+    .default = .default,
+    .preserve = .preserve,
+    fn = fn,
+    args = inputs$args,
     factor = TRUE,
     .ordered = .ordered,
     default_env = rlang::caller_env(),

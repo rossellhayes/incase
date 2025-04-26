@@ -33,8 +33,11 @@ in_case_list <- function(
   inputs <- in_case_setup(dots, .preserve = .preserve, fn = "in_case_list")
 
   replace(
-    inputs$fs, inputs$x, .default, .preserve,
-    list        = TRUE,
+    fs = inputs$fs,
+    x = inputs$x,
+    .default = .default,
+    .preserve = .preserve,
+    list = TRUE,
     default_env = rlang::caller_env(),
     current_env = rlang::current_env()
   )
@@ -105,7 +108,13 @@ fn_case_list <- function(
   inputs <- fn_case_setup(dots)
 
   replace(
-    inputs$fs, x, .default, .preserve, fn, inputs$args, list = TRUE,
+    fs = inputs$fs,
+    x = x,
+    .default = .default,
+    .preserve = .preserve,
+    fn = fn,
+    args = inputs$args,
+    list = TRUE,
     default_env = rlang::caller_env(),
     current_env = rlang::current_env()
   )

@@ -67,10 +67,10 @@ in_case <- function(
   inputs <- in_case_setup(dots, .preserve = .preserve, fn = "in_case")
 
   replace(
-    fs          = inputs$fs,
-    x           = inputs$x,
-    .default     = .default,
-    .preserve    = .preserve,
+    fs = inputs$fs,
+    x = inputs$x,
+    .default = .default,
+    .preserve = .preserve,
     default_env = rlang::caller_env(),
     current_env = rlang::current_env()
   )

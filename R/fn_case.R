@@ -59,7 +59,12 @@ fn_case <- function(
   inputs <- fn_case_setup(dots)
 
   replace(
-    inputs$fs, x, .default, .preserve, fn, inputs$args,
+    fs = inputs$fs,
+    x = x,
+    .default = .default,
+    .preserve = .preserve,
+    fn = fn,
+    args = inputs$args,
     default_env = rlang::caller_env(),
     current_env = rlang::current_env()
   )
