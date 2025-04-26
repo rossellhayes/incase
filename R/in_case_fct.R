@@ -18,6 +18,14 @@
 #'   Levels are determined by the order of inputs to `...` and `.default`.
 #'   Inconsistent lengths will generate an error.
 #'
+#'   The position of the `.default` argument is taken into account when setting
+#'   factor levels in `*_case_fct()` functions.
+#'   For example, if the `.default` argument is given before any case
+#'   statements, the default value will be the first level of the factor;
+#'   if the `.default` argument is positioned in between two case statements,
+#'   the default value will be ordered in between the value of the two
+#'   case statements.
+#'
 #' @seealso [in_case()], [switch_case()], [grep_case()], [fn_case()], and
 #'   [fn_case_fct()] on which these functions are based.
 #'
