@@ -70,6 +70,7 @@ lists."><meta property="og:image" content="https://pkg.rossellhayes.com/incase/l
 <span>  <span class="va">...</span>,</span>
 <span>  .preserve <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  .default <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  .exhaustive <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  preserve <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  default <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
@@ -79,6 +80,7 @@ lists."><meta property="og:image" content="https://pkg.rossellhayes.com/incase/l
 <span>  <span class="va">...</span>,</span>
 <span>  .preserve <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  .default <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  .exhaustive <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  preserve <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  default <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
@@ -89,6 +91,7 @@ lists."><meta property="og:image" content="https://pkg.rossellhayes.com/incase/l
 <span>  <span class="va">...</span>,</span>
 <span>  .preserve <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  .default <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  .exhaustive <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  preserve <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  default <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
@@ -99,6 +102,7 @@ lists."><meta property="og:image" content="https://pkg.rossellhayes.com/incase/l
 <span>  <span class="va">...</span>,</span>
 <span>  .preserve <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  .default <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  .exhaustive <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  preserve <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  default <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -137,6 +141,16 @@ Defaults to <code>NA</code>.</p></dd>
 
 <dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
 <dd><p>A vector</p></dd>
+
+
+<dt id="arg--exhaustive">.exhaustive<a class="anchor" aria-label="anchor" href="#arg--exhaustive"></a></dt>
+<dd><p>If <code>TRUE</code>, unmatched elements of <code>x</code> will result in
+an error.
+This can be useful to ensure you aren't accidentally forgetting to recode
+any values.
+Defaults to <code>FALSE</code>.</p>
+<p>Note that if <code>.preserve</code> is <code>TRUE</code>,
+<code>.exhaustive</code> will never have any effect.</p></dd>
 
 
 <dt id="arg-fn">fn<a class="anchor" aria-label="anchor" href="#arg-fn"></a></dt>

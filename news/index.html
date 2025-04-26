@@ -52,6 +52,9 @@
 <ul><li>The arguments <code>preserve</code>, <code>default</code>, and <code>ordered</code> have been deprecated in favor of <code>.preserve</code>, <code>.default</code>, and <code>.ordered</code> (<a href="https://github.com/rossellhayes/incase/issues/9" class="external-link">#9</a>).
 <ul><li>Using undotted arguments will now trigger a warning. In future versions, these arguments will be removed.</li>
 </ul></li>
+<li>Functions in the <code><a href="../reference/switch_case.html">switch_case()</a></code>, <code><a href="../reference/grep_case.html">grep_case()</a></code>, and <code><a href="../reference/fn_case.html">fn_case()</a></code> families gain an <code>.exhaustive</code> argument (<a href="https://github.com/rossellhayes/incase/issues/11" class="external-link">#11</a>).
+<ul><li>When <code>.exhaustive</code> is <code>TRUE</code>, the function will throw an error if any elements of the input are not matched by case statements. This can be useful to ensure you aren’t accidentally forgetting to recode any values.</li>
+</ul></li>
 <li>The position of the <code>.default</code> argument is now taken into account when setting factor levels in <code>*_case_fct()</code> functions (<a href="https://github.com/rossellhayes/incase/issues/10" class="external-link">#10</a>).
 <ul><li>e.g. if the <code>.default</code> argument is given before any case statements, the default value will be the first level of the factor; if the <code>.default</code> argument is positioned in between two case statements, the default value will be ordered in between the value of the two case statements.</li>
 </ul></li>
