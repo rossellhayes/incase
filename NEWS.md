@@ -2,6 +2,9 @@
 
 * The arguments `preserve`, `default`, and `ordered` have been deprecated in favor of `.preserve`, `.default`, and `.ordered` (#9).
   - Using undotted arguments will now trigger a warning. In future versions, these arguments will be removed.
+* Functions in the `switch_case()`, `grep_case()`, and `fn_case()` families gain an `.exhaustive` argument (#11).
+  - When `.exhaustive` is `TRUE`, the function will throw an error if any elements of the input are not matched by case statements.
+    This can be useful to ensure you aren't accidentally forgetting to recode any values.
 * The position of the `.default` argument is now taken into account when setting factor levels in `*_case_fct()` functions (#10).
   - e.g. if the `.default` argument is given before any case statements, the default value will be the first level of the factor;
   if the `.default` argument is positioned in between two case statements, the default value will be ordered in between the value of the two case statements.
