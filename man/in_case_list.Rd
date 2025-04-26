@@ -21,6 +21,7 @@ switch_case_list(
   ...,
   .preserve = FALSE,
   .default = NA,
+  .exhaustive = FALSE,
   preserve = deprecated(),
   default = deprecated()
 )
@@ -30,6 +31,7 @@ grep_case_list(
   ...,
   .preserve = FALSE,
   .default = NA,
+  .exhaustive = FALSE,
   preserve = deprecated(),
   default = deprecated()
 )
@@ -40,6 +42,7 @@ fn_case_list(
   ...,
   .preserve = FALSE,
   .default = NA,
+  .exhaustive = FALSE,
   preserve = deprecated(),
   default = deprecated()
 )
@@ -50,6 +53,7 @@ fn_switch_case_list(
   ...,
   .preserve = FALSE,
   .default = NA,
+  .exhaustive = FALSE,
   preserve = deprecated(),
   default = deprecated()
 )
@@ -79,6 +83,15 @@ elements of \code{x}.
 Defaults to \code{NA}.}
 
 \item{x}{A vector}
+
+\item{.exhaustive}{If \code{TRUE}, unmatched elements of \code{x} will result in
+an error.
+This can be useful to ensure you aren't accidentally forgetting to recode
+any values.
+Defaults to \code{FALSE}.
+
+Note that if \code{.preserve} is \code{TRUE},
+\code{.exhaustive} will never have any effect.}
 
 \item{fn}{A function to apply to the left-hand side of each formula in \code{...}
 
