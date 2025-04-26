@@ -157,51 +157,6 @@ test_that("preserve and default", {
   )
 })
 
-test_that("arguments can be passed with or without dots", {
-  x <- switch_case(
-    1:10,
-    3 ~ "fizz",
-    5 ~ "buzz",
-    6 ~ "fizz",
-    9 ~ "fizz",
-    .preserve = TRUE
-  )
-
-  expect_equal(x, yp)
-
-  x <- switch_case(
-    1:10,
-    3 ~ "fizz",
-    5 ~ "buzz",
-    6 ~ "fizz",
-    9 ~ "fizz",
-    .default = "bam"
-  )
-
-  expect_equal(x, yd)
-
-  x <- switch_case(
-    1:10,
-    3 ~ "fizz",
-    5 ~ "buzz",
-    6 ~ "fizz",
-    9 ~ "fizz",
-    .preserve = TRUE
-  )
-
-  expect_equal(x, yp)
-
-  x <- switch_case(
-    3 ~ "fizz",
-    5 ~ "buzz",
-    6 ~ "fizz",
-    9 ~ "fizz",
-    .x = 1:10
-  )
-
-  expect_equal(x, yn)
-})
-
 test_that("fn_switch_case()", {
   data <- c(1, 2, 999, 888, 777)
 

@@ -37,7 +37,7 @@ in_case_fct <- function(
   .default <- coalesce_deprecated(.default, default)
   .ordered <- coalesce_deprecated(.ordered, ordered)
 
-  dots <- allow_dot_aliases(compact_list(...))
+  dots <- compact_list(...)
   inputs <- in_case_setup(dots, .preserve = .preserve, fn = "in_case_fct")
 
   replace(
@@ -124,7 +124,7 @@ fn_case_fct <- function(
   .default <- coalesce_deprecated(.default, default)
   .ordered <- coalesce_deprecated(.ordered, ordered)
 
-  dots <- allow_dot_aliases(compact_list(...))
+  dots <- compact_list(...)
   inputs <- fn_case_setup(dots)
 
   replace(

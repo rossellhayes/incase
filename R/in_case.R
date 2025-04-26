@@ -63,7 +63,7 @@ in_case <- function(
   .preserve <- coalesce_deprecated(.preserve, preserve)
   .default <- coalesce_deprecated(.default, default)
 
-  dots <- allow_dot_aliases(compact_list(...))
+  dots <- compact_list(...)
   inputs <- in_case_setup(dots, .preserve = .preserve, fn = "in_case")
 
   replace(
