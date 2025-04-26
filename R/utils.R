@@ -6,6 +6,42 @@ compact_list <- function(...) {
   Filter(function(x) !is.null(x), rlang::list2(...))
 }
 
+first_incase_frame <- function() {
+  frames <- sys.frames()
+
+  for (i in seq_len(sys.nframe() - 1)) {
+    if (
+      identical(
+        environment(rlang::frame_fn(frames[[i]])),
+        asNamespace("incase")
+      )
+    ) {
+      return(frames[[i]])
+    }
+  }
+
+  rlang::caller_env()
+}
+
+first_incase_frame_parent <- function() {
+  frames <- sys.frames()
+
+  for (i in seq_len(sys.nframe() - 1)) {
+    if (
+      identical(
+        environment(rlang::frame_fn(frames[[i]])),
+        asNamespace("incase")
+      )
+    ) {
+      parent <- sys.parents()[[i]]
+      if (parent == 0) return(rlang::global_env())
+      return(frames[[parent]])
+    }
+  }
+
+  rlang::global_env()
+}
+
 coalesce_deprecated <- function(
   .argument,
   argument,

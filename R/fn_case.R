@@ -78,34 +78,3 @@ fn_case_setup <- function(dots) {
 
   list(fs = fs, args = args)
 }
-
-first_incase_frame <- function() {
-  frames <- sys.frames()
-
-  for (frame in frames) {
-    if (identical(environment(rlang::frame_fn(frame)), asNamespace("incase"))) {
-      return(frame)
-    }
-  }
-
-  rlang::current_env()
-}
-
-first_incase_frame_parent <- function() {
-  frames <- sys.frames()
-
-  for (i in seq_len(sys.nframe())) {
-    if (
-      identical(
-        environment(rlang::frame_fn(frames[[i]])),
-        asNamespace("incase")
-      )
-    ) {
-      parent <- sys.parents()[[i]]
-      if (parent == 0) return(rlang::global_env())
-      return(frames[[parent]])
-    }
-  }
-
-  rlang::caller_env()
-}
