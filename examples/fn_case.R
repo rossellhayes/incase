@@ -24,7 +24,7 @@ fn_case(
   "Belgi(qu)?e" ~ "Belgium",
   "Nederland"   ~ "Netherlands",
   "Italia"      ~ "Italy",
-  preserve      = TRUE,
+  .preserve     = TRUE,
   ignore.case   = TRUE
 )
 
@@ -35,7 +35,7 @@ fn_case(
   "Belgi(qu)?e" ~ "Belgium",
   "Nederland"   ~ "Netherlands",
   "Italia"      ~ "Italy",
-  preserve      = TRUE,
+  .preserve     = TRUE,
   ignore.case   = TRUE
 )
 
@@ -46,7 +46,7 @@ minutes <- time %% 1 * 60
 
 hours <- hours %>%
   if_case(minutes > 32.5, (. + 1) %% 12, .) %>%
-  switch_case(0 ~ 12, preserve = TRUE)
+  switch_case(0 ~ 12, .preserve = TRUE)
 
 minutes %>%
   fn_case(
@@ -67,7 +67,7 @@ minutes %>%
   ) %>%
   switch_case(
     "o'clock" ~ paste(hours, .),
-    default   = paste(., hours)
+    .default  = paste(., hours)
   )
 
 # Replicate vctrs::vec_ptype_abbr() (used for tibble column labels)
@@ -88,7 +88,7 @@ in_herits <- function(x) {
     "data.frame" ~ "df",
     "list"       ~ "lst",
     "function"   ~ "fn",
-    default      = class(x)[[1]]
+    .default     = class(x)[[1]]
   )
 }
 

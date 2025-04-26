@@ -26,6 +26,6 @@ grep_case(
   "Belgi(qu)?e" ~ "Belgium",
   "Nederland"   ~ "Netherlands",
   "Italia"      ~ "Italy",
-  preserve      = TRUE,
+  .preserve     = TRUE,
   ignore.case   = TRUE
 )

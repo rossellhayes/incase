@@ -29,21 +29,21 @@ parties %>%
   switch_case(
     "d" ~ "Democrat",
     "r" ~ "Republican",
-    default = "Other"
+    .default = "Other"
   )
 
 parties %>%
   switch_case(
     "d" ~ "Democrat",
     "r" ~ "Republican",
-    preserve = FALSE
+    .preserve = FALSE
   )
 
 parties %>%
   switch_case(
     "d" ~ "Democrat",
     "r" ~ "Republican",
-    preserve = TRUE
+    .preserve = TRUE
   )
 
 data <- c(1, 4, 8, 12, 999, 6, 2, 888, 4, 6, 777)
@@ -54,5 +54,5 @@ fn_switch_case(
   7 ~ "Not asked",
   8 ~ "Refused",
   9 ~ "Missing",
-  preserve = TRUE
+  .preserve = TRUE
 )

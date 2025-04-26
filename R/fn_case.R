@@ -43,12 +43,23 @@
 #' @export
 #' @example examples/fn_case.R
 
-fn_case <- function(x, fn, ..., preserve = FALSE, default = NA) {
+fn_case <- function(
+  x,
+  fn,
+  ...,
+  .preserve = FALSE,
+  .default = NA,
+  preserve = deprecated(),
+  default = deprecated()
+) {
+  .preserve <- coalesce_deprecated(.preserve, preserve)
+  .default <- coalesce_deprecated(.default, default)
+
   dots <- allow_dot_aliases(compact_list(...))
   inputs <- fn_case_setup(dots)
 
   replace(
-    inputs$fs, x, default, preserve, fn, inputs$args,
+    inputs$fs, x, .default, .preserve, fn, inputs$args,
     default_env = rlang::caller_env(),
     current_env = rlang::current_env()
   )

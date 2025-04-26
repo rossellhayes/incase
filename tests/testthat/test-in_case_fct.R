@@ -61,7 +61,7 @@ test_that("switch_case_fct", {
       "c" ~ "cantaloupe",
       "b" ~ "banana",
       "a" ~ "apple",
-      preserve = TRUE
+      .preserve = TRUE
     ),
     factor(
       factor(
@@ -127,7 +127,7 @@ test_that("grep_case_fct() with vector LHS", {
       "nederland" ~ "Netherlands",
       "italia" ~ "Italy",
       ignore.case = TRUE,
-      preserve = TRUE
+      .preserve = TRUE
     ),
     factor(
       c(
@@ -141,6 +141,19 @@ test_that("grep_case_fct() with vector LHS", {
   )
 })
 
+test_that("ordered", {
+  x <- 1:10
+
+  expect_equal(
+    in_case_fct(
+      x %% 2 == 0 ~ "even",
+      x %% 2 == 1 ~ "odd",
+      .ordered = TRUE
+    ),
+    factor(rep(c("odd", "even"), 5), levels = c("even", "odd"), ordered = TRUE)
+  )
+})
+
 test_that("errors", {
   x <- 1:15
 
@@ -149,7 +162,7 @@ test_that("errors", {
       x %% 15 == 0 ~ "fizzbuzz",
       x %% 3  == 0 ~ "fizz",
       x %% 5  == 0 ~ "buzz",
-      preserve = TRUE
+      .preserve = TRUE
     )
   )
 })
@@ -164,7 +177,7 @@ test_that("fn_switch_case_fct()", {
       7 ~ "Not asked",
       8 ~ "Refused",
       9 ~ "Missing",
-      preserve = TRUE
+      .preserve = TRUE
     ),
     factor(
       c("1", "2", "Missing", "Refused", "Not asked"),
@@ -175,4 +188,49 @@ test_that("fn_switch_case_fct()", {
 
 test_that("fn_switch_case_fct() errors", {
   expect_error(fn_switch_case_fct(1:10, function(x) x + 5))
+})
+
+test_that("warning for deprecated argument", {
+  lifecycle::expect_deprecated(
+    preserve <- switch_case_fct(
+      c("a", "b", "c", "d"),
+      "c" ~ "cantaloupe",
+      "b" ~ "banana",
+      "a" ~ "apple",
+      preserve = TRUE
+    ),
+    "The `preserve` argument of `switch_case_fct()` is deprecated as of incase 0.3.3.",
+    fixed = TRUE
+  )
+
+  expect_equal(
+    preserve,
+    switch_case_fct(
+      c("a", "b", "c", "d"),
+      "c" ~ "cantaloupe",
+      "b" ~ "banana",
+      "a" ~ "apple",
+      .preserve = TRUE
+    )
+  )
+
+  x <- 1:10
+  lifecycle::expect_deprecated(
+    ordered <- in_case_fct(
+      x %% 2 == 0 ~ "even",
+      x %% 2 == 1 ~ "odd",
+      ordered = TRUE
+    ),
+    "The `ordered` argument of `in_case_fct()` is deprecated as of incase 0.3.3.",
+    fixed = TRUE
+  )
+
+  expect_equal(
+    ordered,
+    ordered <- in_case_fct(
+      x %% 2 == 0 ~ "even",
+      x %% 2 == 1 ~ "odd",
+      .ordered = TRUE
+    )
+  )
 })

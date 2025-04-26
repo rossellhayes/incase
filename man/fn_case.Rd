@@ -4,7 +4,15 @@
 \alias{fn_case}
 \title{Case statements applying a function to all inputs}
 \usage{
-fn_case(x, fn, ..., preserve = FALSE, default = NA)
+fn_case(
+  x,
+  fn,
+  ...,
+  .preserve = FALSE,
+  .default = NA,
+  preserve = deprecated(),
+  default = deprecated()
+)
 }
 \arguments{
 \item{x}{A vector}
@@ -31,14 +39,14 @@ The RHS must be of length 1 or the same length as all other RHS.
 to the function \code{fn}.
 }}
 
-\item{preserve}{If \code{TRUE}, unmatched elements of \code{x} will be returned
+\item{.preserve, preserve}{If \code{TRUE}, unmatched elements of \code{x} will be returned
 unmodified.
 (The elements may have their type coerced to be compatible with
 replacement values.)
-If \code{FALSE}, unmatched elements of \code{x} will be replaced with \code{default}.
+If \code{FALSE}, unmatched elements of \code{x} will be replaced with \code{.default}.
 Defaults to \code{FALSE}.}
 
-\item{default}{If \code{preserve} is \code{FALSE}, a value to replace unmatched
+\item{.default, default}{If \code{.preserve} is \code{FALSE}, a value to replace unmatched
 elements of \code{x}.
 Defaults to \code{NA}.}
 }
@@ -77,7 +85,7 @@ fn_case(
   "Belgi(qu)?e" ~ "Belgium",
   "Nederland"   ~ "Netherlands",
   "Italia"      ~ "Italy",
-  preserve      = TRUE,
+  .preserve     = TRUE,
   ignore.case   = TRUE
 )
 
@@ -88,7 +96,7 @@ fn_case(
   "Belgi(qu)?e" ~ "Belgium",
   "Nederland"   ~ "Netherlands",
   "Italia"      ~ "Italy",
-  preserve      = TRUE,
+  .preserve     = TRUE,
   ignore.case   = TRUE
 )
 
@@ -99,7 +107,7 @@ minutes <- time \%\% 1 * 60
 
 hours <- hours \%>\%
   if_case(minutes > 32.5, (. + 1) \%\% 12, .) \%>\%
-  switch_case(0 ~ 12, preserve = TRUE)
+  switch_case(0 ~ 12, .preserve = TRUE)
 
 minutes \%>\%
   fn_case(
@@ -120,7 +128,7 @@ minutes \%>\%
   ) \%>\%
   switch_case(
     "o'clock" ~ paste(hours, .),
-    default   = paste(., hours)
+    .default  = paste(., hours)
   )
 
 # Replicate vctrs::vec_ptype_abbr() (used for tibble column labels)
@@ -141,7 +149,7 @@ in_herits <- function(x) {
     "data.frame" ~ "df",
     "list"       ~ "lst",
     "function"   ~ "fn",
-    default      = class(x)[[1]]
+    .default     = class(x)[[1]]
   )
 }
 

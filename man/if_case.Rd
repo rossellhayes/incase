@@ -24,8 +24,8 @@ and where it's \code{NA}, the matching value from \code{missing}.
 \description{
 Compared to \code{\link[dplyr:if_else]{dplyr::if_else()}}, this function is easier to use with a pipe.
 A vector piped into this function will be quietly ignored.
-This allows \link{magrittr} dots to be used in arguments without requiring
-workarounds like wrapping the function in braces.
+This allows \link[magrittr:magrittr-package]{magrittr} dots to be used in arguments
+without requiring workarounds like wrapping the function in braces.
 }
 \details{
 This function is also less strict than \code{\link[dplyr:if_else]{dplyr::if_else()}}.

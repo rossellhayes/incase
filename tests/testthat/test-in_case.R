@@ -28,7 +28,7 @@ test_that("fizz_buzz", {
       in_case(
         . %% 3 == 0 ~ "fizz",
         . %% 5 == 0 ~ "buzz",
-        preserve = TRUE
+        .preserve = TRUE
       ),
     y
   )
@@ -37,7 +37,7 @@ test_that("fizz_buzz", {
     in_case(
       x %% 3 == 0 ~ "fizz",
       x %% 5 == 0 ~ "buzz",
-      default = "pass"
+      .default = "pass"
     ),
     c("pass", "pass", "fizz", "pass", "buzz")
   )
@@ -71,7 +71,7 @@ test_that("return list of tibbles", {
   expect_equal(
     in_case(
       x > 3 ~ list(df1),
-      default = list(df2)
+      .default = list(df2)
     ),
     list(df2, df2, df2, df1, df1)
   )
@@ -80,7 +80,7 @@ test_that("return list of tibbles", {
     in_case(
       x,
       x > 3 ~ list(df1),
-      preserve = TRUE
+      .preserve = TRUE
     ),
     list(1, 2, 3, df1, df1)
   )
@@ -88,7 +88,7 @@ test_that("return list of tibbles", {
 
 test_that("zero-length input", {
   expect_equal(
-    in_case(logical() ~ integer(), default = character(1)),
+    in_case(logical() ~ integer(), .default = character(1)),
     character(0)
   )
 })
@@ -106,8 +106,8 @@ test_that("condition all NA and FALSE", {
 })
 
 test_that("errors", {
-  expect_warning(x %>% in_case(. > 3 ~ "f", preserve = TRUE, default = "p"))
-  expect_error(in_case(x %% 3 == 0 ~ "fizz", preserve = TRUE))
+  expect_warning(x %>% in_case(. > 3 ~ "f", .preserve = TRUE, .default = "p"))
+  expect_error(in_case(x %% 3 == 0 ~ "fizz", .preserve = TRUE))
   expect_error(in_case(3 ~ "fizz", 5 ~ "buzz", TRUE ~ x))
   expect_error(in_case(y ~ "fizz", 5 ~ "buzz", TRUE ~ x), "y")
   expect_error(
@@ -124,6 +124,81 @@ test_that("errors", {
   expect_error(
     in_case(TRUE ~ 1:3, TRUE ~ 1:2),
     "The right-hand side of `TRUE ~ 1:2`",
+    fixed = TRUE
+  )
+})
+
+test_that("warning for deprecated argument", {
+  lifecycle::expect_deprecated(
+    preserve <- x %>%
+      in_case(
+        . %% 3 == 0 ~ "fizz",
+        . %% 5 == 0 ~ "buzz",
+        preserve = TRUE
+      ),
+    "The `preserve` argument of `in_case()` is deprecated as of incase 0.3.3.",
+    fixed = TRUE
+  )
+
+  expect_equal(
+    preserve,
+    x %>%
+      in_case(
+        . %% 3 == 0 ~ "fizz",
+        . %% 5 == 0 ~ "buzz",
+        .preserve = TRUE
+      )
+  )
+
+  lifecycle::expect_deprecated(
+    default <- in_case(
+      x %% 3 == 0 ~ "fizz",
+      x %% 5 == 0 ~ "buzz",
+      default = "pass"
+    ),
+    "The `default` argument of `in_case()` is deprecated as of incase 0.3.3.",
+    fixed = TRUE
+  )
+
+  expect_equal(
+    default,
+    in_case(
+      x %% 3 == 0 ~ "fizz",
+      x %% 5 == 0 ~ "buzz",
+      .default = "pass"
+    )
+  )
+
+  # No error if duplicated dotted and undotted argument
+
+  lifecycle::expect_deprecated(
+    default <- in_case(
+      x %% 3 == 0 ~ "fizz",
+      x %% 5 == 0 ~ "buzz",
+      .default = "pass",
+      default = "pass"
+    ),
+    "The `default` argument of `in_case()` is deprecated as of incase 0.3.3.",
+    fixed = TRUE
+  )
+
+  expect_equal(
+    default,
+    in_case(
+      x %% 3 == 0 ~ "fizz",
+      x %% 5 == 0 ~ "buzz",
+      .default = "pass"
+    )
+  )
+
+  expect_error(
+    in_case(
+      x %% 3 == 0 ~ "fizz",
+      x %% 5 == 0 ~ "buzz",
+      .default = "pass",
+      default = "fail"
+    ),
+    "`default` and `.default` arguments cannot both be specified.",
     fixed = TRUE
   )
 })

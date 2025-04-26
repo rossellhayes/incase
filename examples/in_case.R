@@ -35,13 +35,13 @@ try(
   )
 )
 
-# default and preserve make it easier to handle unmatched values
+# .default and .preserve make it easier to handle unmatched values
 1:30 %>%
   in_case(
     . %% 15 == 0 ~ "fizz buzz",
     . %%  3 == 0 ~ "fizz",
     . %%  5 == 0 ~ "buzz",
-    default      = "pass"
+    .default     = "pass"
   )
 
 1:30 %>%
@@ -49,5 +49,5 @@ try(
     . %% 15 == 0 ~ "fizz buzz",
     . %%  3 == 0 ~ "fizz",
     . %%  5 == 0 ~ "buzz",
-    preserve     = TRUE
+    .preserve    = TRUE
   )

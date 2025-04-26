@@ -2,8 +2,8 @@
 #'
 #' Compared to [dplyr::if_else()], this function is easier to use with a pipe.
 #' A vector piped into this function will be quietly ignored.
-#' This allows [magrittr] dots to be used in arguments without requiring
-#' workarounds like wrapping the function in braces.
+#' This allows [magrittr][magrittr::magrittr] dots to be used in arguments
+#' without requiring workarounds like wrapping the function in braces.
 #'
 #' This function is also less strict than [dplyr::if_else()].
 #' If `true`, `false`, and `missing` are different types, they are silently

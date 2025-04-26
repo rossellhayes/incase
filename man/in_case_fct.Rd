@@ -8,15 +8,61 @@
 \alias{fn_switch_case_fct}
 \title{Case statements returning a factor}
 \usage{
-in_case_fct(..., preserve = FALSE, default = NA, ordered = FALSE)
+in_case_fct(
+  ...,
+  .preserve = FALSE,
+  .default = NA,
+  .ordered = FALSE,
+  preserve = deprecated(),
+  default = deprecated(),
+  ordered = deprecated()
+)
 
-switch_case_fct(x, ..., preserve = FALSE, default = NA, ordered = FALSE)
+switch_case_fct(
+  x,
+  ...,
+  .preserve = FALSE,
+  .default = NA,
+  .ordered = FALSE,
+  preserve = deprecated(),
+  default = deprecated(),
+  ordered = deprecated()
+)
 
-grep_case_fct(x, ..., preserve = FALSE, default = NA, ordered = FALSE)
+grep_case_fct(
+  x,
+  ...,
+  .preserve = FALSE,
+  .default = NA,
+  .ordered = FALSE,
+  preserve = deprecated(),
+  default = deprecated(),
+  ordered = deprecated()
+)
 
-fn_case_fct(x, fn, ..., preserve = FALSE, default = NA, ordered = FALSE)
+fn_case_fct(
+  x,
+  fn,
+  ...,
+  .preserve = FALSE,
+  .default = NA,
+  .ordered = FALSE,
+  preserve = deprecated(),
+  default = deprecated(),
+  ordered = deprecated()
+)
 
-fn_switch_case_fct(x, fn, ..., preserve = FALSE, default = NA, ordered = FALSE)
+fn_switch_case_fct(
+  x,
+  fn,
+  ...,
+  .preserve = FALSE,
+  .default = NA,
+  .ordered = FALSE,
+  preserve = deprecated(),
+  default = deprecated(),
+  ordered = deprecated()
+)
 }
 \arguments{
 \item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}> A sequence of two-sided
@@ -31,20 +77,23 @@ The RHS must be of length 1 or the same length as all other RHS.
 to the function \code{fn}.
 }}
 
-\item{preserve}{If \code{TRUE}, unmatched elements of \code{x} will be returned
+\item{.preserve}{If \code{TRUE}, unmatched elements of \code{x} will be returned
 unmodified.
 (The elements may have their type coerced to be compatible with
 replacement values.)
-If \code{FALSE}, unmatched elements of \code{x} will be replaced with \code{default}.
+If \code{FALSE}, unmatched elements of \code{x} will be replaced with \code{.default}.
 Defaults to \code{FALSE}.}
 
-\item{default}{If \code{preserve} is \code{FALSE}, a value to replace unmatched
+\item{.default}{If \code{.preserve} is \code{FALSE}, a value to replace unmatched
 elements of \code{x}.
 Defaults to \code{NA}.}
 
-\item{ordered}{A logical.
+\item{.ordered}{A logical.
 If \code{\link{TRUE}}, returns an \link{ordered} factor.
 If \code{\link{FALSE}}, returns an unordered factor.}
+
+\item{preserve, default, ordered}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+Deprecated in favor of \code{.preserve}, \code{.default}, and \code{.ordered}}
 
 \item{x}{A vector}
 
@@ -96,7 +145,7 @@ switch_case_fct(
   "c" ~ "cantaloupe",
   "b" ~ "banana",
   "a" ~ "apple",
-  preserve = TRUE
+  .preserve = TRUE
 )
 
 grep_case_fct(
