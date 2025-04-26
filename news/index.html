@@ -52,6 +52,9 @@
 <ul><li>The arguments <code>preserve</code>, <code>default</code>, and <code>ordered</code> have been deprecated in favor of <code>.preserve</code>, <code>.default</code>, and <code>.ordered</code> (<a href="https://github.com/rossellhayes/incase/issues/9" class="external-link">#9</a>).
 <ul><li>Using undotted arguments will now trigger a warning. In future versions, these arguments will be removed.</li>
 </ul></li>
+<li>The position of the <code>.default</code> argument is now taken into account when setting factor levels in <code>*_case_fct()</code> functions (<a href="https://github.com/rossellhayes/incase/issues/10" class="external-link">#10</a>).
+<ul><li>e.g. if the <code>.default</code> argument is given before any case statements, the default value will be the first level of the factor; if the <code>.default</code> argument is positioned in between two case statements, the default value will be ordered in between the value of the two case statements.</li>
+</ul></li>
 <li>
 <code><a href="../reference/grep_case.html">grep_case()</a></code> and <code><a href="../reference/in_case_fct.html">grep_case_fct()</a></code> now support vectors in the left-hand side of arguments (<a href="https://github.com/rossellhayes/incase/issues/8" class="external-link">#8</a>).</li>
 <li>

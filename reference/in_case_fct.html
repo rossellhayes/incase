@@ -176,8 +176,15 @@ length as <code>x</code>.</p></dd>
     <h2>Value</h2>
     <p>A factor vector of length 1 or n, matching the length of the logical
 input or output vectors.
-Levels are determined by the order of inputs to <code>...</code>.
+Levels are determined by the order of inputs to <code>...</code> and <code>.default</code>.
 Inconsistent lengths will generate an error.</p>
+<p>The position of the <code>.default</code> argument is taken into account when setting
+factor levels in <code>*_case_fct()</code> functions.
+For example, if the <code>.default</code> argument is given before any case
+statements, the default value will be the first level of the factor;
+if the <code>.default</code> argument is positioned in between two case statements,
+the default value will be ordered in between the value of the two
+case statements.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -222,6 +229,36 @@ Inconsistent lengths will generate an error.</p>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] apple      banana     cantaloupe d         </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Levels: cantaloupe banana apple d</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">switch_case_fct</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"c"</span> <span class="op">~</span> <span class="st">"cantaloupe"</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"b"</span> <span class="op">~</span> <span class="st">"banana"</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"a"</span> <span class="op">~</span> <span class="st">"apple"</span>,</span></span>
+<span class="r-in"><span>  .default <span class="op">=</span> <span class="st">"other"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] apple      banana     cantaloupe other     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Levels: cantaloupe banana apple other</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">switch_case_fct</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  .default <span class="op">=</span> <span class="st">"other"</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"c"</span> <span class="op">~</span> <span class="st">"cantaloupe"</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"b"</span> <span class="op">~</span> <span class="st">"banana"</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"a"</span> <span class="op">~</span> <span class="st">"apple"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] apple      banana     cantaloupe other     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Levels: other cantaloupe banana apple</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">switch_case_fct</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"c"</span> <span class="op">~</span> <span class="st">"cantaloupe"</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"b"</span> <span class="op">~</span> <span class="st">"banana"</span>,</span></span>
+<span class="r-in"><span>  .default <span class="op">=</span> <span class="st">"other"</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"a"</span> <span class="op">~</span> <span class="st">"apple"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] apple      banana     cantaloupe other     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Levels: cantaloupe banana other apple</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">grep_case_fct</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"caterpillar"</span>, <span class="st">"dogwood"</span>, <span class="st">"catastrophe"</span>, <span class="st">"dogma"</span><span class="op">)</span>,</span></span>
