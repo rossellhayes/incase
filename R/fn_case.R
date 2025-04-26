@@ -67,14 +67,8 @@ fn_case <- function(
     .exhaustive = .exhaustive,
     fn = fn,
     args = inputs$args,
-    default_env = rlang::caller_env(),
-    current_env = if (
-      identical(environment(rlang::caller_fn()), asNamespace("incase"))
-    ) {
-      rlang::caller_env()
-    } else {
-      rlang::current_env()
-    }
+    default_env = first_incase_frame_parent(),
+    current_env = first_incase_frame()
   )
 }
 
@@ -83,4 +77,35 @@ fn_case_setup <- function(dots) {
   args  <- dots[!dots %in% fs]
 
   list(fs = fs, args = args)
+}
+
+first_incase_frame <- function() {
+  frames <- sys.frames()
+
+  for (frame in frames) {
+    if (identical(environment(rlang::frame_fn(frame)), asNamespace("incase"))) {
+      return(frame)
+    }
+  }
+
+  rlang::current_env()
+}
+
+first_incase_frame_parent <- function() {
+  frames <- sys.frames()
+
+  for (i in seq_len(sys.nframe())) {
+    if (
+      identical(
+        environment(rlang::frame_fn(frames[[i]])),
+        asNamespace("incase")
+      )
+    ) {
+      parent <- sys.parents()[[i]]
+      if (parent == 0) return(rlang::global_env())
+      return(frames[[parent]])
+    }
+  }
+
+  rlang::caller_env()
 }

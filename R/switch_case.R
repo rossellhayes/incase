@@ -64,16 +64,15 @@ switch_case <- function(
   preserve = deprecated(),
   default = deprecated()
 ) {
-  .preserve <- coalesce_deprecated(.preserve, preserve)
-  .default <- coalesce_deprecated(.default, default)
-
   fn_case(
     x  = x,
     fn = `%in%`,
     ...,
     .preserve = .preserve,
     .default  = .default,
-    .exhaustive = .exhaustive
+    .exhaustive = .exhaustive,
+    preserve = preserve,
+    default = default
   )
 }
 
@@ -89,9 +88,6 @@ fn_switch_case <- function(
   preserve = deprecated(),
   default = deprecated()
 ) {
-  .preserve <- coalesce_deprecated(.preserve, preserve)
-  .default <- coalesce_deprecated(.default, default)
-
   eval.parent(fn_switch_case_call("switch_case", fn, ...))
 }
 
@@ -103,7 +99,6 @@ fn_switch_case_call <- function(
   current_fn = rlang::caller_fn()
 ) {
   args <- as.list(call)[-1]
-  args <- dot_arg_names(args)
 
   dots <- compact_list(...)
   dots_idx <- which(args %in% dots)

@@ -38,8 +38,8 @@ in_case_list <- function(
     .default = .default,
     .preserve = .preserve,
     list = TRUE,
-    default_env = rlang::caller_env(),
-    current_env = rlang::current_env()
+    default_env = first_incase_frame_parent(),
+    current_env = first_incase_frame()
   )
 }
 
@@ -54,15 +54,14 @@ switch_case_list <- function(
   preserve = deprecated(),
   default = deprecated()
 ) {
-  .preserve <- coalesce_deprecated(.preserve, preserve)
-  .default <- coalesce_deprecated(.default, default)
-
   fn_case_list(
     x  = x,
     fn = `%in%`,
     ...,
     .preserve = .preserve,
-    .default  = .default
+    .default = .default,
+    preserve = preserve,
+    default = default,
   )
 }
 
@@ -77,15 +76,14 @@ grep_case_list <- function(
   preserve = deprecated(),
   default = deprecated()
 ) {
-  .preserve <- coalesce_deprecated(.preserve, preserve)
-  .default <- coalesce_deprecated(.default, default)
-
   fn_case_list(
     x  = x,
     fn = function(x, pattern, ...) grepl(pattern, x, ...),
     ...,
     .preserve = .preserve,
-    .default  = .default
+    .default  = .default,
+    preserve = preserve,
+    default = default,
   )
 }
 
@@ -115,8 +113,8 @@ fn_case_list <- function(
     fn = fn,
     args = inputs$args,
     list = TRUE,
-    default_env = rlang::caller_env(),
-    current_env = rlang::current_env()
+    default_env = first_incase_frame_parent(),
+    current_env = first_incase_frame()
   )
 }
 
@@ -132,8 +130,5 @@ fn_switch_case_list <- function(
   preserve = deprecated(),
   default = deprecated()
 ) {
-  .preserve <- coalesce_deprecated(.preserve, preserve)
-  .default <- coalesce_deprecated(.default, default)
-
   eval.parent(fn_switch_case_call("switch_case_list", fn, ...))
 }

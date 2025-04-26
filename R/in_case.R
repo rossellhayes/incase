@@ -71,8 +71,8 @@ in_case <- function(
     x = inputs$x,
     .default = .default,
     .preserve = .preserve,
-    default_env = rlang::caller_env(),
-    current_env = rlang::current_env()
+    default_env = first_incase_frame_parent(),
+    current_env = first_incase_frame()
   )
 }
 
