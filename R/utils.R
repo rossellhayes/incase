@@ -34,8 +34,7 @@ first_incase_frame_parent <- function() {
       )
     ) {
       parent <- sys.parents()[[i]]
-      if (parent == 0) return(rlang::global_env())
-      return(frames[[parent]])
+      if (parent > 0) return(frames[[parent]])
     }
   }
 
