@@ -75,6 +75,7 @@ switch_case_fct <- function(
   .preserve = FALSE,
   .default = NA,
   .ordered = FALSE,
+  .exhaustive = FALSE,
   preserve = deprecated(),
   default = deprecated(),
   ordered = deprecated()
@@ -93,6 +94,7 @@ grep_case_fct <- function(
   .preserve = FALSE,
   .default = NA,
   .ordered = FALSE,
+  .exhaustive = FALSE,
   preserve = deprecated(),
   default = deprecated(),
   ordered = deprecated()
@@ -112,6 +114,7 @@ fn_case_fct <- function(
   .preserve = FALSE,
   .default = NA,
   .ordered = FALSE,
+  .exhaustive = FALSE,
   preserve = deprecated(),
   default = deprecated(),
   ordered = deprecated()
@@ -132,6 +135,7 @@ fn_case_fct <- function(
     x = x,
     .default = .default,
     .preserve = .preserve,
+    .exhaustive = .exhaustive,
     fn = fn,
     args = inputs$args,
     factor = TRUE,
@@ -153,6 +157,7 @@ fn_switch_case_fct <- function(
   .preserve = FALSE,
   .default = NA,
   .ordered = FALSE,
+  .exhaustive = FALSE,
   preserve = deprecated(),
   default = deprecated(),
   ordered = deprecated()

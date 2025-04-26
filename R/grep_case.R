@@ -37,6 +37,7 @@ grep_case <- function(
   ...,
   .preserve = FALSE,
   .default = NA,
+  .exhaustive = FALSE,
   preserve = deprecated(),
   default = deprecated()
 ) {
@@ -46,6 +47,7 @@ grep_case <- function(
     ...,
     .preserve = .preserve,
     .default = .default,
+    .exhaustive = .exhaustive,
     preserve = preserve,
     default = default
   )

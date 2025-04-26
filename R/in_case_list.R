@@ -51,6 +51,7 @@ switch_case_list <- function(
   ...,
   .preserve = FALSE,
   .default = NA,
+  .exhaustive = FALSE,
   preserve = deprecated(),
   default = deprecated()
 ) {
@@ -60,6 +61,7 @@ switch_case_list <- function(
     ...,
     .preserve = .preserve,
     .default = .default,
+    .exhaustive = .exhaustive,
     preserve = preserve,
     default = default,
   )
@@ -73,6 +75,7 @@ grep_case_list <- function(
   ...,
   .preserve = FALSE,
   .default = NA,
+  .exhaustive = FALSE,
   preserve = deprecated(),
   default = deprecated()
 ) {
@@ -82,6 +85,7 @@ grep_case_list <- function(
     ...,
     .preserve = .preserve,
     .default  = .default,
+    .exhaustive = .exhaustive,
     preserve = preserve,
     default = default,
   )
@@ -96,6 +100,7 @@ fn_case_list <- function(
   ...,
   .preserve = FALSE,
   .default = NA,
+  .exhaustive = FALSE,
   preserve = deprecated(),
   default = deprecated()
 ) {
@@ -110,6 +115,7 @@ fn_case_list <- function(
     x = x,
     .default = .default,
     .preserve = .preserve,
+    .exhaustive = .exhaustive,
     fn = fn,
     args = inputs$args,
     list = TRUE,
@@ -127,6 +133,7 @@ fn_switch_case_list <- function(
   ...,
   .preserve = FALSE,
   .default = NA,
+  .exhaustive = FALSE,
   preserve = deprecated(),
   default = deprecated()
 ) {

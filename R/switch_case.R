@@ -85,6 +85,7 @@ fn_switch_case <- function(
   ...,
   .preserve = FALSE,
   .default = NA,
+  .exhaustive = FALSE,
   preserve = deprecated(),
   default = deprecated()
 ) {

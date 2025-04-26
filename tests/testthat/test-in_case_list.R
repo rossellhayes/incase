@@ -46,6 +46,20 @@ test_that("switch_case_list", {
   )
 })
 
+test_that("exhaustive switch_case_list", {
+  error <- expect_error(
+    1:3 %>% switch_case_list(2 ~ mtcars, .exhaustive = TRUE),
+    "The following values were not matched: 1 and 3.",
+  )
+
+  expect_equal(error$call[[1]], rlang::sym("switch_case_list"))
+
+  expect_equal(
+    1:3 %>% switch_case_list(2 ~ mtcars, 1:3 ~ letters, .exhaustive = TRUE),
+    list(letters, mtcars, letters)
+  )
+})
+
 test_that("grep_case_list", {
   names <- c("bat", "cat", "dog")
 
@@ -58,6 +72,22 @@ test_that("grep_case_list", {
     dplyr::tibble(x = names) %>%
       dplyr::mutate(y = grep_case_list(x, "a" ~ mtcars, .default = letters)),
     dplyr::tibble(x = names, y = list(mtcars, mtcars, letters))
+  )
+})
+
+test_that("exhaustive grep_case_list", {
+  names <- c("bat", "cat", "dog")
+
+  error <- expect_error(
+    names %>% grep_case_list("a" ~ mtcars, .exhaustive = TRUE),
+    "The following value was not matched: dog.",
+  )
+
+  expect_equal(error$call[[1]], rlang::sym("grep_case_list"))
+
+  expect_equal(
+    names %>% grep_case_list("a" ~ mtcars, "o" ~ letters, .exhaustive = TRUE),
+    list(mtcars, mtcars, letters)
   )
 })
 
@@ -107,6 +137,38 @@ test_that("fn_switch_case_list()", {
       8 ~ letters,
       9 ~ mtcars,
       .preserve = TRUE
+    ),
+    list(1, 2, mtcars, letters, mtcars)
+  )
+})
+
+test_that("exhaustive grep_case_list", {
+  data <- c(111, 222, 999, 888, 777)
+
+  error <- expect_error(
+    fn_switch_case_list(
+      data,
+      function(x) strrep(x, 3),
+      7 ~ mtcars,
+      8 ~ letters,
+      9 ~ mtcars,
+      .exhaustive = TRUE
+    ),
+    "The following values were not matched: 111 and 222.",
+  )
+
+  expect_equal(error$call[[1]], rlang::sym("fn_switch_case_list"))
+
+  expect_equal(
+    fn_switch_case_list(
+      data,
+      function(x) strrep(x, 3),
+      1 ~ 1,
+      2 ~ 2,
+      7 ~ mtcars,
+      8 ~ letters,
+      9 ~ mtcars,
+      .exhaustive = TRUE
     ),
     list(1, 2, mtcars, letters, mtcars)
   )

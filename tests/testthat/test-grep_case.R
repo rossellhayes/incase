@@ -21,6 +21,20 @@ test_that("grep_case() with ignore.case", {
   )
 })
 
+test_that("grep_case() .exhaustive", {
+  words <- c("caterpillar", "dogwood", "catastrophe", "dogma")
+
+  expect_error(
+    grep_case(words, "cat" ~ "feline", .exhaustive = TRUE),
+    "The following values were not matched: dogwood and dogma.",
+  )
+
+  expect_equal(
+    grep_case(words, "cat" ~ "feline", "dog" ~ "canine", .exhaustive = TRUE),
+    c("feline", "canine", "feline", "canine")
+  )
+})
+
 test_that("grep_case() with two args", {
   caps_words <- c("caterpillar", "dogwood", "Catastrophe", "DOGMA")
 

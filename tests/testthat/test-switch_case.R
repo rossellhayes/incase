@@ -130,9 +130,8 @@ test_that("unpiped vectored switch_case()", {
   expect_equal(x, yn)
 })
 
-
 test_that("exhaustive switch_case()", {
-  expect_error(
+  error <- expect_error(
     switch_case(
       1:10,
       c(3, 6, 9) ~ "fizz",
@@ -142,6 +141,8 @@ test_that("exhaustive switch_case()", {
     "The following values were not matched: 1, 2, 4, 7, and 8.",
     fixed = TRUE
   )
+
+  expect_equal(error$call[[1]], rlang::sym("switch_case"))
 
   expect_equal(
     switch_case(
@@ -214,6 +215,38 @@ test_that("fn_switch_case()", {
       .preserve = TRUE
     ),
     c("1", "2", "Missing", "Refused", "Not asked")
+  )
+})
+
+test_that("fn_switch_case() exhaustive", {
+  data <- c(1, 2, 999, 888, 777)
+
+  error <- expect_error(
+    fn_switch_case(
+      data,
+      function(x) strrep(x, 3),
+      7 ~ "Not asked",
+      8 ~ "Refused",
+      9 ~ "Missing",
+      .exhaustive = TRUE
+    ),
+    "The following values were not matched: 1 and 2.",
+    fixed = TRUE
+  )
+
+  expect_equal(error$call[[1]], rlang::sym("fn_switch_case"))
+
+  expect_equal(
+    fn_switch_case(
+      c(111, 222, 999, 888, 777),
+      function(x) strrep(x, 3),
+      1:2 ~ "Valid",
+      7 ~ "Not asked",
+      8 ~ "Refused",
+      9 ~ "Missing",
+      .exhaustive = TRUE
+    ),
+    c("Valid", "Valid", "Missing", "Refused", "Not asked")
   )
 })
 
