@@ -80,7 +80,7 @@ replace <- function(
     cli::cli_abort(
       c(
         "Not all values were matched.",
-        "x" = "The following values were not matched: {unique(x[!replaced])}.",
+        "x" = "The following {plu::ral('value was', unique(x[!replaced]))} not matched: {unique(x[!replaced])}.",
         "i" = "This error was generated because {.arg .exhaustive} is {.val {TRUE}}.",
         " " = "If you don't care about matching all values, you can set {.arg .exhaustive} to {.val {FALSE}}."
       ),
