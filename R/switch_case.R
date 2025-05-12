@@ -89,7 +89,7 @@ fn_switch_case <- function(
   preserve = deprecated(),
   default = deprecated()
 ) {
-  eval(fn_switch_case_call("switch_case", fn, ...))
+  eval.parent(fn_switch_case_call("switch_case", fn, ...))
 }
 
 fn_switch_case_call <- function(
