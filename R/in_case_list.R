@@ -137,5 +137,5 @@ fn_switch_case_list <- function(
   preserve = deprecated(),
   default = deprecated()
 ) {
-  eval.parent(fn_switch_case_call("switch_case_list", fn, ...))
+  eval(fn_switch_case_call("switch_case_list", fn, ...))
 }
