@@ -82,7 +82,7 @@ switch_case_fct <- function(
 ) {
   args <- as.list(rlang::current_call())[-1]
 
-  eval.parent(rlang::call2("fn_case_fct", fn = `%in%`, !!!args))
+  eval.parent(rlang::call2(fn_case_fct, fn = `%in%`, !!!args))
 }
 
 #' @rdname in_case_fct
@@ -101,7 +101,7 @@ grep_case_fct <- function(
 ) {
   args <- as.list(rlang::current_call())[-1]
 
-  eval.parent(rlang::call2("fn_case_fct", fn = grepl_any, !!!args))
+  eval.parent(rlang::call2(fn_case_fct, fn = grepl_any, !!!args))
 }
 
 #' @rdname in_case_fct
@@ -162,5 +162,5 @@ fn_switch_case_fct <- function(
   default = deprecated(),
   ordered = deprecated()
 ) {
-  eval.parent(fn_switch_case_call("switch_case_fct", fn, ...))
+  eval.parent(fn_switch_case_call(switch_case_fct, fn, ...))
 }
