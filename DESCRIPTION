@@ -1,7 +1,7 @@
 Type: Package
 Package: incase
 Title: Pipe-Friendly Vector Replacement with Case Statements
-Version: 0.3.2.9000
+Version: 0.4.0
 Authors@R: c(
     person("Alexander", "Rossell Hayes", , "alexander@rossellhayes.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0001-9412-0457")),
