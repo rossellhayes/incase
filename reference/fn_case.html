@@ -151,10 +151,10 @@ but not <code>x</code></p>
 <span class="r-in"><span>  <span class="st">"g"</span> <span class="op">~</span> <span class="st">"Green"</span>,</span></span>
 <span class="r-in"><span>  <span class="st">"l"</span> <span class="op">~</span> <span class="st">"Libertarian"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "Libertarian" "Green"       "Libertarian" "Green"       "Democrat"   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "Libertarian" "Libertarian" "Libertarian" "Republican"  "Independent"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "Independent" "Libertarian" "Libertarian" "Green"       "Libertarian"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "Republican"  "Green"       "Republican"  "Independent" "Democrat"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "Green"       "Libertarian" "Green"       "Democrat"    "Libertarian"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "Libertarian" "Libertarian" "Republican"  "Independent" "Independent"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "Libertarian" "Libertarian" "Green"       "Libertarian" "Republican" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "Green"       "Republican"  "Independent" "Democrat"    "Independent"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Replicate grep_case()</span></span></span>
 <span class="r-in"><span><span class="va">countries</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
@@ -218,10 +218,10 @@ but not <code>x</code></p>
 <span class="r-in"><span>    <span class="st">"o'clock"</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">hours</span>, <span class="va">.</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>    .default  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">.</span>, <span class="va">hours</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "twenty-five past 11" "3 o'clock"           "twenty-five past 3" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4] "half past 8"         "half past 6"         "five past 8"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "quarter past 8"      "five past 2"         "twenty-five past 9" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10] "half past 9"        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "twenty-five past 3" "half past 8"        "half past 6"       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4] "five past 8"        "quarter past 8"     "five past 2"       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "twenty-five past 9" "half past 9"        "five to 12"        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10] "twenty to 12"      </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Replicate vctrs::vec_ptype_abbr() (used for tibble column labels)</span></span></span>
 <span class="r-in"><span><span class="co"># Based on a contribution by Patrice Kiener</span></span></span>
@@ -265,7 +265,7 @@ but not <code>x</code></p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
       </footer></div>

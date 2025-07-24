@@ -156,10 +156,10 @@ and <code><a href="in_case_list.html">switch_case_list()</a></code> and <code><a
 <span class="r-in"><span>  <span class="st">"g"</span> <span class="op">~</span> <span class="st">"Green"</span>,</span></span>
 <span class="r-in"><span>  <span class="st">"l"</span> <span class="op">~</span> <span class="st">"Libertarian"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "Libertarian" "Republican"  "Democrat"    "Green"       "Democrat"   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "Republican"  "Independent" "Democrat"    "Democrat"    "Republican" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "Libertarian" "Democrat"    "Green"       "Independent" "Green"      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "Green"       "Independent" "Republican"  "Independent" "Republican" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "Democrat"    "Republican"  "Libertarian" "Democrat"    "Green"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "Independent" "Green"       "Green"       "Independent" "Republican" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "Independent" "Republican"  "Republican"  "Independent" "Green"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "Republican"  "Democrat"    "Independent" "Democrat"    "Republican" </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">parties</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">switch_case</span><span class="op">(</span></span></span>
@@ -169,10 +169,10 @@ and <code><a href="in_case_list.html">switch_case_list()</a></code> and <code><a
 <span class="r-in"><span>    <span class="st">"g"</span> <span class="op">~</span> <span class="st">"Green"</span>,</span></span>
 <span class="r-in"><span>    <span class="st">"l"</span> <span class="op">~</span> <span class="st">"Libertarian"</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "Libertarian" "Republican"  "Democrat"    "Green"       "Democrat"   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "Republican"  "Independent" "Democrat"    "Democrat"    "Republican" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "Libertarian" "Democrat"    "Green"       "Independent" "Green"      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "Green"       "Independent" "Republican"  "Independent" "Republican" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "Democrat"    "Republican"  "Libertarian" "Democrat"    "Green"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "Independent" "Green"       "Green"       "Independent" "Republican" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "Independent" "Republican"  "Republican"  "Independent" "Green"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "Republican"  "Democrat"    "Independent" "Democrat"    "Republican" </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">parties</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">switch_case</span><span class="op">(</span></span></span>
@@ -180,10 +180,10 @@ and <code><a href="in_case_list.html">switch_case_list()</a></code> and <code><a
 <span class="r-in"><span>    <span class="st">"r"</span> <span class="op">~</span> <span class="st">"Republican"</span>,</span></span>
 <span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"i"</span>, <span class="st">"g"</span>, <span class="st">"l"</span><span class="op">)</span> <span class="op">~</span> <span class="st">"Other"</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "Other"      "Republican" "Democrat"   "Other"      "Democrat"  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "Republican" "Other"      "Democrat"   "Democrat"   "Republican"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "Other"      "Democrat"   "Other"      "Other"      "Other"     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "Other"      "Other"      "Republican" "Other"      "Republican"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "Democrat"   "Republican" "Other"      "Democrat"   "Other"     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "Other"      "Other"      "Other"      "Other"      "Republican"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "Other"      "Republican" "Republican" "Other"      "Other"     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "Republican" "Democrat"   "Other"      "Democrat"   "Republican"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">parties</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">switch_case</span><span class="op">(</span></span></span>
@@ -191,10 +191,10 @@ and <code><a href="in_case_list.html">switch_case_list()</a></code> and <code><a
 <span class="r-in"><span>    <span class="st">"r"</span> <span class="op">~</span> <span class="st">"Republican"</span>,</span></span>
 <span class="r-in"><span>    .default <span class="op">=</span> <span class="st">"Other"</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "Other"      "Republican" "Democrat"   "Other"      "Democrat"  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "Republican" "Other"      "Democrat"   "Democrat"   "Republican"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "Other"      "Democrat"   "Other"      "Other"      "Other"     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "Other"      "Other"      "Republican" "Other"      "Republican"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "Democrat"   "Republican" "Other"      "Democrat"   "Other"     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "Other"      "Other"      "Other"      "Other"      "Republican"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "Other"      "Republican" "Republican" "Other"      "Other"     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "Republican" "Democrat"   "Other"      "Democrat"   "Republican"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">parties</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">switch_case</span><span class="op">(</span></span></span>
@@ -202,10 +202,10 @@ and <code><a href="in_case_list.html">switch_case_list()</a></code> and <code><a
 <span class="r-in"><span>    <span class="st">"r"</span> <span class="op">~</span> <span class="st">"Republican"</span>,</span></span>
 <span class="r-in"><span>    .preserve <span class="op">=</span> <span class="cn">FALSE</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] NA           "Republican" "Democrat"   NA           "Democrat"  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "Republican" NA           "Democrat"   "Democrat"   "Republican"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] NA           "Democrat"   NA           NA           NA          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] NA           NA           "Republican" NA           "Republican"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "Democrat"   "Republican" NA           "Democrat"   NA          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] NA           NA           NA           NA           "Republican"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11] NA           "Republican" "Republican" NA           NA          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "Republican" "Democrat"   NA           "Democrat"   "Republican"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">parties</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">switch_case</span><span class="op">(</span></span></span>
@@ -213,10 +213,10 @@ and <code><a href="in_case_list.html">switch_case_list()</a></code> and <code><a
 <span class="r-in"><span>    <span class="st">"r"</span> <span class="op">~</span> <span class="st">"Republican"</span>,</span></span>
 <span class="r-in"><span>    .preserve <span class="op">=</span> <span class="cn">TRUE</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "l"          "Republican" "Democrat"   "g"          "Democrat"  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "Republican" "i"          "Democrat"   "Democrat"   "Republican"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "l"          "Democrat"   "g"          "i"          "g"         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "g"          "i"          "Republican" "i"          "Republican"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "Democrat"   "Republican" "l"          "Democrat"   "g"         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "i"          "g"          "g"          "i"          "Republican"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "i"          "Republican" "Republican" "i"          "g"         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "Republican" "Democrat"   "i"          "Democrat"   "Republican"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">8</span>, <span class="fl">12</span>, <span class="fl">999</span>, <span class="fl">6</span>, <span class="fl">2</span>, <span class="fl">888</span>, <span class="fl">4</span>, <span class="fl">6</span>, <span class="fl">777</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
@@ -228,7 +228,8 @@ and <code><a href="in_case_list.html">switch_case_list()</a></code> and <code><a
 <span class="r-in"><span>  <span class="fl">9</span> <span class="op">~</span> <span class="st">"Missing"</span>,</span></span>
 <span class="r-in"><span>  .preserve <span class="op">=</span> <span class="cn">TRUE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in match(x, table, nomatch = 0L):</span> 'match' requires vector arguments</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "1"         "4"         "8"         "12"        "Missing"   "6"        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "2"         "Refused"   "4"         "6"         "Not asked"</span>
 </code></pre></div>
     </div>
   </div>
@@ -243,7 +244,7 @@ and <code><a href="in_case_list.html">switch_case_list()</a></code> and <code><a
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
       </footer></div>
