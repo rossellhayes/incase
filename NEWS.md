@@ -1,3 +1,5 @@
+# incase (development version)
+
 # incase 0.4.0
 
 * The arguments `preserve`, `default`, and `ordered` have been deprecated in favor of `.preserve`, `.default`, and `.ordered` (#9).
