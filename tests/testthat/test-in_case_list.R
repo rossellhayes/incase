@@ -80,7 +80,7 @@ test_that("exhaustive grep_case_list", {
 
   error <- expect_error(
     names %>% grep_case_list("a" ~ mtcars, .exhaustive = TRUE),
-    "The following value was not matched: dog.",
+    'The following value was not matched: "dog".',
   )
 
   expect_equal(error$call[[1]], rlang::sym("grep_case_list"))

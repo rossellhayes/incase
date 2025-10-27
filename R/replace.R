@@ -77,12 +77,17 @@ replace <- function(
   }
 
   if (.exhaustive & !all(replaced)) {
+    non_replaced_values <- unique(x[!replaced])
+
     cli::cli_abort(
       c(
         "Not all values were matched.",
-        "x" = "The following {plu::ral('value was', unique(x[!replaced]))} not matched: {unique(x[!replaced])}.",
-        "i" = "This error was generated because {.arg .exhaustive} is {.val {TRUE}}.",
-        " " = "If you don't care about matching all values, you can set {.arg .exhaustive} to {.val {FALSE}}."
+        "x" = "The following {plu::ral('value was', non_replaced_values)} not
+        matched: {.val {non_replaced_values}}.",
+        "i" = "This error was generated because {.arg .exhaustive} is
+        {.val {TRUE}}.",
+        "*" = "If you don't care about matching all values, you can set
+        {.arg .exhaustive} to {.val {FALSE}}."
       ),
       call = current_env
     )

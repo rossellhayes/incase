@@ -593,7 +593,7 @@ test_that("exhaustive *_case_fct()", {
       "b" ~ "banana",
       .exhaustive = TRUE
     ),
-    "The following value was not matched: a.",
+    'The following value was not matched: "a".',
   )
 
   expect_equal(error$call[[1]], rlang::sym("switch_case_fct"))

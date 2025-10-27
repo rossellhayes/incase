@@ -65,7 +65,7 @@ test_that("fn_case() exhaustive", {
       "cat" ~ "feline",
       .exhaustive = TRUE
     ),
-    "The following values were not matched: dogwood and dogma.",
+    'The following values were not matched: "dogwood" and "dogma".',
   )
 
   expect_equal(
